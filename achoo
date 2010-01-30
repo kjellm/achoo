@@ -1,0 +1,138 @@
+#!/usr/bin/env ruby
+
+require 'mechanize'
+require 'date'
+
+def main
+  load_rc
+
+  $agent = WWW::Mechanize.new
+
+  login
+  welcome
+
+  date = date_chooser
+  puts "Selected #{date.strftime('%Y-%m-%d')}"
+
+  page = $agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
+  
+  project = project_chooser(page)
+  # FIX select phase
+
+end
+
+
+def project_chooser(page)
+  puts "Choose project: "
+  page.form('entryform').field_with(:name => 'projectid').options.each do |opt|
+    val = opt.value["project.id='".length..-2]
+    printf "%6s - %s\n", val, opt.text
+  end
+  puts "     0 - Other"
+  print "[FIX]> "
+  answer = gets.chop
+  case answer
+  when ''
+    # FIX
+    return 1
+  when '0'
+    return all_projects_chooser(page)
+  else
+    return answer
+  end
+end
+
+
+def all_projects_chooser(page)
+  page = $agent.get(projects_url(page))
+  projects = scrape_projects(page)
+
+  while (link = page.link_with(:text => 'Next'))
+    page = link.click
+    projects.merge!(scrape_projects(page))
+  end
+
+  projects.keys.sort.each do |name|
+    puts "X - #{projects[name]}: #{name}"
+  end
+
+  print "> "
+  answer = gets.chop
+end
+
+
+def projects_url(page)
+  href = page.link_with(:text => 'Select project').href['javascript:atkSubmit("__'.length..-3]
+  href.gsub!('_13F', '?')
+  href.gsub!('_13D', '=')
+  href.gsub!('_126', '&')
+  return RC[:url] + '/' + href
+end
+
+
+def scrape_projects(page)
+  projects = {}
+
+  page.search('table#rl_1 tr').each do |tr|
+    cells = tr.search('td')
+    next if cells.empty?
+    projects[cells[1].text.strip] = cells[0].text.strip
+    #FIX extract project id cells[1].css('a').attribute('href')
+  end
+
+  return projects
+end
+
+
+def login
+  $agent.cookie_jar.load("#{ENV['HOME']}/.achoo_cookies.yml")
+
+  page = $agent.get(RC[:url])
+
+  return if page.forms.empty?
+
+  form = page.forms.first
+  form.auth_user = RC[:user]
+  form.auth_pw   = RC[:password]
+  page = $agent.submit(form, form.buttons.first)
+
+  $agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
+
+  # FIX check login failure
+  # "Username and/or password are incorrect. Please try again."
+end
+
+
+def load_rc
+  rc_file = "#{ENV['HOME']}/.achoo"
+
+  # FIX test
+  if File.stat(rc_file).mode != 0100600
+    warn "Insecure permissions on #{rc_file}"
+    exit 1
+  end
+
+  load rc_file
+end
+
+
+def welcome
+  puts "Welcome to Achoo!"
+end
+
+def date_chooser
+  today = Date.today
+  puts "Register hours for today? [Y/<date>]"
+  print "> "
+  answer = gets.chop
+  date = case answer
+         when 'y', 'Y', ''
+           today
+         else
+           Date.parse(answer)
+         end
+  return date
+end
+
+
+main
