@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'mechanize'
-require 'date'
+require 'achoo/hour_registration_form'
 require 'achoo/last'
+require 'date'
+require 'mechanize'
 
 def main
   load_rc
@@ -14,10 +15,10 @@ def main
   
   $date = date_chooser
   puts "Selected #{$date.strftime('%Y-%m-%d')}"
+
+  form = Achoo::HourRegistrationForm.new($agent)
   
-  page = $agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
-  
-  project = project_chooser(page)
+  project = project_chooser(form)
   #FIX select phase
   
   remark = get_remark
@@ -58,12 +59,9 @@ def get_remark
 end
 
 
-def project_chooser(page)
+def project_chooser(form)
   puts "Choose project: "
-  page.form('entryform').field_with(:name => 'projectid').options.each do |opt|
-    val = opt.value["project.id='".length..-2]
-    printf "%6s - %s\n", val, opt.text
-  end
+  form.list_recent_projects
   puts "     0 - Other"
   print "[FIX]> "
   answer = gets.chop
@@ -72,52 +70,20 @@ def project_chooser(page)
     # FIX
     return 1
   when '0'
-    return all_projects_chooser(page)
+    return all_projects_chooser(form)
   else
     return answer
   end
 end
 
 
-def all_projects_chooser(page)
-  page = $agent.get(projects_url(page))
-  projects = scrape_projects(page)
-
-  while (link = page.link_with(:text => 'Next'))
-    page = link.click
-    projects.merge!(scrape_projects(page))
-  end
-
-  projects.keys.sort.each do |name|
-    puts "X - #{projects[name]}: #{name}"
-  end
-
+def all_projects_chooser(form)
+  form.list_all_projects
   print "> "
   answer = gets.chop
 end
 
 
-def projects_url(page)
-  href = page.link_with(:text => 'Select project').href['javascript:atkSubmit("__'.length..-3]
-  href.gsub!('_13F', '?')
-  href.gsub!('_13D', '=')
-  href.gsub!('_126', '&')
-  return RC[:url] + '/' + href
-end
-
-
-def scrape_projects(page)
-  projects = {}
-
-  page.search('table#rl_1 tr').each do |tr|
-    cells = tr.search('td')
-    next if cells.empty?
-    projects[cells[1].text.strip] = cells[0].text.strip
-    #FIX extract project id cells[1].css('a').attribute('href')
-  end
-
-  return projects
-end
 
 
 def login
