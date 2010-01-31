@@ -2,33 +2,35 @@
 
 require 'mechanize'
 require 'date'
+require 'achoo/last'
 
 def main
   load_rc
 
   $agent = WWW::Mechanize.new
-
+  
   login
   welcome
-
+  
   $date = date_chooser
   puts "Selected #{$date.strftime('%Y-%m-%d')}"
-
+  
   page = $agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
-
+  
   project = project_chooser(page)
   #FIX select phase
-
+  
   remark = get_remark
 
   hours = hours_chooser
-
+  puts
 end
 
 
 def hours_chooser
   puts "Last log:"
-  system "last reboot | grep '#{$date.strftime('%a %b %d')}'"
+  last = Achoo::Last.new
+  print last.find_by_date($date)
   print "> "
   return gets.chop
 end
