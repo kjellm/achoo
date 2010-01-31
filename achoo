@@ -11,7 +11,7 @@ def main
   $agent = WWW::Mechanize.new
   
   login
-  welcome
+  print_welcome
   
   $date = date_chooser
   puts "Selected #{$date.strftime('%Y-%m-%d')}"
@@ -25,6 +25,16 @@ def main
 
   hours = hours_chooser
   puts
+
+  form.set_values({
+                    :date    => $date,
+                    :project => project,
+                    :remark  => remark,
+                    :hours   => hours,
+                  })
+  form.print_values
+  #confirm
+  #form.submit
 end
 
 
@@ -38,7 +48,6 @@ end
 
 
 def get_remark
-  
   puts "RCS logs for #$date:"
 
   today = $date.strftime('%Y-%m-%d')
@@ -84,8 +93,6 @@ def all_projects_chooser(form)
 end
 
 
-
-
 def login
   $agent.cookie_jar.load("#{ENV['HOME']}/.achoo_cookies.yml")
 
@@ -118,7 +125,7 @@ def load_rc
 end
 
 
-def welcome
+def print_welcome
   puts "Welcome to Achoo!"
 end
 

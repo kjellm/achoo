@@ -4,12 +4,11 @@ class Achoo
     def initialize(agent)
       @agent = agent
       @page  = @agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
-  
+      @form  = @page.form('entryform')
     end
 
     def list_recent_projects
-      form = @page.form('entryform')
-      form.field_with(:name => 'projectid').options.each do |opt|
+      @form.field_with(:name => 'projectid').options.each do |opt|
         val = opt.value["project.id='".length..-2]
         printf "%6s - %s\n", val, opt.text
       end
@@ -29,6 +28,37 @@ class Achoo
       end
     end
 
+    def set_values(values)
+      @form.field_with(:name => 'activitydate[day]') \
+        .options[values[:date].day.to_i - 1].select
+
+      @form.field_with(:name => 'activitydate[month]') \
+        .options[values[:date].month.to_i - 1].select
+
+      @form.field_with(:name => 'activitydate[year]').value \
+        = values[:date].year
+
+      @form.projectid = "project.id='#{values[:project]}'"
+
+      @form.remark = values[:remark]
+
+      @form.time = values[:hours]
+    end
+
+    def print_values
+      printf "%10s: %s\n", 'day', @form.field_with(:name => 'activitydate[day]').value
+      printf "%10s: %s\n", 'month', @form.field_with(:name => 'activitydate[month]').value
+      printf "%10s: %s\n", 'year', @form.field_with(:name => 'activitydate[year]').value
+
+      @form.field_with(:name => 'projectid').options.each do |opt|
+        if opt.selected
+          printf "%10s: '%s'\n", 'project', opt.text
+        end
+      end
+
+      printf "%10s: '%s'\n", 'remark', @form.remark
+      printf "%10s: %s\n", 'hours', @form.time
+    end
 
     private
 
