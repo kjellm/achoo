@@ -1,0 +1,15 @@
+USAGE
+-----
+
+Create ~/.achoo with the following content:
+
+RC = {
+  :url => 'https://example.com/achievo/',
+  :user => 'joe',
+  :password => 'geheim',
+  :vcs_dirs => ["#{ENV['HOME']}/projects"],
+}
+
+Change to your achoo dir and run it with the following command
+
+ruby -Ilib achoo
