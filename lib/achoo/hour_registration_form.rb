@@ -46,20 +46,14 @@ class Achoo
     end
 
     def print_values
-      printf "%10s: %s\n", 'day', @form.field_with(:name => 'activitydate[day]').value
-      printf "%10s: %s\n", 'month', @form.field_with(:name => 'activitydate[month]').value
-      printf "%10s: %s\n", 'year', @form.field_with(:name => 'activitydate[year]').value
-
-      @form.field_with(:name => 'projectid').options.each do |opt|
-        if opt.selected
-          printf "%10s: '%s'\n", 'project', opt.text
-        end
-      end
-
-      printf "%10s: '%s'\n", 'remark', @form.remark
-      printf "%10s: %s\n", 'hours', @form.time
+      format = "%10s: \"%s\"\n"
+      printf format, 'day',     day_field.value
+      printf format, 'month',   month_field.value
+      printf format, 'year',    year_field.value
+      printf format, 'project', selected_projectid_option.text
+      printf format, 'remark',  @form.remark
+      printf format, 'hours',   @form.time
     end
-
 
     def submit
       require 'pp'
@@ -67,9 +61,27 @@ class Achoo
       pp response.body
     end
 
-
     private
 
+    def day_field
+      @form.field_with(:name => 'activitydate[day]')
+    end
+
+    def month_field
+      @form.field_with(:name => 'activitydate[month]')
+    end
+
+    def year_field
+      @form.field_with(:name => 'activitydate[year]')
+    end
+
+    def selected_projectid_option
+      @form.field_with(:name => 'projectid').options.each do |opt|
+        return opt if opt.selected
+      end
+      return nil
+    end
+    
     def projects_url
       href = @page.link_with(:text => 'Select project').href['javascript:atkSubmit("__'.length..-3]
       href.gsub!('_13F', '?')
