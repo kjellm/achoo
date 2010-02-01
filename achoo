@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
+
 require 'achoo/hour_registration_form'
 require 'achoo/last'
 require 'date'
 require 'mechanize'
+
 
 def main
   load_rc
@@ -57,13 +59,14 @@ def register_hours(agent)
   })
 
   form.print_values
-  if confirm(form)
+  if confirm
     puts "Submitting ..."
     form.submit
   else
     puts "Cancelled"
   end
 end
+
 
 def lock_month(agent)
   page  = agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours_lock&atkaction=admin&atklevel=-1&atkprevlevel=0&')
@@ -86,6 +89,7 @@ def lock_month(agent)
     puts "Cancelled"
   end
 end
+
 
 def confirm
   answer = ask "Submit? [Y/n]"
@@ -146,7 +150,7 @@ end
 
 
 def login(agent)
-  agent.cookie_jar.load("#{ENV['HOME']}/.achoo_cookies.yml")
+  load_cookies(agent)
 
   page = agent.get(RC[:url])
 
@@ -167,6 +171,13 @@ def login(agent)
 end
 
 
+def load_cookies(agent)
+  cookies_file = "#{ENV['HOME']}/.achoo_cookies.yml"
+  FileUtils.touch(cookies_file)
+  agent.cookie_jar.load(cookies_file)
+end
+
+
 def load_rc
   rc_file = "#{ENV['HOME']}/.achoo"
 
@@ -184,6 +195,7 @@ def print_welcome
   puts "Welcome to Achoo!"
 end
 
+
 def date_chooser
   today = Date.today
   answer = ask "Date [today]"
@@ -196,6 +208,7 @@ def date_chooser
   return date
 end
 
+
 def ask(question='')
   print bold("#{question}> ")
   answer = gets.chop
@@ -204,6 +217,7 @@ def ask(question='')
   end
   answer
 end
+
 
 def bold(text)
   "\e[1m#{text}\e[0m"
