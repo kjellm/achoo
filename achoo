@@ -110,7 +110,7 @@ end
 def confirm
   answer = ask "Submit? [Y/n]"
   answer.downcase!
-  return answer == 'y'
+  return answer == 'y' || answer == ''
 end
 
 
