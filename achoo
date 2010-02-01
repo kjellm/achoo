@@ -34,9 +34,11 @@ def show_menu_and_ask_for_action_and_act(agent)
     register_hours(agent)
   when '2'
     show_flexi_time(agent)
+  when '5'
+    show_holiday_report(agent)
   when '6'
     lock_month(agent)
-  when '3', '4', '5'
+  when '3', '4'
     warn "Not implemented yet"
   else
     warn "Input error"
@@ -98,6 +100,12 @@ def lock_month(agent)
   end
 end
 
+
+def show_holiday_report(agent)
+  page = agent.get(RC[:url] + '/dispatch.php?atknodetype=linpro_reports.employeeholiday_report&atkaction=report&atklevel=-1&atkprevlevel=0&')
+  page.body.match(/<b>(\d+,\d+)<\/b>/)
+  puts "Balance: #$1"
+end
 
 def confirm
   answer = ask "Submit? [Y/n]"
