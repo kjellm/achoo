@@ -24,7 +24,7 @@ class Achoo
       end
 
       projects.keys.sort.each do |name|
-        puts "X - #{projects[name]}: #{name}"
+        printf "%6s - %s: %s\n", projects[name][0], projects[name][1], name
       end
     end
 
@@ -91,6 +91,7 @@ class Achoo
       href.gsub!('_13F', '?')
       href.gsub!('_13D', '=')
       href.gsub!('_126', '&')
+      href.gsub!('_125', '%')
       return RC[:url] + '/' + href
     end
 
@@ -100,8 +101,10 @@ class Achoo
       projects_page.search('table#rl_1 tr').each do |tr|
         cells = tr.search('td')
         next if cells.empty?
-        projects[cells[1].text.strip] = cells[0].text.strip
-        #FIX extract project id cells[1].css('a').attribute('href')
+        projects[cells[1].text.strip] = [
+          cells[1].at_css('a').attribute('href').to_s.match('project.id%3D%27(\d+)%27')[1],
+          cells[0].text.strip,
+        ]
       end
 
       return projects
