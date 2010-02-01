@@ -24,7 +24,10 @@ def show_menu_and_ask_for_action_and_act(agent)
   puts "4. Show week"
   puts "5. Holidays"
   puts "6. Lock month"
+  puts "0. Exit"
   case ask '[1]'
+  when '0'
+    exit
   when '1', ''
     register_hours(agent)
   when '6'
@@ -34,7 +37,6 @@ def show_menu_and_ask_for_action_and_act(agent)
   else
     warn "Input error"
   end
-  
 end
 
 
@@ -54,6 +56,7 @@ def register_hours(agent)
     :hours   => hours,
   })
 
+  form.print_values
   if confirm(form)
     puts "Submitting ..."
     form.submit
@@ -64,12 +67,27 @@ end
 
 def lock_month(agent)
   page  = agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours_lock&atkaction=admin&atklevel=-1&atkprevlevel=0&')
-  p page.forms.first
-
+  form  = page.form('entryform')
+  period = ask "Period (YYYYMM)"
+  form.period = period
+  user_select = form.field_with(:name => 'userid')
+  unless user_select.nil?
+    user_select.options.each do |opt|
+      if opt.text.match(/\(#{RC[:user]}\)$/)
+        opt.select
+      end
+    end
+  end
+  puts "period: #{form.period}"
+  puts "  user: #{user_select.value}" unless user_select.nil?
+  if confirm
+    form.submit
+  else
+    puts "Cancelled"
+  end
 end
 
-def confirm(form)
-  form.print_values
+def confirm
   answer = ask "Submit? [Y/n]"
   answer.downcase!
   return answer == 'y'
