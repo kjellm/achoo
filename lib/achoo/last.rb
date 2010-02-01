@@ -9,7 +9,7 @@ class Achoo
     end
 
     def find_by_date(date)
-      date_pattern = date.strftime('%a\s%b\s+%d')
+      date_pattern = date.strftime('%a\s%b\s+%d').sub(/(\D)0/, "#$1 ")
       @output.grep /#{date_pattern}/
     end
 
