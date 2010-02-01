@@ -1,15 +1,21 @@
+INSTALL
+-------
+
+  git clone git://github.com/kjellm/achoo.git
+  gem install mechanize
+
 USAGE
 -----
 
-Create ~/.achoo with the following content:
+Create ~/.achoo with the following content and edit it:
 
-RC = {
-  :url => 'https://example.com/achievo/',
-  :user => 'joe',
-  :password => 'geheim',
-  :vcs_dirs => ["#{ENV['HOME']}/projects"],
-}
+  RC = {
+    :url => 'https://example.com/achievo/',
+    :user => 'joe',
+    :password => 'geheim',
+    :vcs_dirs => ["#{ENV['HOME']}/projects"],
+  }
 
 Change to your achoo dir and run it with the following command
 
-ruby -Ilib achoo
+  ruby -Ilib achoo
