@@ -13,21 +13,20 @@ def main
   login(agent)
   print_welcome
   
-  $date = date_chooser
-  puts "Selected #{$date.strftime('%Y-%m-%d')}"
+  date = date_chooser
 
   form = Achoo::HourRegistrationForm.new(agent)
   
   project = project_chooser(form)
   #FIX select phase
   
-  remark = get_remark
+  remark = get_remark(date)
 
-  hours = hours_chooser
+  hours = hours_chooser(date)
   puts
 
   form.set_values({
-    :date    => $date,
+    :date    => date,
     :project => project,
     :remark  => remark,
     :hours   => hours,
@@ -51,20 +50,20 @@ def confirm(form)
 end
 
 
-def hours_chooser
+def hours_chooser(date)
   puts "Last log:"
   last = Achoo::Last.new
-  print last.find_by_date($date).join("\n")
+  print last.find_by_date(date).join("\n")
   puts
   return ask "Hours:"
 end
 
 
-def get_remark
-  puts "RCS logs for #$date:"
+def get_remark(date)
+  puts "RCS logs for #{date}:"
 
-  today = $date.strftime('%Y-%m-%d')
-  tomorrow = $date.next.strftime('%Y-%m-%d')
+  today    = date.strftime('%Y-%m-%d')
+  tomorrow = date.next.strftime('%Y-%m-%d')
 
   RC[:vcs_dirs].each do |dir|
     Dir.glob("#{dir}/*/").each do |dir|
@@ -150,6 +149,7 @@ def date_chooser
          else
            Date.parse(answer)
          end
+  puts "Selected #{date.strftime('%Y-%m-%d')}"
   return date
 end
 
