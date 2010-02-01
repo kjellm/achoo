@@ -27,14 +27,27 @@ def main
   puts
 
   form.set_values({
-                    :date    => $date,
-                    :project => project,
-                    :remark  => remark,
-                    :hours   => hours,
-                  })
+    :date    => $date,
+    :project => project,
+    :remark  => remark,
+    :hours   => hours,
+  })
+  if confirm(form)
+    puts "Submitting ..."
+    form.submit
+  else
+    puts "Cancelled"
+  end
+
+  puts
+end
+
+
+def confirm(form)
   form.print_values
-  #confirm
-  #form.submit
+  answer = ask "Submit this? [Y/n]"
+  answer.downcase!
+  return answer == 'y'
 end
 
 
@@ -43,9 +56,7 @@ def hours_chooser
   last = Achoo::Last.new
   print last.find_by_date($date).join("\n")
   puts
-  puts "Hours:"
-  print "> "
-  return gets.chop
+  return ask "Hours:"
 end
 
 
@@ -64,22 +75,19 @@ def get_remark
     end
   end
   puts "----------------------------------"
-  puts "Remark:"
-  print "> "
-  return gets.chop
+  ask 'Remark: '
 end
 
 
 def project_chooser(form)
-  puts "Choose project: "
+  puts 'Recently used projects'
   form.list_recent_projects
   puts "     0 - Other"
-  print "[FIX]> "
-  answer = gets.chop
+  answer = ask "Choose project: "
   case answer
   when ''
-    # FIX
-    return 1
+    warn "TODO Not implementd"
+    exit 1
   when '0'
     return all_projects_chooser(form)
   else
@@ -135,9 +143,7 @@ end
 
 def date_chooser
   today = Date.today
-  puts "Register hours for today? [Y/<date>]"
-  print "> "
-  answer = gets.chop
+  answer = ask "Register hours for today? [Y/<date>]"
   date = case answer
          when 'y', 'Y', ''
            today
@@ -147,5 +153,17 @@ def date_chooser
   return date
 end
 
+def ask(question)
+  print bold("#{question}\n> ")
+  answer = gets.chop
+  unless $stdin.tty?
+    puts answer
+  end
+  answer
+end
+
+def bold(text)
+  "\e[1m#{text}\e[0m"
+end
 
 main

@@ -60,6 +60,14 @@ class Achoo
       printf "%10s: %s\n", 'hours', @form.time
     end
 
+
+    def submit
+      require 'pp'
+      response =  @form.submit()
+      pp response.body
+    end
+
+
     private
 
     def projects_url
