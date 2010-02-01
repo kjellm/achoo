@@ -27,8 +27,12 @@ def show_menu_and_ask_for_action_and_act(agent)
   case ask '[1]'
   when '1', ''
     register_hours(agent)
+  when '6'
+    lock_month(agent)
+  when '2', '3', '4', '5'
+    warn "Not implemented yet"
   else
-    warn "Not implemented"
+    warn "Input error"
   end
   
 end
@@ -58,6 +62,11 @@ def register_hours(agent)
   end
 end
 
+def lock_month(agent)
+  page  = agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours_lock&atkaction=admin&atklevel=-1&atkprevlevel=0&')
+  p page.forms.first
+
+end
 
 def confirm(form)
   form.print_values
