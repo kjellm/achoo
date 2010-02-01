@@ -41,7 +41,9 @@ end
 def hours_chooser
   puts "Last log:"
   last = Achoo::Last.new
-  print last.find_by_date($date)
+  print last.find_by_date($date).join("\n")
+  puts
+  puts "Hours:"
   print "> "
   return gets.chop
 end

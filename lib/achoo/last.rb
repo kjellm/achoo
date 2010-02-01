@@ -2,11 +2,16 @@ class Achoo
   class Last
     
     def initialize
-      @output = %x{last reboot}
+      @output = []
+      Dir.glob('/var/log/wtmp*').each do |f|
+        @output.concat(%x{last -R -f #{f} reboot}.split("\n"))
+      end
     end
 
     def find_by_date(date)
-      @output.grep /#{date.strftime('%a\s%b\s+%d')}/
+      date_pattern = date.strftime('%a\s%b\s+%d')
+      puts date_pattern
+      @output.grep /#{date_pattern}/
     end
 
   end
