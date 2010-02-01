@@ -60,6 +60,11 @@ class Achoo
       @form.submit()
     end
 
+    def flexi_time
+      @page.body.match(/(Flexi time balance: -?\d+:\d+)/)
+      $1
+    end
+
     private
 
     def day_field

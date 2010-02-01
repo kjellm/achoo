@@ -32,9 +32,11 @@ def show_menu_and_ask_for_action_and_act(agent)
     exit
   when '1', ''
     register_hours(agent)
+  when '2'
+    show_flexi_time(agent)
   when '6'
     lock_month(agent)
-  when '2', '3', '4', '5'
+  when '3', '4', '5'
     warn "Not implemented yet"
   else
     warn "Input error"
@@ -65,6 +67,12 @@ def register_hours(agent)
   else
     puts "Cancelled"
   end
+end
+
+
+def show_flexi_time(agent)
+  form = Achoo::HourRegistrationForm.new(agent)
+  puts form.flexi_time
 end
 
 
