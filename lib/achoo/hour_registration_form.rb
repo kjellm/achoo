@@ -29,20 +29,15 @@ class Achoo
     end
 
     def set_values(values)
-      @form.field_with(:name => 'activitydate[day]') \
-        .options[values[:date].day.to_i - 1].select
+      day_field.value   = values[:date].strftime('%d') # .day gives '1' not '01'
+      month_field.value = values[:date].strftime('%m')
+      year_field.value  = values[:date].year
+      @form.projectid   = "project.id='#{values[:project]}'"
+      @form.remark      = values[:remark]
+      @form.time        = values[:hours]
 
-      @form.field_with(:name => 'activitydate[month]') \
-        .options[values[:date].month.to_i - 1].select
-
-      @form.field_with(:name => 'activitydate[year]').value \
-        = values[:date].year
-
-      @form.projectid = "project.id='#{values[:project]}'"
-
-      @form.remark = values[:remark]
-
-      @form.time = values[:hours]
+      # FIX
+      @form.phaseid = "phase.id='276'"
     end
 
     def print_values
@@ -53,12 +48,16 @@ class Achoo
       printf format, 'project', selected_projectid_option.text
       printf format, 'remark',  @form.remark
       printf format, 'hours',   @form.time
+      printf format, 'phase',   'leveranse' #FIX
+
+      # @form.fields.each do |field|
+      #   printf format, field.name, field.value
+      # end
+
     end
 
     def submit
-      require 'pp'
-      response =  @form.submit()
-      pp response.body
+      @form.submit()
     end
 
     private

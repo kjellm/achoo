@@ -7,23 +7,16 @@ require 'mechanize'
 
 def main
   load_rc
-
-  agent = WWW::Mechanize.new
-  
-  login(agent)
   print_welcome
-  
-  date = date_chooser
-
+  agent = WWW::Mechanize.new
+  login(agent)
   form = Achoo::HourRegistrationForm.new(agent)
   
+  date    = date_chooser
   project = project_chooser(form)
   #FIX select phase
-  
-  remark = get_remark(date)
-
-  hours = hours_chooser(date)
-  puts
+  remark  = get_remark(date)
+  hours   = hours_chooser(date)
 
   form.set_values({
     :date    => date,
@@ -31,6 +24,7 @@ def main
     :remark  => remark,
     :hours   => hours,
   })
+
   if confirm(form)
     puts "Submitting ..."
     form.submit
