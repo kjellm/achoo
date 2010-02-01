@@ -10,6 +10,31 @@ def main
   print_welcome
   agent = WWW::Mechanize.new
   login(agent)
+
+  while true
+    show_menu_and_ask_for_action_and_act(agent)
+  end
+end
+
+
+def show_menu_and_ask_for_action_and_act(agent)
+  puts "1. Register hours"
+  puts "2. Show flexitime balance"
+  puts "3. Show day"
+  puts "4. Show week"
+  puts "5. Holidays"
+  puts "6. Lock month"
+  case ask '[1]'
+  when '1', ''
+    register_hours(agent)
+  else
+    warn "Not implemented"
+  end
+  
+end
+
+
+def register_hours(agent)
   form = Achoo::HourRegistrationForm.new(agent)
   
   date    = date_chooser
@@ -89,7 +114,7 @@ end
 
 def all_projects_chooser(form)
   form.list_all_projects
-  answer = ask ''
+  answer = ask
 end
 
 
@@ -144,7 +169,7 @@ def date_chooser
   return date
 end
 
-def ask(question)
+def ask(question='')
   print bold("#{question}> ")
   answer = gets.chop
   unless $stdin.tty?
