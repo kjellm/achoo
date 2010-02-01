@@ -8,15 +8,15 @@ require 'mechanize'
 def main
   load_rc
 
-  $agent = WWW::Mechanize.new
+  agent = WWW::Mechanize.new
   
-  login
+  login(agent)
   print_welcome
   
   $date = date_chooser
   puts "Selected #{$date.strftime('%Y-%m-%d')}"
 
-  form = Achoo::HourRegistrationForm.new($agent)
+  form = Achoo::HourRegistrationForm.new(agent)
   
   project = project_chooser(form)
   #FIX select phase
@@ -90,27 +90,29 @@ end
 
 def all_projects_chooser(form)
   form.list_all_projects
-  print "> "
-  answer = gets.chop
+  answer = ask ''
 end
 
 
-def login
-  $agent.cookie_jar.load("#{ENV['HOME']}/.achoo_cookies.yml")
+def login(agent)
+  agent.cookie_jar.load("#{ENV['HOME']}/.achoo_cookies.yml")
 
-  page = $agent.get(RC[:url])
+  page = agent.get(RC[:url])
 
   return if page.forms.empty?
+
+  puts "Logging in"
 
   form = page.forms.first
   form.auth_user = RC[:user]
   form.auth_pw   = RC[:password]
-  page = $agent.submit(form, form.buttons.first)
+  page = agent.submit(form, form.buttons.first)
 
-  $agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
+  agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
 
   # FIX check login failure
-  # "Username and/or password are incorrect. Please try again."
+  #  - "Username and/or password are incorrect. Please try again."
+  #  - page.forms.empty?
 end
 
 
