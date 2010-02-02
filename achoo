@@ -78,15 +78,14 @@ end
 def show_registered_hours_for_day(agent)
   page  = agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
   date = date_chooser
-  unless date == Date.today
-    form  = page.form('dayview')
-    form.field_with(:name => 'viewdate[day]').value = date.strftime('%d') # .day gives '1' not '01'
-    form.field_with(:name => 'viewdate[month]').value = date.strftime('%m')
-    form.field_with(:name => 'viewdate[year]').value = date.year
-    page = form.submit
-    File.open("dump.html", "w") do |f|
-      f.puts page.body
-    end
+  puts "Fetching data for #{date} ..."
+  form  = page.form('dayview')
+  form.field_with(:name => 'viewdate[day]').value = date.strftime('%d') # .day gives '1' not '01'
+  form.field_with(:name => 'viewdate[month]').value = date.strftime('%m')
+  form.field_with(:name => 'viewdate[year]').value = date.year
+  page = form.submit
+  File.open("dump.html", "w") do |f|
+    f.puts page.body
   end
 
   columns = [0,1,2,3,6,7,9] # ignore 'Biling billed', 'Billing marked' and 'Currency'
@@ -101,6 +100,8 @@ def show_registered_hours_for_day(agent)
     cells = cells.to_a.values_at(*columns)
     data_rows << cells.map {|td| td.content.strip}
   end
+
+  # FIX add summary for hours and billing total
 
   Achoo::Term.table(headers, data_rows)
 end
