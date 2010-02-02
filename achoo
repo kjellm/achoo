@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
 
+require 'achoo/hour_administration_form'
 require 'achoo/hour_registration_form'
 require 'achoo/last'
-require 'achoo/term'
 require 'date'
 require 'mechanize'
 
@@ -28,7 +28,7 @@ def show_menu_and_ask_for_action_and_act(agent)
   puts "6. Lock month"
   puts "0. Exit"
   case ask '[1]'
-  when '0'
+  when '0', 'q', 'Q'
     exit
   when '1', ''
     register_hours(agent)
@@ -71,38 +71,16 @@ end
 
 
 def show_registered_hours_for_day(agent)
-  page  = agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
   date = date_chooser
-  puts "Fetching data for #{date} ..."
-  # FIX don't fetch if page contains data for given date
-  form  = page.form('dayview')
-  form.field_with(:name => 'viewdate[day]').value = date.strftime('%d') # .day gives '1' not '01'
-  form.field_with(:name => 'viewdate[month]').value = date.strftime('%m')
-  form.field_with(:name => 'viewdate[year]').value = date.year
-  page = form.submit
-
-  columns = [0,1,2,3,6,7,9] # ignore 'Biling billed', 'Billing marked' and 'Currency'
-
-  headers = page.search('#rl_1 tr').first.css('th').to_a.values_at(*columns)
-  headers = headers.map {|th| th.content.strip}
-
-  data_rows = []
-  page.search('#rl_1 tr').each do |tr|
-    cells = tr.css('td')
-    next if cells.empty?
-    cells = cells.to_a.values_at(*columns)
-    data_rows << cells.map {|td| td.content.strip}
-  end
-
-  # FIX add summary for hours and billing total
-
-  Achoo::Term.table(headers, data_rows)
+  form = Achoo::HourAdministrationForm.new(agent)
+  form.show_registered_hours_for_day(date)
 end
 
 
 def show_flexi_time(agent)
-  form = Achoo::HourRegistrationForm.new(agent)
-  puts form.flexi_time
+  date = date_chooser
+  form = Achoo::HourAdministrationForm.new(agent)
+  puts form.flexi_time(date)
 end
 
 
