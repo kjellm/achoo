@@ -1,10 +1,6 @@
+= Achoo - the Achivo CLI
 
-                        Achoo - the Achivo CLI
-                       ========================
-
-
-INSTALL
--------
+== INSTALL
 
   git clone git://github.com/kjellm/achoo.git
 
@@ -17,8 +13,7 @@ Needs bleeding edge mechanize (newer then 0.9.3) because of SSL issues
   gem install mechanize-*.gem
 
 
-USAGE
------
+== USAGE
 
 Create ~/.achoo with the following content and edit it:
 
@@ -34,13 +29,12 @@ Change to your achoo dir and run it with the following command
   ruby -Ilib achoo
 
 
-TODO
-----
+== TODO
 
-  - Hours week report
-  - Fix phases
-  - Input validation
-  - Readline
-  - Check date parsing (Chronic)
-  - Sane input defaults
-  - Add sumary to day and week reports
+- Hours week report
+- Fix phases
+- Input validation
+- Readline
+- Check date parsing (Chronic)
+- Sane input defaults
+- Add sumary to day and week reports
