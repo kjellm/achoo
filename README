@@ -1,8 +1,19 @@
+
+                        Achoo - the Achivo CLI
+                       ========================
+
+
 INSTALL
 -------
 
   git clone git://github.com/kjellm/achoo.git
   gem install mechanize
+
+Make shure that WWW::Mechanize has the following patch applied
+(version 0.9.3 has not):
+
+  http://github.com/valo/mechanize/commit/e8c9d0ef72f55461ed33d4a0ee283683cb0f83aa
+
 
 USAGE
 -----
