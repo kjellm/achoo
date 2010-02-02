@@ -85,9 +85,6 @@ def show_registered_hours_for_day(agent)
   form.field_with(:name => 'viewdate[month]').value = date.strftime('%m')
   form.field_with(:name => 'viewdate[year]').value = date.year
   page = form.submit
-  File.open("dump.html", "w") do |f|
-    f.puts page.body
-  end
 
   columns = [0,1,2,3,6,7,9] # ignore 'Biling billed', 'Billing marked' and 'Currency'
 
