@@ -7,7 +7,6 @@ require 'achoo/term'
 require 'date'
 require 'mechanize'
 
-
 def main
   load_rc
   print_welcome
@@ -37,12 +36,12 @@ def show_menu_and_ask_for_action_and_act(agent)
     show_flexi_time(agent)
   when '3'
     show_registered_hours_for_day(agent)
+  when '4'
+    warn "Not implemented yet"
   when '5'
     show_holiday_report(agent)
   when '6'
     lock_month(agent)
-  when '3', '4'
-    warn "Not implemented yet"
   else
     warn "Input error"
   end
@@ -52,18 +51,14 @@ end
 def register_hours(agent)
   form = Achoo::HourRegistrationForm.new(agent)
   
-  date    = date_chooser
-  project = project_chooser(form)
-  #FIX select phase
-  remark  = get_remark(date)
-  hours   = hours_chooser(date)
+  date         = date_chooser
+  form.date    = date
+  form.project = project_chooser(form)
+  form.list_phases
+  form.phase   = ask 'Phase ID'
+  form.remark  = get_remark(date)
+  form.hours   = hours_chooser(date)
 
-  form.set_values({
-    :date    => date,
-    :project => project,
-    :remark  => remark,
-    :hours   => hours,
-  })
 
   form.print_values
   if confirm

@@ -1,12 +1,93 @@
 class Achoo
   class HourRegistrationForm
 
+    PHASE_MAP = {
+        "3"   => "Ferie",
+        "4"   => "Permisjon med lønn",
+        "5"   => "Permisjon uten lønn",
+        "6"   => "Sykemelding",
+        "9"   => "Helligdag",
+        "276" => "Leveranse",
+        "459" => "Foreldrepermisjon",
+        "476" => "Egenmelding - barns sykdom",
+        "477" => "Egenmelding - egen sykdom",
+    }
+
     def initialize(agent)
       @agent = agent
       @page  = @agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
       @form  = @page.form('entryform')
     end
 
+    def date=(date)
+      # Day and month must be prefixed with '0' if single
+      # digit. Date.day and Date.month doesn't do this. Use strftime
+      day_field.value   = date.strftime('%d')
+      month_field.value = date.strftime('%m')
+      year_field.value  = date.year
+    end
+    
+    def project
+      @form.projectid.match(/project\.id='(\d+)'/)[1]
+    end
+
+    def project=(projectid)
+      @form.projectid   = "project.id='#{projectid}'"
+    end
+
+    def remark=(remark)
+      @form.remark = remark
+    end
+
+    def hours=(hours)
+      @form.time = hours
+    end
+
+    def phase
+      @form.phaseid.match(/phase\.id='(\d+)'/)[1]
+    end
+
+    def phase=(phaseid)
+      @form.phaseid   = "phase.id='#{phaseid}'"
+    end
+
+
+
+    def list_phases
+      # FIX make this work:
+      # old_action = @form.action
+      # @form.action = RC[:url]+"/dispatch.php?atknodetype=timereg.hours&atkaction=add&atkfieldprefix=&atkpartial=attribute.phaseid.refresh&atklevel=-3&atkprevlevel=0&atkstackid=4b67cdb34ff5a&"
+      # p old_action
+      # p @form.action
+      # require 'logger'
+      # @agent.log =  Logger.new("mech.log")
+      # page = @form.submit(nil, {
+      #   'X-Requested-With'    => 'XMLHttpRequest',
+      #   'X-Prototype-Version' => '1.5.0_rc1'
+      # })
+      # @agent.log = nil
+      # File.open("dump.html", "w") do |f|
+      #   f.puts page.body
+      # end
+      # @form.action = old_action
+      # p @form.action
+
+      # Hard coded for now :(
+      if (project == '1')
+        puts "476. Egenmelding - barns sykdom"
+        puts "477. Egenmelding - egen sykdom"
+        puts "  3. Ferie"
+        puts "459. Foreldrepermisjon"
+        puts "  9. Helligdag"
+        puts "  4. Permisjon med lønn"
+        puts "  5. Permisjon uten lønn"
+        puts "  6. Sykemelding"
+      else
+        puts "276. Leveranse"
+      end
+
+    end
+    
     def list_recent_projects
       @form.field_with(:name => 'projectid').options.each do |opt|
         val = opt.value["project.id='".length..-2]
@@ -28,27 +109,15 @@ class Achoo
       end
     end
 
-    def set_values(values)
-      day_field.value   = values[:date].strftime('%d') # .day gives '1' not '01'
-      month_field.value = values[:date].strftime('%m')
-      year_field.value  = values[:date].year
-      @form.projectid   = "project.id='#{values[:project]}'"
-      @form.remark      = values[:remark]
-      @form.time        = values[:hours]
-
-      # FIX
-      @form.phaseid = "phase.id='276'"
-    end
-
     def print_values
       format = "%10s: \"%s\"\n"
       printf format, 'day',     day_field.value
       printf format, 'month',   month_field.value
       printf format, 'year',    year_field.value
       printf format, 'project', selected_projectid_option.text
+      printf format, 'phase',   PHASE_MAP[phase]
       printf format, 'remark',  @form.remark
       printf format, 'hours',   @form.time
-      printf format, 'phase',   'leveranse' #FIX
 
       # @form.fields.each do |field|
       #   printf format, field.name, field.value
@@ -61,6 +130,7 @@ class Achoo
     end
 
     def flexi_time
+      # FIX not necessarily for today
       @page.body.match(/(Flexi time balance: -?\d+:\d+)/)
       $1
     end
