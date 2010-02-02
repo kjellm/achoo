@@ -23,9 +23,8 @@ def show_menu_and_ask_for_action_and_act(agent)
   puts "1. Register hours"
   puts "2. Show flexitime balance"
   puts "3. Show day"
-  puts "4. Show week"
-  puts "5. Holidays"
-  puts "6. Lock month"
+  puts "4. Holidays"
+  puts "5. Lock month"
   puts "0. Exit"
   case ask '[1]'
   when '0', 'q', 'Q'
@@ -37,10 +36,8 @@ def show_menu_and_ask_for_action_and_act(agent)
   when '3'
     show_registered_hours_for_day(agent)
   when '4'
-    warn "Not implemented yet"
-  when '5'
     show_holiday_report(agent)
-  when '6'
+  when '5'
     lock_month(agent)
   else
     warn "Input error"
