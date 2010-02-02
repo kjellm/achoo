@@ -3,6 +3,7 @@
 
 require 'achoo/hour_registration_form'
 require 'achoo/last'
+require 'achoo/term'
 require 'date'
 require 'mechanize'
 
@@ -34,6 +35,8 @@ def show_menu_and_ask_for_action_and_act(agent)
     register_hours(agent)
   when '2'
     show_flexi_time(agent)
+  when '3'
+    show_registered_hours_for_day(agent)
   when '5'
     show_holiday_report(agent)
   when '6'
@@ -72,6 +75,37 @@ def register_hours(agent)
 end
 
 
+def show_registered_hours_for_day(agent)
+  page  = agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
+  date = date_chooser
+  unless date == Date.today
+    form  = page.form('dayview')
+    form.field_with(:name => 'viewdate[day]').value = date.strftime('%d') # .day gives '1' not '01'
+    form.field_with(:name => 'viewdate[month]').value = date.strftime('%m')
+    form.field_with(:name => 'viewdate[year]').value = date.year
+    page = form.submit
+    File.open("dump.html", "w") do |f|
+      f.puts page.body
+    end
+  end
+
+  columns = [0,1,2,3,6,7,9] # ignore 'Biling billed', 'Billing marked' and 'Currency'
+
+  headers = page.search('#rl_1 tr').first.css('th').to_a.values_at(*columns)
+  headers = headers.map {|th| th.content.strip}
+
+  data_rows = []
+  page.search('#rl_1 tr').each do |tr|
+    cells = tr.css('td')
+    next if cells.empty?
+    cells = cells.to_a.values_at(*columns)
+    data_rows << cells.map {|td| td.content.strip}
+  end
+
+  Achoo::Term.table(headers, data_rows)
+end
+
+
 def show_flexi_time(agent)
   form = Achoo::HourRegistrationForm.new(agent)
   puts form.flexi_time
@@ -106,6 +140,7 @@ def show_holiday_report(agent)
   page.body.match(/<b>(\d+,\d+)<\/b>/)
   puts "Balance: #$1"
 end
+
 
 def confirm
   answer = ask "Submit? [Y/n]"
@@ -213,11 +248,10 @@ end
 
 
 def date_chooser
-  today = Date.today
   answer = ask "Date [today]"
   date = case answer
          when ''
-           today
+           Date.today
          else
            Date.parse(answer)
          end
