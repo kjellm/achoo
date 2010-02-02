@@ -1,5 +1,5 @@
 class Achoo
-  class HourRegistrationForm
+  class HourRegistrationForm < Achoo::Form
 
     PHASE_MAP = {
         "3"   => "Ferie",
@@ -19,14 +19,6 @@ class Achoo
       @form  = @page.form('entryform')
     end
 
-    def date=(date)
-      # Day and month must be prefixed with '0' if single
-      # digit. Date.day and Date.month doesn't do this. Use strftime
-      day_field.value   = date.strftime('%d')
-      month_field.value = date.strftime('%m')
-      year_field.value  = date.year
-    end
-    
     def project
       @form.projectid.match(/project\.id='(\d+)'/)[1]
     end
