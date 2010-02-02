@@ -15,7 +15,7 @@ Needs bleeding edge mechanize (newer then 0.9.3) because of SSL issues
 
 == USAGE
 
-Create ~/.achoo with the following content and edit it:
+Create ~/.achoo from the following template and edit it:
 
   RC = {
     :url => 'https://example.com/achievo/',
