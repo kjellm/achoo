@@ -13,35 +13,40 @@ def main
   agent = WWW::Mechanize.new
   login(agent)
 
+  command_loop(agent)
+end
+
+
+def command_loop(agent)
   while true
-    show_menu_and_ask_for_action_and_act(agent)
+    print_menu
+    case ask '[1]'
+    when '0', 'q', 'Q'
+      exit
+    when '1', ''
+      register_hours(agent)
+    when '2'
+      show_flexi_time(agent)
+    when '3'
+      show_registered_hours_for_day(agent)
+    when '4'
+      show_holiday_report(agent)
+    when '5'
+      lock_month(agent)
+    else
+      warn "Input error"
+    end
   end
 end
 
 
-def show_menu_and_ask_for_action_and_act(agent)
+def print_menu
   puts "1. Register hours"
   puts "2. Show flexitime balance"
   puts "3. Show day"
   puts "4. Holidays"
   puts "5. Lock month"
   puts "0. Exit"
-  case ask '[1]'
-  when '0', 'q', 'Q'
-    exit
-  when '1', ''
-    register_hours(agent)
-  when '2'
-    show_flexi_time(agent)
-  when '3'
-    show_registered_hours_for_day(agent)
-  when '4'
-    show_holiday_report(agent)
-  when '5'
-    lock_month(agent)
-  else
-    warn "Input error"
-  end
 end
 
 
