@@ -7,12 +7,14 @@ INSTALL
 -------
 
   git clone git://github.com/kjellm/achoo.git
-  gem install mechanize
 
-Make shure that WWW::Mechanize has the following patch applied
-(version 0.9.3 has not):
+Needs bleeding edge mechanize (newer then 0.9.3) because of SSL issues
 
-  http://github.com/valo/mechanize/commit/e8c9d0ef72f55461ed33d4a0ee283683cb0f83aa
+  cd /tmp/
+  git clone git://github.com/valo/mechanize.git
+  cd mechanize
+  gem builde mechanize.gemspec
+  gem install mechanize-*.gem
 
 
 USAGE
