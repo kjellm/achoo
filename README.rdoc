@@ -9,7 +9,7 @@ Needs bleeding edge mechanize (newer then 0.9.3) because of SSL issues
   cd /tmp/
   git clone git://github.com/valo/mechanize.git
   cd mechanize
-  gem builde mechanize.gemspec
+  gem build mechanize.gemspec
   gem install mechanize-*.gem
 
 
