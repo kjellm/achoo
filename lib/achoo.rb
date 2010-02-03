@@ -99,7 +99,8 @@ class Achoo
     if phases.length == 1
       return phases[0][0]
     else
-      return ask 'Phase ID'
+      return ask_and_validate_against_list('Phase ID', 
+                                           phases.collect {|p| p[0]})
     end
   end
 
@@ -241,14 +242,28 @@ class Achoo
 
 
   def date_chooser
-    answer = ask "Date [today]"
-    date = case answer
-           when ''
-             Date.today
-           else
-             Date.parse(answer)
-           end
-    return date
+    while true
+      begin
+        answer = ask "Date [today]"
+        return answer == '' ? Date.today : Date.parse(answer)
+      rescue ArgumentError => e
+        puts e.message
+      end
+    end
+  end
+
+  
+  def ask_and_validate_against_list(question, values)
+    answer = nil
+    while true
+      answer = ask question
+      if values.include?(answer)
+        break
+      else
+        puts "Invalid value. Must be one of " << values.join(',')
+      end
+    end
+    return answer
   end
 
 
