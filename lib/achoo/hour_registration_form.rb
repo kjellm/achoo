@@ -47,7 +47,7 @@ class Achoo
 
 
 
-    def list_phases
+    def phases_for_project
       # FIX make this work:
       # old_action = @form.action
       # @form.action = RC[:url]+"/dispatch.php?atknodetype=timereg.hours&atkaction=add&atkfieldprefix=&atkpartial=attribute.phaseid.refresh&atklevel=-3&atkprevlevel=0&atkstackid=4b67cdb34ff5a&"
@@ -68,16 +68,18 @@ class Achoo
 
       # Hard coded for now :(
       if (project == '1')
-        puts "476. Egenmelding - barns sykdom"
-        puts "477. Egenmelding - egen sykdom"
-        puts "  3. Ferie"
-        puts "459. Foreldrepermisjon"
-        puts "  9. Helligdag"
-        puts "  4. Permisjon med lønn"
-        puts "  5. Permisjon uten lønn"
-        puts "  6. Sykemelding"
+        [
+         ["476", "Egenmelding - barns sykdom"],
+         ["477", "Egenmelding - egen sykdom"],
+         ["3",   "Ferie"],
+         ["459", "Foreldrepermisjon"],
+         ["9",   "Helligdag"],
+         ["4",   "Permisjon med lønn"],
+         ["5",   "Permisjon uten lønn"],
+         ["6",   "Sykemelding"],
+        ]
       else
-        puts "276. Leveranse"
+        [["276", "Leveranse"]]
       end
 
     end

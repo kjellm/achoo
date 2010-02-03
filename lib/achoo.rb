@@ -77,8 +77,7 @@ class Achoo
     date         = date_chooser
     form.date    = date
     form.project = project_chooser(form)
-    form.list_phases
-    form.phase   = ask 'Phase ID'
+    form.phase   = phase_chooser(form)
     form.remark  = get_remark(date)
     form.hours   = hours_chooser(date)
 
@@ -89,6 +88,18 @@ class Achoo
       form.submit
     else
       puts "Cancelled"
+    end
+  end
+
+
+  def phase_chooser(form)
+    phases = form.phases_for_project
+    puts "Phases"
+    phases.each {|p| printf "%6d. %s\n", *p }
+    if phases.length == 1
+      return phases[0][0]
+    else
+      return ask 'Phase ID'
     end
   end
 
