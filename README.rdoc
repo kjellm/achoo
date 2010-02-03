@@ -39,3 +39,4 @@ Change to your achoo dir and run it with the following command
 - Sane input defaults
 - Add sumary to day and week reports
 - Add hours to a range of dates
+- Bug when choosing project not in drop down

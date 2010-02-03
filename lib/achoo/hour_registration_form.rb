@@ -1,3 +1,5 @@
+require 'achoo/form'
+
 class Achoo
   class HourRegistrationForm < Achoo::Form
 
@@ -15,7 +17,7 @@ class Achoo
 
     def initialize(agent)
       @agent = agent
-      @page  = @agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
+      @page  = @agent.get(RC[:hour_registration_url])
       @form  = @page.form('entryform')
     end
 
@@ -24,7 +26,7 @@ class Achoo
     end
 
     def project=(projectid)
-      @form.projectid   = "project.id='#{projectid}'"
+      @form.projectid = "project.id='#{projectid}'"
     end
 
     def remark=(remark)
@@ -118,7 +120,10 @@ class Achoo
     end
 
     def submit
+      require 'logger'
+      @agent.log =  Logger.new("mech.log")
       @form.submit()
+      @agent.log = nil
     end
 
     private

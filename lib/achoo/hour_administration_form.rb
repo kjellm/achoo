@@ -6,7 +6,7 @@ class Achoo
 
     def initialize(agent)
       @agent = agent
-      @page  = @agent.get(RC[:url] + '/dispatch.php?atknodetype=timereg.hours&atkaction=admin&atklevel=-1&atkprevlevel=0&')
+      @page  = @agent.get(RC[:hour_admin_url])
       @form  = @page.form('dayview')
     end
 
