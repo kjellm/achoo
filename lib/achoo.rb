@@ -159,7 +159,7 @@ class Achoo
   def hours_chooser(date)
     puts "Last log:"
     last = Achoo::Last.new
-    print last.find_by_date(date).join("\n")
+    last.find_by_date(date)
     puts
     return ask 'Hours'
   end

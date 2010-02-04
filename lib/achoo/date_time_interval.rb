@@ -26,6 +26,21 @@ class Achoo
 
       sprintf "%s - %s (%d+%02d:%02d)", start, self.end, d, h, m
     end
-    
+
+    def contains(date)
+      start = self.start.strftime("%F")
+      stop  = self.end.strftime("%F")
+      date = date.strftime("%F")
+      return start <= date && stop >= date
+    end
+
+    def contains_interval(dt_interval)
+      #puts "### #{self}"
+      #puts "!!! #{dt_interval}"
+      test = (self.start <=> dt_interval.start) <= 0 \
+        && (self.end <=> dt_interval.end) >= 0
+      #puts "=== #{test}"
+      return test
+    end
   end
 end
