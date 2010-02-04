@@ -166,20 +166,22 @@ class Achoo
 
 
   def get_remark(date)
-    puts "RCS logs for #{date}:"
+    puts "VCS logs for #{date}:"
 
     today    = date.strftime('%Y-%m-%d')
     tomorrow = date.next.strftime('%Y-%m-%d')
 
     RC[:vcs_dirs].each do |dir|
       Dir.glob("#{dir}/*/").each do |dir|
-        puts "---------(#{dir})-------------"
         if File.exist?("#{dir}/.git")
-          system "cd  #{dir}; git log --author=#{ENV['USER']} --oneline --after=#{today} --before=#{tomorrow}| cut -d ' ' -f 2-"
+          output = `cd  #{dir}; git log --author=#{ENV['USER']} --oneline --after=#{today} --before=#{tomorrow}| cut -d ' ' -f 2-`
+          puts "---------(#{dir})-------------" unless output == ''
+          print output
+        else
+          puts "!!! Unrecognized vcs in dirctory: #{dir}"
         end
       end
     end
-    puts "----------------------------------"
     ask 'Remark'
   end
 
