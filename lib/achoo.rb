@@ -231,8 +231,9 @@ class Achoo
 
   def load_cookies
     cookies_file = "#{ENV['HOME']}/.achoo_cookies.yml"
-    FileUtils.touch(cookies_file)
-    @agent.cookie_jar.load(cookies_file)
+    if FileTest.exists? cookies_file
+      @agent.cookie_jar.load(cookies_file)
+    end
   end
 
 
