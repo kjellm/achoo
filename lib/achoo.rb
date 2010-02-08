@@ -50,8 +50,9 @@ class Achoo
     puts "1. Register hours"
     puts "2. Show flexitime balance"
     puts "3. Show day"
-    puts "4. Holidays"
-    puts "5. Lock month"
+    puts "4. Show week"
+    puts "5. Holidays"
+    puts "6. Lock month"
     puts "0. Exit"
   end
 
