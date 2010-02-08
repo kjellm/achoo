@@ -30,6 +30,7 @@ class Achoo
       unless link.nil?
         puts "Fetching #{view} ..."
         @page = link.click
+        @form = @page.form(view)
       end
       @page = get_page_for(date) unless date == self.date
       @form = @page.form(view)
