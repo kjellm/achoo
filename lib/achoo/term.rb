@@ -9,7 +9,10 @@ class Achoo
       puts separator
       printf format, *headers
       puts separator
-      data_rows.each {|r| printf format, *r}
+      data_rows.each do |r|
+        r.collect! {|c| c == "\302\240" ? '  ' : c} # UTF-8 NO-BREAK-SPACE
+        printf format, *r
+      end
       puts separator
     end
 
