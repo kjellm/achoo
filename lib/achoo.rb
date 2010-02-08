@@ -246,7 +246,14 @@ class Achoo
     while true
       begin
         answer = ask "Date [today]"
-        return answer == '' ? Date.today : Date.parse(answer)
+        case answer
+        when '?'
+          system 'cal -3m'
+        when ''
+          return Date.today
+        else
+          return Date.parse(answer)
+        end
       rescue ArgumentError => e
         puts e.message
       end
