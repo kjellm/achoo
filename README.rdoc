@@ -31,12 +31,10 @@ Change to your achoo dir and run it with the following command
 
 == TODO
 
-- Hours week report
 - Fix phases
 - Input validation
 - Readline
 - Check date parsing (Chronic)
 - Sane input defaults
-- Add sumary to day and week reports
 - Add hours to a range of dates
 - Bug when choosing project not in drop down
