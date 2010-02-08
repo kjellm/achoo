@@ -10,67 +10,11 @@ class Achoo
     end
 
     def show_registered_hours_for_day(date)
-      link = @page.link_with(:text => 'Dayview')
-      unless link.nil?
-        @page = link.click
-      end
-      @form = @page.form('dayview')
-      @page = get_page_for(date) unless date == self.date
-
-      columns = [1,2,3,4,7,8,9,10] # ignore 'Biling billed' and 'Billing marked'
-      if @page.search('#rl_1 tr td').empty?
-        columns.collect! {|c| c - 1}
-      end
-
-      headers = @page.search('#rl_1 tr').first.css('th').to_a.values_at(*columns)
-      headers = headers.map {|th| th.content.strip}
-
-      data_rows = []
-      @page.search('#rl_1 tr').each do |tr|
-        cells = tr.css('td')
-        next if cells.empty?
-        cells = cells.to_a.values_at(*columns)
-        data_rows << fix_empty_cells(cells.map {|td| td.content.strip})
-      end
-
-      summaries = nil
-      unless data_rows.empty?
-        summaries = @page.search('#rl_1 tr').last.css('th').to_a.values_at(*columns)
-        summaries = summaries.map {|th| th.content.strip }
-        fix_empty_cells(summaries)
-      end
-
-      Achoo::Term.table(headers, data_rows, summaries)
+      show_registered_hours(date, 'dayview', '#rl_1 tr')
     end
     
     def show_registered_hours_for_week(date)
-      link = @page.link_with(:text => 'Weekview')
-      unless link.nil?
-        @page = link.click
-      end
-      @form = @page.form('weekview')
-      unless date == self.date
-        puts "Fetching data for #{date} ..."
-        self.date = date
-        @page = @form.submit
-      end
-      
-      headers = @page.search('//form[@name="weekview"]/following::table/tr').first.css('th')
-      headers = headers.map {|th| th.content.match(/^(\S+)/)[1] }
-      # FIX add a second header row with dates
-
-      data_rows = []
-      @page.search('//form[@name="weekview"]/following::table/tr').each do |tr|
-        cells = tr.css('td')
-        next if cells.empty?
-        data_rows << fix_empty_cells(cells.map {|td| td.content.strip})
-      end
-
-      summaries = @page.search('//form[@name="weekview"]/following::table/tr').last.css('th')
-      summaries = summaries.map {|th| th.content }
-      fix_empty_cells(summaries)
-      
-      Achoo::Term.table(headers, data_rows, summaries)
+      show_registered_hours(date, 'weekview', '//form[@name="weekview"]/following::table/tr')
     end
 
     def flexi_time(date)
@@ -80,6 +24,59 @@ class Achoo
     end
 
     private
+    
+    def show_registered_hours(date, view, query)
+      link = @page.link_with(:text => view.capitalize)
+      unless link.nil?
+        puts "Fetching #{view} ..."
+        @page = link.click
+      end
+      @page = get_page_for(date) unless date == self.date
+      @form = @page.form(view)
+
+      columns = nil
+      if view == 'dayview'
+        columns = [1,2,3,4,7,8,9,10] # ignore 'Biling billed' and 'Billing marked'
+        if @page.search(query + ' td').empty?
+          columns.collect! {|c| c - 1}
+        end
+      end
+
+      rows = @page.search(query)
+
+      headers = rows.first.css('th')
+      if view == 'dayview'
+        headers = headers.to_a.values_at(*columns)
+      end
+      headers = headers.map {|th| th.content.strip}
+      if view == 'weekview'
+        headers = headers.map {|th| th.match(/^(\S+)/)[1] }
+      end
+
+
+      data_rows = []
+      rows.each do |tr|
+        cells = tr.css('td')
+        next if cells.empty?
+        if view == 'dayview'
+          cells = cells.to_a.values_at(*columns)
+        end
+        data_rows << fix_empty_cells(cells.map {|td| td.content.strip})
+      end
+
+      summaries = nil
+      unless data_rows.empty?
+        summaries = rows.last.css('th')
+        if view == 'dayview'
+          summaries = summaries.to_a.values_at(*columns)
+        end
+        summaries = summaries.map {|th| th.content.strip }
+        fix_empty_cells(summaries)
+      end
+
+      Achoo::Term.table(headers, data_rows, summaries)
+    end
+
 
     def get_page_for(date)
       puts "Fetching data for #{date} ..."
