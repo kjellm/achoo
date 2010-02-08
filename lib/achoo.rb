@@ -34,8 +34,10 @@ class Achoo
       when '3'
         show_registered_hours_for_day
       when '4'
-        show_holiday_report
+        show_registered_hours_for_week
       when '5'
+        show_holiday_report
+      when '6'
         lock_month
       else
         warn "Input error"
@@ -110,6 +112,12 @@ class Achoo
     date = date_chooser
     form = Achoo::HourAdministrationForm.new(@agent)
     form.show_registered_hours_for_day(date)
+  end
+
+  def show_registered_hours_for_week
+    date = date_chooser
+    form = Achoo::HourAdministrationForm.new(@agent)
+    form.show_registered_hours_for_week(date)
   end
 
 
@@ -229,8 +237,9 @@ class Achoo
 
   def load_cookies
     cookies_file = "#{ENV['HOME']}/.achoo_cookies.yml"
-    FileUtils.touch(cookies_file)
-    @agent.cookie_jar.load(cookies_file)
+    if FileTest.exists? cookies_file
+      @agent.cookie_jar.load(cookies_file)
+    end
   end
 
 
@@ -243,7 +252,14 @@ class Achoo
     while true
       begin
         answer = ask "Date [today]"
-        return answer == '' ? Date.today : Date.parse(answer)
+        case answer
+        when '?'
+          system 'cal -3m'
+        when ''
+          return Date.today
+        else
+          return Date.parse(answer)
+        end
       rescue ArgumentError => e
         puts e.message
       end

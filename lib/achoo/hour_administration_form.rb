@@ -7,10 +7,14 @@ class Achoo
     def initialize(agent)
       @agent = agent
       @page  = @agent.get(RC[:hour_admin_url])
-      @form  = @page.form('dayview')
     end
 
     def show_registered_hours_for_day(date)
+      link = @page.link_with(:text => 'Dayview')
+      unless link.nil?
+        @page = link.click
+      end
+      @form = @page.form('dayview')
       @page = get_page_for(date) unless date == self.date
 
       columns = [1,2,3,4,7,8,9,10] # ignore 'Biling billed' and 'Billing marked'
@@ -34,6 +38,33 @@ class Achoo
       Achoo::Term.table(headers, data_rows)
     end
     
+    def show_registered_hours_for_week(date)
+      link = @page.link_with(:text => 'Weekview')
+      unless link.nil?
+        @page = link.click
+      end
+      @form = @page.form('weekview')
+      unless date == self.date
+        puts "Fetching data for #{date} ..."
+        self.date = date
+        @page = @form.submit
+      end
+      
+      headers = @page.search('//form[@name="weekview"]/following::table/tr').first.css('th')
+      headers = headers.map {|th| th.content.match(/^(\S+)/)[1] }
+     
+      data_rows = []
+      @page.search('//form[@name="weekview"]/following::table/tr').each do |tr|
+        cells = tr.css('td')
+        next if cells.empty?
+        data_rows << cells.map {|td| td.content.strip}
+      end
+
+      # FIX add summary row
+
+      Achoo::Term.table(headers, data_rows)
+    end
+
     def flexi_time(date)
       @page = get_page_for(date) unless date == self.date
 
