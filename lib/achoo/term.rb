@@ -1,7 +1,7 @@
 class Achoo
   class Term
 
-    def self.table(headers, data_rows)
+    def self.table(headers, data_rows, summaries=nil)
       lengths = calculate_table_cell_widths(headers, data_rows)
       separator = table_separator(lengths)
       format = lengths.reduce('|') {|f, l| f + " %-#{l}s |"} + "\n"
@@ -10,10 +10,13 @@ class Achoo
       printf format, *headers
       puts separator
       data_rows.each do |r|
-        r.collect! {|c| c == "\302\240" ? '  ' : c} # UTF-8 NO-BREAK-SPACE
         printf format, *r
       end
       puts separator
+      unless summaries.nil?
+        printf format, *summaries
+        puts separator
+      end
     end
 
     private

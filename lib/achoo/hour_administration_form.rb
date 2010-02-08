@@ -30,12 +30,17 @@ class Achoo
         cells = tr.css('td')
         next if cells.empty?
         cells = cells.to_a.values_at(*columns)
-        data_rows << cells.map {|td| td.content.strip}
+        data_rows << fix_empty_cells(cells.map {|td| td.content.strip})
       end
 
-      # FIX add summary for hours and billing total
+      summaries = nil
+      unless data_rows.empty?
+        summaries = @page.search('#rl_1 tr').last.css('th').to_a.values_at(*columns)
+        summaries = summaries.map {|th| th.content.strip }
+        fix_empty_cells(summaries)
+      end
 
-      Achoo::Term.table(headers, data_rows)
+      Achoo::Term.table(headers, data_rows, summaries)
     end
     
     def show_registered_hours_for_week(date)
@@ -52,17 +57,20 @@ class Achoo
       
       headers = @page.search('//form[@name="weekview"]/following::table/tr').first.css('th')
       headers = headers.map {|th| th.content.match(/^(\S+)/)[1] }
-     
+      # FIX add a second header row with dates
+
       data_rows = []
       @page.search('//form[@name="weekview"]/following::table/tr').each do |tr|
         cells = tr.css('td')
         next if cells.empty?
-        data_rows << cells.map {|td| td.content.strip}
+        data_rows << fix_empty_cells(cells.map {|td| td.content.strip})
       end
 
-      # FIX add summary row
-
-      Achoo::Term.table(headers, data_rows)
+      summaries = @page.search('//form[@name="weekview"]/following::table/tr').last.css('th')
+      summaries = summaries.map {|th| th.content }
+      fix_empty_cells(summaries)
+      
+      Achoo::Term.table(headers, data_rows, summaries)
     end
 
     def flexi_time(date)
@@ -89,6 +97,11 @@ class Achoo
     
     def year_field
       @form.field_with(:name => 'viewdate[year]')
+    end
+
+    def fix_empty_cells(row)
+      row.collect! {|c| c == "\302\240" ? '  ' : c} # UTF-8 NO-BREAK-SPACE
+
     end
   end  
 end
