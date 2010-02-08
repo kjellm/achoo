@@ -27,13 +27,16 @@ class Achoo
     
     def show_registered_hours(date, view, query)
       link = @page.link_with(:text => view.capitalize)
+      @form = @page.form(view)
       unless link.nil?
         puts "Fetching #{view} ..."
         @page = link.click
         @form = @page.form(view)
       end
-      @page = get_page_for(date) unless date == self.date
-      @form = @page.form(view)
+      unless date == self.date
+        @page = get_page_for(date)
+        @form = @page.form(view)
+      end
 
       columns = nil
       if view == 'dayview'
