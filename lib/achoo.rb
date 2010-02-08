@@ -1,3 +1,4 @@
+require 'achoo/git'
 require 'achoo/hour_administration_form'
 require 'achoo/hour_registration_form'
 require 'achoo/last'
@@ -168,15 +169,10 @@ class Achoo
   def get_remark(date)
     puts "VCS logs for #{date}:"
 
-    today    = date.strftime('%Y-%m-%d')
-    tomorrow = date.next.strftime('%Y-%m-%d')
-
     RC[:vcs_dirs].each do |dir|
       Dir.glob("#{dir}/*/").each do |dir|
-        if File.exist?("#{dir}/.git")
-          output = `cd  #{dir}; git log --author=#{ENV['USER']} --oneline --after=#{today} --before=#{tomorrow}| cut -d ' ' -f 2-`
-          puts "---------(#{dir})-------------" unless output == ''
-          print output
+        if Achoo::Git.git_repository?(dir)
+          Achoo::Git.new(dir).print_log_for(date)
         else
           puts "!!! Unrecognized vcs in dirctory: #{dir}"
         end
