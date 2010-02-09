@@ -49,23 +49,18 @@ class Achoo
 
 
     def phases_for_project
-      # FIX make this work:
-      # old_action = @form.action
-      # @form.action = RC[:url]+"/dispatch.php?atknodetype=timereg.hours&atkaction=add&atkfieldprefix=&atkpartial=attribute.phaseid.refresh&atklevel=-3&atkprevlevel=0&atkstackid=4b67cdb34ff5a&"
-      # p old_action
-      # p @form.action
-      # require 'logger'
-      # @agent.log =  Logger.new("mech.log")
-      # page = @form.submit(nil, {
-      #   'X-Requested-With'    => 'XMLHttpRequest',
-      #   'X-Prototype-Version' => '1.5.0_rc1'
-      # })
-      # @agent.log = nil
-      # File.open("dump.html", "w") do |f|
-      #   f.puts page.body
-      # end
-      # @form.action = old_action
-      # p @form.action
+      #FIX make this work:
+      #old = {
+      #  :atkaction => @form.atkaction,
+      #  :action    => @form.action,
+      #}
+      #
+      #@form.action = RC[:url]+"/dispatch.php?atkpartial=attribute.phaseid.refresh"
+      #@form.atkaction = 'add'
+      #page = @form.submit
+      #@form.action    = old[:action]
+      #@form.atkaction = old[:atkaction]
+      #p page.body
 
       # Hard coded for now :(
       if (project == '1')
