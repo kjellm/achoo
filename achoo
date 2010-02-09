@@ -3,6 +3,7 @@
 require 'achoo'
 
 def main
+  trap("INT") {puts; exit} # Print a newline in case we are prompting
   load_rc
   achoo = Achoo.new
   achoo.start
