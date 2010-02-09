@@ -18,17 +18,7 @@ class Achoo
     end
 
     def flexi_time(date)
-      link = @page.link_with(:text => 'Dayview')
-      @form = @page.form('dayview')
-      unless link.nil?
-        puts "Fetching dayview ..."
-        @page = link.click
-        @form = @page.form('dayview')
-      end
-      unless date == self.date
-        @page = get_page_for(date)
-        @form = @page.form('dayview')
-      end
+      set_page_to_view_for_date('dayview', date)
 
       @page.body.match(/(Flexi time balance: -?\d+:\d+)/)[1]
     end
@@ -36,17 +26,7 @@ class Achoo
     private
     
     def show_registered_hours(date, view, query)
-      link = @page.link_with(:text => view.capitalize)
-      @form = @page.form(view)
-      unless link.nil?
-        puts "Fetching #{view} ..."
-        @page = link.click
-        @form = @page.form(view)
-      end
-      unless date == self.date
-        @page = get_page_for(date)
-        @form = @page.form(view)
-      end
+      set_page_to_view_for_date(view, date)
 
       columns = nil
       if view == 'dayview'
@@ -64,7 +44,7 @@ class Achoo
       end
       headers = headers.map {|th| th.content.strip}
       if view == 'weekview'
-        headers = headers.map {|th| th.match(/^(\S+)/)[1] }
+        headers = headers.map {|th| th.gsub(/\s+/, ' ') }
       end
 
 
@@ -91,6 +71,20 @@ class Achoo
       Achoo::Term.table(headers, data_rows, summaries)
     end
 
+    
+    def set_page_to_view_for_date(view, date)
+      link = @page.link_with(:text => view.capitalize)
+      @form = @page.form(view)
+      unless link.nil?
+        puts "Fetching #{view} ..."
+        @page = link.click
+        @form = @page.form(view)
+      end
+      unless date == self.date
+        @page = get_page_for(date)
+        @form = @page.form(view)
+      end
+    end    
 
     def get_page_for(date)
       puts "Fetching data for #{date} ..."
