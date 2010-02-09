@@ -1,11 +1,13 @@
 #!/usr/bin/env ruby
 
 require 'achoo'
+require 'optparse'
 
 def main
   trap("INT") {puts; exit} # Print a newline in case we are prompting
   load_rc
-  achoo = Achoo.new
+  options = parse_args
+  achoo = Achoo.new(options[:log])
   achoo.start
 end
 
@@ -19,6 +21,22 @@ def load_rc
   end
 
   load rc_file
+end
+
+def parse_args
+  options = {}
+
+  optparse = OptionParser.new do|opts|
+    opts.banner = "Usage: $0 [options]"
+
+    options[:log] = false
+    opts.on( '-l', '--log', 'Write http communication to achoo_http.log' ) do
+      options[:log] = true
+    end
+  end
+
+  optparse.parse!
+  options
 end
 
 main

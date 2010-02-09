@@ -2,13 +2,17 @@ require 'achoo/git'
 require 'achoo/hour_administration_form'
 require 'achoo/hour_registration_form'
 require 'achoo/last'
+require 'logger'
 require 'mechanize'
 
 
 class Achoo
 
-  def initialize
+  def initialize(log=false)
     @agent = WWW::Mechanize.new
+    if log
+      @agent.log = Logger.new("achoo_http.log")
+    end
   end
 
   def start
