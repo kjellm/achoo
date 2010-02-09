@@ -18,7 +18,17 @@ class Achoo
     end
 
     def flexi_time(date)
-      @page = get_page_for(date) unless date == self.date
+      link = @page.link_with(:text => 'Dayview')
+      @form = @page.form('dayview')
+      unless link.nil?
+        puts "Fetching dayview ..."
+        @page = link.click
+        @form = @page.form('dayview')
+      end
+      unless date == self.date
+        @page = get_page_for(date)
+        @form = @page.form('dayview')
+      end
 
       @page.body.match(/(Flexi time balance: -?\d+:\d+)/)[1]
     end
