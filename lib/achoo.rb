@@ -247,11 +247,11 @@ class Achoo
   def date_chooser
     while true
       begin
-        answer = ask "Date [today]"
+        answer = ask "Date ([today] | YYYY-MM-DD | ?)"
         case answer
         when '?'
           system 'cal -3m'
-        when ''
+        when '', 'today'
           return Date.today
         else
           return Date.parse(answer)
