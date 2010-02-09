@@ -4,9 +4,9 @@
 
   git clone git://github.com/kjellm/achoo.git
 
-Nokogiri requirements (required by mechanize)
+Mechanize/Nokogiri requirements (nokogiri is required by mechanize)
 
-  sudo aptitude install ruby1.8-dev libxml2, libxml2-dev, libxslt1, libxslt1-dev
+  sudo aptitude install ruby1.8-dev libxml2 libxml2-dev libxslt1 libxslt1-dev libopenssl-ruby
 
 Needs bleeding edge mechanize (newer then 0.9.3) because of SSL
 issues. 
