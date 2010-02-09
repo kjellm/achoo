@@ -4,14 +4,18 @@
 
   git clone git://github.com/kjellm/achoo.git
 
-Needs bleeding edge mechanize (newer then 0.9.3) because of SSL issues
+Nokogiri requirements (required by mechanize)
+
+  sudo aptitude install ruby1.8-dev libxml2, libxml2-dev, libxslt1, libxslt1-dev
+
+Needs bleeding edge mechanize (newer then 0.9.3) because of SSL
+issues. 
 
   cd /tmp/
   git clone git://github.com/valo/mechanize.git
   cd mechanize
   gem build mechanize.gemspec
   gem install mechanize-*.gem
-
 
 == USAGE
 
@@ -26,15 +30,18 @@ Create ~/.achoo from the following template and edit it:
 
 Change to your achoo dir and run it with the following command
 
-  ruby -Ilib achoo
+  RUBYOPT=rubygems ruby -Ilib achoo
 
 
 == TODO
 
-- Fix phases
 - Input validation
-- Readline
+- Readline?
 - Check date parsing (Chronic)
 - Sane input defaults
-- Add hours to a range of dates
+- Add hour registration to a range of dates
+
+== BUGS
+
+- Fix project phases
 - Bug when choosing project not in drop down
