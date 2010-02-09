@@ -28,6 +28,10 @@ Create ~/.achoo from the following template and edit it:
     :vcs_dirs => ["#{ENV['HOME']}/projects"],
   }
 
+Then
+
+  chmod 0600 ~/.achoo
+
 Change to your achoo dir and run it with the following command
 
   RUBYOPT=rubygems ruby -Ilib achoo
