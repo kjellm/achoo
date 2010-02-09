@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'achoo/form'
 
 class Achoo
@@ -84,11 +85,13 @@ class Achoo
 
     end
     
-    def list_recent_projects
+    def recent_projects
+      projects = []
       @form.field_with(:name => 'projectid').options.each do |opt|
         val = opt.value["project.id='".length..-2]
-        printf "%6s - %s\n", val, opt.text
+        projects << [val, opt.text]
       end
+      projects
     end
 
     def list_all_projects

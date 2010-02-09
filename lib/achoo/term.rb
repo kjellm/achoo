@@ -1,17 +1,28 @@
 class Achoo
   class Term
 
+    def self.bold(text)
+      "\e[1m#{text}\e[0m"
+    end
+
+    def self.menu(entries, special=nil)
+      max_digits = Math.log10(entries.length).to_i
+      format = "% #{max_digits}d. %s\n"
+      entries.each_with_index do |entry, i|
+        printf format, i+1, entry
+      end
+      printf format, 0, special unless special.nil?
+    end
+
     def self.table(headers, data_rows, summaries=nil)
       lengths = calculate_table_cell_widths(headers, data_rows)
       separator = table_separator(lengths)
-      format = lengths.reduce('|') {|f, l| f + " %-#{l}s |"} + "\n"
+      format = build_format(lengths)
       
       puts separator
       printf format, *headers
       puts separator
-      data_rows.each do |r|
-        printf format, *r
-      end
+      data_rows.each {|r| printf format, *r }
       puts separator
       unless summaries.nil?
         printf format, *summaries
@@ -32,6 +43,10 @@ class Achoo
         end
       end
       lengths
+    end
+
+    def self.build_format(lengths)
+      lengths.reduce('|') {|f, l| f + " %-#{l}s |"} + "\n"
     end
 
     def self.table_separator(lengths)

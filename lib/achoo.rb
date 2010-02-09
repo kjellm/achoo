@@ -23,7 +23,14 @@ class Achoo
 
   def command_loop
     while true
-      print_menu
+      Term.menu(["Register hours",
+                 "Show flexitime balance",
+                 "Day hour report",
+                 "Week hour report",
+                 "Holiday balance",
+                 "Lock month",
+                ],
+                "Exit")
       case ask '[1]'
       when '0', 'q', 'Q'
         exit
@@ -45,18 +52,6 @@ class Achoo
     end
   end
 
-
-  def print_menu
-    puts "1. Register hours"
-    puts "2. Show flexitime balance"
-    puts "3. Show day"
-    puts "4. Show week"
-    puts "5. Holidays"
-    puts "6. Lock month"
-    puts "0. Exit"
-  end
-
-
   def scrape_urls 
     page = @agent.get(@agent.current_page.frames.find {|f| f.name == 'menu'}.href)
     menu_links = page.search('a.menuItemLevel2')
@@ -67,7 +62,6 @@ class Achoo
     RC[:hour_admin_url]        = RC[:hour_registration_url]
   end
 
-  
   def menu_link_to_url(menu_links, text)
     url = menu_links.find {|a| 
       a.text.strip == text
@@ -76,7 +70,7 @@ class Achoo
   end
 
   def register_hours
-    form = Achoo::HourRegistrationForm.new(@agent)
+    form = HourRegistrationForm.new(@agent)
     
     date         = date_chooser
     form.date    = date
@@ -111,20 +105,20 @@ class Achoo
 
   def show_registered_hours_for_day
     date = date_chooser
-    form = Achoo::HourAdministrationForm.new(@agent)
+    form = HourAdministrationForm.new(@agent)
     form.show_registered_hours_for_day(date)
   end
 
   def show_registered_hours_for_week
     date = date_chooser
-    form = Achoo::HourAdministrationForm.new(@agent)
+    form = HourAdministrationForm.new(@agent)
     form.show_registered_hours_for_week(date)
   end
 
 
   def show_flexi_time
     date = date_chooser
-    form = Achoo::HourAdministrationForm.new(@agent)
+    form = HourAdministrationForm.new(@agent)
     puts form.flexi_time(date)
   end
 
@@ -168,10 +162,11 @@ class Achoo
 
   def hours_chooser(date)
     puts "Last log:"
-    last = Achoo::Last.new
+    last = Last.new
     last.find_by_date(date)
     puts
-    return ask 'Hours'
+    answer = ask 'Hours [7:30]'
+    return answer == '' ? '7.5' : answer
   end
 
 
@@ -180,8 +175,8 @@ class Achoo
 
     RC[:vcs_dirs].each do |dir|
       Dir.glob("#{dir}/*/").each do |dir|
-        if Achoo::Git.git_repository?(dir)
-          Achoo::Git.new(dir).print_log_for(date)
+        if Git.git_repository?(dir)
+          Git.new(dir).print_log_for(date)
         else
           puts "!!! Unrecognized vcs in dirctory: #{dir}"
         end
@@ -193,17 +188,17 @@ class Achoo
 
   def project_chooser(form)
     puts 'Recently used projects'
-    form.list_recent_projects
-    puts "     0 - Other"
-    answer = ask "Project ID"
+    projects = form.recent_projects
+    Term.menu(projects.collect {|p| "#{p[1]} (#{p[0]})"},
+              'Other')
+    answer = ask "Project [1]"
     case answer
     when ''
-      warn "TODO Not implementd"
-      exit 1
+      projects[0][0]
     when '0'
       return all_projects_chooser(form)
     else
-      return answer
+      return projects[answer.to_i-1][0]
     end
   end
 
@@ -283,7 +278,7 @@ class Achoo
 
 
   def ask(question='')
-    print bold("#{question}> ")
+    print Term.bold("#{question}> ")
     answer = gets.chop
     unless $stdin.tty?
       puts answer
@@ -291,9 +286,5 @@ class Achoo
     answer
   end
 
-
-  def bold(text)
-    "\e[1m#{text}\e[0m"
-  end
 
 end
