@@ -30,7 +30,8 @@ class Achoo
 
       columns = nil
       if view == 'dayview'
-        columns = [1,2,3,4,7,8,9,10] # ignore 'Biling billed' and 'Billing marked'
+        # ignore 'Biling billed', 'Billing marked', and 'Bolling total'
+        columns = [1,2,3,4,7,9,10]
         if @page.search(query + ' td').empty?
           columns.collect! {|c| c - 1}
         end

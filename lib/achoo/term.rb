@@ -24,7 +24,7 @@ class Achoo
       puts separator
       data_rows.each {|r| printf format, *r }
       puts separator
-      unless summaries.nil?
+      unless summaries.nil? || data_rows.length == 1
         printf format, *summaries
         puts separator
       end
