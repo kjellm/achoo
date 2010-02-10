@@ -75,12 +75,16 @@ class Achoo
     end
 
     def list_all_projects
+      puts "Getting project page #1..."
       projects_page = @agent.get(projects_url)
       projects = scrape_projects(projects_page)
 
+      i = 2
       while (link = projects_page.link_with(:text => 'Next'))
+        puts "Getting project page ##{i}..."
         projects_page = link.click
         projects.merge!(scrape_projects(projects_page))
+        i += 1
       end
 
       projects.keys.sort.each do |name|
