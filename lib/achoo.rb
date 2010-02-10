@@ -227,13 +227,12 @@ class Achoo
     form.auth_pw   = RC[:password]
     page = @agent.submit(form, form.buttons.first)
 
-    @agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
-
     if page.body.match(/Username and\/or password are incorrect. Please try again./)
       warn "Username and/or password are incorrect."
       exit 2
     end
 
+    @agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
   end
 
 
