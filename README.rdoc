@@ -48,8 +48,5 @@ Change to your achoo dir and run it with the following command
 
 == BUGS
 
-- Project phases are hardcoded. All projects gets phase "leveranse"
-  except the "SOL-absence" project where I have hardcoded the phases.
-
 - Wrong project gets registered when choosing a project not in the
   first list (recently used projects)
