@@ -229,9 +229,11 @@ class Achoo
 
     @agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
 
-    # FIX check login failure
-    #  - "Username and/or password are incorrect. Please try again."
-    #  - page.forms.empty?
+    if page.body.match(/Username and\/or password are incorrect. Please try again./)
+      warn "Username and/or password are incorrect."
+      exit 2
+    end
+
   end
 
 
