@@ -97,12 +97,12 @@ class Achoo
   def phase_chooser(form)
     phases = form.phases_for_project
     puts "Phases"
-    phases.each {|p| printf "%6d. %s\n", *p }
+    Term.menu(phases.collect {|p| "#{p[1]} (#{p[0]})"})
     if phases.length == 1
       return phases[0][0]
     else
-      return ask_and_validate_against_list('Phase ID', 
-                                           phases.collect {|p| p[0]})
+      answer = ask('Phase ID')
+      return phases[answer.to_i-1][0]
     end
   end
 
