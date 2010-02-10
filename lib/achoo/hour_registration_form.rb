@@ -33,9 +33,7 @@ class Achoo::HourRegistrationForm < Achoo::Form
     @form.phaseid   = "phase.id='#{phaseid}'"
   end
 
-
-
-  def phases_for_project
+  def phases_for_selected_project
     old = {
       :atkaction => @form.atkaction,
       :action    => @form.action,

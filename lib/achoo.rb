@@ -82,7 +82,6 @@ class Achoo
     form.remark  = get_remark(date)
     form.hours   = hours_chooser(date)
 
-
     form.print_values
     if confirm
       puts "Submitting ..."
@@ -94,7 +93,7 @@ class Achoo
 
 
   def phase_chooser(form)
-    phases = form.phases_for_project
+    phases = form.phases_for_selected_project
     puts "Phases"
     Term.menu(phases.collect {|p| "#{p[1]} (#{p[0]})"})
     if phases.length == 1
