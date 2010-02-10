@@ -23,7 +23,7 @@ class Achoo
     end
 
     def project
-      @form.projectid.match(/project\.id='(\d+)'/)[1]
+      extract_number_from_projectid(@form.projectid)
     end
 
     def project=(projectid)
@@ -60,8 +60,20 @@ class Achoo
       #page = @form.submit
       #@form.action    = old[:action]
       #@form.atkaction = old[:atkaction]
-      #p page.body
-
+      #
+      ## Construct a mechanize page from the partial html response
+      #body = "<html><head></head><body><form>#{page.body}</form></body></html>"
+      #page = Mechanize::Page.new(nil, {'content-type' => 'text/html'}, body, nil, @agent)
+      #field = page.forms.first.field_with(:name => 'phaseid')
+      #
+      #phases = []
+      #if field.respond_to?(:options)
+      #  field.options.each do |opt|
+      #    phases << [extract_number_from_phaseid(opt.value), opt.text]
+      #  end
+      #end
+      #return phases
+      
       # Hard coded for now :(
       if (project == '1')
         [
@@ -138,6 +150,14 @@ class Achoo
 
     def year_field
       @form.field_with(:name => 'activitydate[year]')
+    end
+
+    def extract_number_from_projectid(projectid)
+      projectid.match(/project\.id='(\d+)'/)[1]
+    end
+
+    def extract_number_from_phaseid(projectid)
+      projectid.match(/phase\.id='(\d+)'/)[1]
     end
 
     def projects_url
