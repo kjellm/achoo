@@ -19,9 +19,7 @@ class Achoo
   def start
     print_welcome
     login
-
     scrape_urls
-
     command_loop
   end
 
