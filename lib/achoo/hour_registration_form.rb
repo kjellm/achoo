@@ -94,7 +94,7 @@ class Achoo
       printf format, 'month',   month_field.value
       printf format, 'year',    year_field.value
       printf format, 'project', project
-      printf format, 'phase',   PHASE_MAP[phase]
+      printf format, 'phase',   phase
       printf format, 'remark',  @form.remark
       printf format, 'hours',   @form.time
 
