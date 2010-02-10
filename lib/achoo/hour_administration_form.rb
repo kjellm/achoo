@@ -19,7 +19,7 @@ class Achoo::HourAdministrationForm < Achoo::Form
   def flexi_time(date)
     set_page_to_view_for_date('dayview', date)
 
-    @page.body.match(/(Flexi time balance: -?\d+:\d+)/)[1]
+    @page.body.match(/Flexi time balance: (-?\d+:\d+)/)[1]
   end
 
   private

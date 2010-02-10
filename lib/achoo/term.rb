@@ -4,6 +4,10 @@ class Achoo::Term
     "\e[1m#{text}\e[0m"
   end
 
+  def self.underline(text)
+    "\e[4m#{text}\e[0m"
+  end
+
   def self.menu(entries, special=nil)
     max_digits = Math.log10(entries.length).to_i
     format = "% #{max_digits}d. %s\n"

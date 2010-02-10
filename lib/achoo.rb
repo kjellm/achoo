@@ -121,7 +121,8 @@ class Achoo
   def show_flexi_time
     date = date_chooser
     form = HourAdministrationForm.new(@agent)
-    puts form.flexi_time(date)
+    balance = form.flexi_time(date)
+    puts "Flexi time balance: #{Term::underline(balance)}"
   end
 
 
@@ -151,7 +152,7 @@ class Achoo
   def show_holiday_report
     page = @agent.get(RC[:holiday_report_url])
     page.body.match(/<b>(\d+,\d+)<\/b>/)
-    puts "Balance: #$1"
+    puts "Balance: #{Term::underline($1)}"
   end
 
 
