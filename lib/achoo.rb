@@ -1,10 +1,11 @@
+class Achoo; end
+
 require 'achoo/git'
 require 'achoo/hour_administration_form'
 require 'achoo/hour_registration_form'
 require 'achoo/last'
 require 'logger'
 require 'mechanize'
-
 
 class Achoo
 
