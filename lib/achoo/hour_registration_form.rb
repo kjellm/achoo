@@ -4,18 +4,6 @@ require 'achoo/form'
 class Achoo
   class HourRegistrationForm < Achoo::Form
 
-    PHASE_MAP = {
-        "3"   => "Ferie",
-        "4"   => "Permisjon med lønn",
-        "5"   => "Permisjon uten lønn",
-        "6"   => "Sykemelding",
-        "9"   => "Helligdag",
-        "276" => "Leveranse",
-        "459" => "Foreldrepermisjon",
-        "476" => "Egenmelding - barns sykdom",
-        "477" => "Egenmelding - egen sykdom",
-    }
-
     def initialize(agent)
       @agent = agent
       @page  = @agent.get(RC[:hour_registration_url])
@@ -49,47 +37,32 @@ class Achoo
 
 
     def phases_for_project
-      #FIX make this work:
-      #old = {
-      #  :atkaction => @form.atkaction,
-      #  :action    => @form.action,
-      #}
-      #
-      #@form.action = RC[:url]+"/dispatch.php?atkpartial=attribute.phaseid.refresh"
-      #@form.atkaction = 'add'
-      #page = @form.submit
-      #@form.action    = old[:action]
-      #@form.atkaction = old[:atkaction]
-      #
-      ## Construct a mechanize page from the partial html response
-      #body = "<html><head></head><body><form>#{page.body}</form></body></html>"
-      #page = Mechanize::Page.new(nil, {'content-type' => 'text/html'}, body, nil, @agent)
-      #field = page.forms.first.field_with(:name => 'phaseid')
-      #
-      #phases = []
-      #if field.respond_to?(:options)
-      #  field.options.each do |opt|
-      #    phases << [extract_number_from_phaseid(opt.value), opt.text]
-      #  end
-      #end
-      #return phases
+      old = {
+        :atkaction => @form.atkaction,
+        :action    => @form.action,
+      }
       
-      # Hard coded for now :(
-      if (project == '1')
-        [
-         ["476", "Egenmelding - barns sykdom"],
-         ["477", "Egenmelding - egen sykdom"],
-         ["3",   "Ferie"],
-         ["459", "Foreldrepermisjon"],
-         ["9",   "Helligdag"],
-         ["4",   "Permisjon med lønn"],
-         ["5",   "Permisjon uten lønn"],
-         ["6",   "Sykemelding"],
-        ]
+      @form.action = RC[:url]+"/dispatch.php?atkpartial=attribute.phaseid.refresh"
+      @form.atkaction = 'add'
+      partial_page = @form.submit
+      @form.action    = old[:action]
+      @form.atkaction = old[:atkaction]
+      
+      # Construct a mechanize page from the partial html response
+      body = "<html><head></head><body><form>#{partial_page.body}</form></body></html>"
+      page = Mechanize::Page.new(nil, {'content-type' => 'text/html; charset=iso-8859-1'}, body, nil, @agent)
+      field = page.forms.first.field_with(:name => 'phaseid')
+      
+      phases = []
+      if field.respond_to?(:options)
+        field.options.each do |opt|
+          phases << [extract_number_from_phaseid(opt.value), opt.text]
+        end
       else
-        [["276", "Leveranse"]]
+        partial_page.body.match(/(^[^<]+)&nbsp;&nbsp;</)
+        phases << [extract_number_from_phaseid(field.value), $1]
       end
-
+      return phases
     end
     
     def recent_projects
