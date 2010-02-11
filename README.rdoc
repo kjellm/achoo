@@ -56,3 +56,4 @@ command:
 - Add hour registration to a range of dates
 - Subversion support
 - Edit and delete registered hours
+- Create gem
