@@ -1,10 +1,11 @@
+class Achoo; end
+
 require 'achoo/git'
 require 'achoo/hour_administration_form'
 require 'achoo/hour_registration_form'
 require 'achoo/last'
 require 'logger'
 require 'mechanize'
-
 
 class Achoo
 
@@ -18,9 +19,7 @@ class Achoo
   def start
     print_welcome
     login
-
     scrape_urls
-
     command_loop
   end
 
@@ -83,7 +82,6 @@ class Achoo
     form.remark  = get_remark(date)
     form.hours   = hours_chooser(date)
 
-
     form.print_values
     if confirm
       puts "Submitting ..."
@@ -95,7 +93,7 @@ class Achoo
 
 
   def phase_chooser(form)
-    phases = form.phases_for_project
+    phases = form.phases_for_selected_project
     puts "Phases"
     Term.menu(phases.collect {|p| "#{p[1]} (#{p[0]})"})
     if phases.length == 1
@@ -123,7 +121,8 @@ class Achoo
   def show_flexi_time
     date = date_chooser
     form = HourAdministrationForm.new(@agent)
-    puts form.flexi_time(date)
+    balance = form.flexi_time(date)
+    puts "Flexi time balance: #{Term::underline(balance)}"
   end
 
 
@@ -153,7 +152,7 @@ class Achoo
   def show_holiday_report
     page = @agent.get(RC[:holiday_report_url])
     page.body.match(/<b>(\d+,\d+)<\/b>/)
-    puts "Balance: #$1"
+    puts "Balance: #{Term::underline($1)}"
   end
 
 
