@@ -9,7 +9,7 @@ spec = Gem::Specification.new do |s|
   s.author = 'Kjell-Magne Øierud'
   s.email = 'kjellm@acm.org'
   s.homepage = 'http://github.com/kjellm/achoo/'
-  s.add_dependency('mechanize', '> 0.9.3')
+  s.add_dependency('mechanize', '>= 1.0.0')
   s.requirements << 'none'
   s.files = FileList['lib/**/*.rb', 'achoo', 'README.rdoc', 'Rakefile', 'COPYING'].to_a
   s.description = 'Command line interface to Achievo'

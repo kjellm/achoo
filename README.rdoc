@@ -18,14 +18,9 @@ Mechanize/Nokogiri requirements (nokogiri is required by mechanize)
 
   sudo aptitude install ruby1.8-dev libxml2 libxml2-dev libxslt1 libxslt1-dev libopenssl-ruby
 
-Achoo needs bleeding edge mechanize (newer then 0.9.3) because of SSL
-issues. 
+Install mechanize
 
-  cd /tmp/
-  git clone git://github.com/valo/mechanize.git
-  cd mechanize
-  gem build mechanize.gemspec
-  gem install mechanize-*.gem
+  gem install mechanize
 
 == USAGE
 
