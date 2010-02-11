@@ -52,8 +52,7 @@ command:
 
 - Input validation
 - Readline?
-- Check date parsing (Chronic)
-- Sane input defaults
+- Date chooser parsing (Chronic?) 2010-0?2-0?1, 0?2-0?1, 0?1
 - Add hour registration to a range of dates
 - Subversion support
 - Edit and delete registered hours

@@ -126,7 +126,10 @@ class Achoo
   def lock_month
     page  = @agent.get(RC[:lock_months_url])
     form  = page.form('entryform')
-    period = Term::ask "Period (YYYYMM)"
+    default = one_month_ago
+    period = Term::ask "Period ([#{default}] | YYYYMM)"
+    period = default if period.empty?
+    # FIX validate YYYYMM
     form.period = period
     user_select = form.field_with(:name => 'userid')
     unless user_select.nil?
@@ -145,6 +148,16 @@ class Achoo
     end
   end
 
+
+  def one_month_ago
+    now   = Time.now
+    year  = now.year
+    month = (now.month - 2)%12 + 1
+    year -= 1 if month > now.month
+
+    sprintf "%d%02d", year, month
+  end
+    
 
   def show_holiday_report
     page = @agent.get(RC[:holiday_report_url])
@@ -216,7 +229,7 @@ class Achoo
 
     return if page.forms.empty?
 
-    puts "Logging in"
+    puts "Logging in ..."
 
     form = page.forms.first
     form.auth_user = RC[:user]
