@@ -2,13 +2,23 @@
 
 == INSTALL
 
+These instructions are for installing on Ubuntu 9.10 (Karmic Koala),
+but they will probably work with minor adjustments on other systems as
+well.
+
+Make shure that you have ruby, rubygems, and git installed
+
+  sudo aptitude install ruby rubygems git-core
+
+Get Achoo
+
   git clone git://github.com/kjellm/achoo.git
 
 Mechanize/Nokogiri requirements (nokogiri is required by mechanize)
 
   sudo aptitude install ruby1.8-dev libxml2 libxml2-dev libxslt1 libxslt1-dev libopenssl-ruby
 
-Needs bleeding edge mechanize (newer then 0.9.3) because of SSL
+Achoo needs bleeding edge mechanize (newer then 0.9.3) because of SSL
 issues. 
 
   cd /tmp/
@@ -32,7 +42,8 @@ Then
 
   chmod 0600 ~/.achoo
 
-Change to your achoo dir and run it with the following command
+Change to your achoo directory and run achoo with the following
+command:
 
   RUBYOPT=rubygems ruby -Ilib achoo
 
