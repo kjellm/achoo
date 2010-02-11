@@ -26,15 +26,16 @@ class Achoo
 
   def command_loop
     while true
-      Term.menu(["Register hours",
-                 "Show flexitime balance",
-                 "Day hour report",
-                 "Week hour report",
-                 "Holiday balance",
-                 "Lock month",
-                ],
-                "Exit")
-      case ask '[1]'
+      answer = Term.menu('[1]',
+                         ["Register hours",
+                          "Show flexitime balance",
+                          "Day hour report",
+                          "Week hour report",
+                          "Holiday balance",
+                          "Lock month",
+                         ],
+                         "Exit")
+      case answer
       when '0', 'q', 'Q'
         exit
       when '1', ''
@@ -95,13 +96,8 @@ class Achoo
   def phase_chooser(form)
     phases = form.phases_for_selected_project
     puts "Phases"
-    Term.menu(phases.collect {|p| p[1] })
-    if phases.length == 1
-      return phases[0][0]
-    else
-      answer = ask('Phase ID')
-      return phases[answer.to_i-1][0]
-    end
+    answer = Term.menu('Phase ID', phases.collect {|p| p[1] })
+    phases[answer.to_i-1][0]
   end
 
 
@@ -129,7 +125,7 @@ class Achoo
   def lock_month
     page  = @agent.get(RC[:lock_months_url])
     form  = page.form('entryform')
-    period = ask "Period (YYYYMM)"
+    period = Term::ask "Period (YYYYMM)"
     form.period = period
     user_select = form.field_with(:name => 'userid')
     unless user_select.nil?
@@ -157,7 +153,7 @@ class Achoo
 
 
   def confirm
-    answer = ask "Submit? [Y/n]"
+    answer = Term::ask "Submit? [Y/n]"
     answer.downcase!
     return answer == 'y' || answer == ''
   end
@@ -168,7 +164,7 @@ class Achoo
     last = Last.new
     last.find_by_date(date)
     puts
-    answer = ask 'Hours [7:30]'
+    answer = Term::ask 'Hours [7:30]'
     return answer == '' ? '7.5' : answer
   end
 
@@ -185,15 +181,14 @@ class Achoo
         end
       end
     end
-    ask 'Remark'
+    Term::ask 'Remark'
   end
 
 
   def project_chooser(form)
     puts 'Recently used projects'
     projects = form.recent_projects
-    Term.menu(projects.collect { |p| p[1] }, 'Other')
-    answer = ask "Project [1]"
+    answer = Term.menu('Project [1]', projects.collect { |p| p[1] }, 'Other')
     case answer
     when ''
       projects[0][0]
@@ -207,8 +202,7 @@ class Achoo
 
   def all_projects_chooser(form)
     projects = form.all_projects
-    Term.menu(projects.collect { |p| p[1] })
-    answer = ask
+    answer = Term.menu('Project', projects.collect { |p| p[1] })
     projects[answer.to_i-1][0]
   end
 
@@ -252,7 +246,7 @@ class Achoo
   def date_chooser
     while true
       begin
-        answer = ask "Date ([today] | YYYY-MM-DD | ?)"
+        answer = Term::ask "Date ([today] | YYYY-MM-DD | ?)"
         case answer
         when '?'
           system 'cal -3m'
@@ -268,28 +262,5 @@ class Achoo
   end
 
   
-  def ask_and_validate_against_list(question, values)
-    answer = nil
-    while true
-      answer = ask question
-      if values.include?(answer)
-        break
-      else
-        puts "Invalid value. Must be one of " << values.join(',')
-      end
-    end
-    return answer
-  end
-
-
-  def ask(question='')
-    print Term.bold("#{question}> ")
-    answer = gets.chop
-    unless $stdin.tty?
-      puts answer
-    end
-    answer
-  end
-
-
 end
+

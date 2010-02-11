@@ -8,13 +8,33 @@ class Achoo::Term
     "\e[4m#{text}\e[0m"
   end
 
-  def self.menu(entries, special=nil)
-    max_digits = Math.log10(entries.length).to_i
-    format = "% #{max_digits}d. %s\n"
-    entries.each_with_index do |entry, i|
-      printf format, i+1, entry
+  def self.ask(question='')
+    print bold("#{question}> ")
+    answer = gets.chop
+    unless $stdin.tty?
+      puts answer
     end
-    printf format, 0, special unless special.nil?
+    answer
+  end
+
+  def self.menu(question, entries, special=nil, additional_valid_answers=[])
+    print_menu(entries, special)
+    if entries.length == 1 && special.nil?
+      return '1'
+    else
+      return ask question
+    end
+
+    #answer = nil
+    #while true
+    #  answer = Term::ask question
+    #  if values.include?(answer)
+    #    break
+    #  else
+    #    puts "Invalid value. Must be one of " << values.join(',')
+    #  end
+    #end
+
   end
 
   def self.table(headers, data_rows, summaries=nil)
@@ -34,6 +54,15 @@ class Achoo::Term
   end
 
   private
+
+  def self.print_menu(entries, special)
+    max_digits = Math.log10(entries.length).to_i
+    format = "% #{max_digits}d. %s\n"
+    entries.each_with_index do |entry, i|
+      printf format, i+1, entry
+    end
+    printf format, 0, special unless special.nil?
+  end
 
   def self.calculate_table_cell_widths(headers, data_rows)
     lengths = []
