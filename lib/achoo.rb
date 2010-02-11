@@ -10,7 +10,7 @@ require 'mechanize'
 class Achoo
 
   def initialize(log=false)
-    @agent = WWW::Mechanize.new
+    @agent = Mechanize.new
     if log
       @agent.log = Logger.new("achoo_http.log")
     end
