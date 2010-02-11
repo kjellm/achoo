@@ -34,7 +34,8 @@ class Achoo
                           "Holiday balance",
                           "Lock month",
                          ],
-                         "Exit")
+                         "Exit",
+                         ['q', 'Q', ''])
       case answer
       when '0', 'q', 'Q'
         exit
@@ -188,7 +189,8 @@ class Achoo
   def project_chooser(form)
     puts 'Recently used projects'
     projects = form.recent_projects
-    answer = Term.menu('Project [1]', projects.collect { |p| p[1] }, 'Other')
+    answer = Term.menu('Project [1]', projects.collect { |p| p[1] },
+                       'Other', [''])
     case answer
     when ''
       projects[0][0]

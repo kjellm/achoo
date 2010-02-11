@@ -19,22 +19,24 @@ class Achoo::Term
 
   def self.menu(question, entries, special=nil, additional_valid_answers=[])
     print_menu(entries, special)
-    if entries.length == 1 && special.nil?
-      return '1'
-    else
-      return ask question
+    return '1' if entries.length == 1 && special.nil?
+
+    valid_answers = {}
+    valid_answers['0'] = true unless special.nil?
+    1.upto(entries.length).each {|i| valid_answers[i.to_s] = true}
+    additional_valid_answers.each {|a| valid_answers[a] = true}
+
+    answer = nil
+    while true
+      answer = ask question
+      if valid_answers[answer]
+        break
+      else
+        puts "Invalid value. Must be one of " << valid_answers.keys.sort.join(',')
+      end
     end
 
-    #answer = nil
-    #while true
-    #  answer = Term::ask question
-    #  if values.include?(answer)
-    #    break
-    #  else
-    #    puts "Invalid value. Must be one of " << values.join(',')
-    #  end
-    #end
-
+    answer
   end
 
   def self.table(headers, data_rows, summaries=nil)
