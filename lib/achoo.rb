@@ -207,8 +207,10 @@ class Achoo
 
 
   def all_projects_chooser(form)
-    form.list_all_projects
+    projects = form.all_projects
+    Term.menu(projects.collect {|p| "#{p[1]} (#{p[0]})"})
     answer = ask
+    projects[answer.to_i-1][0]
   end
 
 

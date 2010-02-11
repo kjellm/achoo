@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 require 'achoo/form'
 
 class Achoo::HourRegistrationForm < Achoo::Form
@@ -7,6 +6,8 @@ class Achoo::HourRegistrationForm < Achoo::Form
     @agent = agent
     @page  = @agent.get(RC[:hour_registration_url])
     @form  = @page.form('entryform')
+    @projects_seen = {}
+    @phases_seen   = {}
   end
 
   def project
@@ -59,6 +60,9 @@ class Achoo::HourRegistrationForm < Achoo::Form
       partial_page.body.match(/(^[^<]+)&nbsp;&nbsp;</)
       phases << [extract_number_from_phaseid(field.value), $1]
     end
+    
+    phases.each {|p| @phases_seen[p[0]] = p[1]}
+
     return phases
   end
   
@@ -68,10 +72,13 @@ class Achoo::HourRegistrationForm < Achoo::Form
       val = opt.value["project.id='".length..-2]
       projects << [val, opt.text]
     end
+
+    projects.each {|p| @projects_seen[p[0]] = p[1]}
+
     projects
   end
 
-  def list_all_projects
+  def all_projects
     puts "Getting project page #1..."
     projects_page = @agent.get(projects_url)
     projects = scrape_projects(projects_page)
@@ -84,8 +91,11 @@ class Achoo::HourRegistrationForm < Achoo::Form
       i += 1
     end
 
-    projects.keys.sort.each do |name|
-      printf "%6s - %s: %s\n", projects[name][0], projects[name][1], name
+    projects.keys.sort.collect do |name|
+      id   = projects[name][0]
+      text = "#{projects[name][1]}: #{name}"
+      @projects_seen[id] = text
+      [id, text]
     end
   end
 
@@ -94,8 +104,8 @@ class Achoo::HourRegistrationForm < Achoo::Form
     printf format, 'day',     day_field.value
     printf format, 'month',   month_field.value
     printf format, 'year',    year_field.value
-    printf format, 'project', project
-    printf format, 'phase',   phase
+    printf format, 'project', @projects_seen[project]
+    printf format, 'phase',   @phases_seen[phase]
     printf format, 'remark',  @form.remark
     printf format, 'hours',   @form.time
 
