@@ -152,6 +152,8 @@ class Achoo
   def one_month_ago
     now   = Time.now
     year  = now.year
+
+    # Use -2 + 1 to shift range from 0-11 to 1-12 
     month = (now.month - 2)%12 + 1
     year -= 1 if month > now.month
 
