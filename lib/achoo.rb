@@ -95,7 +95,7 @@ class Achoo
   def phase_chooser(form)
     phases = form.phases_for_selected_project
     puts "Phases"
-    Term.menu(phases.collect {|p| "#{p[1]} (#{p[0]})"})
+    Term.menu(phases.collect {|p| p[1] })
     if phases.length == 1
       return phases[0][0]
     else
@@ -192,8 +192,7 @@ class Achoo
   def project_chooser(form)
     puts 'Recently used projects'
     projects = form.recent_projects
-    Term.menu(projects.collect {|p| "#{p[1]} (#{p[0]})"},
-              'Other')
+    Term.menu(projects.collect { |p| p[1] }, 'Other')
     answer = ask "Project [1]"
     case answer
     when ''
@@ -208,7 +207,7 @@ class Achoo
 
   def all_projects_chooser(form)
     projects = form.all_projects
-    Term.menu(projects.collect {|p| "#{p[1]} (#{p[0]})"})
+    Term.menu(projects.collect { |p| p[1] })
     answer = ask
     projects[answer.to_i-1][0]
   end
