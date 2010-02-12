@@ -6,17 +6,19 @@ These instructions are for installing on Ubuntu 9.10 (Karmic Koala),
 but they will probably work with minor adjustments on other systems as
 well.
 
-Make shure that you have ruby, rubygems, and git installed
+- Make shure that you have ruby, rubygems, and git installed
 
-  sudo aptitude install ruby rubygems git-core
+    sudo aptitude install ruby rubygems git-core
 
-Install non-gem requirements
+- Install non-gem requirements
 
-  sudo aptitude install ruby1.8-dev libxml2 libxml2-dev libxslt1 libxslt1-dev libopenssl-ruby
+    sudo aptitude install ruby1.8-dev libxml2 libxml2-dev libxslt1 libxslt1-dev libopenssl-ruby
 
-Download achoo-0.1.gem from http://github.com/kjellm/achoo/downloads and install it
+- Download achoo-0.1.gem[http://github.com/downloads/kjellm/achoo/achoo-0.1.gem] and install it
 
-  gem install achoo-0.1.gem
+    wget http://github.com/downloads/kjellm/achoo/achoo-0.1.gem
+    gem install achoo-0.1.gem
+
 
 === TRACKING THE LATEST CHANGES
 
@@ -46,16 +48,16 @@ Then
 
   chmod 0600 ~/.achoo
 
-Change to your achoo directory and run achoo with the following
-command:
+Change to your achoo directory and run achoo like this:
 
-  RUBYOPT=rubygems ruby -Ilib achoo
+  achoo
 
 
 == TODO
 
-- Input validation
+- More input validation
+- Better exception handling
 - Add hour registration to a range of dates
-- Subversion support
+- Subversion support (Bazaar, CVS, other?)
 - Edit and delete registered hours
 - Readline?
