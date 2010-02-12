@@ -1,3 +1,3 @@
-achoo*.log
-pkg
+/achoo*.log
+/pkg
 /doc
