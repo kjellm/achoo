@@ -51,8 +51,6 @@ class Achoo
         show_holiday_report
       when '6'
         lock_month
-      else
-        warn "Input error"
       end
     end
   end

@@ -1,12 +1,15 @@
 = Achoo - the Achivo CLI
 
+Achoo is a command line interface for Achievo[http://achievo.org]. It
+works by scraping achievo web pages and sending HTTP requests.
+
 == INSTALL
 
 These instructions are for installing on Ubuntu 9.10 (Karmic Koala),
 but they will probably work with minor adjustments on other systems as
 well.
 
-- Make shure that you have ruby, rubygems, and git installed
+- Make sure that you have ruby, rubygems, and git installed
 
     sudo aptitude install ruby rubygems git-core
 
@@ -24,7 +27,7 @@ well.
 
   git clone git://github.com/kjellm/achoo.git
 
-Or if you already has cloned achoo
+Or if you already has cloned achoo, update with
 
   git pull
 
@@ -34,6 +37,9 @@ Then
   gem install pkg/achoo-XXX.gem
 
 == USAGE
+
+First, make sure that language in the Achievo user preferences is
+English.
 
 Create ~/.achoo from the following template and edit it:
 
