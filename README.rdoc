@@ -48,7 +48,7 @@ Then
 
   chmod 0600 ~/.achoo
 
-Change to your achoo directory and run achoo like this:
+You can then run achoo from a shell with the achoo command
 
   achoo
 
