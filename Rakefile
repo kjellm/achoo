@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rake/gempackagetask'
+require 'rake/rdoctask'
 require 'rake/testtask'
-
 
 def version
   v = '0.1.0'
@@ -42,3 +42,13 @@ Rake::TestTask.new do |t|
   #t.verbose = true
 end
 
+
+# gem install allison
+Rake::RDocTask.new do |rd|
+  rd.title = 'Achoo --- The Achievo CLI'
+  rd.main = "README.rdoc"
+  rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
+  rd.template = `allison --path`.chop + '.rb'
+  rd.options << '--line-numbers' << '--inline-source'
+  rd.rdoc_dir = 'doc'
+end
