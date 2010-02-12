@@ -10,17 +10,26 @@ Make shure that you have ruby, rubygems, and git installed
 
   sudo aptitude install ruby rubygems git-core
 
-Get Achoo
-
-  git clone git://github.com/kjellm/achoo.git
-
-Mechanize/Nokogiri requirements (nokogiri is required by mechanize)
+Install non-gem requirements
 
   sudo aptitude install ruby1.8-dev libxml2 libxml2-dev libxslt1 libxslt1-dev libopenssl-ruby
 
-Install mechanize
+Download achoo-0.1.gem from http://github.com/kjellm/achoo/downloads and install it
 
-  gem install mechanize
+  gem install achoo-0.1.gem
+
+=== TRACKING THE LATEST CHANGES
+
+  git clone git://github.com/kjellm/achoo.git
+
+Or if you already has cloned achoo
+
+  git pull
+
+Then
+
+  rake gem
+  gem install pkg/achoo-XXX.gem
 
 == USAGE
 
