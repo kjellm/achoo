@@ -13,31 +13,28 @@ class Achoo::Last
   def find_by_date(date)
     intervals.find do |i| 
       if i.contains(date)
-        puts i
-        asleep = suspend_intervals.find_all {|j| i.contains_interval(j)}
-        if asleep.length > 0
-          print asleep.collect {|j| "  ZZZ  "+ j.to_s }.join("\n"), "\n"
+        asleep = suspend_intervals.reverse.find_all {|j| i.contains_interval(j)}
+        if asleep.empty?
+          puts i
+        else
+          puts i
+          start = i.start
+          asleep.each do |j|
+            dti = Achoo::DateTimeInterval.new
+            dti.start = start
+            dti.end = j.start
+            puts "  " + dti.to_s if dti.contains(date)
+            start = j.end
+          end
+          dti = Achoo::DateTimeInterval.new
+          dti.start = start
+          dti.end = i.end
+          puts "  " + dti.to_s
         end
       end
     end
   end
   
-  # ruby -Ilib -rachoo/last -le 'l = Achoo::Last.new; l.send(:process_suspend_logs); l.merge'
-  def merge
-    i = 0
-    format = "%15s: %s\n"
-    time_format = "%F %T"
-    intervals.each do |last|
-      printf format, "Powered off", last.end.strftime(time_format)
-      while i < @@suspend_intervals.length && last.contains_interval(@@suspend_intervals[i])
-        printf format, "Awake", @@suspend_intervals[i].end.strftime(time_format)
-        printf format, "Suspend", @@suspend_intervals[i].start.strftime(time_format)
-        i += 1
-      end
-      printf format, "Powered on", last.start.strftime(time_format)
-      print "--------------"
-    end
-  end
 
   private
 
