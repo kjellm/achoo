@@ -4,7 +4,7 @@ require 'rake/testtask'
 
 
 def version
-  v = '0.1'
+  v = '0.1.0'
   origin_master_commits = `git rev-list origin/master`.split("\n")
   v << '.' << origin_master_commits.length.to_s
 end
@@ -14,7 +14,7 @@ spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
 
   s.name        = 'achoo'
-  s.version     = '0.1' #version
+  s.version     = version
   s.summary     = 'Achievo CLI.'
   s.description = 'Command line interface for Achievo (http://achievo.org)'
   s.homepage    = 'http://github.com/kjellm/achoo/'
@@ -24,7 +24,7 @@ spec = Gem::Specification.new do |s|
 
   s.add_dependency('mechanize', '>= 1.0.0')
   s.requirements << 'none'
-  s.files = FileList['lib/**/*.rb', 'achoo', 'README.rdoc', 'Rakefile', 'COPYING'].to_a
+  s.files = FileList['lib/**/*.rb', 'achoo', 'README.rdoc', 'Rakefile', 'CHANGES', 'COPYING'].to_a
   s.bindir = '.'
   s.executables << 'achoo'
   s.required_ruby_version = '>= 1.8.1'
