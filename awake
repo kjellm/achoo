@@ -1,0 +1,31 @@
+#! /usr/bin/env ruby
+
+require 'achoo/last'
+require 'optparse'
+
+
+def main
+  last = Achoo::Last.new
+  
+  options = {
+    :all => false,
+  }
+
+  optparse = OptionParser.new do|opts|
+    opts.banner = "Usage: $0 [options]"
+
+    opts.on( '-a', '--all', 'FIX' ) do
+      options[:all] = true
+    end
+  end
+
+  optparse.parse!
+
+  if options[:all]
+    last.all
+  else
+    last.find_by_date(Date.today)
+  end
+end
+
+main

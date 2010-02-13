@@ -1,9 +1,9 @@
 require 'achoo/date_time_interval'
 
+class Achoo; end
+
 class Achoo::Last
     
-  FILE_BOUNDARY_MARKER = "---"
-
   @@intervals         = nil
   @@suspend_intervals = nil
 
@@ -11,32 +11,35 @@ class Achoo::Last
   end
 
   def find_by_date(date)
-    intervals.find do |i| 
+    intervals.each do |i| 
       if i.contains(date)
-        asleep = suspend_intervals.reverse.find_all {|j| i.contains_interval(j)}
-        if asleep.empty?
-          puts i
-        else
-          puts i
-          start = i.start
-          asleep.each do |j|
-            dti = Achoo::DateTimeInterval.new
-            dti.start = start
-            dti.end = j.start
-            puts "  " + dti.to_s if dti.contains(date)
-            start = j.end
-          end
-          dti = Achoo::DateTimeInterval.new
-          dti.start = start
-          dti.end = i.end
-          puts "  " + dti.to_s
-        end
+        print_session(i, date)
       end
     end
   end
   
+  def all
+    intervals.each { |i| print_session(i) }
+  end
 
   private
+
+  def print_session(powered_on_interval, date=nil)
+    puts "Powered on: " << powered_on_interval.to_s
+    asleep = suspend_intervals.reverse.find_all do |j|
+      powered_on_interval.contains_interval(j)
+    end
+    unless asleep.empty?
+      start = powered_on_interval.start
+      asleep.each do |j|
+        dti = Achoo::DateTimeInterval.new(start, j.start)
+        puts "  Awake: " + dti.to_s if date.nil? || dti.contains(date)
+        start = j.end
+      end
+      dti = Achoo::DateTimeInterval.new(start, powered_on_interval.end)
+      puts "  Awake: " + dti.to_s if date.nil? || dti.contains(date)       
+    end
+  end
 
   def intervals
     process_last_logs unless @@intervals 
@@ -50,11 +53,13 @@ class Achoo::Last
 
   # wtmp file boundaries needs to be handled specially.
   def process_last_logs
+    file_boundary_marker = "---"
+    
     output = []
     wtmp = Dir.glob('/var/log/wtmp*').sort
     wtmp.each do |f|
       output.concat(%x{last -RF -f #{f} reboot}.split("\n"))
-      output << FILE_BOUNDARY_MARKER
+      output << file_boundary_marker
     end
     
 
@@ -68,7 +73,7 @@ class Achoo::Last
         interval.start = $1
         interval.end   = $2
       else
-        if line == FILE_BOUNDARY_MARKER
+        if line == file_boundary_marker
           merge_next = true
         end
         next
