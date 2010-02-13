@@ -24,9 +24,15 @@ spec = Gem::Specification.new do |s|
 
   s.add_dependency('mechanize', '>= 1.0.0')
   s.requirements << 'none'
-  s.files = FileList['lib/**/*.rb', 'achoo', 'README.rdoc', 'Rakefile', 'CHANGES', 'COPYING'].to_a
-  s.bindir = '.'
-  s.executables << 'achoo'
+  s.files = FileList['bin/*',
+                     'lib/**/*.rb', 
+                     'test/*',
+                     'Rakefile',
+                     'README.rdoc',
+                     'CHANGES',
+                     'COPYING'].to_a
+  s.bindir = 'bin'
+  s.executables = %w(achoo awake)
   s.required_ruby_version = '>= 1.8.1'
 end
 
