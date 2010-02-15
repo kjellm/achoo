@@ -36,7 +36,7 @@ class Achoo::HourRegistrationForm < Achoo::Form
 
   def phases_for_selected_project
     partial_page = retrieve_project_phases_page
-    page         = create_page_from_partial
+    page         = create_page_from_partial(partial_page)
     field        = page.forms.first.field_with(:name => 'phaseid')
     
     phases = []
