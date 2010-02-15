@@ -116,10 +116,7 @@ class Achoo::HourRegistrationForm < Achoo::Form
   end
 
   def submit
-    require 'logger'
-    @agent.log =  Logger.new("mech.log")
     @form.submit()
-    @agent.log = nil
   end
 
   private
