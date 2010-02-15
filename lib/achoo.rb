@@ -3,7 +3,6 @@ class Achoo; end
 require 'achoo/git'
 require 'achoo/hour_administration_form'
 require 'achoo/hour_registration_form'
-require 'achoo/lock_month_form'
 require 'achoo/last'
 require 'logger'
 require 'mechanize'
@@ -123,24 +122,28 @@ class Achoo
 
 
   def lock_month
-    month = month_chooser
-    form   = LockMonthForm.new(@agent)
-    form.lock_month(month)
-    form.print_values
+    page  = @agent.get(RC[:lock_months_url])
+    form  = page.form('entryform')
+    default = one_month_ago
+    period = Term::ask "Period ([#{default}] | YYYYMM)"
+    period = default if period.empty?
+    # FIX validate YYYYMM
+    form.period = period
+    user_select = form.field_with(:name => 'userid')
+    unless user_select.nil?
+      user_select.options.each do |opt|
+        if opt.text.match(/\(#{RC[:user]}\)$/)
+          opt.select
+        end
+      end
+    end
+    puts "period: #{form.period}"
+    puts "  user: #{user_select.value}" unless user_select.nil?
     if confirm
       form.submit
     else
       puts "Cancelled"
     end
-  end
-
-  
-  def month_chooser
-    default = one_month_ago
-    period = Term::ask "Period ([#{default}] | YYYYMM)"
-    period = default if period.empty?
-    # FIX validate YYYYMM
-    period
   end
 
 
