@@ -40,9 +40,9 @@ class Achoo::Term
   end
 
   def self.table(headers, data_rows, summaries=nil)
-    lengths = calculate_table_cell_widths(headers, data_rows)
+    lengths   = calculate_table_cell_widths(headers, data_rows)
     separator = table_separator(lengths)
-    format = build_format(lengths)
+    format    = build_format(lengths)
     
     puts separator
     printf format, *headers
