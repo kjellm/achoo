@@ -9,9 +9,9 @@ These instructions are for installing on Ubuntu 9.10 (Karmic Koala),
 but they will probably work with minor adjustments on other systems as
 well.
 
-- Make sure that you have ruby, rubygems, and git installed
+- Make sure that you have ruby and rubygems installed
 
-    sudo aptitude install ruby rubygems git-core
+    sudo aptitude install ruby rubygems
 
 - Install non-gem requirements
 
@@ -25,13 +25,19 @@ well.
 
 === TRACKING THE LATEST CHANGES
 
+Requires git and rake
+
+  sudo aptitude install rake git-core
+
+Then
+
   git clone git://github.com/kjellm/achoo.git
 
 Or if you already has cloned achoo, update with
 
   git pull
 
-Then
+Generate gem and install it
 
   rake gem
   gem install pkg/achoo-XXX.gem
