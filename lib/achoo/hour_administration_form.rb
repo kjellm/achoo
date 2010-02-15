@@ -5,7 +5,7 @@ class Achoo::HourAdministrationForm < Achoo::Form
 
   def initialize(agent)
     @agent = agent
-    @page  = @agent.get(RC[:hour_admin_url])
+    @page  = nil
   end
 
   def show_registered_hours_for_day(date)
@@ -27,52 +27,18 @@ class Achoo::HourAdministrationForm < Achoo::Form
   def show_registered_hours(date, view, query)
     set_page_to_view_for_date(view, date)
 
-    columns = nil
-    if view == 'dayview'
-      # ignore 'Billing billed', 'Billing marked', and 'Billing total'
-      columns = [1,2,3,4,7,9,10]
-      if @page.search(query + ' td').empty?
-        columns.collect! {|c| c - 1}
-      end
-    end
-
-    rows = @page.search(query)
-
-    headers = rows.first.css('th')
-    if view == 'dayview'
-      headers = headers.to_a.values_at(*columns)
-    end
-    headers = headers.map {|th| th.content.strip}
-    if view == 'weekview'
-      headers = headers.map {|th| th.gsub(/\s+/, ' ') }
-    end
-
-
-    data_rows = []
-    rows.each do |tr|
-      cells = tr.css('td')
-      next if cells.empty?
-      if view == 'dayview'
-        cells = cells.to_a.values_at(*columns)
-      end
-      data_rows << fix_empty_cells(cells.map {|td| td.content.strip})
-    end
-
-    summaries = nil
-    unless data_rows.empty?
-      summaries = rows.last.css('th')
-      if view == 'dayview'
-        summaries = summaries.to_a.values_at(*columns)
-      end
-      summaries = summaries.map {|th| th.content.strip }
-      fix_empty_cells(summaries)
-    end
+    columns     = choose_source_columns(view, query)
+    source_rows = @page.search(query)
+    headers     = extract_headers(source_rows, columns, view)
+    data_rows   = extract_data_rows(source_rows, columns)
+    summaries   = extract_summaries(source_rows, data_rows, columns)
 
     Achoo::Term.table(headers, data_rows, summaries)
   end
-
   
   def set_page_to_view_for_date(view, date)
+    @page ||= @agent.get(RC[:hour_admin_url])
+
     link = @page.link_with(:text => view.capitalize)
     @form = @page.form(view)
     unless link.nil?
@@ -85,6 +51,58 @@ class Achoo::HourAdministrationForm < Achoo::Form
       @form = @page.form(view)
     end
   end    
+
+  def choose_source_columns(view, query)
+    columns = nil
+    if view == 'dayview'
+      # Ignore 'Billing billed', 'Billing marked', and 'Billing total'
+      columns = [0,1,2,3,6,8,9]
+      # Achievo prepends an extra column dynamically if there are
+      # data rows.
+      unless @page.search(query + ' td').empty?
+        columns.collect! {|c| c + 1}
+      end
+    end
+    columns
+  end
+
+  def extract_headers(source_rows, columns, view)
+    headers = source_rows.first.css('th')
+    unless columns.nil?
+      headers = headers.to_a.values_at(*columns)
+    end
+    headers = headers.map {|th| th.content.strip}
+    if view == 'weekview'
+      headers = headers.map {|th| th.gsub(/\s+/, ' ') }
+    end
+    headers
+  end
+
+  def extract_data_rows(source_rows, columns)
+    data_rows = []
+    source_rows.each do |tr|
+      cells = tr.css('td')
+      next if cells.empty?
+      unless columns.nil?
+        cells = cells.to_a.values_at(*columns)
+      end
+      data_rows << fix_empty_cells(cells.map {|td| td.content.strip})
+    end
+    data_rows
+  end
+
+  def extract_summaries(source_rows, data_rows, columns)
+    summaries = nil
+    unless data_rows.empty?
+      summaries = source_rows.last.css('th')
+      unless columns.nil?
+        summaries = summaries.to_a.values_at(*columns)
+      end
+      summaries = summaries.map {|th| th.content.strip }
+      fix_empty_cells(summaries)
+    end
+    summaries
+  end
 
   def get_page_for(date)
     puts "Fetching data for #{date} ..."
