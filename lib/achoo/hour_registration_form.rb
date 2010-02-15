@@ -35,21 +35,9 @@ class Achoo::HourRegistrationForm < Achoo::Form
   end
 
   def phases_for_selected_project
-    old = {
-      :atkaction => @form.atkaction,
-      :action    => @form.action,
-    }
-    
-    @form.action = RC[:url]+"/dispatch.php?atkpartial=attribute.phaseid.refresh"
-    @form.atkaction = 'add'
-    partial_page = @form.submit
-    @form.action    = old[:action]
-    @form.atkaction = old[:atkaction]
-    
-    # Construct a mechanize page from the partial html response
-    body = "<html><head></head><body><form>#{partial_page.body}</form></body></html>"
-    page = Mechanize::Page.new(nil, {'content-type' => 'text/html; charset=iso-8859-1'}, body, nil, @agent)
-    field = page.forms.first.field_with(:name => 'phaseid')
+    partial_page = retrieve_project_phases_page
+    page         = create_page_from_partial
+    field        = page.forms.first.field_with(:name => 'phaseid')
     
     phases = []
     if field.respond_to?(:options)
@@ -121,6 +109,27 @@ class Achoo::HourRegistrationForm < Achoo::Form
 
   private
 
+  def retrieve_project_phases_page
+    old = {
+      :atkaction => @form.atkaction,
+      :action    => @form.action,
+    }
+    
+    @form.action = RC[:url]+"/dispatch.php?atkpartial=attribute.phaseid.refresh"
+    @form.atkaction = 'add'
+    partial_page = @form.submit
+    @form.action    = old[:action]
+    @form.atkaction = old[:atkaction]
+    
+    return partial_page
+  end
+
+  def create_page_from_partial(partial_page)
+    body = "<html><head></head><body><form>#{partial_page.body}</form></body></html>"
+    page = Mechanize::Page.new(nil, {'content-type' => 'text/html; charset=iso-8859-1'},
+                               body, nil, @agent)
+  end
+
   def day_field
     @form.field_with(:name => 'activitydate[day]')
   end
@@ -152,7 +161,6 @@ class Achoo::HourRegistrationForm < Achoo::Form
 
   def scrape_projects(projects_page)
     projects = {}
-
     projects_page.search('table#rl_1 tr').each do |tr|
       cells = tr.search('td')
       next if cells.empty?
