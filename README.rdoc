@@ -59,15 +59,3 @@ You can then run achoo from a shell with the achoo command
   achoo
 
 
-== TODO
-
-- More input validation
-- Better exception handling
-- Add hour registration to a range of dates
-- Subversion support (Bazaar, CVS, other?)
-- Edit and delete registered hours
-- Readline?
-- Check out
-  * http://highline.rubyforge.org/
-  * http://tagaholic.me/bond/
-  * http://tagaholic.me/hirb/
