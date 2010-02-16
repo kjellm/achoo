@@ -1,6 +1,6 @@
 class Achoo; end
 
-require 'achoo/git'
+require 'achoo/vcs'
 require 'achoo/hour_administration_form'
 require 'achoo/hour_registration_form'
 require 'achoo/lock_month_form'
@@ -185,10 +185,11 @@ class Achoo
 
     RC[:vcs_dirs].each do |dir|
       Dir.glob("#{dir}/*/").each do |dir|
-        if Git.git_repository?(dir)
-          Git.new(dir).print_log_for(date)
-        else
+        vcs = VCS.factory(dir)
+        if vcs.nil?
           puts "!!! Unrecognized vcs in dirctory: #{dir}"
+        else
+          vcs.print_log_for(date)
         end
       end
     end

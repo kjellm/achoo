@@ -1,7 +1,7 @@
 class Achoo::Git
 
-  def self.git_repository?(dir)
-    File.exist?("#{dir}/.git")
+  def self.repository?(dir)
+    File.exists?("#{dir}/.git")
   end
 
   def initialize(dir)
