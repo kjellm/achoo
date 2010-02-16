@@ -1,0 +1,30 @@
+#! /usr/bin/env ruby
+
+require 'achoo/rc_loader'
+require 'achoo/vcs'
+require 'optparse'
+
+include Achoo::RCLoader
+
+def main
+  load_rc
+
+  options = {
+    :date => Date.today,
+  }
+  
+  optparse = OptionParser.new do|opts|
+    opts.banner = "Usage: $0 [options]"
+  
+    opts.on( '-d', '--date [DATE]', 'FIX' ) do |date|
+      options[:date] = Date.parse(date)
+    end
+  end
+  
+  optparse.parse!
+  
+  Achoo::VCS.print_log_for(options[:date], RC[:vcs_dirs])
+
+end
+
+main

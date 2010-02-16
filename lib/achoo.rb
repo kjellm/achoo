@@ -183,16 +183,7 @@ class Achoo
   def get_remark(date)
     puts "VCS logs for #{date}:"
 
-    RC[:vcs_dirs].each do |dir|
-      Dir.glob("#{dir}/*/").each do |dir|
-        vcs = VCS.factory(dir)
-        if vcs.nil?
-          puts "!!! Unrecognized vcs in dirctory: #{dir}"
-        else
-          vcs.print_log_for(date)
-        end
-      end
-    end
+    VCS.print_log_for(date, RC[:vcs_dirs])
     Term::ask 'Remark'
   end
 

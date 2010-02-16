@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'achoo'
+require 'achoo/rc_loader'
 require 'optparse'
+
+include Achoo::RCLoader
 
 def main
   trap("INT") {puts; exit} # Print a newline in case we are prompting
@@ -9,18 +12,6 @@ def main
   options = parse_args
   achoo = Achoo.new(options[:log])
   achoo.start
-end
-
-def load_rc
-  rc_file = "#{ENV['HOME']}/.achoo"
-
-  # FIX test
-  if File.stat(rc_file).mode != 0100600
-    warn "Insecure permissions on #{rc_file}"
-    exit 1
-  end
-
-  load rc_file
 end
 
 def parse_args
