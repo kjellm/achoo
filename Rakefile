@@ -32,7 +32,7 @@ spec = Gem::Specification.new do |s|
                      'CHANGES',
                      'COPYING'].to_a
   s.bindir = 'bin'
-  s.executables = %w(achoo awake)
+  s.executables = %w(achoo awake vcs_commits)
   s.required_ruby_version = '>= 1.8.1'
 end
 
