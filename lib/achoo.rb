@@ -206,7 +206,7 @@ class Achoo
   def get_remark(date)
     puts "VCS logs for #{date}:"
 
-    VCS.print_log_for(date, RC[:vcs_dirs])
+    VCS.print_logs_for(date, RC[:vcs_dirs])
     Term::ask 'Remark'
   end
 

@@ -23,7 +23,7 @@ def main
   
   optparse.parse!
   
-  Achoo::VCS.print_log_for(options[:date], RC[:vcs_dirs])
+  Achoo::VCS.print_logs_for(options[:date], RC[:vcs_dirs])
 
 end
 
