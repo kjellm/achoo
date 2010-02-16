@@ -8,6 +8,11 @@ class Achoo::HourRegistrationForm < Achoo::Form
     @form  = @page.form('entryform')
     @projects_seen = {}
     @phases_seen   = {}
+
+    # FIX Need to preselect this for some reason
+    @form.field_with(:name => 'billpercent').options.first.select
+    # Preselecting this one as well, just in case
+    @form.field_with(:name => 'workperiod').options.first.select
   end
 
   def project
@@ -32,6 +37,27 @@ class Achoo::HourRegistrationForm < Achoo::Form
 
   def phase=(phaseid)
     @form.phaseid   = "phase.id='#{phaseid}'"
+  end
+
+  def workperiod=(workperiod)
+    @form.workperiod = "workperiod.id='#{workperiod}'"
+  end
+
+  def billing=(billing)
+    @form.billpercent = "billpercent.id='#{billing}'"
+  end
+
+
+  def worktime_periods
+    @form.field_with(:name => 'workperiod').options.collect do |opt|
+      [opt.value.match(/workperiod\.id='(\d+)'/)[1], opt.text]
+    end
+  end
+
+  def billing_options
+    @form.field_with(:name => 'billpercent').options.collect do |opt|
+      [opt.value.match(/billpercent\.id='(\d+)'/)[1], opt.text]
+    end
   end
 
   def phases_for_selected_project
@@ -89,13 +115,14 @@ class Achoo::HourRegistrationForm < Achoo::Form
 
   def print_values
     format = "%10s: \"%s\"\n"
-    printf format, 'day',     day_field.value
-    printf format, 'month',   month_field.value
-    printf format, 'year',    year_field.value
-    printf format, 'project', @projects_seen[project]
-    printf format, 'phase',   @phases_seen[phase]
-    printf format, 'remark',  @form.remark
-    printf format, 'hours',   @form.time
+    printf format, 'date',     "%s-%s-%s" % [year_field, month_field, day_field].collect {|f| f.value}
+    printf format, 'project',  @projects_seen[project]
+    printf format, 'phase',    @phases_seen[phase]
+    printf format, 'remark',   @form.remark
+    printf format, 'hours',    @form.time
+    printf format, 'worktime', @form.field_with(:name => 'workperiod').selected_options.first.text
+    printf format, 'billing',  @form.field_with(:name => 'billpercent').selected_options.first.text
+
 
     # @form.fields.each do |field|
     #   printf format, field.name, field.value

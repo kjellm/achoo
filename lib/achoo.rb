@@ -83,6 +83,12 @@ class Achoo
     form.remark  = get_remark(date)
     form.hours   = hours_chooser(date)
 
+    answer = Term::ask("Do you want to change the defaults for worktime period and/or billing percentage? [N/y]").downcase
+    if answer == 'y'
+      form.workperiod = workperiod_chooser(form)
+      form.billing    = billing_chooser(form)
+    end
+
     form.print_values
     if confirm
       puts "Submitting ..."
@@ -96,8 +102,25 @@ class Achoo
   def phase_chooser(form)
     phases = form.phases_for_selected_project
     puts "Phases"
-    answer = Term.menu('Phase ID', phases.collect {|p| p[1] })
+    answer = Term.menu('Phase', phases.collect {|p| p[1] })
     phases[answer.to_i-1][0]
+  end
+
+
+  def workperiod_chooser(form)
+    periods = form.worktime_periods
+    puts "Worktime periods"
+    answer = Term.menu('Period [1]', periods.collect {|p| p[1] }, nil, [''])
+    answer = '1' if answer.empty?
+    periods[answer.to_i-1][0]
+  end
+
+  def billing_chooser(form)
+    options = form.billing_options
+    puts "Billing options"
+    answer = Term.menu('Billing [1]', options.collect {|p| p[1] }, nil, [''])
+    answer = '1' if answer.empty?
+    options[answer.to_i-1][0]
   end
 
 
