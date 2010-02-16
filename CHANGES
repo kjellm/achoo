@@ -1,3 +1,19 @@
+2010-02-16: version 0.2
+
+ - Added support for registering "worktime period" and "billing
+   percentage" in hour registration.
+
+ - Support for Subversion logs.
+
+ - Added two new executables (awake and vcs_commits) that shows commit
+   logs for a given date, and when the computer has been awake (not
+   suspended).
+
+ - The suspend log has been inverted to an awake log.
+ 
+ - More flexible date input ((+|-)n | [[[YY]YY]-[M]M]-[D]D)
+
+
 2010-02-12: version 0.1
 
  - Initial release

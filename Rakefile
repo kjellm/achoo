@@ -4,7 +4,7 @@ require 'rake/rdoctask'
 require 'rake/testtask'
 
 def version
-  v = '0.1.0'
+  v = '0.2.0'
   origin_master_commits = `git rev-list origin/master`.split("\n")
   v << '.' << origin_master_commits.length.to_s
 end
@@ -14,7 +14,7 @@ spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
 
   s.name        = 'achoo'
-  s.version     = version
+  s.version     = '0.2' # version
   s.summary     = 'Achievo CLI.'
   s.description = 'Command line interface for Achievo (http://achievo.org)'
   s.homepage    = 'http://github.com/kjellm/achoo/'
