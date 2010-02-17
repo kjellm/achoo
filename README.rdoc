@@ -65,3 +65,11 @@ You can then run achoo from a shell with the achoo command
   achoo
 
 
+== AUTHOR
+
+Kjell-Magne Øierud <kjellm AT acm DOT org>
+
+== LICENSE
+
+This library is distributed under the GPL. Please see the COPYING
+file.
