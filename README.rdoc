@@ -64,6 +64,8 @@ You can then run achoo from a shell with the achoo command
 
   achoo
 
+For more usage information, see
+this[http://oierud.name/~kjellm/bliki/AchooTheAchievoCLI.html] blog.
 
 == AUTHOR
 
