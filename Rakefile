@@ -14,7 +14,7 @@ spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
 
   s.name        = 'achoo'
-  s.version     = '0.2' # version
+  s.version     = version
   s.summary     = 'Achievo CLI.'
   s.description = 'Command line interface for Achievo (http://achievo.org)'
   s.homepage    = 'http://github.com/kjellm/achoo/'
