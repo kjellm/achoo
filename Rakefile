@@ -23,6 +23,7 @@ spec = Gem::Specification.new do |s|
   s.email  = 'kjellm@acm.org'
 
   s.add_dependency('mechanize', '>= 1.0.0')
+  s.add_dependency('ri_cal')
   s.requirements << 'none'
   s.files = FileList['bin/*',
                      'lib/**/*.rb', 
@@ -32,7 +33,7 @@ spec = Gem::Specification.new do |s|
                      'CHANGES',
                      'COPYING'].to_a
   s.bindir = 'bin'
-  s.executables = %w(achoo awake vcs_commits)
+  s.executables = %w(achoo awake vcs_commits ical)
   s.required_ruby_version = '>= 1.8.1'
 end
 

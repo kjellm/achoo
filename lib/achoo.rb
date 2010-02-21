@@ -3,6 +3,7 @@ class Achoo; end
 require 'achoo/vcs'
 require 'achoo/hour_administration_form'
 require 'achoo/hour_registration_form'
+require 'achoo/ical'
 require 'achoo/lock_month_form'
 require 'achoo/last'
 require 'logger'
@@ -205,8 +206,12 @@ class Achoo
 
   def get_remark(date)
     puts "VCS logs for #{date}:"
-
     VCS.print_logs_for(date, RC[:vcs_dirs])
+    puts "Calendar events for #{date}:"
+    RC[:ical].each do |config|
+      ICal.from_http_request(config).print_events(date)
+    end
+
     Term::ask 'Remark'
   end
 
