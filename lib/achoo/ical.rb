@@ -26,16 +26,26 @@ class Achoo::ICal
 
   def print_events(date)
     arg_start = date
-    arg_end   = arg_start + 1
+    arg_end   = date + 1
 
     @calendar.events.each do |e|
-      if e.recurs? && e.occurrences({:overlapping => [arg_start, arg_end]})
-        ; #FIX
-      elsif e.dtstart > arg_start && e.dtstart < arg_end
-        dti = Achoo::DateTimeInterval.new(e.dtstart.to_s, e.dtend.to_s)
-        printf "%s: %s\n", dti, e.summary
+      if e.recurs?
+        e.occurrences({:overlapping => [arg_start, arg_end]}).each do |o|
+          print_event(o)
+        end
+      elsif e.dtstart >= arg_start && e.dtstart <= arg_end \
+        || e.dtend  >= arg_start && e.dtend <= arg_end
+        print_event(e)
       end
     end
+  end
+
+  private
+
+  def print_event(e)
+    # FIX stupid converting to string
+    dti = Achoo::DateTimeInterval.new(e.dtstart.to_s, e.dtend.to_s)
+    printf "%s: %s\n", dti, e.summary
   end
 end
 
