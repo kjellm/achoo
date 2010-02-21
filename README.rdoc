@@ -50,12 +50,19 @@ English.
 Create ~/.achoo from the following template and edit it:
 
   RC = {
-    :url => 'https://example.com/achievo/',
-    :user => 'joe',
+    :url      => 'https://example.com/achievo/',
+    :user     => 'joe',
     :password => 'geheim',
     :vcs_dirs => ["#{ENV['HOME']}/projects"],
+    :ical     => [{ :host => "foo.example.com",
+                    :port => 443,
+                    :path => "/joe/Calendar",
+                    :user => "joe",
+                    :pass => 'GeHeIm',
+                  },
+                 ],
   }
-
+    
 Then
 
   chmod 0600 ~/.achoo
@@ -66,6 +73,10 @@ You can then run achoo from a shell with the achoo command
 
 For more usage information, see
 this[http://oierud.name/~kjellm/bliki/AchooTheAchievoCLI.html] blog.
+
+== BUGS
+
+Report bugs to http://github.com/kjellm/achoo/issues
 
 == AUTHOR
 
