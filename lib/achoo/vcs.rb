@@ -15,28 +15,29 @@ class Achoo::VCS
     klass.new(dir)
   end
 
-  def self.print_logs_for(date, vcs_dirs)
+  def self.print_logs_for(date, vcs_dirs, io=$stdout)
     vcs_dirs.each do |dir|
       Dir.glob("#{dir}/*/").each do |dir|
         vcs = factory(dir)
-        if vcs.nil?
-          puts "!!! Unrecognized vcs in dirctory: #{dir}"
-          next
-        end
+        next if vcs.nil?
 
         log = vcs.log_for(date)
-        print_log(log, dir)
+        print_log(log, dir, io)
       end
     end
   end
 
-  def self.print_log(log, dir)
-    unless log.empty?
-      project = "<( #{File.basename(dir).upcase} )>"
-      dashes = '-' * ((LINE_LENGTH - project.length) / 2)
-      puts dashes + project + dashes
-      puts log.chomp
-    end
+  private
+
+  def self.print_log(log, dir, io)
+    return if log.empty?
+    io.puts header(dir)
+    io.puts log.chomp
   end
 
+  def self.header(dir)
+    project = "<( #{File.basename(dir).upcase} )>"
+    dashes = '-' * ((LINE_LENGTH - project.length) / 2)
+    dashes + project + dashes
+  end
 end

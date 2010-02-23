@@ -24,28 +24,28 @@ class Achoo::ICal
     @calendar = RiCal.parse_string(ics_str).first
   end
 
-  def print_events(date)
+  def print_events(date, io=$stdout)
     arg_start = date
     arg_end   = date + 1
 
     @calendar.events.each do |e|
       if e.recurs?
         e.occurrences({:overlapping => [arg_start, arg_end]}).each do |o|
-          print_event(o)
+          print_event(o, io)
         end
       elsif e.dtstart >= arg_start && e.dtstart <= arg_end \
         || e.dtend  >= arg_start && e.dtend <= arg_end
-        print_event(e)
+        print_event(e, io)
       end
     end
   end
 
   private
 
-  def print_event(e)
+  def print_event(e, io)
     # FIX stupid converting to string
     dti = Achoo::DateTimeInterval.new(e.dtstart.to_s, e.dtend.to_s)
-    printf "%s: %s\n", dti, e.summary
+    io.printf "%s: %s\n", dti, e.summary
   end
 end
 

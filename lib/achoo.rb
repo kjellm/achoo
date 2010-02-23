@@ -8,6 +8,7 @@ require 'achoo/lock_month_form'
 require 'achoo/last'
 require 'logger'
 require 'mechanize'
+require 'stringio'
 
 class Achoo
 
@@ -75,13 +76,16 @@ class Achoo
   end
 
   def register_hours
+    date       = date_chooser
+    prefetcher = Thread.new { remark_helper_data(date) }
+
+    puts "Fetching data ..."
     form = HourRegistrationForm.new(@agent)
-    
-    date         = date_chooser
+
     form.date    = date
     form.project = project_chooser(form)
     form.phase   = phase_chooser(form)
-    form.remark  = get_remark(date)
+    form.remark  = get_remark(date, prefetcher)
     form.hours   = hours_chooser(date)
 
     answer = Term::ask("Do you want to change the defaults for worktime period and/or billing percentage? [N/y]").downcase
@@ -204,13 +208,14 @@ class Achoo
   end
 
 
-  def get_remark(date)
+  def get_remark(date, prefetcher)
     puts "VCS logs for #{date}:"
-    VCS.print_logs_for(date, RC[:vcs_dirs])
+    prefetcher.join
+    print prefetcher[:vcs].string
+    puts '-' * 80 unless prefetcher[:vcs].string.empty?
     puts "Calendar events for #{date}:"
-    RC[:ical].each do |config|
-      ICal.from_http_request(config).print_events(date)
-    end
+    puts '---' unless prefetcher[:ical].string.empty?
+    print prefetcher[:ical].string
 
     Term::ask 'Remark'
   end
@@ -317,6 +322,16 @@ class Achoo
       return Date.civil(*date)
     end
   end
-  
+
+  def remark_helper_data(date)
+    t = Thread.current
+    t[:vcs] = StringIO.new
+    VCS.print_logs_for(date, RC[:vcs_dirs], t[:vcs])
+    
+    t[:ical] = StringIO.new
+    RC[:ical].each do |config|
+      ICal.from_http_request(config).print_events(date, t[:ical])
+    end
+  end
 end
 

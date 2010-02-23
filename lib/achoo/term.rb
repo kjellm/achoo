@@ -10,6 +10,7 @@ class Achoo::Term
 
   def self.ask(question='')
     print bold("#{question}> ")
+    $stdout.flush
     answer = gets.chop
     unless $stdin.tty?
       puts answer
