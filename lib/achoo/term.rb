@@ -1,3 +1,6 @@
+$KCODE = 'u'
+require 'jcode'
+
 class Achoo::Term
 
   def self.bold(text)
@@ -70,11 +73,11 @@ class Achoo::Term
   def self.calculate_table_cell_widths(headers, data_rows)
     lengths = []
     headers.each_with_index do |h, i|
-      lengths[i] = h.length
+      lengths[i] = h.jlength
     end
     data_rows.each do |r|
       r.each_with_index do |d, i|
-        lengths[i] = [d.length, lengths[i]].max
+        lengths[i] = [d.jlength, lengths[i]].max
       end
     end
     lengths
