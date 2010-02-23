@@ -1,4 +1,4 @@
-require 'parsedate'
+#require 'parsedate'
 
 class Achoo; end
 
@@ -17,12 +17,12 @@ class Achoo::DateTimeInterval
   end
 
   def start=(date_time)
-    date_time = Time.local(*ParseDate.parsedate(date_time)) if date_time.kind_of?(String)
+    date_time = Time.parse(date_time) if date_time.kind_of?(String)
     @start = date_time
   end
   
   def end=(date_time)
-    date_time = Time.local(*ParseDate.parsedate(date_time)) if date_time.kind_of?(String)
+    date_time = Time.parse(date_time) if date_time.kind_of?(String)
     @end = date_time
   end
 

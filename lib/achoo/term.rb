@@ -1,5 +1,8 @@
-$KCODE = 'u'
-require 'jcode'
+
+if RUBY_VERSION < "1.9"
+  $KCODE = 'u'
+  require 'jcode'
+end
 
 class Achoo::Term
 
@@ -73,11 +76,12 @@ class Achoo::Term
   def self.calculate_table_cell_widths(headers, data_rows)
     lengths = []
     headers.each_with_index do |h, i|
-      lengths[i] = h.jlength
+      lengths[i] = RUBY_VERSION < '1.9' ? h.jlength : h.length
     end
     data_rows.each do |r|
       r.each_with_index do |d, i|
-        lengths[i] = [d.jlength, lengths[i]].max
+        len = RUBY_VERSION < '1.9' ? d.jlength : d.length
+        lengths[i] = [len, lengths[i]].max
       end
     end
     lengths
