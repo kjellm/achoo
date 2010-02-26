@@ -22,6 +22,12 @@ well.
     wget http://github.com/downloads/kjellm/achoo/achoo-0.2.gem
     gem install achoo-0.2.gem
 
+- Make shure that ~/.gem/ruby/1.8/bin is in your PATH environment variable
+
+    if echo $PATH | grep -vq ~/.gem/ruby/1.8/bin; then
+      export PATH=~/.gem/ruby/1.8/bin:$PATH
+      echo 'export PATH=~/.gem/ruby/1.8/bin:$PATH' >> ~/.bashrc
+    fi
 
 === TRACKING THE LATEST CHANGES
 
