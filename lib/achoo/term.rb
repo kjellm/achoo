@@ -59,6 +59,8 @@ class Achoo::Term
     separator = table_separator(lengths)
     format    = build_format(lengths)
     
+    center_table_headings(headers, lengths)
+
     puts separator
     printf format, *headers
     puts separator
@@ -71,6 +73,12 @@ class Achoo::Term
   end
 
   private
+
+  def self.center_table_headings(headers, lengths)
+    lengths.each_with_index do |len,i|
+      headers[i] = headers[i].center(len)
+    end
+  end
 
   def self.print_menu(entries, special)
     max_digits = Math.log10(entries.length).to_i
