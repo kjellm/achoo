@@ -12,6 +12,9 @@ module Achoo::RCLoader
     end
 
     load rc_file
+
+    RC[:vcs_dirs] ||= []
+    RC[:ical]     ||= []
   end
 
 end
