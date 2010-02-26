@@ -1,8 +1,9 @@
-
 if RUBY_VERSION < "1.9"
   $KCODE = 'u'
   require 'jcode'
 end
+
+class Achoo; end
 
 class Achoo::Term
 
@@ -12,6 +13,13 @@ class Achoo::Term
 
   def self.underline(text)
     "\e[4m#{text}\e[0m"
+  end
+
+  def self.password
+    `stty -echo`
+    pas = ask('Password')
+    `stty echo`
+    pas
   end
 
   def self.ask(question='')
