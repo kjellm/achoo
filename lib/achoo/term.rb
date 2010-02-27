@@ -57,12 +57,12 @@ class Achoo::Term
   def self.table(headers, data_rows, summaries=nil)
     lengths   = calculate_table_cell_widths(headers, data_rows)
     separator = table_separator(lengths)
-    format    = build_format(lengths)
+    format    = build_format(data_rows, lengths)
     
-    center_table_headings(headers, lengths)
+    center_table_headers(headers, lengths)
 
     puts separator
-    printf format, *headers
+    print '| ' << headers.join(' | ') << " |\n"
     puts separator
     data_rows.each {|r| printf format, *r }
     puts separator
@@ -74,7 +74,7 @@ class Achoo::Term
 
   private
 
-  def self.center_table_headings(headers, lengths)
+  def self.center_table_headers(headers, lengths)
     lengths.each_with_index do |len,i|
       headers[i] = headers[i].center(len)
     end
@@ -103,8 +103,22 @@ class Achoo::Term
     lengths
   end
 
-  def self.build_format(lengths)
-    lengths.reduce('|') {|f, l| f + " %-#{l}s |"} + "\n"
+  def self.build_format(data_rows, lengths)
+    is_column_left_justified = Array.new(lengths.nitems)
+    is_column_left_justified.fill(false)
+    
+    data_rows.each do |r|
+      r.each_index do |c|
+        if !r[c].strip.empty? && !r[c].match(/^\d+[:.,]?\d*$/)
+          is_column_left_justified[c] = true
+        end
+      end
+    end
+
+    lengths.reduce('|') do |f, l|
+      justify = is_column_left_justified.shift ? '-' : ''
+      f + " %#{justify}#{l}s |"
+    end + "\n"
   end
 
   def self.table_separator(lengths)
