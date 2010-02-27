@@ -23,11 +23,15 @@ class Achoo::Term
   end
 
   def self.ask(question='')
-    print bold("#{question}> ")
-    $stdout.flush
-    answer = gets.chop
-    unless $stdin.tty?
-      puts answer
+    answer = nil
+    loop do
+      print bold("#{question}> ")
+      $stdout.flush
+      answer = gets.chop
+      unless $stdin.tty?
+        puts answer
+      end
+      break unless a_little_something(answer)
     end
     answer
   end
@@ -123,6 +127,16 @@ class Achoo::Term
 
   def self.table_separator(lengths)
     lengths.reduce('+') {|s, length| s + '-'*(length+2) + '+'}
+  end
+
+  def self.a_little_something(answer)
+    case answer.downcase
+    when 'bless you!', 'gesundheit!'
+      puts "Thank you!"
+      return true
+    else
+      return false
+    end
   end
 
 end
