@@ -10,6 +10,8 @@ require 'logger'
 require 'mechanize'
 require 'stringio'
 
+
+
 class Achoo
 
   def initialize(log=false)
@@ -20,10 +22,14 @@ class Achoo
   end
 
   def start
-    print_welcome
-    login
-    scrape_urls
-    command_loop
+    begin
+      print_welcome
+      login
+      scrape_urls
+      command_loop
+    rescue Exception => e
+      handle_fatal_exception("Something bad happened. Shutting down.", e)
+    end
   end
 
 
@@ -200,9 +206,13 @@ class Achoo
 
   def hours_chooser(date)
     puts "Last log:"
-    last = Last.new
-    last.find_by_date(date)
-    puts
+    begin
+      last = Last.new
+      last.find_by_date(date)
+      puts
+    rescue Exception => e
+      print handle_exception("Failed to retrieve awake log.", e)
+    end
     answer = Term::ask 'Hours [7:30]'
     return answer == '' ? '7.5' : answer
   end
@@ -211,11 +221,11 @@ class Achoo
   def get_remark(date, prefetcher)
     puts "VCS logs for #{date}:"
     prefetcher.join
-    print prefetcher[:vcs].string
-    puts '-' * 80 unless prefetcher[:vcs].string.empty?
+    print prefetcher[:vcs]
+    puts '-' * 80 unless prefetcher[:vcs].empty?
     puts "Calendar events for #{date}:"
-    puts '---' unless prefetcher[:ical].string.empty?
-    print prefetcher[:ical].string
+    puts '---' unless prefetcher[:ical].empty?
+    print prefetcher[:ical]
 
     Term::ask 'Remark'
   end
@@ -325,13 +335,37 @@ class Achoo
 
   def remark_helper_data(date)
     t = Thread.current
-    t[:vcs] = StringIO.new
-    VCS.print_logs_for(date, RC[:vcs_dirs], t[:vcs])
-    
-    t[:ical] = StringIO.new
-    RC[:ical].each do |config|
-      ICal.from_http_request(config).print_events(date, t[:ical])
+
+    begin
+      io = StringIO.new
+      VCS.print_logs_for(date, RC[:vcs_dirs], io)
+      t[:vcs] = io.string
+    rescue Exception => e
+      t[:vcs] = handle_exception("Failed to retrieve VCS logs.", e)
     end
+    
+    begin
+      io = StringIO.new
+      RC[:ical].each do |config|
+        ICal.from_http_request(config).print_events(date, io)
+      end
+      t[:ical] = io.string
+    rescue Exception => e
+      t[:ical] = handle_exception("Failed to retrieve calendar events.", e)
+    end
+  end
+
+  def handle_exception(user_message, e)
+    Term::warn(user_message) + get_exception_reason(e)
+  end
+
+  def handle_fatal_exception(user_message, e)
+    puts Term::fatal(user_message) + get_exception_reason(e)
+    exit 1
+  end
+
+  def get_exception_reason(e)
+    "\nReason: \n\t" + e.message + "\n\t" + e.backtrace.join("\n\t")
   end
 end
 

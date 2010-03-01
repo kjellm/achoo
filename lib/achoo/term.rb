@@ -7,13 +7,13 @@ class Achoo; end
 
 class Achoo::Term
 
-  def self.bold(text)
-    "\e[1m#{text}\e[0m"
-  end
+  def self.bold(text); "\e[1m#{text}\e[0m"; end
 
-  def self.underline(text)
-    "\e[4m#{text}\e[0m"
-  end
+  def self.underline(text); "\e[4m#{text}\e[0m"; end
+
+  def self.warn(text); "\e[1;33m#{text}\e[0m"; end
+
+  def self.fatal(text); "\e[1;31m#{text}\e[0m"; end
 
   def self.password
     `stty -echo`

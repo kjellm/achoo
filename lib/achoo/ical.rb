@@ -28,16 +28,22 @@ class Achoo::ICal
     arg_start = date
     arg_end   = date + 1
 
-    @calendar.events.each do |e|
-      if e.recurs?
-        e.occurrences({:overlapping => [arg_start, arg_end]}).each do |o|
-          print_event(o, io)
+    e = nil
+
+    #begin 
+      @calendar.events.each do |e|
+        if e.recurs?
+          e.occurrences({:overlapping => [arg_start, arg_end]}).each do |o|
+            print_event(o, io)
+          end
+        elsif e.dtstart >= arg_start && e.dtstart <= arg_end \
+          || e.dtend  >= arg_start && e.dtend <= arg_end
+          print_event(e, io)
         end
-      elsif e.dtstart >= arg_start && e.dtstart <= arg_end \
-        || e.dtend  >= arg_start && e.dtend <= arg_end
-        print_event(e, io)
       end
-    end
+    #rescue
+    #  require 'pp'; pp e
+    #end
   end
 
   private

@@ -1,3 +1,5 @@
+require 'achoo/term'
+
 class Achoo; end
 
 module Achoo::RCLoader
@@ -18,7 +20,7 @@ module Achoo::RCLoader
   def file_permissions_secure?
     # FIX test to is to strict
     if File.stat(RC_FILE).mode != 0100600
-      warn "Insecure permissions on #{RC_FILE}"
+      puts Achoo::Term.fatal "Insecure permissions on #{RC_FILE}"
       exit 1
     end
   end
@@ -32,20 +34,20 @@ module Achoo::RCLoader
 
   def verify_rc_contents
     unless Object.const_defined?('RC')
-      warn "Malformed run control file: No RC constant defined"
+      puts Achoo::Term.fatal "Malformed run control file: No RC constant defined"
       exit 1
     end
 
     %w(url user password).each do |key|
       unless RC.has_key?(key.to_sym)
-        warn "Missing mandatory run control configuration variable: #{key}"
+        puts Achoo::Term.fatal "Missing mandatory run control configuration variable: #{key}"
         exit 1
       end
     end
 
     %w(vcs_dirs ical).each do |key|
       unless RC.has_key?(key.to_sym)
-        warn "Missing run control configuration variable: #{key}. " \
+        puts Achoo::Term.warn "Missing run control configuration variable: #{key}. " \
              + "Add it to #{RC_FILE} to get rid of this warning"
         RC[key] = []
       end
