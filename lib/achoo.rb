@@ -27,6 +27,8 @@ class Achoo
       login
       scrape_urls
       command_loop
+    rescue SystemExit => e
+      raise
     rescue Exception => e
       handle_fatal_exception("Something bad happened. Shutting down.", e)
     end
