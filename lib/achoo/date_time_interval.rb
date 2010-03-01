@@ -1,4 +1,4 @@
-#require 'parsedate'
+require 'time'
 
 class Achoo; end
 

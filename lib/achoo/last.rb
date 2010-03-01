@@ -58,11 +58,12 @@ class Achoo::Last
     output = []
     wtmp = Dir.glob('/var/log/wtmp*').sort
     wtmp.each do |f|
-      output.concat(%x{last -RF -f #{f} reboot}.split("\n"))
+      o = %x{last -RF -f #{f} reboot}.split("\n").grep(/^reboot/)
+      next if o.empty?
+      output.concat(o)
       output << file_boundary_marker
     end
     
-
     @@intervals = []
     merge_next = false
     output.each do |line|
