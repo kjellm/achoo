@@ -22,7 +22,7 @@ well.
     wget http://github.com/downloads/kjellm/achoo/achoo-0.2.gem
     gem install achoo-0.2.gem
 
-- Make shure that ~/.gem/ruby/1.8/bin is in your PATH environment variable
+- Make sure that ~/.gem/ruby/1.8/bin is in your PATH environment variable
 
     if echo $PATH | grep -vq ~/.gem/ruby/1.8/bin; then
       export PATH=~/.gem/ruby/1.8/bin:$PATH
@@ -50,8 +50,8 @@ Generate gem and install it
 
 == USAGE
 
-First, make sure that language in the Achievo user preferences is
-English.
+First, make sure that language in Achievo's user preferences is
+English and theme is 'no value'.
 
 Create ~/.achoo from the following template and edit it:
 

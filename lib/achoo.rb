@@ -77,9 +77,15 @@ class Achoo
   end
 
   def menu_link_to_url(menu_links, text)
-    url = menu_links.find {|a| 
+    a_tag = menu_links.find {|a| 
       a.text.strip == text
-    }.attribute('onclick').value.match(/window\.open\('([^']+)/)[1]
+    }
+    
+    if a_tag.nil?
+      raise Exception.new("Could not find the '#{text}' link in Achievo.\nMake sure that language is 'English' and theme is 'no value' in Achievo's user preferences.\nYou must delete ~/.achoo_cookies.yml for these changes to take affect.")
+    end
+
+    url = a_tag.attribute('onclick').value.match(/window\.open\('([^']+)/)[1]
     return "#{RC[:url]}#{url}"
   end
 
@@ -367,7 +373,7 @@ class Achoo
   end
 
   def get_exception_reason(e)
-    "\nReason: \n\t" + e.message + "\n\t" + e.backtrace.join("\n\t")
+    "\nReason: \n\t" + e.message.gsub("\n", "\n\t") + "\n---\n\t" + e.backtrace.join("\n\t")
   end
 end
 
