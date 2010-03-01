@@ -27,15 +27,17 @@ class Achoo::Term
     loop do
       print bold("#{question}> ")
       $stdout.flush
-      answer = gets.chop
+      answer = gets
+      
+      # Answer is nil if user hits C-d
+      answer.chop! unless answer.nil?
+
       unless $stdin.tty?
         puts answer
       end
       break unless a_little_something(answer)
     end
-
-    # Answer is nil if user hits C-d
-    answer.nil? ? answer : answer.chop
+    answer
   end
 
   def self.menu(question, entries, special=nil, additional_valid_answers=[])
