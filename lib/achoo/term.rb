@@ -33,7 +33,9 @@ class Achoo::Term
       end
       break unless a_little_something(answer)
     end
-    answer
+
+    # Answer is nil if user hits C-d
+    answer.nil? ? answer : answer.chop
   end
 
   def self.menu(question, entries, special=nil, additional_valid_answers=[])
