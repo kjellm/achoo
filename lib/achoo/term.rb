@@ -134,6 +134,8 @@ class Achoo::Term
   end
 
   def self.a_little_something(answer)
+    return false if answer.nil?
+
     case answer.downcase
     when 'bless you!', 'gesundheit!'
       puts "Thank you!"
