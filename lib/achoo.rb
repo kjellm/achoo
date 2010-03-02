@@ -6,6 +6,7 @@ require 'achoo/hour_registration_form'
 require 'achoo/ical'
 require 'achoo/lock_month_form'
 require 'achoo/last'
+require 'achoo/term'
 require 'logger'
 require 'mechanize'
 require 'stringio'
@@ -37,16 +38,16 @@ class Achoo
 
   def command_loop
     while true
-      answer = Term.menu('[1]',
-                         ["Register hours",
-                          "Show flexitime balance",
-                          "Day hour report",
-                          "Week hour report",
-                          "Holiday balance",
-                          "Lock month",
-                         ],
-                         "Exit",
-                         ['q', 'Q', ''])
+      answer = Term.choose('[1]',
+                           ["Register hours",
+                            "Show flexitime balance",
+                            "Day hour report",
+                            "Week hour report",
+                            "Holiday balance",
+                            "Lock month",
+                           ],
+                           "Exit",
+                           ['q', 'Q', ''])
       case answer
       when '0', 'q', 'Q'
         exit
@@ -121,7 +122,7 @@ class Achoo
   def phase_chooser(form)
     phases = form.phases_for_selected_project
     puts "Phases"
-    answer = Term.menu('Phase', phases.collect {|p| p[1] })
+    answer = Term.choose('Phase', phases.collect {|p| p[1] })
     phases[answer.to_i-1][0]
   end
 
@@ -129,7 +130,7 @@ class Achoo
   def workperiod_chooser(form)
     periods = form.worktime_periods
     puts "Worktime periods"
-    answer = Term.menu('Period [1]', periods.collect {|p| p[1] }, nil, [''])
+    answer = Term.choose('Period [1]', periods.collect {|p| p[1] }, nil, [''])
     answer = '1' if answer.empty?
     periods[answer.to_i-1][0]
   end
@@ -137,7 +138,7 @@ class Achoo
   def billing_chooser(form)
     options = form.billing_options
     puts "Billing options"
-    answer = Term.menu('Billing [1]', options.collect {|p| p[1] }, nil, [''])
+    answer = Term.choose('Billing [1]', options.collect {|p| p[1] }, nil, [''])
     answer = '1' if answer.empty?
     options[answer.to_i-1][0]
   end
@@ -242,7 +243,7 @@ class Achoo
   def project_chooser(form)
     puts 'Recently used projects'
     projects = form.recent_projects
-    answer = Term.menu('Project [1]', projects.collect { |p| p[1] },
+    answer = Term.choose('Project [1]', projects.collect { |p| p[1] },
                        'Other', [''])
     case answer
     when ''
@@ -257,7 +258,7 @@ class Achoo
 
   def all_projects_chooser(form)
     projects = form.all_projects
-    answer = Term.menu('Project', projects.collect { |p| p[1] })
+    answer = Term.choose('Project', projects.collect { |p| p[1] })
     projects[answer.to_i-1][0]
   end
 

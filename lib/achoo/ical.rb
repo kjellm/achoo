@@ -45,7 +45,6 @@ class Achoo::ICal
   private
 
   def print_event(e, io)
-    # FIX stupid converting to string
     dti = Achoo::DateTimeInterval.new(e.dtstart.to_s, e.dtend.to_s)
     io.printf "%s: %s\n", dti, e.summary
   end

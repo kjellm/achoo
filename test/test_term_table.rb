@@ -9,7 +9,7 @@ class TestTermTable < Test::Unit::TestCase
   # def teardown
   # end
 
-  def test_parse_date
+  def test_it
     table = Achoo::Term::Table.new(%w(a b), [%w(1 2)])
     io = StringIO.new
     table.print(io)
