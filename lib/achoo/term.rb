@@ -62,31 +62,7 @@ class Achoo::Term
     answer
   end
 
-  def self.table(headers, data_rows, summaries=nil)
-    lengths   = calculate_table_cell_widths(headers, data_rows)
-    separator = table_separator(lengths)
-    format    = build_format(data_rows, lengths)
-    
-    center_table_headers(headers, lengths)
-
-    puts separator
-    print '| ' << headers.join(' | ') << " |\n"
-    puts separator
-    data_rows.each {|r| printf format, *r }
-    puts separator
-    unless summaries.nil? || data_rows.length == 1
-      printf format, *summaries
-      puts separator
-    end
-  end
-
   private
-
-  def self.center_table_headers(headers, lengths)
-    lengths.each_with_index do |len,i|
-      headers[i] = headers[i].center(len)
-    end
-  end
 
   def self.print_menu(entries, special)
     max_digits = Math.log10(entries.length).to_i
@@ -95,42 +71,6 @@ class Achoo::Term
       printf format, i+1, entry
     end
     printf format, 0, special unless special.nil?
-  end
-
-  def self.calculate_table_cell_widths(headers, data_rows)
-    lengths = []
-    headers.each_with_index do |h, i|
-      lengths[i] = RUBY_VERSION < '1.9' ? h.jlength : h.length
-    end
-    data_rows.each do |r|
-      r.each_with_index do |d, i|
-        len = RUBY_VERSION < '1.9' ? d.jlength : d.length
-        lengths[i] = [len, lengths[i]].max
-      end
-    end
-    lengths
-  end
-
-  def self.build_format(data_rows, lengths)
-    is_column_left_justified = Array.new(lengths.nitems)
-    is_column_left_justified.fill(false)
-    
-    data_rows.each do |r|
-      r.each_index do |c|
-        if !r[c].strip.empty? && !r[c].match(/^\d+[:.,]?\d*$/)
-          is_column_left_justified[c] = true
-        end
-      end
-    end
-
-    lengths.reduce('|') do |f, l|
-      justify = is_column_left_justified.shift ? '-' : ''
-      f + " %#{justify}#{l}s |"
-    end + "\n"
-  end
-
-  def self.table_separator(lengths)
-    lengths.reduce('+') {|s, length| s + '-'*(length+2) + '+'}
   end
 
   def self.a_little_something(answer)

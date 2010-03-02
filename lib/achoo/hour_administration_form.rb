@@ -1,5 +1,5 @@
 require 'achoo/form'
-require 'achoo/term'
+require 'achoo/term/table'
 
 class Achoo::HourAdministrationForm < Achoo::Form
 
@@ -33,7 +33,7 @@ class Achoo::HourAdministrationForm < Achoo::Form
     data_rows   = extract_data_rows(source_rows, columns)
     summaries   = extract_summaries(source_rows, data_rows, columns)
 
-    Achoo::Term.table(headers, data_rows, summaries)
+    Achoo::Term::Table.new(headers, data_rows, summaries).print
   end
   
   def set_page_to_view_for_date(view, date)
