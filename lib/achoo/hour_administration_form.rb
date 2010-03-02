@@ -50,6 +50,8 @@ class Achoo::HourAdministrationForm < Achoo::Form
       @page = get_page_for(date)
       @form = @page.form(view)
     end
+
+    @page
   end    
 
   def choose_source_columns(view, query)

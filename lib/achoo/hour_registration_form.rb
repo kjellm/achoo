@@ -1,4 +1,5 @@
 require 'achoo/form'
+require 'achoo/hour_administration_form'
 
 class Achoo::HourRegistrationForm < Achoo::Form
 
@@ -6,10 +7,26 @@ class Achoo::HourRegistrationForm < Achoo::Form
     @agent = agent
     @page  = @agent.get(RC[:hour_registration_url])
     @form  = @page.form('entryform')
+
+    if @form.nil?
+      # Happens if the user has viewed a day or week report for a
+      # locked month. Fetching todays day report should fix this in
+      # most cases.
+
+      # FIX Ugly call to a private method using send()
+      haf    = Achoo::HourAdministrationForm.new(@agent)
+      @page  = haf.send(:set_page_to_view_for_date, 'dayview', Date.today)
+      @form  = @page.form('entryform')
+    end
+
+    if @form.nil?
+      raise "Failed to retrieve the hour registration form.\nThe likely cause is that you have locked the current month, which is a silly thing to do."
+    end
+
     @projects_seen = {}
     @phases_seen   = {}
 
-    # FIX Need to preselect this for some reason
+    # Need to preselect this for some reason
     @form.field_with(:name => 'billpercent').options.first.select
     # Preselecting this one as well, just in case
     @form.field_with(:name => 'workperiod').options.first.select
