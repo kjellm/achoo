@@ -1,5 +1,6 @@
 require 'achoo/term/menu'
 require 'stringio'
+require 'test/unit'
 
 class Achoo
   class Term
