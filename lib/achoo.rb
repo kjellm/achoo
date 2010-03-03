@@ -5,7 +5,7 @@ require 'achoo/hour_administration_form'
 require 'achoo/hour_registration_form'
 require 'achoo/ical'
 require 'achoo/lock_month_form'
-require 'achoo/last'
+require 'achoo/awake'
 require 'achoo/term'
 require 'logger'
 require 'mechanize'
@@ -214,10 +214,10 @@ class Achoo
 
 
   def hours_chooser(date)
-    puts "Last log:"
+    puts "Awake log:"
     begin
-      last = Last.new
-      last.find_by_date(date)
+      awake = Awake.new
+      awake.find_by_date(date)
       puts
     rescue Exception => e
       print handle_exception("Failed to retrieve awake log.", e)

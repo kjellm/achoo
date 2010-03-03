@@ -2,7 +2,7 @@ require 'achoo/date_time_interval'
 
 class Achoo; end
 
-class Achoo::Last
+class Achoo::Awake
     
   @@intervals         = nil
   @@suspend_intervals = nil

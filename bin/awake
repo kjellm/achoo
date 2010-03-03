@@ -1,11 +1,10 @@
 #! /usr/bin/env ruby
 
-require 'achoo/last'
+require 'achoo/awake'
 require 'optparse'
 
-
 def main
-  last = Achoo::Last.new
+  awake = Achoo::Awake.new
   
   options = {
     :all => false,
@@ -22,9 +21,9 @@ def main
   optparse.parse!
 
   if options[:all]
-    last.all
+    awake.all
   else
-    last.find_by_date(Date.today)
+    awake.find_by_date(Date.today)
   end
 end
 
