@@ -1,7 +1,7 @@
-require 'achoo/term/menu'
-require 'achoo/term/table'
+class Achoo; class Term; end; end
 
-class Achoo; end
+Achoo::Term.autoload :Menu,  'achoo/term/menu'
+Achoo::Term.autoload :Table, 'achoo/term/table'
 
 class Achoo::Term
 
