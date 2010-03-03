@@ -1,14 +1,14 @@
 class Achoo; end
 
-require 'achoo/subversion'
-require 'achoo/git'
+require 'achoo/vcs/subversion'
+require 'achoo/vcs/git'
 
 class Achoo::VCS
 
   LINE_LENGTH = 80
 
   def self.factory(dir)
-    klass = [Achoo::Git, Achoo::Subversion].find do |k|
+    klass = [Achoo::VCS::Git, Achoo::VCS::Subversion].find do |k|
       k.repository?(dir)
     end
     return nil if klass.nil?

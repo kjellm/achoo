@@ -1,4 +1,6 @@
-class Achoo::Git
+class Achoo; class VCS; end; end
+
+class Achoo::VCS::Git
 
   def self.repository?(dir)
     File.exists?("#{dir}/.git")
@@ -12,7 +14,7 @@ class Achoo::Git
     today    = date.strftime('%Y-%m-%d')
     tomorrow = date.next.strftime('%Y-%m-%d')
     
-    `cd  #@dir; git log --author=#{ENV['USER']} --oneline --after=#{today} --before=#{tomorrow}| cut -d ' ' -f 2-`
+    `cd  #@dir; git log --author=#{ENV['USER']} --oneline --after=#{today} --before=#{tomorrow} | cut -d ' ' -f 2-`
   end
 
 end

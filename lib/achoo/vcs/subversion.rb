@@ -1,8 +1,8 @@
 require 'nokogiri'
 
-class Achoo; end
+class Achoo; class VCS; end; end
 
-class Achoo::Subversion
+class Achoo::VCS::Subversion
 
   def self.repository?(dir)
     File.exist?("#{dir}/.svn")
@@ -17,7 +17,7 @@ class Achoo::Subversion
     xml = Nokogiri::XML(`cd #@dir; svn log --xml`)
     logentries = xml.xpath("/log/logentry/author[contains(., \"#{ENV['USER']}\")]/parent::*")
 
-    # FIX are the dates in the xml local time or do they need to be
+    # FIX are the dates in the xml local time, or do they need to be
     # converted?
     log = ""
     logentries.each do |e|
