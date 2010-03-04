@@ -24,7 +24,7 @@ module Achoo::UI::RegisterHours
     form.remark  = get_remark(date, prefetcher)
     form.hours   = hours_chooser(date)
 
-    answer = Achoo::Term::ask("Do you want to change the defaults for worktime period and/or billing percentage? [N/y]").downcase
+    answer = Achoo::Term.ask("Do you want to change the defaults for worktime period and/or billing percentage? [N/y]").downcase
     if answer == 'y'
       form.workperiod = workperiod_chooser(form)
       form.billing    = billing_chooser(form)
