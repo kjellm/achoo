@@ -1,11 +1,13 @@
+require 'achoo/date_time_interval'
+require 'achoo/ui/exception_handling'
 require 'net/https'
 require 'ri_cal'
-
-require 'achoo/date_time_interval'
 
 class Achoo; end
 
 class Achoo::ICal
+
+  Achoo::UI::ExceptionHandling
 
   def self.from_http_request(params)
     http = Net::HTTP.new(params[:host], params[:port])
@@ -29,15 +31,19 @@ class Achoo::ICal
     arg_end   = date + 1
 
     @calendar.events.each do |e|
-      if !e.x_properties['X-MICROSOFT-CDO-ALLDAYEVENT'].empty? && e.x_properties['X-MICROSOFT-CDO-ALLDAYEVENT'].first.value == 'TRUE'
-        # FIX handle this
-      elsif e.recurs?
-        e.occurrences({:overlapping => [arg_start, arg_end]}).each do |o|
-          print_event(o, io)
+      begin
+        if !e.x_properties['X-MICROSOFT-CDO-ALLDAYEVENT'].empty? && e.x_properties['X-MICROSOFT-CDO-ALLDAYEVENT'].first.value == 'TRUE'
+          # FIX handle this
+        elsif e.recurs?
+          e.occurrences({:overlapping => [arg_start, arg_end]}).each do |o|
+            print_event(o, io)
+          end
+        elsif e.dtstart >= arg_start && e.dtstart <= arg_end \
+          || e.dtend  >= arg_start && e.dtend <= arg_end
+          print_event(e, io)
         end
-      elsif e.dtstart >= arg_start && e.dtstart <= arg_end \
-        || e.dtend  >= arg_start && e.dtend <= arg_end
-        print_event(e, io)
+      rescue Exception => e
+        handle_exception("Failed to process calendar event", e)
       end
     end
   end
