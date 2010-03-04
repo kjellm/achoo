@@ -25,6 +25,15 @@ module Achoo::UI::DateChooser
     end
   end
 
+  def month_chooser
+    default = one_month_ago
+    period = Achoo::Term::ask "Period ([#{default}] | YYYYMM)"
+    period = default if period.empty?
+    # FIX validate YYYYMM
+    period
+  end
+
+
   def parse_date(date_str)
     today = Date.today
     case date_str.chars.first
@@ -45,5 +54,18 @@ module Achoo::UI::DateChooser
       return Date.civil(*date)
     end
   end
+
+
+  def one_month_ago
+    now   = Time.now
+    year  = now.year
+
+    # Use -2 + 1 to shift range from 0-11 to 1-12 
+    month = (now.month - 2)%12 + 1
+    year -= 1 if month > now.month
+
+    sprintf "%d%02d", year, month
+  end
+    
 
 end
