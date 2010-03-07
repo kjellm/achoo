@@ -4,7 +4,7 @@ require 'achoo/ui'
 
 module Achoo::UI::Commands
 
-  include Achoo::UI::DateChooser
+  include Achoo::UI::DateChoosers
   include Achoo::UI::Common
 
   def show_registered_hours_for_day(agent)

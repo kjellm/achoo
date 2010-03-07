@@ -8,15 +8,19 @@ require 'stringio'
 
 module Achoo::UI::RegisterHours
 
-  include Achoo::UI::DateChooser
+  include Achoo::UI::DateChoosers
   include Achoo::UI::ExceptionHandling
 
   def register_hours(agent)
-    date       = date_chooser
+    date       = optionally_ranged_date_chooser
     prefetcher = Thread.new { remark_helper_data(date) }
 
     puts "Fetching data ..."
-    form = Achoo::HourRegistrationForm.new(agent)
+    form = if true
+             Achoo::HourRegistrationForm
+           else
+             Achoo::RangedHourRegistrationForm
+           end.new(agent)
 
     form.date    = date
     form.project = project_chooser(form)

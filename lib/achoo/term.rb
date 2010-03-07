@@ -28,8 +28,9 @@ class Achoo::Term
       answer = gets
       
       # Answer is nil if user hits C-d
-      answer.chop! unless answer.nil?
+      answer.strip! unless answer.nil?
 
+      # FIX move this to achoo.rb?
       unless $stdin.tty?
         puts answer
       end

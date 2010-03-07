@@ -2,70 +2,74 @@ require 'achoo/term'
 
 class Achoo; class UI; end; end
 
-module Achoo::UI::DateChooser
+class Achoo::UI::DateChooser
 
-  def date_chooser
+  PROMPT = "Date ([today] | ?)"
+  FORMAT = "        today | (+|-)n | [[[YY]YY]-[M]M]-[D]D"
+
+  def choose
     loop do
-      answer = Achoo::Term::ask "Date ([today] | ?)"
-      case answer
-      when '?'
-        puts "Accepted formats:"
-        puts "\t today | (+|-)n | [[[YY]YY]-[M]M]-[D]D"
-        puts
-        system 'cal -3m'
-      when '', 'today'
-        return Date.today
-      else
-        begin
-          return parse_date(answer)
-        rescue ArgumentError => e
-          puts e.message
-        end
+      answer = Achoo::Term::ask PROMPT 
+      begin
+        date = handle_answer(answer)
+        return date if date
+      rescue ArgumentError => e
+        puts e
       end
     end
   end
 
-  def month_chooser
-    default = one_month_ago
-    period = Achoo::Term::ask "Period ([#{default}] | YYYYMM)"
-    period = default if period.empty?
-    # FIX validate YYYYMM
-    period
-  end
+  def parse_date(date_str, base=Date.today)
+    raise ArgumentError.new('Invalid date') if date_str.nil?
 
-
-  def parse_date(date_str)
-    today = Date.today
-    case date_str.chars.first
-    when '-'
-      return today - date_str[1..-1].to_i
-    when '+'
-      return today + date_str[1..-1].to_i
+    # Today (default)
+    if date_str == 'today' || date_str.empty?
+      return Date.today
     end
     
+    # Base offset
+    case date_str.chars.first
+    when '-'
+      return base - Integer(date_str[1..-1])
+    when '+'
+      return base + Integer(date_str[1..-1])
+    end
+    
+    # 
     date = date_str.split('-').collect {|d| d.to_i}
     case date.length
     when 1
-      return Date.civil(today.year, today.month, *date)
+      return Date.civil(base.year, base.month, *date)
     when 2
-      return Date.civil(today.year, *date)
+      return Date.civil(base.year, *date)
     when 3
       date[0] += 2000 if date[0] < 100
       return Date.civil(*date)
     end
-  end
-
-
-  def one_month_ago
-    now   = Time.now
-    year  = now.year
-
-    # Use -2 + 1 to shift range from 0-11 to 1-12 
-    month = (now.month - 2)%12 + 1
-    year -= 1 if month > now.month
-
-    sprintf "%d%02d", year, month
-  end
     
+    raise ArgumentError.new('Invalid date')
+  end
+
+  private
+
+  def handle_answer(answer)
+    if answer == '?'
+      print_help_message
+      return false
+    else
+      return parse_date(answer)
+    end
+  end
+  
+  def print_help_message   
+    puts "Accepted formats:"
+    puts date_format_help_string
+    puts
+    system 'cal -3m'
+  end
+
+  def date_format_help_string
+    FORMAT
+  end
 
 end
