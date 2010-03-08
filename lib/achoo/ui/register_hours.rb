@@ -97,7 +97,7 @@ module Achoo::UI::RegisterHours
     end
     puts '-' * 80
     puts "Calendar events for #{date}:"
-    puts '---' unless prefetcher[:ical].empty?
+    puts '---'
     begin
       RC[:ical].each do |config|
         Achoo::ICal.from_http_request(config).print_events(date)

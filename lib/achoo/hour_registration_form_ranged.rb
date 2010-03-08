@@ -12,9 +12,9 @@ class Achoo::HourRegistrationFormRanged < Achoo::HourRegistrationForm
   def date=(date_range)
     super(date_range[0])
 
-    to_day_field.value   = date.strftime('%d')
-    to_month_field.value = date.strftime('%m')
-    to_year_field.value  = date.year
+    to_day_field.value   = date_range[1].strftime('%d')
+    to_month_field.value = date_range[1].strftime('%m')
+    to_year_field.value  = date_range[1].year
   end
 
   def date
@@ -23,7 +23,8 @@ class Achoo::HourRegistrationFormRanged < Achoo::HourRegistrationForm
                       to_day_field.value.to_i)
     [start, finish]
   end
-    private
+  
+  private
 
   def to_day_field
     @form.field_with(:name => 'todate[day]')

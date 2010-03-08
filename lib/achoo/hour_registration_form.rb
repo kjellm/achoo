@@ -137,9 +137,8 @@ class Achoo::HourRegistrationForm < Achoo::Form
     printf format, 'phase',    @phases_seen[phase]
     printf format, 'remark',   @form.remark
     printf format, 'hours',    @form.time
-    printf format, 'worktime', @form.field_with(:name => 'workperiod').selected_options.first.text
-    printf format, 'billing',  @form.field_with(:name => 'billpercent').selected_options.first.text
-
+    printf format, 'worktime', @form.field_with(:name => 'workperiod').options.first.text
+    printf format, 'billing',  @form.field_with(:name => 'billpercent').options.first.text
 
     # @form.fields.each do |field|
     #   printf format, field.name, field.value
