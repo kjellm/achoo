@@ -103,6 +103,7 @@ class Achoo
   def login
     load_cookies
 
+    puts "Fetching data ..."
     page = @agent.get(RC[:url])
 
     return if page.forms.empty?

@@ -1,3 +1,6 @@
+
+class Achoo; end
+
 class Achoo::Form
 
   def date=(date)

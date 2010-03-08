@@ -1,5 +1,6 @@
 require 'achoo/awake'
 require 'achoo/hour_registration_form'
+require 'achoo/hour_registration_form_ranged'
 require 'achoo/ical'
 require 'achoo/term'
 require 'achoo/ui'
@@ -13,20 +14,21 @@ module Achoo::UI::RegisterHours
 
   def register_hours(agent)
     date       = optionally_ranged_date_chooser
-    prefetcher = Thread.new { remark_helper_data(date) }
 
     puts "Fetching data ..."
-    form = if true
+    form = if date.class == Date
              Achoo::HourRegistrationForm
            else
-             Achoo::RangedHourRegistrationForm
+             Achoo::HourRegistrationFormRanged
            end.new(agent)
 
     form.date    = date
     form.project = project_chooser(form)
     form.phase   = phase_chooser(form)
-    form.remark  = get_remark(date, prefetcher)
-    form.hours   = hours_chooser(date)
+    print_remark_help(date) if date.class == Date
+    form.remark  = remark_chooser
+    print_hours_help(date) if date.class == Date
+    form.hours   = hours_chooser
 
     answer = Achoo::Term.ask("Do you want to change the defaults for worktime period and/or billing percentage? [N/y]").downcase
     if answer == 'y'
@@ -69,7 +71,7 @@ module Achoo::UI::RegisterHours
   end
 
 
-  def hours_chooser(date)
+  def print_hours_help(date)
     puts "Awake log:"
     begin
       awake = Achoo::Awake.new
@@ -78,20 +80,34 @@ module Achoo::UI::RegisterHours
     rescue Exception => e
       print handle_exception("Failed to retrieve awake log.", e)
     end
+  end
+
+  def hours_chooser
     answer = Achoo::Term::ask 'Hours [7:30]'
     return answer == '' ? '7.5' : answer
   end
 
 
-  def get_remark(date, prefetcher)
+  def print_remark_help(date)
     puts "VCS logs for #{date}:"
-    prefetcher.join
-    print prefetcher[:vcs]
-    puts '-' * 80 unless prefetcher[:vcs].empty?
+    begin
+      Achoo::VCS.print_logs_for(date, RC[:vcs_dirs])
+    rescue Exception => e
+      puts handle_exception("Failed to retrieve VCS logs.", e)
+    end
+    puts '-' * 80
     puts "Calendar events for #{date}:"
     puts '---' unless prefetcher[:ical].empty?
-    print prefetcher[:ical]
+    begin
+      RC[:ical].each do |config|
+        Achoo::ICal.from_http_request(config).print_events(date)
+      end
+    rescue Exception => e
+      puts handle_exception("Failed to retrieve calendar events.", e)
+    end
+  end
 
+  def remark_chooser
     Achoo::Term::ask 'Remark'
   end
 
@@ -118,26 +134,4 @@ module Achoo::UI::RegisterHours
     projects[answer.to_i-1][0]
   end
 
-
-  def remark_helper_data(date)
-    t = Thread.current
-
-    begin
-      io = StringIO.new
-      Achoo::VCS.print_logs_for(date, RC[:vcs_dirs], io)
-      t[:vcs] = io.string
-    rescue Exception => e
-      t[:vcs] = handle_exception("Failed to retrieve VCS logs.", e)
-    end
-    
-    begin
-      io = StringIO.new
-      RC[:ical].each do |config|
-        Achoo::ICal.from_http_request(config).print_events(date, io)
-      end
-      t[:ical] = io.string
-    rescue Exception => e
-      t[:ical] = handle_exception("Failed to retrieve calendar events.", e)
-    end
-  end
 end

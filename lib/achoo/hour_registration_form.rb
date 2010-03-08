@@ -132,7 +132,7 @@ class Achoo::HourRegistrationForm < Achoo::Form
 
   def print_values
     format = "%10s: \"%s\"\n"
-    printf format, 'date',     "%s-%s-%s" % [year_field, month_field, day_field].collect {|f| f.value}
+    printf format, 'date',     date_to_s
     printf format, 'project',  @projects_seen[project]
     printf format, 'phase',    @phases_seen[phase]
     printf format, 'remark',   @form.remark
@@ -152,6 +152,10 @@ class Achoo::HourRegistrationForm < Achoo::Form
   end
 
   private
+
+  def date_to_s
+    date.strftime("%Y-%m-%d")
+  end
 
   def retrieve_project_phases_page
     old = {
@@ -195,7 +199,11 @@ class Achoo::HourRegistrationForm < Achoo::Form
   end
 
   def projects_url
-    href = @page.link_with(:text => 'Select project').href['javascript:atkSubmit("__'.length..-3]
+    atk_submit_to_url(@page.link_with(:text => 'Select project').href)
+  end
+
+  def atk_submit_to_url(atk_submit)
+    href = atk_submit['javascript:atkSubmit("__'.length..-3]
     href.gsub!('_13F', '?')
     href.gsub!('_13D', '=')
     href.gsub!('_126', '&')
