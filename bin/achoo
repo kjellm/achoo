@@ -7,7 +7,8 @@ require 'optparse'
 include Achoo::RCLoader
 
 def main
-  trap("INT") {puts; exit} # Print a newline in case we are prompting
+  trap("INT") { exit }
+
   load_rc
   options = parse_args
   achoo = Achoo.new(options[:log])

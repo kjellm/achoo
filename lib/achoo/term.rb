@@ -26,8 +26,13 @@ class Achoo::Term
       print bold("#{question}> ")
       $stdout.flush
       answer = gets
+
+      # Answer is nil if user hits C-d on an enpty input
+      if answer.nil?
+        puts
+        exit
+      end
       
-      # Answer is nil if user hits C-d
       answer.strip! unless answer.nil?
 
       # FIX move this to achoo.rb?

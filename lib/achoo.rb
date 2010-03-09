@@ -41,17 +41,22 @@ class Achoo
 
   def command_loop
     while true
-      answer = Term.choose('[1]',
-                           ["Register hours",
-                            "Show flexitime balance",
-                            "Day hour report",
-                            "Week hour report",
-                            "Holiday balance",
-                            "Lock month",
-                           ],
-                           "Exit",
-                           ['q', 'Q', ''])
-      dispatch(answer)
+      begin
+        trap("INT", "DEFAULT");
+        answer = Term.choose('[1]',
+                             ["Register hours",
+                              "Show flexitime balance",
+                              "Day hour report",
+                              "Week hour report",
+                              "Holiday balance",
+                              "Lock month",
+                             ],
+                             "Exit",
+                             ['q', 'Q', ''])
+        dispatch(answer)
+      rescue Interrupt
+        puts # Add a new line in case we are prompting
+      end
     end
   end
 
