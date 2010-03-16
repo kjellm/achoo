@@ -1,4 +1,4 @@
-require 'achoo/date_time_interval'
+require 'achoo/timespan'
 
 class Achoo; end
 
@@ -32,11 +32,11 @@ class Achoo::Awake
     unless asleep.empty?
       start = powered_on_interval.start
       asleep.each do |j|
-        dti = Achoo::DateTimeInterval.new(start, j.start)
+        dti = Achoo::Timespan.new(start, j.start)
         puts "  Awake: " + dti.to_s if date.nil? || dti.contains(date)
         start = j.end
       end
-      dti = Achoo::DateTimeInterval.new(start, powered_on_interval.end)
+      dti = Achoo::Timespan.new(start, powered_on_interval.end)
       puts "  Awake: " + dti.to_s if date.nil? || dti.contains(date)       
     end
   end
@@ -70,7 +70,7 @@ class Achoo::Awake
       interval = nil
       if line.match(/^reboot\s+system\sboot\s+(.*?)\s+\(/)
         $1 =~ /(.*) - (.*)/
-        interval = Achoo::DateTimeInterval.new
+        interval = Achoo::Timespan.new
         interval.start = $1
         interval.end   = $2
       else
@@ -112,7 +112,7 @@ class Achoo::Awake
         interval = nil
       when 'Awake.'
         raise "Parse error: suspend/awake out of sync" unless interval.nil?
-        interval = Achoo::DateTimeInterval.new
+        interval = Achoo::Timespan.new
         interval.end = date
       else
         raise "Parse error"

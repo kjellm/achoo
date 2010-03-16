@@ -2,7 +2,7 @@ require 'time'
 
 class Achoo; end
 
-class Achoo::DateTimeInterval
+class Achoo::Timespan
 
   SECONDS_IN_DAY    = 86400
   SECONDS_IN_HOUR   = 3600
