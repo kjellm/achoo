@@ -4,26 +4,24 @@ class Achoo; end
 
 class Achoo::Timespan
 
-  SECONDS_IN_DAY    = 86400
-  SECONDS_IN_HOUR   = 3600
-  SECONDS_IN_MINUTE = 60
+  SECONDS_IN_A_DAY    = 86400
+  SECONDS_IN_AN_HOUR  = 3600
+  SECONDS_IN_A_MINUTE = 60
 
   attr :start
   attr :end
 
-  def initialize(start_dt=nil, end_dt=nil)
-    self.start = start_dt
-    self.end   = end_dt
+  def initialize(start, end_)
+    self.start = start
+    self.end   = end_
   end
 
-  def start=(date_time)
-    date_time = Time.parse(date_time) if date_time.kind_of?(String)
-    @start = date_time
+  def start=(timeish)
+    @start = to_time(timeish)
   end
   
-  def end=(date_time)
-    date_time = Time.parse(date_time) if date_time.kind_of?(String)
-    @end = date_time
+  def end=(timeish)
+    @end = to_time(timeish)
   end
 
   def to_s
@@ -33,33 +31,45 @@ class Achoo::Timespan
     sprintf("(%s) %s", duration, from_to)
   end
 
-  def contains(date)
-    start = self.start.strftime("%F")
-    stop  = self.end.strftime("%F")
-    date = date.strftime("%F")
-    return start <= date && stop >= date
-  end
-
-  def contains_interval(dt_interval)
-    #puts "### #{self}"
-    #puts "!!! #{dt_interval}"
-    test = (self.start <=> dt_interval.start) <= 0 \
-      && (self.end <=> dt_interval.end) >= 0
-    #puts "=== #{test}"
-    return test
+  def contains?(timeish_or_timespan)
+    if timeish_or_timespan.instance_of? self.class
+      timespan = timeish_or_timespan
+      return start <= timespan.start && self.end >= timespan.end
+    else
+      time = to_time(timeish_or_timespan)
+      return start <= time && self.end >= time
+    end
   end
 
   private 
   
+  def to_time(timeish)
+    case timeish.class
+    when Time
+      timeish.clone
+    when DateTime
+      Time.local(timeish.year, timeish.month, timeish.day, timeish.hour,timeish.minute, timeish.second)
+    when Date
+      Time.local(timeish.year, timeish.month, timeish.day)
+    else
+      if timeish.respond_to?(:to_s)
+        Time.parse(timeish.to_s)
+      else
+        raise ArgumentError.new("Don't know how to convert #{timeish.class} to Time")
+      end
+    end
+  end
+
+
   def duration_string
     delta = @end - @start
-    d     = delta.to_i / SECONDS_IN_DAY
+    d     = delta.to_i / SECONDS_IN_A_DAY
 
-    delta = delta - d*SECONDS_IN_DAY
-    h     = delta.to_i / SECONDS_IN_HOUR
+    delta = delta - d*SECONDS_IN_A_DAY
+    h     = delta.to_i / SECONDS_IN_AN_HOUR
 
-    delta = delta - h*SECONDS_IN_HOUR
-    m     = delta.to_i / SECONDS_IN_MINUTE
+    delta = delta - h*SECONDS_IN_AN_HOUR
+    m     = delta.to_i / SECONDS_IN_A_MINUTE
 
     sprintf "%d+%02d:%02d", d, h, m
   end

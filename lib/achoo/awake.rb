@@ -12,7 +12,7 @@ class Achoo::Awake
 
   def find_by_date(date)
     intervals.each do |i| 
-      if i.contains(date)
+      if i.contains?(date)
         print_session(i, date)
       end
     end
@@ -27,17 +27,17 @@ class Achoo::Awake
   def print_session(powered_on_interval, date=nil)
     puts "Powered on: " << powered_on_interval.to_s
     asleep = suspend_intervals.reverse.find_all do |j|
-      powered_on_interval.contains_interval(j)
+      powered_on_interval.contains?(j)
     end
     unless asleep.empty?
       start = powered_on_interval.start
       asleep.each do |j|
         dti = Achoo::Timespan.new(start, j.start)
-        puts "  Awake: " + dti.to_s if date.nil? || dti.contains(date)
+        puts "  Awake: " + dti.to_s if date.nil? || dti.contains?(date)
         start = j.end
       end
       dti = Achoo::Timespan.new(start, powered_on_interval.end)
-      puts "  Awake: " + dti.to_s if date.nil? || dti.contains(date)       
+      puts "  Awake: " + dti.to_s if date.nil? || dti.contains?(date)       
     end
   end
 
@@ -70,9 +70,7 @@ class Achoo::Awake
       interval = nil
       if line.match(/^reboot\s+system\sboot\s+(.*?)\s+\(/)
         $1 =~ /(.*) - (.*)/
-        interval = Achoo::Timespan.new
-        interval.start = $1
-        interval.end   = $2
+        interval = Achoo::Timespan.new($1, $2)
       else
         if line == file_boundary_marker
           merge_next = true
@@ -99,7 +97,7 @@ class Achoo::Awake
     end
 
     @@suspend_intervals = []
-    interval = nil
+    to = nil
     output.each do |l|
       l =~ /(.+): ([^:]+)$/
       date   = $1
@@ -107,13 +105,11 @@ class Achoo::Awake
       
       case action
       when 'performing suspend'
-        interval.start = date
-        @@suspend_intervals << interval
-        interval = nil
+        @@suspend_intervals << Achoo::Timespan.new(date, to)
+        to = nil
       when 'Awake.'
-        raise "Parse error: suspend/awake out of sync" unless interval.nil?
-        interval = Achoo::Timespan.new
-        interval.end = date
+        raise "Parse error: suspend/awake out of sync" unless to.nil?
+        to = date
       else
         raise "Parse error"
       end
