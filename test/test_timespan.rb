@@ -1,4 +1,5 @@
 require 'achoo/timespan'
+require 'test/unit'
 
 class TestTimespan < Test::Unit::TestCase
   # def setup
@@ -26,4 +27,3 @@ class TestTimespan < Test::Unit::TestCase
   end
 
 end
-
