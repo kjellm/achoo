@@ -27,7 +27,7 @@ class Achoo::Term
       $stdout.flush
       answer = gets
 
-      # Answer is nil if user hits C-d on an enpty input
+      # Answer is nil if user hits C-d on an empty input
       if answer.nil?
         puts
         exit
