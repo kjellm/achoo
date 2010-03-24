@@ -35,7 +35,7 @@ class Achoo
 
 
   def print_welcome
-    puts "Welcome to Achoo!"
+    puts Term.shadowbox("Welcome to Achoo!")
   end
 
 

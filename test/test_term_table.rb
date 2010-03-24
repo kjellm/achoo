@@ -14,11 +14,11 @@ class TestTermTable < Test::Unit::TestCase
     io = StringIO.new
     table.print(io)
     expected = <<'EOT'
-+---+---+
-| a | b |
-+---+---+
-| 1 | 2 |
-+---+---+
+┌───┬───┐
+│ a │ b │
+├───┼───┤
+│ 1 │ 2 │
+└───┴───┘
 EOT
     assert_equal expected, io.string
 
@@ -27,10 +27,10 @@ EOT
     io = StringIO.new
     table.print(io)
     expected = <<'EOT'
-+---+---+
-| a | b |
-+---+---+
-+---+---+
+┌───┬───┐
+│ a │ b │
+├───┼───┤
+└───┴───┘
 EOT
     assert_equal expected, io.string
 
@@ -38,10 +38,10 @@ EOT
     io = StringIO.new
     table.print(io)
     expected = <<'EOT'
-+
-|  |
-+
-+
+┌┐
+│  │
+├┤
+└┘
 EOT
     assert_equal expected, io.string
   end

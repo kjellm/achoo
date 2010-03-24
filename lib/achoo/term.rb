@@ -27,7 +27,7 @@ class Achoo::Term
       $stdout.flush
       answer = gets
 
-      # Answer is nil if user hits C-d on an enpty input
+      # Answer is nil if user hits C-d on an empty input
       if answer.nil?
         puts
         exit
@@ -61,6 +61,14 @@ class Achoo::Term
     else
       return false
     end
+  end
+
+  def self.shadowbox(text)
+    x =  "┌──────────────────────────────────────────┐ \n"
+    x << "│ #{text.center(40)} " <<                  "│▒\n"
+    x << "└──────────────────────────────────────────┘▒\n"
+    x << "  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n"
+    x
   end
 
 end
