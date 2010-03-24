@@ -15,10 +15,4 @@ class Achoo::System::Wtmp < Array
     end
   end
   
-  def print_log
-    @records.each do |r|
-      puts r.to_s
-    end
-  end
-
 end
