@@ -36,8 +36,16 @@ class Achoo::Binary::UTMPRecord < Achoo::Binary::CStruct
     @time ||= Time.at(seconds, milliseconds)
   end
   
+  def record_type_symbol
+    TYPE_MAP[record_type]
+  end
+
+  def record_type_symbol=(sym)
+    @values[0] = (TYPE_MAP.find_index(sym))
+  end
+  
   def to_s
-    sprintf "%s  %-7s  %-8s %s", time.strftime('%F_%T'), TYPE_MAP[record_type], username, device_name
+    sprintf "%s  %-7s  %-8s %s", time.strftime('%F_%T'), record_type_symbol, username, device_name
   end
   
 end

@@ -1,13 +1,13 @@
 require 'achoo/timespan'
+require 'achoo/system'
 
 class Achoo; end
 
 class Achoo::Awake
     
-  @@intervals         = nil
-  @@suspend_intervals = nil
-
   def initialize
+    @intervals         = nil
+    @suspend_intervals = nil
   end
 
   def find_by_date(date)
@@ -42,13 +42,13 @@ class Achoo::Awake
   end
 
   def intervals
-    process_last_logs unless @@intervals 
-    @@intervals
+    process_last_logs unless @intervals 
+    @intervals
   end
 
   def suspend_intervals
-    process_suspend_logs unless @@suspend_intervals
-    @@suspend_intervals
+    process_suspend_log unless @suspend_intervals
+    @suspend_intervals
   end
 
   # wtmp file boundaries needs to be handled specially.
@@ -64,7 +64,7 @@ class Achoo::Awake
       output << file_boundary_marker
     end
     
-    @@intervals = []
+    @intervals = []
     merge_next = false
     output.each do |line|
       interval = nil
@@ -79,37 +79,27 @@ class Achoo::Awake
       end
 
       if merge_next
-        @@intervals.last.start = interval.start
+        @intervals.last.start = interval.start
         merge_next = false
       else
-        @@intervals << interval
+        @intervals << interval
       end
     end
   end
 
-  def process_suspend_logs
-    output = []
-    pm_suspend = Dir.glob('/var/log/pm-suspend.log*').sort
-    pm_suspend.each do |file|
-      File.open(file, 'r') do |fh|
-        output.concat(fh.readlines.collect {|l| l.chop}.grep(/Awake|performing suspend/).reverse)
-      end
-    end
+  def process_suspend_log
+    log = Achoo::System::PMSuspend.new
 
-    @@suspend_intervals = []
+    @suspend_intervals = []
     to = nil
-    output.each do |l|
-      l =~ /(.+): ([^:]+)$/
-      date   = $1
-      action = $2
-      
-      case action
+    log.each do |l|
+      case l.action
       when 'performing suspend'
-        @@suspend_intervals << Achoo::Timespan.new(date, to)
+        @suspend_intervals << Achoo::Timespan.new(l.time, to)
         to = nil
       when 'Awake.'
         raise "Parse error: suspend/awake out of sync" unless to.nil?
-        to = date
+        to = l.time
       else
         raise "Parse error"
       end

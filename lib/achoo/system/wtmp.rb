@@ -1,30 +1,18 @@
 require 'achoo/binary'
+require 'achoo/system'
 
-class Achoo; module System; end; end
-
-class Achoo::System::WTMP
+class Achoo::System::Wtmp < Array
 
   def initialize(glob='/var/log/wtmp*')
-    @records = []
+    super()
     chunk_size = Achoo::Binary::UTMPRecord.bin_size
     Dir.glob(glob).sort.reverse.each do |file|
       File.open(file, 'r') do |io|
         while (bytes = io.read(chunk_size)) 
-          @records << Achoo::Binary::UTMPRecord.new(bytes)
+          self << Achoo::Binary::UTMPRecord.new(bytes)
         end
       end
     end
   end
   
-  def select(&block)
-    @records.select &block
-  end
-
-  def print_log
-    @records.each do |r|
-      puts r.to_s
-    end
-  end
-
 end
-
