@@ -15,8 +15,6 @@ class TestBinaryCStruct < Test::Unit::TestCase
 
   def test_cstruct
     ts = TestStruct.new
-    p ts
-    p TestStruct
     ts.a = 1
     ts.b = "hi"
 
