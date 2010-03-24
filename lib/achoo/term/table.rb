@@ -36,7 +36,7 @@ class Achoo::Term::Table
     
 
     io.print '┌' << separator.join('┬') << "┐\n"
-    io.print '│ ' << headers.join  (' │ ') << " │\n"
+    io.print '│ ' << headers.join(' │ ') << " │\n"
     io.print '├' << separator.join('┼') << "┤\n"
     @data_rows.each {|r| io.printf format, *r }
     unless @summaries.nil? || @data_rows.length == 1
