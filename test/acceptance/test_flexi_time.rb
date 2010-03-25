@@ -4,7 +4,7 @@ require 'achoo_runner'
 require 'achoo/term'
 require 'test/unit'
 
-class TestAcceptance < Test::Unit::TestCase
+class TestFlexiTime < Test::Unit::TestCase
 
   @@main_html = %q{
     <html>
