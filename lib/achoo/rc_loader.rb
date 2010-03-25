@@ -4,35 +4,33 @@ class Achoo; end
 
 module Achoo::RCLoader
 
-  RC_FILE = "#{ENV['HOME']}/.achoo"
+  def load_rc(rc_file="#{ENV['HOME']}/.achoo")
+    #create_empty_rc_if_not_exists(rc_file)
+    file_permissions_secure?(rc_file)
 
-  def load_rc
-    #create_empty_rc_if_not_exists
-    file_permissions_secure?
+    load rc_file
 
-    load RC_FILE
-
-    verify_rc_contents
+    verify_rc_contents(rc_file)
   end
 
   private
 
-  def file_permissions_secure?
+  def file_permissions_secure?(rc_file)
     # FIX test to is to strict
-    if File.stat(RC_FILE).mode != 0100600
-      puts Achoo::Term.fatal "Insecure permissions on #{RC_FILE}"
+    if File.stat(rc_file).mode != 0100600
+      puts Achoo::Term.fatal "Insecure permissions on #{rc_file}"
       exit 1
     end
   end
 
-  def create_empty_rc_if_not_exists
-    return if FileTest.exist?(RC_FILE)
+  def create_empty_rc_if_not_exists(rc_file)
+    return if FileTest.exist?(rc_file)
 
-    FileUtils.touch(RC_FILE)
-    FileUtils.chmod(0600, RC_FILE)
+    FileUtils.touch(rc_file)
+    FileUtils.chmod(0600, rc_file)
   end
 
-  def verify_rc_contents
+  def verify_rc_contents(rc_file)
     unless Object.const_defined?('RC')
       puts Achoo::Term.fatal "Malformed run control file: No RC constant defined"
       exit 1
@@ -48,7 +46,7 @@ module Achoo::RCLoader
     %w(vcs_dirs ical).each do |key|
       unless RC.has_key?(key.to_sym)
         puts Achoo::Term.warn "Missing run control configuration variable: #{key}. " \
-             + "Add it to #{RC_FILE} to get rid of this warning"
+             + "Add it to #{rc_file} to get rid of this warning"
         RC[key] = []
       end
     end

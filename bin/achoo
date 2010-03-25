@@ -9,8 +9,13 @@ include Achoo::RCLoader
 def main
   trap("INT") { exit }
 
-  load_rc
-  options = parse_args
+  options = {
+    :log     => false,
+    :rc_file => "#{ENV['HOME']}/.achoo",
+  }.merge(parse_args)
+
+  load_rc(options[:rc_file])
+
   achoo = Achoo.new(options[:log])
   achoo.start
 end
@@ -21,9 +26,12 @@ def parse_args
   optparse = OptionParser.new do|opts|
     opts.banner = "Usage: $0 [options]"
 
-    options[:log] = false
     opts.on( '-l', '--log', 'Write http communication to achoo_http.log' ) do
       options[:log] = true
+    end
+
+    opts.on('--rcfile FILE', 'FIX' ) do |file|
+      options[:rc_file] = file
     end
   end
 
