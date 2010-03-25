@@ -46,9 +46,21 @@ end
 
 
 Rake::TestTask.new do |t|
-  t.libs << "test"
-  t.test_files = FileList['test/test*.rb']
+  t.libs << "test/lib"
+  t.test_files = FileList['test/**/test*.rb']
   #t.verbose = true
+end
+
+Rake::TestTask.new do |t|
+  t.name = :test_unit
+  t.libs << "test/lib"
+  t.test_files = FileList['test/unit/test*.rb']
+end
+
+Rake::TestTask.new do |t|
+  t.name = :test_acceptance
+  t.libs << "test/lib"
+  t.test_files = FileList['test/acceptance/test*.rb']
 end
 
 

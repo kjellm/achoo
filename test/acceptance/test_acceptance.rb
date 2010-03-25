@@ -1,5 +1,5 @@
-require File.dirname(__FILE__) + '/lib/achievo_mock'
-require File.dirname(__FILE__) + '/lib/achoo'
+require 'achievo_mock'
+require 'achoo_runner'
 
 require 'achoo/term'
 require 'test/unit'
