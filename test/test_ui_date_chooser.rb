@@ -1,4 +1,5 @@
 require 'achoo/ui/date_chooser'
+require 'date'
 require 'test/unit'
 
 class TestUIDateChooser < Test::Unit::TestCase

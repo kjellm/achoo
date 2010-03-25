@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Achoo; class Term; end; end
 
 Achoo::Term.autoload :Menu,  'achoo/term/menu'

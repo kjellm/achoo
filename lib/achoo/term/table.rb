@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 if RUBY_VERSION < "1.9"
   $KCODE = 'u'
   require 'jcode'
@@ -79,7 +81,7 @@ class Achoo::Term::Table
   end
 
   def build_format(lengths)
-    is_column_left_justified = Array.new(lengths.nitems)
+    is_column_left_justified = Array.new(lengths.count)
     is_column_left_justified.fill(false)
     
     @data_rows.each do |r|
