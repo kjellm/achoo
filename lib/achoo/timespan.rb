@@ -32,7 +32,7 @@ class Achoo::Timespan
   end
 
   def contains?(timeish_or_timespan)
-    # FIX rase exception if start or end is nil
+    # FIX raise exception if start or end is nil?
 
     if timeish_or_timespan.instance_of? self.class
       timespan = timeish_or_timespan
@@ -41,6 +41,12 @@ class Achoo::Timespan
       time = to_time(timeish_or_timespan)
       return start <= time && self.end >= time
     end
+  end
+
+  def overlaps?(timespan)
+    start <= timespan.start && self.end >= timespan.start \
+      || start <= timespan.end && self.end >= timespan.end \
+      || contains?(timespan) || timespan.contains?(self)
   end
 
   private 

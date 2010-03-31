@@ -1,4 +1,5 @@
 require 'achoo/system'
+require 'time'
 
 class Achoo::System::PMSuspend < Array
 
@@ -8,13 +9,14 @@ class Achoo::System::PMSuspend < Array
     
     def initialize(time_str, action)
       @action = action
-      @time   = time_str
+      @time   = Time.parse(time_str)
     end
   end
 
   def initialize(glob='/var/log/pm-suspend.log*')
     super()
-    Dir.glob(glob).sort.each do |file|
+    Dir.glob(glob).sort.reverse.each do |file|
+      next if file =~ /\.gz$/ # FIX uncompress?
       File.open(file, 'r') do |fh|
         fh.readlines.each do |l|
           l.chop!

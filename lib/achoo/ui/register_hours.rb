@@ -75,7 +75,7 @@ module Achoo::UI::RegisterHours
     puts "Awake log:"
     begin
       awake = Achoo::Awake.new
-      awake.find_by_date(date)
+      awake.at(date)
       puts
     rescue Exception => e
       print handle_exception("Failed to retrieve awake log.", e)
