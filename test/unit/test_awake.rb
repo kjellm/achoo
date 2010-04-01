@@ -69,4 +69,31 @@ Powered on: (0+04:40) Mon  1. Mar 2010 07:00 - 11:40
     assert_equal(expected, actual)
   end
 
+  def test_at_1
+    $stdout = StringIO.new
+
+    @awake.at(Date.new(2010, 3, 2))
+    expected = %q{Powered on: (1+05:00) Tue  2. Mar 2010 07:00 - Wed  3. Mar 2010 12:00
+  Awake: (0+01:00) Tue  2. Mar 2010 09:00 - 10:00
+  Awake: (0+01:00) Tue  2. Mar 2010 07:00 - 08:00
+}
+    actual = $stdout.string
+    $stdout = STDOUT
+    assert_equal(expected, actual)
+    
+  end
+
+  def test_at_2
+    $stdout = StringIO.new
+
+    @awake.at(Date.new(2010, 3, 3))
+    expected = %q{Powered on: (1+05:00) Tue  2. Mar 2010 07:00 - Wed  3. Mar 2010 12:00
+  Awake: (0+01:00) Wed  3. Mar 2010 11:00 - 12:00
+}
+    actual = $stdout.string
+    $stdout = STDOUT
+    assert_equal(expected, actual)
+    
+  end
+
 end
