@@ -63,7 +63,8 @@ class Achoo::Awake
       unless g.length == 2 && [:crash, :halt, :now].find(g.first[1]) && g.last[1] == :boot
         i = 0
         while i < g.length-1
-          bar[1] << Achoo::Timespan.new(g[i+1][0], g[i][0])
+          klass = g[i][1] == :crash ? Achoo::OpenTimespan : Achoo::Timespan
+          bar[1] << klass.new(g[i+1][0], g[i][0])
           i += 2
         end
       end
