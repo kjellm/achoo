@@ -12,6 +12,8 @@ class Achoo::Timespan
   attr :end
 
   def initialize(start, end_)
+    raise ArgumentError.new('Nil in parameters not allowed') if start.nil? || end_.nil?
+
     self.start = start
     self.end   = end_
   end
@@ -32,8 +34,6 @@ class Achoo::Timespan
   end
 
   def contains?(timeish_or_timespan)
-    # FIX raise exception if start or end is nil?
-
     if timeish_or_timespan.instance_of? self.class
       timespan = timeish_or_timespan
       return start <= timespan.start && self.end >= timespan.end
@@ -53,8 +53,6 @@ class Achoo::Timespan
   
   def to_time(timeish)
     case timeish
-    when NilClass
-      nil
     when Time
       timeish.clone
     when DateTime
@@ -72,8 +70,6 @@ class Achoo::Timespan
 
 
   def duration_string
-    return '?+??:??' if @end.nil? || @start.nil?
-
     delta = @end - @start
     d     = delta.to_i / SECONDS_IN_A_DAY
 
@@ -93,20 +89,14 @@ class Achoo::Timespan
     #  - Etc
 
     from = nil
-    if start.nil?
-      from = '?'
-    elsif start.send(:to_date) == Date.today
+    if start.send(:to_date) == Date.today
       from = start.strftime("Today %R")
     else
       from = start.strftime("%a %e. %b %Y %R")
     end
     
     to = nil
-    if self.end.nil?
-      to = '?'
-    elsif start.nil?
-      to = self.end.strftime("%a %e. %b %Y %R")
-    elsif self.end.send(:to_date) == start.send(:to_date)
+    if self.end.send(:to_date) == start.send(:to_date)
       to = self.end.strftime("%R")
     elsif self.end.send(:to_date) == Date.today
       to = self.end.strftime("Today %R")
