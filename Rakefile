@@ -5,6 +5,8 @@ require 'rake/gempackagetask'
 require 'rake/rdoctask'
 require 'rake/testtask'
 
+task :default => [:test_unit]
+
 def version
   v = '0.2.0'
   origin_master_commits = `git rev-list origin/master`.split("\n")
