@@ -7,11 +7,9 @@ class Achoo; end
 class Achoo::Awake
     
   def initialize
-    suspend = filter_and_translate_suspend(Achoo::System::PMSuspend.new.reverse)
-    wtmp    = filter_and_translate_wtmp(Achoo::System::Wtmp.new.reverse)
-    log = merge(wtmp, suspend)
+    log = array_merge(wtmp, suspend) {|a, b| a[0] >= b[0] }
     log.unshift([Time.now, :now])
-    @sessions = to_intervals(log)
+    @sessions = sessions(log)
   end
 
   def at(date)
@@ -36,58 +34,55 @@ class Achoo::Awake
     end
   end
 
-  def to_intervals(log)
-    @sessions = group(log)
-    foo = []
-    @sessions.each do |g|
-      raise "Foo" unless g.last[1] == :boot
+  def sessions(log)
+    sessions = []
+    group(log).each do |g|
+      raise "Session doesn't begin with a boot event" unless g.last[1] == :boot
       
-      bar = []
-      
-      if g.first[1] == :now || g.first[1] == :halt || g.first[1] == :suspend
+      session = []
+      case g.first[1]
+      when :now, :halt, :suspend
         # We know the end of the session
-        raise "Foo" if g.length < 2
-        bar << Achoo::Timespan.new(g.last[0], g.first[0])
-      elsif g.first[1] == :awake || g.first[1] == :boot
+        session << Achoo::Timespan.new(g.last[0], g.first[0])
+      else # :awake, :boot
         # We don't know the end of the session
-        bar << Achoo::OpenTimespan.new(g.last[0], g.first[0])
+        session << Achoo::OpenTimespan.new(g.last[0], g.first[0])
         g.unshift([-1, :crash])
-      else
-        raise "Foo"
       end
       
-      raise "Foo" unless g.length.even?
+      raise "Session must consist of even number of events. Found #{g.length}" unless g.length.even?
 
-      bar << []
-      
-      unless g.length == 2 && [:crash, :halt, :now].find(g.first[1]) && g.last[1] == :boot
+
+      session << []
+      unless g.length == 2
         i = 0
         while i < g.length-1
           klass = g[i][1] == :crash ? Achoo::OpenTimespan : Achoo::Timespan
-          bar[1] << klass.new(g[i+1][0], g[i][0])
+          session[1] << klass.new(g[i+1][0], g[i][0])
           i += 2
         end
       end
       
-      foo << bar
+      sessions << session
     end
-    foo
+    sessions
   end
 
-  def merge(wtmp, suspend)
-    log = []
-    until wtmp.empty? or suspend.empty?
-      if wtmp.first[0] >= suspend.first[0]
-        log << wtmp.shift
+  def array_merge(a1, a2)
+    array = []
+    until a1.empty? or a2.empty?
+      if yield(a1.first, a2.first)
+        array << a1.shift
       else
-        log << suspend.shift
+        array << a2.shift
       end
     end
-    log.concat(wtmp).concat(suspend)
-    log
+    array.concat(a1).concat(a2)
+    array
   end
 
-  def filter_and_translate_suspend(log)
+  def suspend
+    log     = Achoo::System::PMSuspend.new.reverse
     new_log = []
     log.each do |entry|
       new_log << [entry.time, entry.action == 'Awake.' ? :awake : :suspend]
@@ -95,17 +90,17 @@ class Achoo::Awake
     new_log
   end
 
-  def filter_and_translate_wtmp(log)
+  def wtmp
+    log     = Achoo::System::Wtmp.new.reverse
     new_log = []
     log.each do |entry|
-      if entry.record_type_symbol == :boot
+      if entry.boot_event?
         new_log << [entry.time, :boot]
-      elsif entry.record_type_symbol == :term && entry.device_name == ':0'
+      elsif entry.halt_event?
         new_log << [entry.time, :halt]
       end
     end
     new_log
-    
   end
 
   def group(log)

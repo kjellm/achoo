@@ -33,7 +33,7 @@ class Achoo::Awake
 
     log.each {|entry| entry[0] = Time.parse(entry[0])}
 
-    @sessions = to_intervals(log)
+    @sessions = sessions(log)
   end
 
 end
