@@ -1,5 +1,4 @@
 require 'achoo/awake'
-require 'redgreen'
 require 'stringio'
 require 'test/unit'
 require 'time'

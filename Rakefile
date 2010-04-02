@@ -1,9 +1,9 @@
 # encoding: utf-8
 
-require 'rubygems'
 require 'rake/gempackagetask'
 require 'rake/rdoctask'
 require 'rake/testtask'
+require 'rubygems'
 
 task :default => [:test_unit]
 
@@ -75,3 +75,11 @@ Rake::RDocTask.new do |rd|
   rd.options << '--line-numbers' << '--inline-source'
   rd.rdoc_dir = 'doc'
 end
+
+
+desc 'Measures test coverage'
+task :coverage do
+  rm_f('coverage')
+  system("rcov -T -Ilib test/unit/test_*.rb")
+end
+
