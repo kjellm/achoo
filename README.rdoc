@@ -90,5 +90,5 @@ Kjell-Magne Øierud <kjellm AT acm DOT org>
 
 == LICENSE
 
-This library is distributed under the GPL. Please see the COPYING
-file.
+This computer program is distributed under the GPL. Please see the
+COPYING file.
