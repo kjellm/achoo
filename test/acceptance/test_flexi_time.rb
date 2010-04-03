@@ -57,7 +57,7 @@ class TestFlexiTime < Test::Unit::TestCase
 
 
   def _expect(r, pattern)
-    stat = r.expect(pattern,1)
+    stat = r.expect(pattern, 3)
     raise "Didn't find #{pattern} before timeout" if stat.nil?
     stat
   end

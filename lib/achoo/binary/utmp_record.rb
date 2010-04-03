@@ -47,5 +47,13 @@ class Achoo::Binary::UTMPRecord < Achoo::Binary::CStruct
   def to_s
     sprintf "%s  %-7s  %-8s %s", time.strftime('%F_%T'), record_type_symbol, username, device_name
   end
+
+  def boot_event?
+    record_type_symbol == :boot
+  end
   
+  def halt_event?
+    record_type_symbol == :term && device_name == ':0'
+  end
+
 end

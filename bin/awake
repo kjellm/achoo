@@ -23,7 +23,7 @@ def main
   if options[:all]
     awake.all
   else
-    awake.find_by_date(Date.today)
+    awake.at(Date.today)
   end
 end
 
