@@ -3,6 +3,7 @@ require 'achoo_runner'
 
 require 'achoo/term'
 require 'test/unit'
+require 'redgreen'
 
 class TestFlexiTime < Test::Unit::TestCase
 
@@ -66,7 +67,6 @@ class TestFlexiTime < Test::Unit::TestCase
     @server.register( { 'REQUEST_METHOD' => 'GET', 'REQUEST_PATH' => '/time_registration' }, [ 200, nil, @@hour_administration_html ])
 
     achoo(:verbose => false) do |r, w|
-
       _expect(r, /\d+\. Show flexitime balance/)
       _expect(r, Achoo::Term::bold('[1]> '))
       w.puts '2'

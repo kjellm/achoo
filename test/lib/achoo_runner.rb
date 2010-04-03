@@ -8,6 +8,7 @@ def achoo(opts)
   }.merge(opts)
 
   rc_file = File.dirname(__FILE__) << '/dot_achoo'
+  File.chmod(0600, rc_file)
   cmd = 'ruby -Ilib bin/achoo --log --rcfile ' << rc_file
 
   PTY.spawn(cmd) do |read, write, pid|
