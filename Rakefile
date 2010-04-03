@@ -5,47 +5,17 @@ require 'rake/rdoctask'
 require 'rake/testtask'
 require 'rubygems'
 
-task :default => [:test_unit]
+load File.dirname(__FILE__) + '/achoo.gemspec'
 
-def version
-  v = '0.2.0'
-  origin_master_commits = `git rev-list origin/master`.split("\n")
-  v << '.' << origin_master_commits.length.to_s
+task :default => ['test:unit']
+
+namespace 'build' do
+
+  Rake::GemPackageTask.new(Spec) do |pkg|
+    pkg.need_tar = true
+  end
+
 end
-
-
-spec = Gem::Specification.new do |s|
-  s.platform = Gem::Platform::RUBY
-
-  s.name        = 'achoo'
-  s.version     = version
-  s.summary     = 'Achievo CLI.'
-  s.description = 'Command line interface for Achievo (http://achievo.org)'
-  s.homepage    = 'http://github.com/kjellm/achoo/'
-
-  s.author = 'Kjell-Magne Øierud'
-  s.email  = 'kjellm@acm.org'
-
-  s.add_dependency('mechanize', '>= 1.0.0')
-  s.add_dependency('ri_cal')
-  s.requirements << 'none'
-  s.files = FileList['bin/*',
-                     'lib/**/*.rb', 
-                     'test/*',
-                     'Rakefile',
-                     'README.rdoc',
-                     'CHANGES',
-                     'COPYING'].to_a
-  s.bindir = 'bin'
-  s.executables = %w(achoo awake vcs_commits ical)
-  s.required_ruby_version = '>= 1.8.1'
-end
-
-
-Rake::GemPackageTask.new(spec) do |pkg|
-  pkg.need_tar = true
-end
-
 
 Rake::TestTask.new do |t|
   t.libs << "test/lib"
@@ -53,33 +23,38 @@ Rake::TestTask.new do |t|
   #t.verbose = true
 end
 
-Rake::TestTask.new do |t|
-  t.name = :test_unit
-  t.libs << "test/lib"
-  t.test_files = FileList['test/unit/test*.rb']
+namespace 'test' do
+
+  Rake::TestTask.new do |t|
+    t.name = :unit
+    t.libs << "test/lib"
+    t.test_files = FileList['test/unit/test*.rb']
+  end
+
+  Rake::TestTask.new do |t|
+    t.name = :acceptance
+    t.libs << "test/lib"
+    t.test_files = FileList['test/acceptance/test*.rb']
+  end
+
+  desc 'Measures test coverage'
+  task :coverage do
+    rm_f('coverage')
+    system("rcov -T -Ilib test/unit/test_*.rb")
+  end
+
 end
 
-Rake::TestTask.new do |t|
-  t.name = :test_acceptance
-  t.libs << "test/lib"
-  t.test_files = FileList['test/acceptance/test*.rb']
-end
+namespace 'doc' do
 
+  Rake::RDocTask.new do |rd|
+    rd.title = 'Achoo --- The Achievo CLI'
+    rd.main = "README.rdoc"
+    rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
+    rd.template = `allison --path`.chop + '.rb'             # gem install allison
+    rd.options << '--line-numbers' << '--inline-source'
+    rd.rdoc_dir = 'doc'
+  end
 
-# gem install allison
-Rake::RDocTask.new do |rd|
-  rd.title = 'Achoo --- The Achievo CLI'
-  rd.main = "README.rdoc"
-  rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
-  rd.template = `allison --path`.chop + '.rb'
-  rd.options << '--line-numbers' << '--inline-source'
-  rd.rdoc_dir = 'doc'
-end
-
-
-desc 'Measures test coverage'
-task :coverage do
-  rm_f('coverage')
-  system("rcov -T -Ilib test/unit/test_*.rb")
 end
 
