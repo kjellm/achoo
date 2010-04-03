@@ -17,7 +17,7 @@ class TestTermMenu < Test::Unit::TestCase
   # def teardown
   # end
 
-  def test_it
+  def test_simple_case_should_work
     menu    = Achoo::Term::Menu.new('', %w(a b c))
     $stdout = StringIO.new
     answer  = menu.print_ask_and_validate
@@ -30,7 +30,9 @@ EOT
     $stdout = STDOUT
     assert_equal expected_menu, res
     assert_equal "1", answer
+end
 
+  def test_empty_menu
     menu    = Achoo::Term::Menu.new('', %w())
     $stdout = StringIO.new
     answer  = menu.print_ask_and_validate
@@ -39,7 +41,9 @@ EOT
     $stdout = STDOUT
     assert_equal expected_menu, res
     assert answer.nil?
+  end
 
+  def test_lots_of_options_right_justified_enumeration
     menu    = Achoo::Term::Menu.new('', %w(a b c d e f g h i j k l), 'spec')
     $stdout = StringIO.new
     answer  = menu.print_ask_and_validate

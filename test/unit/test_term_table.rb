@@ -9,7 +9,7 @@ class TestTermTable < Test::Unit::TestCase
   # def teardown
   # end
 
-  def test_it
+  def test_data_and_header
     table = Achoo::Term::Table.new(%w(a b), [%w(1 2)])
     io = StringIO.new
     table.print(io)
@@ -21,8 +21,9 @@ class TestTermTable < Test::Unit::TestCase
 └───┴───┘
 EOT
     assert_equal expected, io.string
+  end
 
-
+  def test_no_data
     table = Achoo::Term::Table.new(%w(a b), [])
     io = StringIO.new
     table.print(io)
@@ -33,7 +34,9 @@ EOT
 └───┴───┘
 EOT
     assert_equal expected, io.string
+  end
 
+  def test_empty
     table = Achoo::Term::Table.new([], [])
     io = StringIO.new
     table.print(io)

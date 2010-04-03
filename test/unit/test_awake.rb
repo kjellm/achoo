@@ -79,7 +79,6 @@ Powered on: (0+04:40) Mon  1. Mar 2010 07:00 - 11:40
     actual = $stdout.string
     $stdout = STDOUT
     assert_equal(expected, actual)
-    
   end
 
   def test_at_2
@@ -92,7 +91,6 @@ Powered on: (0+04:40) Mon  1. Mar 2010 07:00 - 11:40
     actual = $stdout.string
     $stdout = STDOUT
     assert_equal(expected, actual)
-    
   end
 
 end

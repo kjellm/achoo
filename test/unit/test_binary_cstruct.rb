@@ -14,12 +14,11 @@ class TestBinaryCStruct < Test::Unit::TestCase
   end
 
   def test_cstruct
-    ts = TestStruct.new
+    ts   = TestStruct.new
     ts.a = 1
     ts.b = "hi"
 
-    binary = ts.pack
-    ts2 = TestStruct.new(binary)
+    ts2 = TestStruct.new(ts.pack)
 
     assert_equal(ts.a, ts2.a)
     assert_equal(ts.b, ts2.b)
