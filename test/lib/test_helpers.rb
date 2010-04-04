@@ -43,4 +43,8 @@ module AcceptanceBase
     stat
   end
 
+  def expect_main_prompt(r)
+    _expect(r, '[1]>')
+  end
+
 end

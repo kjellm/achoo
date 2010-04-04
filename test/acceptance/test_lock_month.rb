@@ -27,14 +27,16 @@ class TestLockMonth < Test::Unit::TestCase
     
   def test_lock_month
     achoo(:verbose => false) do |r, w|
-      _expect(r, /6\. Lock month/)
-      _expect(r, Achoo::Term::bold('[1]> '))
+      _expect(r, '6. Lock month')
+      expect_main_prompt(r)
       w.puts '6'
-      _expect(r, Achoo::Term::bold('Period ([201003] | YYYYMM)> '))
-      w.puts
+      _expect(r, /Period \(\[\d{6}\] | YYYYMM\)>/)
+      w.puts '201003'
       _expect(r, 'Month: 201003')
+      _expect(r, 'Submit? [Y/n]>')
       w.puts 'n'
-      _expect(r, Achoo::Term::bold('[1]> '))
+      _expect(r, 'Cancelled')
+      expect_main_prompt(r)
       w.puts 'q'
     end
   end
