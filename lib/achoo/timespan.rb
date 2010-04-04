@@ -83,26 +83,35 @@ class Achoo::Timespan
   end
 
   def from_to_string
-    # FIX 
-    #  - Don't print month if same as today's month
-    #  - Don't print year if same as today's year
-    #  - Etc
+    today      = Date.today
+    start_date = start.send(:to_date)
+    end_date   = self.end.send(:to_date)
 
-    from = nil
-    if start.send(:to_date) == Date.today
-      from = start.strftime("Today %R")
-    else
-      from = start.strftime("%a %e. %b %Y %R")
-    end
-    
-    to = nil
-    if self.end.send(:to_date) == start.send(:to_date)
-      to = self.end.strftime("%R")
-    elsif self.end.send(:to_date) == Date.today
-      to = self.end.strftime("Today %R")
-    else
-      to = self.end.strftime("%a %e. %b %Y %R")
-    end
+    format = if start_date == today
+               "Today"
+             elsif start_date.month == today.month && 
+                 start_date.year == today.year
+               "%a %e."
+             elsif start_date.year == today.year
+               "%a %e. %b"
+             else
+               "%a %e. %b %Y"
+             end
+    from = start.strftime(format << " %R")
+
+    format = if end_date == start_date
+               "%R"
+             elsif end_date == today
+               "Today %R"
+             elsif end_date.month == today.month && 
+               end_date.year == today.year
+               "%a %e. %R"
+             elsif end_date.year == today.year
+               "%a %e. %b %R"
+             else
+               "%a %e. %b %Y %R"
+             end
+    to = self.end.strftime(format)
 
     sprintf "%s - %s", from, to
   end
