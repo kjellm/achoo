@@ -51,10 +51,14 @@ namespace 'doc' do
     rd.title = 'Achoo --- The Achievo CLI'
     rd.main = "README.rdoc"
     rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
-    rd.template = `allison --path`.chop + '.rb'             # gem install allison
+    rd.template = `allison --path`.chop + '.rb'
     rd.options << '--line-numbers' << '--inline-source'
     rd.rdoc_dir = 'doc'
   end
 
 end
 
+desc 'Install development dependencies'
+task :setup do
+  system 'gem install shoulda rack thin redgreen allison'
+end
