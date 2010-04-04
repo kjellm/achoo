@@ -2,6 +2,9 @@ require 'test/unit'
 require 'redgreen'
 require 'shoulda'
 
+require 'achievo_mock'
+require 'achoo_runner'
+
 module AcceptanceBase 
 
   @@main_html = %q{

@@ -1,7 +1,3 @@
-require 'achievo_mock'
-require 'achoo_runner'
-
-require 'achoo/term'
 require 'test_helpers'
 
 class TestFlexiTime < Test::Unit::TestCase
