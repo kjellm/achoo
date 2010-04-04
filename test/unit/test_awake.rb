@@ -1,6 +1,6 @@
 require 'achoo/awake'
 require 'stringio'
-require 'test/unit'
+require 'test_helpers'
 require 'time'
 
 class Achoo::Awake

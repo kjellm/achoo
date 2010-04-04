@@ -1,6 +1,5 @@
 require 'achoo/term/table'
-require 'stringio'
-require 'test/unit'
+require 'test_helpers'
 
 class TestTermTable < Test::Unit::TestCase
   # def setup

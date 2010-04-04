@@ -1,5 +1,5 @@
 require 'achoo/binary'
-require 'test/unit'
+require 'test_helpers'
 
 class TestBinaryCStruct < Test::Unit::TestCase
   # def setup

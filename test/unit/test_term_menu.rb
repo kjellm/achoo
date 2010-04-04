@@ -1,5 +1,4 @@
 require 'achoo/term/menu'
-require 'stringio'
 require 'test_helpers'
 
 class Achoo

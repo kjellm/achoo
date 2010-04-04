@@ -1,6 +1,5 @@
 require 'achoo/timespan'
-require 'shoulda'
-require 'test/unit'
+require 'test_helpers'
 
 class TestTimespan < Test::Unit::TestCase
 

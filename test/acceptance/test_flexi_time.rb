@@ -2,8 +2,7 @@ require 'achievo_mock'
 require 'achoo_runner'
 
 require 'achoo/term'
-require 'test/unit'
-require 'redgreen'
+require 'test_helpers'
 
 class TestFlexiTime < Test::Unit::TestCase
 
