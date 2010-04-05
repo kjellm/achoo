@@ -40,14 +40,4 @@ module AcceptanceBase
     @server.stop
   end
 
-  def _expect(r, pattern)
-    stat = r.expect(pattern, 3)
-    raise "Didn't find #{pattern} before timeout" if stat.nil?
-    stat
-  end
-
-  def expect_main_prompt(r)
-    _expect(r, '[1]>')
-  end
-
 end

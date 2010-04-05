@@ -27,14 +27,14 @@ class TestFlexiTime < Test::Unit::TestCase
   end
 
   def test_flexi_time
-    achoo(:verbose => false) do |r, w|
-      _expect(r, '2. Show flexitime balance')
-      expect_main_prompt(r)
-      w.puts '2'
-      w.puts '2010-03-20'
-      _expect(r, /Flexi time balance:.*-44:30/)
-      expect_main_prompt(r)
-      w.puts 'q'
+    achoo(:verbose => false) do 
+      expect '2. Show flexitime balance'
+      expect_main_prompt
+      puts '2'
+      puts '2010-03-20'
+      expect /Flexi time balance:.*-44:30/
+      expect_main_prompt
+      puts 'q'
     end
   end
 
