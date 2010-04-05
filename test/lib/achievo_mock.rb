@@ -27,7 +27,7 @@ class AchievoMock
   def call(env)
 
     if @expectations.empty?
-      return [500, {'Content-Type' => 'text/plain', 'Content-Length' => '26'}, ['Not expecting any request']]
+      return error_page('Not expecting any request')
     end
 
 
@@ -41,12 +41,21 @@ class AchievoMock
       matched = true
       if value != env[envKey]
         matched = false
-        return [500, {'Content-Type' => 'text/plain', 'Content-Length' => '19'}, ['Expectation not met']]
+        return error_page('Expectation not met')
       end
     end
     if matched
       return response
     end
+  end
+
+  def error_page(msg)
+    [500, 
+     { 'Content-Type'   => 'text/plain', 
+       'Content-Length' => msg.length.to_s
+     }, 
+     [msg]
+    ]
   end
 end
 
