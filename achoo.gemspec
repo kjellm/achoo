@@ -4,11 +4,7 @@ Spec = Gem::Specification.new do |s|
 
   s.platform    = Gem::Platform::RUBY
   s.name        = 'achoo'
-  s.version     = begin
-                    v = '0.2.0'
-                    origin_master_commits = `git rev-list origin/master`.split("\n")
-                    v << '.' << origin_master_commits.length.to_s
-                  end
+  s.version     = '0.3'
   s.summary     = 'Achievo CLI.'
   s.description = 'Command line interface for Achievo (http://achievo.org)'
   s.homepage    = 'http://github.com/kjellm/achoo/'

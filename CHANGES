@@ -1,3 +1,30 @@
+2010-04-05: version 0.3
+
+ - More compact time span format in awake log
+ 
+ - Reimplemented awake log to handle missing log events due to machine
+   crash.
+ 
+ - The welcome message is now printed in a cool shadow box
+ 
+ - Use unicode box drawing characters for printing tables
+ 
+ - Reboot command loop on C-c. Exit on C-d
+ 
+ - Added support for registering hours to a range of dates
+ 
+ - More user friendly error handling
+ 
+ - In tables: Right justify numeric columns and center headers
+ 
+ - Validate run control file content
+ 
+ - Ruby 1.9 compatability
+ 
+ - Added support for ical: List calendar events as a remark writing aid.
+ 
+ - Easter egg ...
+
 2010-02-16: version 0.2
 
  - Added support for registering "worktime period" and "billing
