@@ -17,10 +17,10 @@ well.
 
     sudo aptitude install ruby1.8-dev libxml2 libxml2-dev libxslt1 libxslt1-dev libopenssl-ruby
 
-- Download achoo-0.2.gem[http://github.com/downloads/kjellm/achoo/achoo-0.2.gem] and install it
+- Download achoo-0.3.gem[http://github.com/downloads/kjellm/achoo/achoo-0.3.gem] and install it
 
-    wget http://github.com/downloads/kjellm/achoo/achoo-0.2.gem
-    gem install achoo-0.2.gem
+    wget http://github.com/downloads/kjellm/achoo/achoo-0.3.gem
+    gem install achoo-0.3.gem
 
 - Make sure that ~/.gem/ruby/1.8/bin is in your PATH environment variable
 
