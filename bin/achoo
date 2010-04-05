@@ -9,6 +9,8 @@ include Achoo::RCLoader
 def main
   trap("INT") { exit }
 
+  abort "UTF-8 terminal required" unless utf8?
+
   options = {
     :log     => false,
     :rc_file => "#{ENV['HOME']}/.achoo",
@@ -37,6 +39,10 @@ def parse_args
 
   optparse.parse!
   options
+end
+
+def utf8?
+  `locale charmap`.chop == 'UTF-8'
 end
 
 main
