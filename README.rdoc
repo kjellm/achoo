@@ -45,7 +45,7 @@ Or if you already has cloned achoo, update with
 
 Generate gem and install it
 
-  rake gem
+  rake build:gem
   gem install pkg/achoo-XXX.gem
 
 == USAGE
@@ -79,6 +79,12 @@ You can then run achoo from a shell with the achoo command
 
 For more usage information, see
 this[http://oierud.name/~kjellm/bliki/AchooTheAchievoCLI.html] blog.
+
+== SET UP DEVELOPMENT ENVIRONMENT
+
+To run the tests you need to install some additional gems:
+
+  rake setup
 
 == BUGS
 
