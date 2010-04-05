@@ -34,7 +34,7 @@ class Achoo::Timespan
   end
 
   def contains?(timeish_or_timespan)
-    if timeish_or_timespan.instance_of? self.class
+    if timeish_or_timespan.is_a? Achoo::Timespan
       timespan = timeish_or_timespan
       return start <= timespan.start && self.end >= timespan.end
     else
