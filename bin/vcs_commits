@@ -2,6 +2,7 @@
 
 require 'achoo/rc_loader'
 require 'achoo/vcs'
+require 'date'
 require 'optparse'
 
 include Achoo::RCLoader
