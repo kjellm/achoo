@@ -62,3 +62,6 @@ desc 'Install development dependencies'
 task :setup do
   system 'gem install shoulda rack thin redgreen allison'
 end
+
+desc 'Remove generated files and folders'
+task :clean => ['build:clobber_package', 'doc:clobber_rdoc']
