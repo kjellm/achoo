@@ -5,10 +5,20 @@ class Achoo; class UI; end; end
 class Achoo::UI::MonthChooser
 
   def choose
-    default = one_month_ago
-    period  = Achoo::Term::ask "Period ([#{default}] | YYYYMM)"
-    period  = default if !period || period.empty?
-    # FIX validate YYYYMM
+    loop do
+      answer = Achoo::Term::ask "Period ([#{one_month_ago}] | YYYYMM)"
+      begin
+        return handle_answer(answer)
+      rescue ArgumentError => e
+        puts e
+      end
+    end
+  end
+
+  def handle_answer(answer)
+    period = !answer || answer.empty? ? one_month_ago : answer
+    period =~ /\A \d{4} (?: 0\d | 1[0-2]) \z/x \
+      or raise ArgumentError.new('Invalid month')
     period
   end
 
