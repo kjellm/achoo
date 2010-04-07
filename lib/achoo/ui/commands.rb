@@ -1,6 +1,7 @@
 require 'achoo/hour_administration_form'
 require 'achoo/lock_month_form'
 require 'achoo/ui'
+require 'achoo/term'
 
 module Achoo::UI::Commands
 
@@ -48,4 +49,53 @@ module Achoo::UI::Commands
   end
 
 
+  def view_report(agent)
+    choices = RC[:reports].keys
+    answer = Achoo::Term.choose('Report', choices)
+    key = choices[answer.to_i - 1]
+
+    puts "Fetching data ..."
+    page = agent.get(RC[:url] + RC[:reports][key])
+    
+    columns     = [0,1,2,5,6]
+    source_rows = page.search('#rl_1 tr')
+    headers     = extract_headers(source_rows, columns)
+    data_rows   = extract_data_rows(source_rows, columns)
+    summaries   = extract_summaries(source_rows, data_rows, columns)
+
+    Achoo::Term::Table.new(headers, data_rows, summaries).print
+  end
+
+  def extract_headers(source_rows, columns)
+    headers = source_rows.first.css('th')
+    headers = headers.to_a.values_at(*columns)
+    headers = headers.map {|th| th.content.strip}
+    headers
+  end
+
+  def extract_data_rows(source_rows, columns)
+    data_rows = []
+    source_rows.each do |tr|
+      cells = tr.css('td')
+      next if cells.empty?
+      cells = cells.to_a.values_at(*columns)
+      data_rows << fix_empty_cells(cells.map {|td| td.content.strip})
+    end
+    data_rows
+  end
+
+  def extract_summaries(source_rows, data_rows, columns)
+    summaries = nil
+    unless data_rows.empty?
+      summaries = source_rows.last.css('th')
+      summaries = summaries.to_a.values_at(*columns)
+      summaries = summaries.map {|th| th.content.strip }
+      fix_empty_cells(summaries)
+    end
+    summaries
+  end
+
+  def fix_empty_cells(row)
+    row.collect! {|c| c == "\302\240" ? '  ' : c} # UTF-8 NO-BREAK-SPACE
+  end
 end

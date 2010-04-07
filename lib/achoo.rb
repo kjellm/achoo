@@ -43,14 +43,16 @@ class Achoo
     while true
       begin
         trap("INT", "DEFAULT");
+        choices = ["Register hours",
+                   "Show flexitime balance",
+                   "Day hour report",
+                   "Week hour report",
+                   "Holiday balance",
+                   "Lock month",
+                  ]
+        choices << "View report" if RC[:reports]
         answer = Term.choose('[1]',
-                             ["Register hours",
-                              "Show flexitime balance",
-                              "Day hour report",
-                              "Week hour report",
-                              "Holiday balance",
-                              "Lock month",
-                             ],
+                             choices,
                              "Exit",
                              ['q', 'Q', ''])
         dispatch(answer)
@@ -77,6 +79,8 @@ class Achoo
         show_holiday_report(@agent)
       when '6'
         lock_month(@agent)
+      when '7'
+        view_report(@agent)
       end
   end
 
