@@ -50,7 +50,7 @@ class Achoo
                    "Holiday balance",
                    "Lock month",
                   ]
-        choices << "View report" if RC[:reports]
+        choices << "Time survey report" if RC[:reports]
         answer = Term.choose('[1]',
                              choices,
                              "Exit",
