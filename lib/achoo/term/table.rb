@@ -1,9 +1,5 @@
 # encoding: utf-8
 
-if RUBY_VERSION < "1.9"
-  $KCODE = 'u'
-  require 'jcode'
-end
 
 # Unicode box drawing characters
 #
@@ -69,12 +65,11 @@ class Achoo::Term::Table
   def calculate_table_cell_widths
     lengths = []
     @headers.each_with_index do |h, i|
-      lengths[i] = RUBY_VERSION < '1.9' ? h.jlength : h.length
+      lengths[i] = h.length
     end
     @data_rows.each do |r|
       r.each_with_index do |d, i|
-        len = RUBY_VERSION < '1.9' ? d.jlength : d.length
-        lengths[i] = [len, lengths[i]].max
+        lengths[i] = [d.length, lengths[i]].max
       end
     end
     lengths
