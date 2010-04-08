@@ -17,6 +17,8 @@ class Achoo
         replace(columns.transpose)
       end
 
+      private
+
       def fix_empty_cells(row)
         row.collect {|c| c == "\302\240" ? ' ' : c} # UTF-8 NO-BREAK-SPACE
       end

@@ -1,3 +1,4 @@
+require 'achoo/achievo/table'
 require 'achoo/form'
 require 'achoo/term/table'
 
@@ -27,13 +28,25 @@ class Achoo::HourAdministrationForm < Achoo::Form
   def show_registered_hours(date, view, query)
     set_page_to_view_for_date(view, date)
 
-    columns     = choose_source_columns(view, query)
-    source_rows = @page.search(query)
-    headers     = extract_headers(source_rows, columns, view)
-    data_rows   = extract_data_rows(source_rows, columns)
-    summaries   = extract_summaries(source_rows, data_rows, columns)
+    table = Achoo::Achievo::Table.new(@page.search(query))
 
-    Achoo::Term::Table.new(headers, data_rows, summaries).print
+    if view == 'weekview'
+      table.first.each {|c| c.gsub!(/\s+/, ' ') }
+    end
+
+    if view == 'dayview'
+      table.select_columns do |c|
+        p c[0]
+        !['', ' ', 'Billing billed', 'Billing marked', 'Billing total'].include?(c[0])
+
+      end
+    end
+
+    summaries = table.length > 1 ? table.last : nil
+
+    Achoo::Term::Table.new(table.first,
+                           table[1 .. table.length-2], 
+                           summaries).print
   end
   
   def set_page_to_view_for_date(view, date)
@@ -54,58 +67,6 @@ class Achoo::HourAdministrationForm < Achoo::Form
     @page
   end    
 
-  def choose_source_columns(view, query)
-    columns = nil
-    if view == 'dayview'
-      # Ignore 'Billing billed', 'Billing marked', and 'Billing total'
-      columns = [0,1,2,3,6,8,9]
-      # Achievo prepends an extra column dynamically if there are
-      # data rows.
-      unless @page.search(query + ' td').empty?
-        columns.collect! {|c| c + 1}
-      end
-    end
-    columns
-  end
-
-  def extract_headers(source_rows, columns, view)
-    headers = source_rows.first.css('th')
-    unless columns.nil?
-      headers = headers.to_a.values_at(*columns)
-    end
-    headers = headers.map {|th| th.content.strip}
-    if view == 'weekview'
-      headers = headers.map {|th| th.gsub(/\s+/, ' ') }
-    end
-    headers
-  end
-
-  def extract_data_rows(source_rows, columns)
-    data_rows = []
-    source_rows.each do |tr|
-      cells = tr.css('td')
-      next if cells.empty?
-      unless columns.nil?
-        cells = cells.to_a.values_at(*columns)
-      end
-      data_rows << fix_empty_cells(cells.map {|td| td.content.strip})
-    end
-    data_rows
-  end
-
-  def extract_summaries(source_rows, data_rows, columns)
-    summaries = nil
-    unless data_rows.empty?
-      summaries = source_rows.last.css('th')
-      unless columns.nil?
-        summaries = summaries.to_a.values_at(*columns)
-      end
-      summaries = summaries.map {|th| th.content.strip }
-      fix_empty_cells(summaries)
-    end
-    summaries
-  end
-
   def get_page_for(date)
     puts "Fetching data for #{date} ..."
     self.date = date
@@ -122,10 +83,6 @@ class Achoo::HourAdministrationForm < Achoo::Form
   
   def year_field
     @form.field_with(:name => 'viewdate[year]')
-  end
-
-  def fix_empty_cells(row)
-    row.collect! {|c| c == "\302\240" ? '  ' : c} # UTF-8 NO-BREAK-SPACE
   end
 
 end  
