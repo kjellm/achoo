@@ -36,7 +36,7 @@ class Achoo::HourAdministrationForm < Achoo::Form
 
     if view == 'dayview'
       table.select_columns do |c|
-        p c[0]
+        # '' -> Ruby 1.9, ' ' -> Ruby 1.8
         !['', ' ', 'Billing billed', 'Billing marked', 'Billing total'].include?(c[0])
 
       end
