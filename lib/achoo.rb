@@ -23,6 +23,7 @@ class Achoo
   def start
     begin
       print_welcome
+      warm_up_ical_cache
       login
       scrape_urls
       command_loop
@@ -125,6 +126,18 @@ class Achoo
 
   def save_cookies
     @agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
+  end
+
+  def warm_up_ical_cache
+    Thread.new do 
+      RC[:ical].each do |config|
+        begin
+          Achoo::ICal.from_http_request(config)
+        rescue Exception => e
+          # Ignore, we are just doing this to populate the cache
+        end
+      end
+    end
   end
 
 end
