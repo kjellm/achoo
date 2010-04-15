@@ -1,10 +1,10 @@
 class Achoo; end
 
+require 'achoo/achievo'
 require 'achoo/term'
 require 'achoo/ui'
 require 'logger'
 require 'mechanize'
-
 
 
 class Achoo
@@ -33,6 +33,7 @@ class Achoo
     end
   end
 
+  private
 
   def print_welcome
     puts Term.shadowbox("Welcome to Achoo!")
@@ -111,26 +112,9 @@ class Achoo
 
   def login
     load_cookies
-
-    puts "Fetching data ..."
-    page = @agent.get(RC[:url])
-
-    return if page.forms.empty?
-
-    puts "Logging in ..."
-
-    form = page.forms.first
-    form.auth_user = RC[:user]
-    form.auth_pw   = RC[:password]
-    page = @agent.submit(form, form.buttons.first)
-
-    if page.body.match(/Username and\/or password are incorrect. Please try again./)
-      raise "Username and/or password are incorrect."
-    end
-
-    @agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
+    Achoo::Achievo::LoginForm.login(@agent)
+    save_cookies
   end
-
 
   def load_cookies
     cookies_file = "#{ENV['HOME']}/.achoo_cookies.yml"
@@ -139,6 +123,9 @@ class Achoo
     end
   end
 
+  def save_cookies
+    @agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
+  end
 
 end
 
