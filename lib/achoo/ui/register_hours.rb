@@ -4,7 +4,6 @@ require 'achoo/ical'
 require 'achoo/term'
 require 'achoo/ui'
 require 'achoo/vcs'
-require 'stringio'
 
 module Achoo::UI::RegisterHours
 
@@ -12,21 +11,21 @@ module Achoo::UI::RegisterHours
   include Achoo::UI::ExceptionHandling
 
   def register_hours(agent)
-    date       = optionally_ranged_date_chooser
+    date = optionally_ranged_date_chooser
 
     puts "Fetching data ..."
-    form = if date.class == Date
-             Achoo::Achievo::HourRegistrationForm
-           else
+    form = if date.class == Array
              Achoo::Achievo::HourRegistrationFormRanged
+           else
+             Achoo::Achievo::HourRegistrationForm
            end.new(agent)
 
     form.date    = date
     form.project = project_chooser(form)
     form.phase   = phase_chooser(form)
-    print_remark_help(date) if date.class == Date
+    print_remark_help(date) unless date.class == Array
     form.remark  = remark_chooser
-    print_hours_help(date) if date.class == Date
+    print_hours_help(date) unless date.class == Array
     form.hours   = hours_chooser
 
     answer = Achoo::Term.ask("Do you want to change the defaults for worktime period and/or billing percentage? [N/y]").downcase
