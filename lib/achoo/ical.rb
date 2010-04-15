@@ -9,7 +9,11 @@ class Achoo::ICal
 
   Achoo::UI::ExceptionHandling
 
+  @@cache = {}
+
   def self.from_http_request(params)
+    return @@cache[params] if @@cache[params]
+    
     http = Net::HTTP.new(params[:host], params[:port])
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -19,7 +23,8 @@ class Achoo::ICal
       response = http.request(request)
       response.body
     end
-    self.new(ics)
+    
+    @@cache[params] = self.new(ics)
   end
 
   def initialize(ics_str)
