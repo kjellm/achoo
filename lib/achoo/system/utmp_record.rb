@@ -1,6 +1,6 @@
-require 'achoo/binary'
+require 'achoo/system'
 
-class Achoo::Binary::UTMPRecord < Achoo::Binary::CStruct
+class Achoo::System::UTMPRecord < Achoo::System::CStruct
   long   :record_type
   long   :process_id
   string :device_name,        32

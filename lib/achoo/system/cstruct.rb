@@ -1,6 +1,6 @@
-require 'achoo/binary'
+require 'achoo/system'
 
-class Achoo::Binary::CStruct
+class Achoo::System::CStruct
 
   def initialize(bytes=nil)
     @values = []

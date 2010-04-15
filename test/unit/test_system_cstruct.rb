@@ -1,14 +1,14 @@
-require 'achoo/binary'
+require 'achoo/system'
 require 'test_helpers'
 
-class TestBinaryCStruct < Test::Unit::TestCase
+class TestSystemCStruct < Test::Unit::TestCase
   # def setup
   # end
   
   # def teardown
   # end
 
-  class TestStruct < Achoo::Binary::CStruct
+  class TestStruct < Achoo::System::CStruct
     long   :a
     string :b, 2
   end
