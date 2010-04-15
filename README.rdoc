@@ -31,9 +31,9 @@ well.
 
 === TRACKING THE LATEST CHANGES
 
-Requires git and rake
+Requires git
 
-  sudo aptitude install rake git-core
+  sudo aptitude install git-core
 
 Then
 
@@ -45,8 +45,8 @@ Or if you already has cloned achoo, update with
 
 Generate gem and install it
 
-  rake build:gem
-  gem install pkg/achoo-XXX.gem
+  gem build achoo.gemspec
+  gem install achoo-XXX.gem
 
 == USAGE
 
@@ -76,7 +76,8 @@ You can then run achoo from a shell with the achoo command
   achoo
 
 For more usage information, see
-this[http://oierud.name/~kjellm/bliki/AchooTheAchievoCLI.html] blog.
+this[http://oierud.name/~kjellm/bliki/AchooTheAchievoCLI.html] blog
+post.
 
 == SET UP DEVELOPMENT ENVIRONMENT
 
