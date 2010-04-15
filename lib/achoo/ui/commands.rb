@@ -1,4 +1,4 @@
-require 'achoo/achievo/table'
+require 'achoo/achievo'
 require 'achoo/hour_administration_form'
 require 'achoo/lock_month_form'
 require 'achoo/term'
@@ -32,7 +32,7 @@ module Achoo::UI::Commands
 
   def lock_month(agent)
     month = month_chooser
-    form   = Achoo::LockMonthForm.new(agent)
+    form  = Achoo::Achievo::LockMonthForm.new(agent)
     form.lock_month(month)
     form.print_values
     if confirm

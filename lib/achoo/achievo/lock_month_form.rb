@@ -1,6 +1,6 @@
-class Achoo; end
+require 'achoo/achievo'
 
-class Achoo::LockMonthForm
+class Achoo::Achievo::LockMonthForm
 
   def initialize(agent)
     @agent = agent
