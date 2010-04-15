@@ -1,5 +1,3 @@
-class Achoo; end
-
 require 'achoo/achievo'
 require 'achoo/term'
 require 'achoo/ui'
