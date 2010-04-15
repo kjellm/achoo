@@ -1,6 +1,4 @@
 require 'achoo/achievo'
-require 'achoo/hour_administration_form'
-require 'achoo/lock_month_form'
 require 'achoo/term'
 require 'achoo/ui'
 
@@ -11,20 +9,20 @@ module Achoo::UI::Commands
 
   def show_registered_hours_for_day(agent)
     date = date_chooser
-    form = Achoo::HourAdministrationForm.new(agent)
+    form = Achoo::Achievo::HourAdministrationForm.new(agent)
     form.show_registered_hours_for_day(date)
   end
 
   def show_registered_hours_for_week(agent)
     date = date_chooser
-    form = Achoo::HourAdministrationForm.new(agent)
+    form = Achoo::Achievo::HourAdministrationForm.new(agent)
     form.show_registered_hours_for_week(date)
   end
 
 
   def show_flexi_time(agent)
     date = date_chooser
-    form = Achoo::HourAdministrationForm.new(agent)
+    form = Achoo::Achievo::HourAdministrationForm.new(agent)
     balance = form.flexi_time(date)
     puts "Flexi time balance: #{Achoo::Term::underline(balance)}"
   end

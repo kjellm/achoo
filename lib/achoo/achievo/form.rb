@@ -1,7 +1,6 @@
+require 'achoo/achievo'
 
-class Achoo; end
-
-class Achoo::Form
+class Achoo::Achievo::Form
 
   def date=(date)
     # Day and month must be prefixed with '0' if single

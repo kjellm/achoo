@@ -1,7 +1,6 @@
-require 'achoo/form'
-require 'achoo/hour_administration_form'
+require 'achoo/achievo'
 
-class Achoo::HourRegistrationForm < Achoo::Form
+class Achoo::Achievo::HourRegistrationForm < Achoo::Achievo::Form
 
   def initialize(agent)
     @agent = agent
@@ -14,7 +13,7 @@ class Achoo::HourRegistrationForm < Achoo::Form
       # most cases.
 
       # FIX Ugly call to a private method using send()
-      haf    = Achoo::HourAdministrationForm.new(@agent)
+      haf    = Achoo::Achievo::HourAdministrationForm.new(@agent)
       @page  = haf.send(:set_page_to_view_for_date, 'dayview', Date.today)
       @form  = @page.form('entryform')
     end

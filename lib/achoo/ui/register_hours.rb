@@ -1,6 +1,5 @@
+require 'achoo/achievo'
 require 'achoo/awake'
-require 'achoo/hour_registration_form'
-require 'achoo/hour_registration_form_ranged'
 require 'achoo/ical'
 require 'achoo/term'
 require 'achoo/ui'
@@ -17,9 +16,9 @@ module Achoo::UI::RegisterHours
 
     puts "Fetching data ..."
     form = if date.class == Date
-             Achoo::HourRegistrationForm
+             Achoo::Achievo::HourRegistrationForm
            else
-             Achoo::HourRegistrationFormRanged
+             Achoo::Achievo::HourRegistrationFormRanged
            end.new(agent)
 
     form.date    = date

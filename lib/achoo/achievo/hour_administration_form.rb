@@ -1,8 +1,7 @@
-require 'achoo/achievo/table'
-require 'achoo/form'
+require 'achoo/achievo'
 require 'achoo/term/table'
 
-class Achoo::HourAdministrationForm < Achoo::Form
+class Achoo::Achievo::HourAdministrationForm < Achoo::Achievo::Form
 
   def initialize(agent)
     @agent = agent

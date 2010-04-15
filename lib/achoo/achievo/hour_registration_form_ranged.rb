@@ -1,6 +1,6 @@
-require 'achoo/hour_registration_form'
+require 'achoo/achievo'
 
-class Achoo::HourRegistrationFormRanged < Achoo::HourRegistrationForm
+class Achoo::Achievo::HourRegistrationFormRanged < Achoo::Achievo::HourRegistrationForm
 
   def initialize(agent)
     super
