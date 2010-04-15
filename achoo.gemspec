@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 Spec = Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.8.1'

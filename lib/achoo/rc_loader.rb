@@ -1,4 +1,5 @@
 require 'achoo/term'
+require 'yaml'
 
 class Achoo; end
 
@@ -8,7 +9,10 @@ module Achoo::RCLoader
     #create_empty_rc_if_not_exists(rc_file)
     file_permissions_secure?(rc_file)
 
-    load rc_file
+    self.class.const_set(:RC, YAML.load_file(rc_file))
+    if RC.is_a? String
+      abort "Failed to parse rc file. Do you use the old format? Please convert it to YAML."
+    end
 
     verify_rc_contents(rc_file)
   end

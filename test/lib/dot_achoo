@@ -1,7 +1,6 @@
-RC = {
-  :url      => 'http://localhost:4000/',
-  :user     => 'foo',
-  :password => 'Geheim',
-  :vcs_dirs => [],
-  :ical     => [],
-}
+---
+:url:      'http://localhost:4000/'
+:user:     'foo'
+:password: 'Geheim'
+:vcs_dirs: []
+:ical:     []
