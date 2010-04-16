@@ -1,6 +1,5 @@
-require 'achoo/open_timespan'
-require 'achoo/timespan'
 require 'achoo/system'
+require 'achoo/temporal'
 
 class Achoo; end
 
@@ -13,7 +12,7 @@ class Achoo::Awake
   end
 
   def at(date)
-    span = Achoo::Timespan.new(date, date+1)
+    span = Achoo::Temporal::Timespan.new(date, date+1)
     @sessions.each do |s|
       print_session(s, span) if s[0].overlaps?(span)
     end
@@ -43,10 +42,10 @@ class Achoo::Awake
       case g.first[1]
       when :now, :halt, :suspend
         # We know the end of the session
-        session << Achoo::Timespan.new(g.last[0], g.first[0])
+        session << Achoo::Temporal::Timespan.new(g.last[0], g.first[0])
       else # :awake, :boot
         # We don't know the end of the session
-        session << Achoo::OpenTimespan.new(g.last[0], g.first[0])
+        session << Achoo::Temporal::OpenTimespan.new(g.last[0], g.first[0])
         g.unshift([-1, :crash])
       end
       
@@ -57,7 +56,7 @@ class Achoo::Awake
       unless g.length == 2
         i = 0
         while i < g.length-1
-          klass = g[i][1] == :crash ? Achoo::OpenTimespan : Achoo::Timespan
+          klass = g[i][1] == :crash ? Achoo::Temporal::OpenTimespan : Achoo::Temporal::Timespan
           session[1] << klass.new(g[i+1][0], g[i][0])
           i += 2
         end

@@ -1,8 +1,7 @@
+require 'achoo/temporal'
 require 'time'
 
-class Achoo; end
-
-class Achoo::Timespan
+class Achoo::Temporal::Timespan
 
   SECONDS_IN_A_DAY    = 86400
   SECONDS_IN_AN_HOUR  = 3600
@@ -34,7 +33,7 @@ class Achoo::Timespan
   end
 
   def contains?(timeish_or_timespan)
-    if timeish_or_timespan.is_a? Achoo::Timespan
+    if timeish_or_timespan.is_a? Achoo::Temporal::Timespan
       timespan = timeish_or_timespan
       return start <= timespan.start && self.end >= timespan.end
     else

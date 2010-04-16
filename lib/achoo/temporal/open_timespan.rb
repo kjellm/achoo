@@ -1,8 +1,6 @@
-require 'achoo/timespan'
+require 'achoo/temporal'
 
-class Achoo; end
-
-class Achoo::OpenTimespan < Achoo::Timespan
+class Achoo::Temporal::OpenTimespan < Achoo::Temporal::Timespan
 
   def to_s
     s = super

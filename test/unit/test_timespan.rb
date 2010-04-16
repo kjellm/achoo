@@ -1,11 +1,11 @@
-require 'achoo/timespan'
+require 'achoo/temporal'
 require 'test_helpers'
 
 class TestTimespan < Test::Unit::TestCase
 
   context 'Contains with timeish argument' do
     setup do
-      @ts = Achoo::Timespan.new('1970-01-01', '1970-01-02')
+      @ts = Achoo::Temporal::Timespan.new('1970-01-01', '1970-01-02')
     end
     
     should "contain it's start" do
@@ -27,7 +27,7 @@ class TestTimespan < Test::Unit::TestCase
 
   context 'Contains with timespan argument' do
     setup do
-      @ts = Achoo::Timespan.new('1970-01-01', '1970-01-02')
+      @ts = Achoo::Temporal::Timespan.new('1970-01-01', '1970-01-02')
     end
 
     should 'contain self' do
@@ -35,13 +35,13 @@ class TestTimespan < Test::Unit::TestCase
     end
 
     should 'contain intervening timespan' do
-      assert(@ts.contains?(Achoo::Timespan.new('1970-01-01 06:00', 
-                                               '1970-01-01 09:00 ')))
+      assert(@ts.contains?(Achoo::Temporal::Timespan.new('1970-01-01 06:00', 
+                                                         '1970-01-01 09:00 ')))
     end
 
     should 'not contain timespan with end after end time' do
-      assert(!@ts.contains?(Achoo::Timespan.new('1970-01-01 06:00',
-                                                '1970-01-02 09:00 ')))
+      assert(!@ts.contains?(Achoo::Temporal::Timespan.new('1970-01-01 06:00',
+                                                          '1970-01-02 09:00 ')))
     end
   end
 
