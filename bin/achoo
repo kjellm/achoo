@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'achoo'
+require 'achoo/app'
 require 'achoo/rc_loader'
 require 'optparse'
 
@@ -18,7 +18,7 @@ def main
 
   load_rc(options[:rc_file])
 
-  achoo = Achoo.new(options[:log])
+  achoo = Achoo::App.new(options[:log])
   achoo.start
 end
 

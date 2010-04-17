@@ -1,8 +1,7 @@
+require 'achoo'
 require 'achoo/extensions'
 require 'achoo/system'
 require 'achoo/temporal'
-
-class Achoo; end
 
 class Achoo::Awake
     

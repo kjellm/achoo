@@ -1,6 +1,5 @@
 require 'achoo/term'
-
-class Achoo; class UI; end; end;
+require 'achoo/ui'
 
 module Achoo::UI::ExceptionHandling
 
@@ -9,8 +8,7 @@ module Achoo::UI::ExceptionHandling
   end
 
   def handle_fatal_exception(user_message, e)
-    puts Achoo::Term::fatal(user_message) + get_exception_reason(e)
-    exit 1
+    abort Achoo::Term::fatal(user_message) + get_exception_reason(e)
   end
 
   def get_exception_reason(e)

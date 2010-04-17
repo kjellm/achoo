@@ -1,13 +1,12 @@
+require 'achoo'
 require 'achoo/temporal'
-require 'achoo/ui/exception_handling'
+require 'achoo/ui'
 require 'net/https'
 require 'ri_cal'
 
-class Achoo; end
-
 class Achoo::ICal
 
-  Achoo::UI::ExceptionHandling
+  include Achoo::UI::ExceptionHandling
 
   @@cache = {}
 

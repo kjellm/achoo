@@ -1,9 +1,9 @@
-class Achoo; end
-
-require 'achoo/vcs/subversion'
-require 'achoo/vcs/git'
+require 'achoo'
 
 class Achoo::VCS
+
+  autoload :Git,        'achoo/vcs/git'
+  autoload :Subversion, 'achoo/vcs/subversion'
 
   LINE_LENGTH = 80
 

@@ -1,7 +1,6 @@
+require 'achoo'
 require 'achoo/term'
 require 'yaml'
-
-class Achoo; end
 
 module Achoo::RCLoader
 

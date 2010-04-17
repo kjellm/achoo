@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'achoo/term'
+
 
 # Unicode box drawing characters
 #
@@ -23,8 +25,6 @@
 # 2560 ╠ ╡ ╢ ╣ ╤ ╥ ╦ ╧ ╨ ╩ ╪ ╫ ╬ ╭ ╮ ╯
 #
 # 2570 ╰ ╱ ╲ ╳ ╴ ╵ ╶ ╷ ╸ ╹ ╺ ╻ ╼ ╽ ╾ ╿
-
-class Achoo; class Term; end; end
 
 class Achoo::Term::Table
 

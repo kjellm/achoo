@@ -1,6 +1,5 @@
+require 'achoo/vcs'
 require 'nokogiri'
-
-class Achoo; class VCS; end; end
 
 class Achoo::VCS::Subversion
 

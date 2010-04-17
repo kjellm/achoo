@@ -1,8 +1,4 @@
-require 'achoo/ui/date_chooser'
-require 'achoo/ui/optionally_ranged_date_chooser'
-require 'achoo/ui/month_chooser'
-
-class Achoo; class UI; end; end
+require 'achoo/ui'
 
 module Achoo::UI::DateChoosers
 

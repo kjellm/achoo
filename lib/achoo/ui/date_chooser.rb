@@ -1,6 +1,5 @@
 require 'achoo/term'
-
-class Achoo; class UI; end; end
+require 'achoo/ui'
 
 class Achoo::UI::DateChooser
 

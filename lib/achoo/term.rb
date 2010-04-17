@@ -1,11 +1,11 @@
 # encoding: utf-8
 
-class Achoo; class Term; end; end
-
-Achoo::Term.autoload :Menu,  'achoo/term/menu'
-Achoo::Term.autoload :Table, 'achoo/term/table'
+require 'achoo'
 
 class Achoo::Term
+
+  autoload :Menu,  'achoo/term/menu'
+  autoload :Table, 'achoo/term/table'
 
   def self.bold(text); "\e[1m#{text}\e[0m"; end
 
@@ -47,7 +47,7 @@ class Achoo::Term
   end
 
   def self.choose(question, entries, special=nil, additional_valid_answers=[])
-    menu = Achoo::Term::Menu.new(question, entries, special, additional_valid_answers)
+    menu = Menu.new(question, entries, special, additional_valid_answers)
     menu.print_ask_and_validate
   end
 

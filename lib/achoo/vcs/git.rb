@@ -1,4 +1,4 @@
-class Achoo; class VCS; end; end
+require 'achoo/vcs'
 
 class Achoo::VCS::Git
 

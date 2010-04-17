@@ -1,12 +1,9 @@
+require 'achoo'
 require 'achoo/term/menu'
 require 'test_helpers'
 
-class Achoo
-  class Term
-
-    def self.ask(x); return "1"; end
-
-  end
+class Achoo::Term
+  def self.ask(x); return "1"; end
 end
 
 class TestTermMenu < Test::Unit::TestCase
