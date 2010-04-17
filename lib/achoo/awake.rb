@@ -1,3 +1,4 @@
+require 'achoo/extensions'
 require 'achoo/system'
 require 'achoo/temporal'
 
@@ -6,7 +7,7 @@ class Achoo; end
 class Achoo::Awake
     
   def initialize
-    log = array_merge(wtmp, suspend) {|a, b| a[0] >= b[0] }
+    log = wtmp.merge(suspend) {|a, b| a[0] >= b[0] }
     log.unshift([Time.now, :now])
     @sessions = sessions(log)
   end
@@ -65,19 +66,6 @@ class Achoo::Awake
       sessions << session
     end
     sessions
-  end
-
-  def array_merge(a1, a2)
-    array = []
-    until a1.empty? or a2.empty?
-      if yield(a1.first, a2.first)
-        array << a1.shift
-      else
-        array << a2.shift
-      end
-    end
-    array.concat(a1).concat(a2)
-    array
   end
 
   def suspend
