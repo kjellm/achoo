@@ -101,12 +101,10 @@ class Achoo::Awake
           # Crashed
           group = []
         end
+        group << i
         if i[1] == :boot
-          group << i
           grouped_log << group
           group = nil
-        else
-          group << i
         end    
       end
     end
