@@ -47,27 +47,9 @@ module Achoo
       
 
       def phase_chooser(form)
-        phases = form.phases_for_selected_project
-        puts "Phases"
-        answer = Term.choose('Phase', phases.collect {|p| p[1] })
-        phases[answer.to_i-1][0]
-      end
-
-
-      def workperiod_chooser(form)
-        periods = form.worktime_periods
-        puts "Worktime periods"
-        answer = Term.choose('Period [1]', periods.collect {|p| p[1] }, nil, [''])
-        answer = '1' if answer.empty?
-        periods[answer.to_i-1][0]
-      end
-
-      def billing_chooser(form)
-        options = form.billing_options
-        puts "Billing options"
-        answer = Term.choose('Billing [1]', options.collect {|p| p[1] }, nil, [''])
-        answer = '1' if answer.empty?
-        options[answer.to_i-1][0]
+        chooser_helper(form.phases_for_selected_project,
+                       "Phases",
+                       'Phase')
       end
 
 
@@ -87,6 +69,19 @@ module Achoo
         return answer == '' ? '7.5' : answer
       end
 
+      def workperiod_chooser(form)
+        chooser_helper(form.worktime_periods,
+                       "Worktime periods",
+                       'Period [1]',
+                       true)
+      end
+
+      def billing_chooser(form)
+        chooser_helper(form.billing_options,
+                       "Billing options", 
+                       'Billing [1]',
+                       true)
+      end
 
       def print_remark_help(date)
         puts "VCS logs for #{date}:"
@@ -128,12 +123,21 @@ module Achoo
       end
 
       
-      def all_projects_chooser(form)
-        projects = form.all_projects
-        answer = Term.choose('Project', projects.collect { |p| p[1] })
-        projects[answer.to_i-1][0]
-      end
       
+      def all_projects_chooser(form)
+        chooser_helper(form.all_projects, 
+                       'All projects', 
+                       'Project')
+      end
+
+      def chooser_helper(options, heading, prompt, empty_allowed=false)
+        puts heading
+        extra = empty_allowed ? [''] : []
+        answer = Achoo::Term.choose(prompt, options.collect {|p| p[1] }, nil, [''])
+        answer = '1' if answer.empty?
+        options[answer.to_i-1][0]
+      end
+
     end
   end
 end

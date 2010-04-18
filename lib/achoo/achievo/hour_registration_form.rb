@@ -65,10 +65,17 @@ module Achoo
         @form.billpercent = "billpercent.id='#{billing}'"
       end
 
-
       def worktime_periods
-        @form.field_with(:name => 'workperiod').options.collect do |opt|
-          [opt.value.match(/workperiod\.id='(\d+)'/)[1], opt.text]
+        collect_options('workperiod')
+      end
+      
+      def billing_options
+        collect_options('billpercent')
+      end
+
+      def collect_options(field_name, pattern)
+        @form.field_with(:name => field_name).options.collect do |opt|
+          [opt.value.match(/#{field_name}\.id='(\d+)'/)[1], opt.text]
         end
       end
 
