@@ -1,17 +1,22 @@
 require 'achoo/system'
 
-class Achoo::System::Wtmp < Array
+module Achoo
+  module System
 
-  def initialize(glob='/var/log/wtmp*')
-    super()
-    chunk_size = Achoo::System::UTMPRecord.bin_size
-    Dir.glob(glob).sort.reverse.each do |file|
-      File.open(file, 'r') do |io|
-        while (bytes = io.read(chunk_size)) 
-          self << Achoo::System::UTMPRecord.new(bytes)
+    class Wtmp < Array
+
+      def initialize(glob='/var/log/wtmp*')
+        super()
+        chunk_size = UTMPRecord.bin_size
+        Dir.glob(glob).sort.reverse.each do |file|
+          File.open(file, 'r') do |io|
+            while (bytes = io.read(chunk_size)) 
+              self << UTMPRecord.new(bytes)
+            end
+          end
         end
       end
+
     end
   end
-  
 end

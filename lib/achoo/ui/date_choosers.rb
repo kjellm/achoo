@@ -1,17 +1,22 @@
 require 'achoo/ui'
 
-module Achoo::UI::DateChoosers
+module Achoo
+  module UI
 
-  def date_chooser
-    Achoo::UI::DateChooser.new.choose
+    module DateChoosers
+
+      def date_chooser
+        DateChooser.new.choose
+      end
+
+      def optionally_ranged_date_chooser
+        OptionallyRangedDateChooser.new.choose
+      end
+
+      def month_chooser
+        MonthChooser.new.choose
+      end
+
+    end
   end
-
-  def optionally_ranged_date_chooser
-    Achoo::UI::OptionallyRangedDateChooser.new.choose
-  end
-
-  def month_chooser
-    Achoo::UI::MonthChooser.new.choose
-  end
-
 end
