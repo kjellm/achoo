@@ -1,4 +1,5 @@
 require 'achoo/awake'
+require 'achoo/system'
 require 'stringio'
 require 'test_helpers'
 require 'time'
@@ -31,6 +32,7 @@ class Achoo::Awake
     log.unshift(['1990-03-05 18:00', :now])
 
     log.each {|entry| entry[0] = Time.parse(entry[0])}
+    log.collect! {|entry| Achoo::System::LogEntry.new(*entry)}
 
     @sessions = sessions(log)
   end

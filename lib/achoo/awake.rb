@@ -4,9 +4,9 @@ require 'achoo/system'
 require 'achoo/temporal'
 
 class Achoo::Awake
-    
+
   def initialize
-    log = wtmp.merge(suspend) {|a, b| a[0] >= b[0] }
+    log = wtmp.merge!(suspend)
     log.unshift([Time.now, :now])
     @sessions = sessions(log)
   end
@@ -36,17 +36,17 @@ class Achoo::Awake
   def sessions(log)
     sessions = []
     group(log).each do |g|
-      raise "Session doesn't begin with a boot event" unless g.last[1] == :boot
+      raise "Session doesn't begin with a boot event" unless g.last.event == :boot
       
       session = []
-      case g.first[1]
+      case g.first.event
       when :now, :halt, :suspend
         # We know the end of the session
-        session << Achoo::Temporal::Timespan.new(g.last[0], g.first[0])
+        session << Achoo::Temporal::Timespan.new(g.last.time, g.first.time)
       else # :awake, :boot
         # We don't know the end of the session
-        session << Achoo::Temporal::OpenTimespan.new(g.last[0], g.first[0])
-        g.unshift([-1, :crash])
+        session << Achoo::Temporal::OpenTimespan.new(g.last.time, g.first.time)
+        g.unshift(Achoo::System::LogEntry.new(-1, :crash))
       end
       
       raise "Session must consist of even number of events. Found #{g.length}" unless g.length.even?
@@ -56,8 +56,8 @@ class Achoo::Awake
       unless g.length == 2
         i = 0
         while i < g.length-1
-          klass = g[i][1] == :crash ? Achoo::Temporal::OpenTimespan : Achoo::Temporal::Timespan
-          session[1] << klass.new(g[i+1][0], g[i][0])
+          klass = g[i].event == :crash ? Achoo::Temporal::OpenTimespan : Achoo::Temporal::Timespan
+          session[1] << klass.new(g[i+1].time, g[i].time)
           i += 2
         end
       end
@@ -71,7 +71,7 @@ class Achoo::Awake
     log     = Achoo::System::PMSuspend.new.reverse
     new_log = []
     log.each do |entry|
-      new_log << [entry.time, entry.action == 'Awake.' ? :awake : :suspend]
+      new_log << Achoo::System::LogEntry.new(entry.time, entry.action == 'Awake.' ? :awake : :suspend)
     end
     new_log
   end
@@ -81,9 +81,9 @@ class Achoo::Awake
     new_log = []
     log.each do |entry|
       if entry.boot_event?
-        new_log << [entry.time, :boot]
+        new_log << Achoo::System::LogEntry.new(entry.time, :boot)
       elsif entry.halt_event?
-        new_log << [entry.time, :halt]
+        new_log << Achoo::System::LogEntry.new(entry.time, :halt)
       end
     end
     new_log
@@ -93,7 +93,7 @@ class Achoo::Awake
     grouped_log = []
     group = nil
     log.each do |i|
-      if i[1] == :halt || i[1] == :now
+      if i.event == :halt || i.event == :now
         group = [i]
       else
         if group.nil?
@@ -101,7 +101,7 @@ class Achoo::Awake
           group = []
         end
         group << i
-        if i[1] == :boot
+        if i.event == :boot
           grouped_log << group
           group = nil
         end    

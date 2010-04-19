@@ -1,15 +1,17 @@
-
 class Array
 
-  # FIX raise exception if merge is defined?
-
   #
-  # Useful for merging two sorted arrays
+  # Useful for merging two sorted arrays with Comparable
+  # elements. 
+  #
+  # The content of the two input arrays should not be trusted after
+  # being mistreated by this method.
   # 
-  def merge(other)
+  def merge!(other)
+    # FIX raise exception if merge is defined?
     array = []
     until empty? or other.empty?
-      if yield(first, other.first)
+      if first <= other.first
         array << shift
       else
         array << other.shift
