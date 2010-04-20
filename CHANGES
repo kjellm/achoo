@@ -1,3 +1,11 @@
+2010-04-20: version 0.4
+
+ - Converted rc file format to YAML
+
+ - Prefetch and cache iCalendar data in a parallel thread at startup
+
+ - Added support for 'Time Survey' reports
+
 2010-04-05: version 0.3
 
  - More compact time span format in awake log
