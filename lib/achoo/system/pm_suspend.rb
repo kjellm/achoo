@@ -16,7 +16,7 @@ module Achoo
               next unless l =~ /Awake|performing suspend/
               time, event = *l.split(': ')
               time = Time.parse(time)
-              self << LogEntry.new(time, event)
+              self << LogEntry.new(time, event == 'Awake.' ? :awake : :suspend)
             end
           end
         end

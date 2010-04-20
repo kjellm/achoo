@@ -69,12 +69,7 @@ module Achoo
     end
 
     def suspend
-      log     = System::PMSuspend.new.reverse
-      new_log = []
-      log.each do |entry|
-        new_log << System::LogEntry.new(entry.time, entry.event == 'Awake.' ? :awake : :suspend)
-      end
-      new_log
+      System::PMSuspend.new.reverse
     end
 
     def wtmp
