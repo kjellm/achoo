@@ -1,7 +1,7 @@
 require 'achoo/vcs'
 
 module Achoo
-  module VCS
+  class VCS
     class Git
 
       def self.repository?(dir)

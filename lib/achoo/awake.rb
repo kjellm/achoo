@@ -8,7 +8,7 @@ module Achoo
 
     def initialize
       log = wtmp.merge!(suspend)
-      log.unshift([Time.now, :now])
+      log.unshift(System::LogEntry.new(Time.now, :now))
       @sessions = sessions(log)
     end
 
@@ -72,7 +72,7 @@ module Achoo
       log     = System::PMSuspend.new.reverse
       new_log = []
       log.each do |entry|
-        new_log << System::LogEntry.new(entry.time, entry.action == 'Awake.' ? :awake : :suspend)
+        new_log << System::LogEntry.new(entry.time, entry.event == 'Awake.' ? :awake : :suspend)
       end
       new_log
     end

@@ -14,7 +14,9 @@ module Achoo
             fh.readlines.each do |l|
               l.chop!
               next unless l =~ /Awake|performing suspend/
-              self << LogEntry.new(*l.split(': '))
+              time, event = *l.split(': ')
+              time = Time.parse(time)
+              self << LogEntry.new(time, event)
             end
           end
         end
