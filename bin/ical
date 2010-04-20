@@ -9,8 +9,22 @@ include Achoo::RCLoader
 def main
   load_rc
 
+  options = {
+    :date => Date.today,
+  }
+  
+  optparse = OptionParser.new do|opts|
+    opts.banner = "Usage: $0 [options]"
+  
+    opts.on( '-d', '--date [DATE]', 'FIX' ) do |date|
+      options[:date] = Date.parse(date)
+    end
+  end
+  
+  optparse.parse!
+  
   RC[:ical].each do |config|
-    Achoo::ICal.from_http_request(config).print_events(Date.parse(ARGV[0]))
+    Achoo::ICal.from_http_request(config).print_events(options[:date])
   end
 end
 
