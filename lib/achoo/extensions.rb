@@ -1,8 +1,7 @@
 class Array
 
   #
-  # Useful for merging two sorted arrays with Comparable
-  # elements. 
+  # Useful for merging two sorted arrays with Comparable elements.
   #
   # The content of the two input arrays should not be trusted after
   # being mistreated by this method.
