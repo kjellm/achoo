@@ -12,10 +12,7 @@ module Achoo
       end
 
       def to_s
-        duration = duration_string
-        from_to  = from_to_string
-
-        sprintf("(%s) %s", duration, from_to)
+        "(%s) %s" % [duration_string, from_to_string]
       end
 
       def contains?(timeish_or_timespan)
@@ -68,12 +65,16 @@ module Achoo
         return [d, h, m]
       end
 
-
       def from_to_string
         today      = Date.today
         start_date = first.send(:to_date)
         end_date   = last.send(:to_date)
+        
+        "%s - %s" % [from_as_string(start_date, today),
+                     to_as_string(start_date, end_date, today)]
+      end
 
+      def from_as_string(start_date, today)
         format = if start_date == today
                    "Today"
                  elsif start_date.month == today.month && 
@@ -85,7 +86,9 @@ module Achoo
                    "%a %e. %b %Y"
                  end
         from = first.strftime(format << " %R")
+      end
 
+      def to_as_string(start_date, end_date, today)
         format = if end_date == start_date
                    "%R"
                  elsif end_date == today
@@ -99,8 +102,6 @@ module Achoo
                    "%a %e. %b %Y %R"
                  end
         to = last.strftime(format)
-
-        sprintf "%s - %s", from, to
       end
 
     end
