@@ -1,27 +1,14 @@
-require 'achoo/extensions'
 require 'achoo/temporal'
 require 'time'
 
 module Achoo
   module Temporal
-    class Timespan
-
-      attr :start
-      attr :end
+    class Timespan < Range
 
       def initialize(start, end_)
         raise ArgumentError.new('Nil in parameters not allowed') if start.nil? || end_.nil?
 
-        self.start = start
-        self.end   = end_
-      end
-
-      def start=(timeish)
-        @start = to_time(timeish)
-      end
-      
-      def end=(timeish)
-        @end = to_time(timeish)
+        super(to_time(start), to_time(end_))
       end
 
       def to_s
@@ -33,18 +20,16 @@ module Achoo
 
       def contains?(timeish_or_timespan)
         if timeish_or_timespan.is_a? Timespan
-          timespan = timeish_or_timespan
-          return start <= timespan.start && self.end >= timespan.end
+          time = timeish_or_timespan
+          include?(time.first) && include?(time.last)
         else
-          time = to_time(timeish_or_timespan)
-          return start <= time && self.end >= time
+          include?(to_time(timeish_or_timespan))
         end
       end
 
       def overlaps?(timespan)
-        start <= timespan.start && self.end >= timespan.start \
-        || start <= timespan.end && self.end >= timespan.end \
-        || contains?(timespan) || timespan.contains?(self)
+        include?(timespan.first) || include?(timespan.last) ||
+          timespan.contains?(self)
       end
 
       private 
@@ -66,9 +51,12 @@ module Achoo
         end
       end
 
-
       def duration_string
-        delta = @end - @start
+        "%d+%02d:%02d" % duration
+      end
+
+      def duration
+        delta = last - first
         d     = delta.to_i / 1.day
 
         delta = delta - d.days
@@ -77,13 +65,14 @@ module Achoo
         delta = delta - h.hours
         m     = delta.to_i / 1.minute
 
-        sprintf "%d+%02d:%02d", d, h, m
+        return [d, h, m]
       end
+
 
       def from_to_string
         today      = Date.today
-        start_date = start.send(:to_date)
-        end_date   = self.end.send(:to_date)
+        start_date = first.send(:to_date)
+        end_date   = last.send(:to_date)
 
         format = if start_date == today
                    "Today"
@@ -95,7 +84,7 @@ module Achoo
                  else
                    "%a %e. %b %Y"
                  end
-        from = start.strftime(format << " %R")
+        from = first.strftime(format << " %R")
 
         format = if end_date == start_date
                    "%R"
@@ -109,7 +98,7 @@ module Achoo
                  else
                    "%a %e. %b %Y %R"
                  end
-        to = self.end.strftime(format)
+        to = last.strftime(format)
 
         sprintf "%s - %s", from, to
       end
@@ -117,3 +106,4 @@ module Achoo
     end
   end
 end
+
