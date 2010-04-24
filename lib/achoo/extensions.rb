@@ -1,5 +1,10 @@
 class Array
 
+  %w(merge!).each do |method|
+    raise "Method already defined: #{name}\##{method}" \
+      if method_defined?(method)
+  end
+
   #
   # Useful for merging two sorted arrays with Comparable elements.
   #
@@ -19,5 +24,24 @@ class Array
     array.concat(self).concat(other)
     array
   end
+
+end
+
+
+class Integer
+
+  %w(day days hour hours minute minutes).each do |method|
+    raise "Method already defined: #{name}\##{method}" \
+      if method_defined?(method)
+  end
+    
+  def day; self * 86400; end
+  alias days day
+
+  def hour; self * 3600; end
+  alias hours hour
+
+  def minute; self * 60; end
+  alias minutes minute
 
 end

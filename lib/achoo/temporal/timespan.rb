@@ -1,13 +1,10 @@
+require 'achoo/extensions'
 require 'achoo/temporal'
 require 'time'
 
 module Achoo
   module Temporal
     class Timespan
-
-      SECONDS_IN_A_DAY    = 86400
-      SECONDS_IN_AN_HOUR  = 3600
-      SECONDS_IN_A_MINUTE = 60
 
       attr :start
       attr :end
@@ -72,13 +69,13 @@ module Achoo
 
       def duration_string
         delta = @end - @start
-        d     = delta.to_i / SECONDS_IN_A_DAY
+        d     = delta.to_i / 1.day
 
-        delta = delta - d*SECONDS_IN_A_DAY
-        h     = delta.to_i / SECONDS_IN_AN_HOUR
+        delta = delta - d.days
+        h     = delta.to_i / 1.hour
 
-        delta = delta - h*SECONDS_IN_AN_HOUR
-        m     = delta.to_i / SECONDS_IN_A_MINUTE
+        delta = delta - h.hours
+        m     = delta.to_i / 1.minute
 
         sprintf "%d+%02d:%02d", d, h, m
       end
