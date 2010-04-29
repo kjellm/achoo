@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: Achoo [Achoo --- The Achievo CLI]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          Achoo
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../files/lib/achoo/vcs/git_rb.html">lib/achoo/vcs/git.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/vcs/subversion_rb.html">lib/achoo/vcs/subversion.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ui_rb.html">lib/achoo/ui.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/term_rb.html">lib/achoo/term.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/system_rb.html">lib/achoo/system.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/achievo_rb.html">lib/achoo/achievo.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/achievo/hour_administration_form_rb.html">lib/achoo/achievo/hour_administration_form.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/achievo/login_form_rb.html">lib/achoo/achievo/login_form.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/achievo/lock_month_form_rb.html">lib/achoo/achievo/lock_month_form.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/achievo/hour_registration_form_rb.html">lib/achoo/achievo/hour_registration_form.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/achievo/hour_registration_form_ranged_rb.html">lib/achoo/achievo/hour_registration_form_ranged.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/achievo/table_rb.html">lib/achoo/achievo/table.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/achievo/form_rb.html">lib/achoo/achievo/form.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/vcs_rb.html">lib/achoo/vcs.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ui/date_chooser_rb.html">lib/achoo/ui/date_chooser.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ui/exception_handling_rb.html">lib/achoo/ui/exception_handling.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ui/month_chooser_rb.html">lib/achoo/ui/month_chooser.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ui/commands_rb.html">lib/achoo/ui/commands.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ui/optionally_ranged_date_chooser_rb.html">lib/achoo/ui/optionally_ranged_date_chooser.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ui/common_rb.html">lib/achoo/ui/common.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ui/date_choosers_rb.html">lib/achoo/ui/date_choosers.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ui/register_hours_rb.html">lib/achoo/ui/register_hours.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/ical_rb.html">lib/achoo/ical.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/system/wtmp_rb.html">lib/achoo/system/wtmp.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/temporal_rb.html">lib/achoo/temporal.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/system/cstruct_rb.html">lib/achoo/system/cstruct.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/system/pm_suspend_rb.html">lib/achoo/system/pm_suspend.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/system/log_entry_rb.html">lib/achoo/system/log_entry.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/system/utmp_record_rb.html">lib/achoo/system/utmp_record.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/rc_loader_rb.html">lib/achoo/rc_loader.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/awake_rb.html">lib/achoo/awake.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/temporal/open_timespan_rb.html">lib/achoo/temporal/open_timespan.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/temporal/timespan_rb.html">lib/achoo/temporal/timespan.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/term/menu_rb.html">lib/achoo/term/menu.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/term/table_rb.html">lib/achoo/term/table.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo/app_rb.html">lib/achoo/app.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/achoo_rb.html">lib/achoo.rb</a>
+          </li>
+          <li>
+            <a class='show' href='#' onclick='this.parentNode.parentNode.className += " expanded"; this.parentNode.removeChild(this); return false'>show all</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            Unicode box drawing characters
+            </p>
+            <p>
+            <a
+            href="http://en.wikipedia.org/wiki/Box-drawing_characters">en.wikipedia.org/wiki/Box-drawing_characters</a>
+            </p>
+            <pre>0 1 2 3 4 5 6 7 8 9 A B C D E F</pre>
+            <p>
+            2500 ─ ━ │ ┃ ┄ ┅ ┆ ┇ ┈ ┉ ┊ ┋ ┌ ┍ ┎ ┏
+            </p>
+            <p>
+            2510 ┐ ┑ ┒ ┓ └ ┕ ┖ ┗ ┘ ┙ ┚ ┛ ├ ┝ ┞ ┟
+            </p>
+            <p>
+            2520 ┠ ┡ ┢ ┣ ┤ ┥ ┦ ┧ ┨ ┩ ┪ ┫ ┬ ┭ ┮ ┯
+            </p>
+            <p>
+            2530 ┰ ┱ ┲ ┳ ┴ ┵ ┶ ┷ ┸ ┹ ┺ ┻ ┼ ┽ ┾ ┿
+            </p>
+            <p>
+            2540 ╀ ╁ ╂ ╃ ╄ ╅ ╆ ╇ ╈ ╉ ╊ ╋ ╌ ╍ ╎ ╏
+            </p>
+            <p>
+            2550 ═ ║ ╒ ╓ ╔ ╕ ╖ ╗ ╘ ╙ ╚ ╛ ╜ ╝ ╞ ╟
+            </p>
+            <p>
+            2560 ╠ ╡ ╢ ╣ ╤ ╥ ╦ ╧ ╨ ╩ ╪ ╫ ╬ ╭ ╮ ╯
+            </p>
+            <p>
+            2570 ╰ ╱ ╲ ╳ ╴ ╵ ╶ ╷ ╸ ╹ ╺ ╻ ╼ ╽ ╾ ╿
+            </p>
+          </div>
+          <div id='section'>
+            <div id='class-list'>
+              <h2>Classes and Modules</h2>
+              Module <a href="Achoo/Achievo.html" class="link">Achoo::Achievo</a><br />
+              Module <a href="Achoo/RCLoader.html" class="link">Achoo::RCLoader</a><br />
+              Module <a href="Achoo/System.html" class="link">Achoo::System</a><br />
+              Module <a href="Achoo/Temporal.html" class="link">Achoo::Temporal</a><br />
+              Module <a href="Achoo/UI.html" class="link">Achoo::UI</a><br />
+              Class <a href="Achoo/App.html" class="link">Achoo::App</a><br />
+              Class <a href="Achoo/Awake.html" class="link">Achoo::Awake</a><br />
+              Class <a href="Achoo/ICal.html" class="link">Achoo::ICal</a><br />
+              Class <a href="Achoo/Term.html" class="link">Achoo::Term</a><br />
+              Class <a href="Achoo/VCS.html" class="link">Achoo::VCS</a><br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

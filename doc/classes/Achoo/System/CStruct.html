@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: Achoo::System::CStruct [Achoo --- The Achievo CLI]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          Achoo::System::CStruct
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/lib/achoo/system/cstruct_rb.html">lib/achoo/system/cstruct.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong>Object</strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M000025">bin_size</a></li>
+              <li><a href="#M000020">char</a></li>
+              <li><a href="#M000019">inherited</a></li>
+              <li><a href="#M000022">long</a></li>
+              <li><a href="#M000018">new</a></li>
+              <li><a href="#M000023">quad</a></li>
+              <li><a href="#M000021">short</a></li>
+              <li><a href="#M000024">string</a></li>
+            </ol>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000027">pack</a></li>
+              <li><a href="#M000026">unpack</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='attribute-list'>
+              <h2 class='section-bar'>Attributes</h2>
+              <div class='name-list'>
+                <table>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>template</td>
+                    <td class='context-item-value'>[R]</td>
+                    <td class='context-item-desc'></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M000025'>
+                <a name='M000025'></a>
+                <div class='synopsis'>
+                  <span class='name'>bin_size</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000025-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000025-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 31</span>&#x000A;31:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">bin_size</span>&#x000A;32:           <span class="ruby-ivar">@bin_size</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">''</span>).<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/[[:alpha:]]/</span>}.<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>&#x000A;33:             <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'A'</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>&#x000A;34:           <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">pack</span>(<span class="ruby-identifier">template</span>).<span class="ruby-identifier">length</span>&#x000A;35:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000020'>
+                <a name='M000020'></a>
+                <div class='synopsis'>
+                  <span class='name'>char</span>
+                  <span class='arguments'>(name)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000020-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000020-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 22</span>&#x000A;22:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">char</span>(<span class="ruby-identifier">name</span>);  <span class="ruby-identifier">add_type</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">:char</span>,  <span class="ruby-value str">'c'</span>, <span class="ruby-value">0</span>); <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000019'>
+                <a name='M000019'></a>
+                <div class='synopsis'>
+                  <span class='name'>inherited</span>
+                  <span class='arguments'>(subclass)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000019-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000019-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 17</span>&#x000A;17:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inherited</span>(<span class="ruby-identifier">subclass</span>)&#x000A;18:           <span class="ruby-identifier">subclass</span>.<span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-identifier">:@template</span>, <span class="ruby-value str">''</span>) &#x000A;19:           <span class="ruby-identifier">subclass</span>.<span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-identifier">:@count</span>, <span class="ruby-value">0</span>)&#x000A;20:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000022'>
+                <a name='M000022'></a>
+                <div class='synopsis'>
+                  <span class='name'>long</span>
+                  <span class='arguments'>(name)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000022-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000022-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 24</span>&#x000A;24:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">long</span>(<span class="ruby-identifier">name</span>);  <span class="ruby-identifier">add_type</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">:long</span>,  <span class="ruby-value str">'l'</span>, <span class="ruby-value">0</span>); <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000018'>
+                <a name='M000018'></a>
+                <div class='synopsis'>
+                  <span class='name'>new</span>
+                  <span class='arguments'>(bytes=nil)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000018-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000018-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 8</span>&#x000A; 8:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">bytes</span>=<span class="ruby-keyword kw">nil</span>)&#x000A; 9:         <span class="ruby-ivar">@values</span> = []&#x000A;10:         <span class="ruby-identifier">unpack</span>(<span class="ruby-identifier">bytes</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">nil?</span>&#x000A;11:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000023'>
+                <a name='M000023'></a>
+                <div class='synopsis'>
+                  <span class='name'>quad</span>
+                  <span class='arguments'>(name)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000023-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000023-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 25</span>&#x000A;25:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quad</span>(<span class="ruby-identifier">name</span>);  <span class="ruby-identifier">add_type</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">:quad</span>,  <span class="ruby-value str">'q'</span>, <span class="ruby-value">0</span>); <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000021'>
+                <a name='M000021'></a>
+                <div class='synopsis'>
+                  <span class='name'>short</span>
+                  <span class='arguments'>(name)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000021-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000021-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 23</span>&#x000A;23:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">short</span>(<span class="ruby-identifier">name</span>); <span class="ruby-identifier">add_type</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">:short</span>, <span class="ruby-value str">'s'</span>, <span class="ruby-value">0</span>); <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000024'>
+                <a name='M000024'></a>
+                <div class='synopsis'>
+                  <span class='name'>string</span>
+                  <span class='arguments'>(name, length)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000024-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000024-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 27</span>&#x000A;27:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">length</span>)&#x000A;28:           <span class="ruby-identifier">add_type</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">:string</span>, <span class="ruby-value str">'A'</span>, <span class="ruby-value str">''</span>, <span class="ruby-identifier">length</span>)&#x000A;29:         <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000027'>
+                <a name='M000027'></a>
+                <div class='synopsis'>
+                  <span class='name'>pack</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000027-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000027-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 60</span>&#x000A;60:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pack</span>&#x000A;61:         <span class="ruby-identifier">t</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">template</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-value str">'A'</span>, <span class="ruby-value str">'a'</span>)&#x000A;62:         <span class="ruby-ivar">@values</span>.<span class="ruby-identifier">pack</span>(<span class="ruby-identifier">t</span>)&#x000A;63:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000026'>
+                <a name='M000026'></a>
+                <div class='synopsis'>
+                  <span class='name'>unpack</span>
+                  <span class='arguments'>(str)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000026-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000026-source'>    <span class="ruby-comment cmt"># File lib/achoo/system/cstruct.rb, line 56</span>&#x000A;56:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unpack</span>(<span class="ruby-identifier">str</span>)&#x000A;57:         <span class="ruby-ivar">@values</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">template</span>)&#x000A;58:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

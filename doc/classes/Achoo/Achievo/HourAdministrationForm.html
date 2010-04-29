@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: Achoo::Achievo::HourAdministrationForm [Achoo --- The Achievo CLI]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          Achoo::Achievo::HourAdministrationForm
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/lib/achoo/achievo/hour_administration_form_rb.html">lib/achoo/achievo/hour_administration_form.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong><a href="Form.html">Achoo::Achievo::Form</a></strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M000064">new</a></li>
+            </ol>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000067">flexi_time</a></li>
+              <li><a href="#M000065">show_registered_hours_for_day</a></li>
+              <li><a href="#M000066">show_registered_hours_for_week</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M000064'>
+                <a name='M000064'></a>
+                <div class='synopsis'>
+                  <span class='name'>new</span>
+                  <span class='arguments'>(agent)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000064-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000064-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_administration_form.rb, line 8</span>&#x000A; 8:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">agent</span>)&#x000A; 9:         <span class="ruby-ivar">@agent</span> = <span class="ruby-identifier">agent</span>&#x000A;10:         <span class="ruby-ivar">@page</span>  = <span class="ruby-keyword kw">nil</span>&#x000A;11:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Public instance methods</h2>
+              <div class='method public-instance' id='method-M000067'>
+                <a name='M000067'></a>
+                <div class='synopsis'>
+                  <span class='name'>flexi_time</span>
+                  <span class='arguments'>(date)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000067-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000067-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_administration_form.rb, line 21</span>&#x000A;21:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">flexi_time</span>(<span class="ruby-identifier">date</span>)&#x000A;22:         <span class="ruby-identifier">set_page_to_view_for_date</span>(<span class="ruby-value str">'dayview'</span>, <span class="ruby-identifier">date</span>)&#x000A;23:         &#x000A;24:         <span class="ruby-ivar">@page</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/Flexi time balance: (-?\d+:\d+)/</span>)[<span class="ruby-value">1</span>]&#x000A;25:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000065'>
+                <a name='M000065'></a>
+                <div class='synopsis'>
+                  <span class='name'>show_registered_hours_for_day</span>
+                  <span class='arguments'>(date)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000065-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000065-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_administration_form.rb, line 13</span>&#x000A;13:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_registered_hours_for_day</span>(<span class="ruby-identifier">date</span>)&#x000A;14:         <span class="ruby-identifier">show_registered_hours</span>(<span class="ruby-identifier">date</span>, <span class="ruby-value str">'dayview'</span>, <span class="ruby-value str">'#rl_1 tr'</span>)&#x000A;15:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000066'>
+                <a name='M000066'></a>
+                <div class='synopsis'>
+                  <span class='name'>show_registered_hours_for_week</span>
+                  <span class='arguments'>(date)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000066-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000066-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_administration_form.rb, line 17</span>&#x000A;17:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_registered_hours_for_week</span>(<span class="ruby-identifier">date</span>)&#x000A;18:         <span class="ruby-identifier">show_registered_hours</span>(<span class="ruby-identifier">date</span>, <span class="ruby-value str">'weekview'</span>, <span class="ruby-value str">'//form[@name=&quot;weekview&quot;]/following::table/tr'</span>)&#x000A;19:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: Achoo::VCS [Achoo --- The Achievo CLI]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          Achoo::VCS
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/lib/achoo/vcs/git_rb.html">lib/achoo/vcs/git.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/lib/achoo/vcs/subversion_rb.html">lib/achoo/vcs/subversion.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/lib/achoo/vcs_rb.html">lib/achoo/vcs.rb</a>
+          </li>
+          <li>
+            <a class='show' href='#' onclick='this.parentNode.parentNode.className += " expanded"; this.parentNode.removeChild(this); return false'>show all</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong>Object</strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M000115">factory</a></li>
+              <li><a href="#M000116">print_logs_for</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='class-list'>
+              <h2>Classes and Modules</h2>
+              Class <a href="VCS/Git.html" class="link">Achoo::VCS::Git</a><br />
+              Class <a href="VCS/Subversion.html" class="link">Achoo::VCS::Subversion</a><br />
+            </div>
+            <div id='constants-list'>
+              <h2>Constants</h2>
+              <div class='name-list'>
+                <table summary='Constants'>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>LINE_LENGTH</td>
+                    <td>=</td>
+                    <td class='context-item-value'>80</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M000115'>
+                <a name='M000115'></a>
+                <div class='synopsis'>
+                  <span class='name'>factory</span>
+                  <span class='arguments'>(dir)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000115-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000115-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs.rb, line 11</span>&#x000A;11:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-identifier">dir</span>)&#x000A;12:       <span class="ruby-identifier">klass</span> = [<span class="ruby-constant">Git</span>, <span class="ruby-constant">Subversion</span>].<span class="ruby-identifier">find</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>&#x000A;13:         <span class="ruby-identifier">k</span>.<span class="ruby-identifier">repository?</span>(<span class="ruby-identifier">dir</span>)&#x000A;14:       <span class="ruby-keyword kw">end</span>&#x000A;15:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">nil?</span>&#x000A;16:       <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dir</span>)&#x000A;17:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000116'>
+                <a name='M000116'></a>
+                <div class='synopsis'>
+                  <span class='name'>print_logs_for</span>
+                  <span class='arguments'>(date, vcs_dirs, io=$stdout)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000116-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000116-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs.rb, line 19</span>&#x000A;19:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">print_logs_for</span>(<span class="ruby-identifier">date</span>, <span class="ruby-identifier">vcs_dirs</span>, <span class="ruby-identifier">io</span>=<span class="ruby-identifier">$stdout</span>)&#x000A;20:       <span class="ruby-identifier">vcs_dirs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>&#x000A;21:         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{dir}/*/&quot;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>&#x000A;22:           <span class="ruby-identifier">vcs</span> = <span class="ruby-identifier">factory</span>(<span class="ruby-identifier">dir</span>)&#x000A;23:           <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">vcs</span>.<span class="ruby-identifier">nil?</span>&#x000A;24: &#x000A;25:           <span class="ruby-identifier">log</span> = <span class="ruby-identifier">vcs</span>.<span class="ruby-identifier">log_for</span>(<span class="ruby-identifier">date</span>)&#x000A;26:           <span class="ruby-identifier">print_log</span>(<span class="ruby-identifier">log</span>, <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">io</span>)&#x000A;27:         <span class="ruby-keyword kw">end</span>&#x000A;28:       <span class="ruby-keyword kw">end</span>&#x000A;29:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

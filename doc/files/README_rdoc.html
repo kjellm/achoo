@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>File: README.rdoc [Achoo --- The Achievo CLI]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='file' id='wrapper'>
+      <div class='header'>
+        <div class='name'>README.rdoc</div>
+        <div class='paths'>
+          README.rdoc
+        </div>
+        <div class='last-update'>
+          Last Update:
+          <span class='datetime'>Thu Apr 22 21:13:45 +0200 2010</span>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <h1><a href="../classes/Achoo.html">Achoo</a> - the Achivo CLI</h1>
+            <p>
+            <a href="../classes/Achoo.html">Achoo</a> is a command line interface for
+            <a href="http://achievo.org">Achievo</a>. It works by scraping achievo web
+            pages and sending HTTP requests.
+            </p>
+            <h2>INSTALL</h2>
+            <p>
+            These instructions are for installing on Ubuntu 9.10 (Karmic Koala), but
+            they will probably work with minor adjustments on other systems as well.
+            </p>
+            <ul>
+            <li>Make sure that you have ruby and rubygems installed together with
+            achoo&#8217;s non-gem requirements:
+            
+            <pre>sudo aptitude install ruby rubygems ruby1.8-dev libxml2 \&#x000A;  libxml2-dev libxslt1 libxslt1-dev libopenssl-ruby</pre>
+            </li>
+            <li>Install <a href="../classes/Achoo.html">Achoo</a>
+            
+            <pre>gem install achoo</pre>
+            </li>
+            <li>Make sure that ~/.gem/ruby/1.8/bin is in your PATH environment variable
+            
+            <pre>if echo $PATH | grep -vq ~/.gem/ruby/1.8/bin; then&#x000A;  export PATH=~/.gem/ruby/1.8/bin:$PATH&#x000A;  echo 'export PATH=~/.gem/ruby/1.8/bin:$PATH' &gt;&gt; ~/.bashrc&#x000A;fi</pre>
+            </li>
+            </ul>
+            <h3>TRACKING THE LATEST CHANGES</h3>
+            <p>
+            Requires git
+            </p>
+            <pre>sudo aptitude install git-core</pre>
+            <p>
+            Then
+            </p>
+            <pre>git clone git://github.com/kjellm/achoo.git</pre>
+            <p>
+            Or if you already has cloned achoo, update with
+            </p>
+            <pre>git pull</pre>
+            <p>
+            Generate gem and install it
+            </p>
+            <pre>gem build achoo.gemspec&#x000A;gem install achoo-XXX.gem</pre>
+            <h2>USAGE</h2>
+            <p>
+            First, make sure that language in Achievo&#8217;s user preferences is
+            English and theme is &#8216;no value&#8217;.
+            </p>
+            <p>
+            Create ~/.achoo from the following template (YAML) and edit it:
+            </p>
+            <pre>---&#x000A;:url      : 'https://example.com/achievo/'&#x000A;:user     : 'joe'&#x000A;:password : 'geheim'&#x000A;:vcs_dirs : [&quot;/home/joe/projects&quot;],&#x000A;:ical :&#x000A;  - :host : &quot;foo.example.com&quot;&#x000A;    :port : 443&#x000A;    :path : &quot;/joe/Calendar&quot;&#x000A;    :user : &quot;joe&quot;&#x000A;    :pass : 'GeHeIm'</pre>
+            <p>
+            Then
+            </p>
+            <pre>chmod 0600 ~/.achoo</pre>
+            <p>
+            You can then run achoo from a shell with the achoo command
+            </p>
+            <pre>achoo</pre>
+            <p>
+            For more usage information, see <a
+            href="http://oierud.name/~kjellm/bliki/AchooTheAchievoCLI.html">this</a>
+            blog post.
+            </p>
+            <h2>SET UP DEVELOPMENT ENVIRONMENT</h2>
+            <p>
+            To run the tests you need to install some additional gems:
+            </p>
+            <pre>rake setup</pre>
+            <h2>BUGS</h2>
+            <p>
+            Report bugs to <a
+            href="http://github.com/kjellm/achoo/issues">github.com/kjellm/achoo/issues</a>
+            </p>
+            <h2>AUTHOR</h2>
+            <p>
+            Kjell-Magne Øierud <kjellm AT acm DOT org>
+            </p>
+            <h2>LICENSE</h2>
+            <p>
+            This computer program is distributed under the GPL. Please see the COPYING
+            file.
+            </p>
+          </div>
+          <div id='section'>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>
