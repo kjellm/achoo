@@ -8,13 +8,17 @@ module Achoo
     autoload :Menu,  'achoo/term/menu'
     autoload :Table, 'achoo/term/table'
 
-    def self.bold(text); "\e[1m#{text}\e[0m"; end
-    
-    def self.underline(text); "\e[4m#{text}\e[0m"; end
+    BOLD      = 1
+    UNDERLINE = 4
+    RED       = 31
+    YELLOW    = 33
 
-    def self.warn(text); "\e[1;33m#{text}\e[0m"; end
+    def self.effect(code, text); "\e[#{code}m#{text}\e[0m"; end
 
-    def self.fatal(text); "\e[1;31m#{text}\e[0m"; end
+    def self.bold(text);      effect(BOLD,      text); end
+    def self.underline(text); effect(UNDERLINE, text); end
+    def self.warn(text);      effect(YELLOW,    text); end
+    def self.fatal(text);     effect(RED,       text); end
 
     def self.password
       `stty -echo`
