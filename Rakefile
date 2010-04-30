@@ -115,6 +115,7 @@ namespace 'doc' do
     require 'hanna/rdoctask'
   rescue LoadError => e
     warn "Package hanna recommended for better rdoc output."
+    require 'rake/rdoctask'
   end
   Rake::RDocTask.new do |rd|
     rd.title = 'Achoo --- The Achievo CLI'
