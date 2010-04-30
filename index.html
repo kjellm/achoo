@@ -50,7 +50,16 @@ a {
     float: right;
 }
 pre {
-    background: #000; color: #fff; padding: 15px;
+    background: #000;
+    color: #fff;
+    padding: 15px;
+}
+pre a {
+    color: inherit;
+    text-decoration: none;
+}
+pre a:hover {
+    text-decoration: underline;
 }
 hr {
     border: 0;
@@ -84,15 +93,28 @@ hr {
 
       <div class="description">
         A command line interface for the <a href="http://achievo.org">Achievo time registration system</a>
+
       </div>
 
-      <h2>Developer resources</h2>
+      <pre>
+┌──────────────────────────────────────────┐
+│            Welcome to Achoo!             │▒
+└──────────────────────────────────────────┘▒
+  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+TOC:
+ 1. <a href="#dev-resources">Developer resources</a>
+ 2. <a href="#download">Download</a>
+&gt;
+      </pre>
+
+      <h2><a name="#dev-resources">Developer resources</a></h2>
       <ul>
         <li><a href="doc/">API documentation</a></li>
         <li><a href="#">Metrics</a></li>
       </ul>
 
-      <h2>Download</h2>
+      <h2><a name="#download">Download</a></h2>
       <p>
         You can download this project in either
         <a href="http://github.com/kjellm/achoo/zipball/master">zip</a> or
