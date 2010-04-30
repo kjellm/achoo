@@ -1,0 +1,4378 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <meta content='en' http-equiv='Content-Language' />
+    <title>metrics</title>
+    <style>
+    /*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+    /* --------------------------------------------------------------
+
+   buttons.css
+   * Gives you some great CSS-only buttons.
+
+   Created by Kevin Hale [particletree.com]
+   * particletree.com/features/rediscovering-the-button-element
+
+   See Readme.txt in this folder for instructions.
+
+-------------------------------------------------------------- */
+
+button {
+  display:block;
+  float:left;
+  margin:0 0.583em 0.667em 0;
+  padding:5px 10px 5px 7px;   /* Links */
+
+  border:1px solid #dedede;
+  border-top:1px solid #eee;
+  border-left:1px solid #eee;
+
+  background-color:#f5f5f5;
+  font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+  font-size:100%;
+  line-height:130%;
+  text-decoration:none;
+  font-weight:bold;
+  color:#565656;
+  cursor:pointer;
+}
+button {
+  width:auto;
+  overflow:visible;
+  padding:4px 10px 3px 7px;   /* IE6 */
+}
+button[type] {
+  padding:4px 10px 4px 7px;   /* Firefox */
+  line-height:17px;           /* Safari */
+}
+*:first-child+html button[type] {
+  padding:4px 10px 3px 7px;   /* IE7 */
+}
+button img {
+  margin:0 3px -3px 0 !important;
+  padding:0;
+  border:none;
+  width:16px;
+  height:16px;
+  float:none;
+}
+
+
+/* Button colors
+-------------------------------------------------------------- */
+
+/* Standard */
+button:hover {
+  background-color:#dff4ff;
+  border:1px solid #c2e1ef;
+  color:#336699;
+}
+
+/* Positive */
+body .positive {
+  color:#529214;
+}
+button.positive:hover {
+  background-color:#E6EFC2;
+  border:1px solid #C6D880;
+  color:#529214;
+}
+
+/* Negative */
+body .negative {
+  color:#d12f19;
+}
+button.negative:hover {
+  background:#fbe3e4;
+  border:1px solid #fbc2c4;
+  color:#d12f19;
+}
+
+    html {
+  background-color: #e0e0e0; }
+
+body {
+  font-size: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  color: #333333; }
+
+a {
+  color: #ed1556;
+  text-decoration: none; }
+  a:hover {
+    color: #ffffff;
+    background-color: #ed1556; }
+
+#header, #content, #footer {
+  margin: 0 auto;
+  background: #eeeeee;
+  padding: 0 2em;
+  z-index: 0;
+  position: relative;
+  font-size: 1em; }
+
+#header {
+  background: #ffffff; }
+  #header h1 {
+    font-weight: bold;
+    font-size: 1.5em; }
+  #header address.watermark {
+    position: absolute;
+    font-weight: bold;
+    right: 3em;
+    top: 0;
+    font-size: .75em;
+    color: #cccccc; }
+    #header address.watermark a {
+      color: #cccccc;
+      font-weight: bold;
+      font-size: 2em; }
+      #header address.watermark a:hover {
+        background: transparent;
+        color: #aaaaaa; }
+
+#content {
+  padding-top: 1em;
+  padding-bottom: 2em; }
+  #content strong {
+    font-weight: bold; }
+  #content em {
+    font-style: italic; }
+  #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
+    color: #4e4e4e; }
+  #content h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: .75em;
+    padding: .25em 0;
+    line-height: 1.2;
+    border-bottom: 1px solid #c0c0c0; }
+  #content h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 1em 0 .2em; }
+  #content h3 {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin: .25em 0; }
+  #content h4, #content h5, #content h6 {
+    font-weight: bold;
+    margin-top: .5em; }
+  #content code, #content pre, #content textarea, #content input {
+    font-family: Monaco, Deja Vu Sans Mono, Inconsolata, Consolas, monospace; }
+  #content form p {
+    margin-top: 1em;
+    position: relative; }
+    #content form p.checkbox label {
+      margin-top: 0 !important; }
+  #content form input.text, #content form textarea {
+    width: 30em;
+    padding: .2em .4em;
+    color: #4e4e4e; }
+  #content form input.text {
+    height: 1.4em; }
+  #content form label {
+    float: left;
+    display: block;
+    margin-top: .5em;
+    width: 8em;
+    margin-right: .75em; }
+  #content form .with_errors label {
+    background: red;
+    color: white;
+    position: relative;
+    top: -.7em; }
+  #content form .with_errors.required label {
+    position: static;
+    margin-right: .25em;
+    padding: 0 .2em; }
+  #content form .with_errors input, #content form .with_errors textarea {
+    border: 2px solid #f22;
+    background: #fee;
+    color: #222222; }
+  #content form .required label {
+    float: none;
+    display: block;
+    width: auto;
+    position: relative;
+    font-weight: bold;
+    margin-top: 1em;
+    text-indent: -.65em; }
+    #content form .required label:before {
+      content: "* ";
+      color: #ed1556; }
+  #content form .required input.text {
+    width: 25.6em;
+    font-size: 24px;
+    font-weight: bold; }
+  #content form .normal {
+    margin-top: 2em; }
+  #content form h2.notifier label {
+    float: none;
+    width: auto;
+    margin-right: 0; }
+    #content form h2.notifier label .warning {
+      font-size: .5em;
+      font-weight: normal;
+      color: #999999; }
+  #content form fieldset {
+    padding-bottom: 1em;
+    margin-left: 1.35em;
+    border-bottom: 1px solid #c0c0c0;
+    margin-bottom: 1em; }
+    #content form fieldset h3 {
+      margin-top: 1em;
+      margin-bottom: 0; }
+    #content form fieldset p.normal {
+      margin-top: 1em; }
+    #content form fieldset p label {
+      width: 6.7em; }
+  #content form p.submit {
+    margin-top: 2em; }
+    #content form p.submit:after {
+      display: block;
+      clear: both;
+      float: none;
+      content: ".";
+      text-indent: -9999em;
+      text-align: left; }
+    #content form p.submit.destroy button,     #content form p.submit.manual-build button {
+      float: none;
+      display: inline; }
+    #content form p.submit.manual-build button {
+      margin-right: 0; }
+  #content #build form, #content #last_build form {
+    font-size: .75em; }
+    #content #build form p.submit,     #content #last_build form p.submit {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      right: .5em;
+      top: 1.25em; }
+  #content .blank_slate p,   #content .error p {
+    position: relative;
+    top: .3em; }
+  #content .blank_slate h1,   #content .error h1 {
+    border-width: 0;
+    margin: 0;
+    padding: 0; }
+    #content .blank_slate h1 button,     #content .error h1 button {
+      float: none;
+      border: 0 none;
+      background: transparent;
+      display: inline;
+      color: #ed1556;
+      padding: 0.25em 0;
+      margin: 0; }
+      #content .blank_slate h1 button:hover,       #content .error h1 button:hover {
+        background: #ed1556;
+        color: #ffffff; }
+  #content .error dt {
+    margin-top: 1.4em;
+    margin-bottom: .3em;
+    font-size: 1.75em;
+    font-family: Georgia, Times New Roman, serif; }
+  #content .error dd {
+    line-height: 1.4; }
+  #content .error .backtrace {
+    margin: 1em 0;
+    overflow: scroll;
+    height: 30em;
+    border: 1px solid #c0c0c0;
+    line-height: 1.6; }
+  #content #projects {
+    margin: 1em 0 2em;
+    border-top: 1px solid #c0c0c0; }
+    #content #projects li {
+      position: relative;
+      border-bottom: 1px solid #c0c0c0; }
+      #content #projects li.odd {
+        background: #e6e6e6; }
+      #content #projects li.building {
+        background: transparent url(/spinner.gif) no-repeat scroll right; }
+      #content #projects li a {
+        font-size: 2em;
+        padding: .25em;
+        line-height: 1.2;
+        font-weight: bold;
+        display: block; }
+        #content #projects li a.success {
+          color: #337022; }
+        #content #projects li a.failed {
+          color: #ff1100; }
+      #content #projects li .meta {
+        position: absolute;
+        right: .6em;
+        top: 1.5em;
+        font-size: 0.8em;
+        color: #999999;
+        text-align: right; }
+      #content #projects li.building .meta {
+        right: 1.6em; }
+      #content #projects li.success .meta {
+        color: #337022; }
+      #content #projects li.failed .meta {
+        color: #ff1100; }
+  #content #previous_builds li a {
+    display: block;
+    padding: .25em;
+    margin-bottom: .25em;
+    border-width: 1px;
+    border-style: solid; }
+    #content #previous_builds li a strong {
+      font-size: 1.3em; }
+    #content #previous_builds li a .attribution {
+      font-size: .9em; }
+  #content #projects li.success a,   #content #previous_builds li.success a {
+    background-color: #bbf8aa;
+    border-color: #99d688;
+    color: #337022; }
+    #content #projects li.success a .attribution,     #content #previous_builds li.success a .attribution {
+      color: #77b466; }
+    #content #projects li.success a:hover,     #content #previous_builds li.success a:hover {
+      background-color: #ddffcc; }
+  #content #projects li.failed a,   #content #previous_builds li.failed a {
+    background-color: #ffbbaa;
+    border-color: #dd9988;
+    color: #ff1100; }
+    #content #projects li.failed a .attribution,     #content #previous_builds li.failed a .attribution {
+      color: #bb7766; }
+    #content #projects li.failed a:hover,     #content #previous_builds li.failed a:hover {
+      background-color: #ffddcc; }
+  #content #build, #content #last_build {
+    position: relative; }
+    #content #build h1, #content #build blockquote,     #content #last_build h1, #content #last_build blockquote {
+      border-width: 0 1px;
+      border-style: solid; }
+    #content #build h1,     #content #last_build h1 {
+      border-top-width: 1px; }
+    #content #build blockquote,     #content #last_build blockquote {
+      bottom-bottom-width: 1px;
+      line-height: 1.4; }
+    #content #build.success h1, #content #build.success blockquote,     #content #last_build.success h1, #content #last_build.success blockquote {
+      background-color: #bbf8aa;
+      border-color: #99d688 #ccffbb #ccffbb #99d688; }
+    #content #build.success h1,     #content #last_build.success h1 {
+      color: #337022; }
+    #content #build.success .meta,     #content #last_build.success .meta {
+      color: #77b466; }
+    #content #build.failed h1, #content #build.failed blockquote,     #content #last_build.failed h1, #content #last_build.failed blockquote {
+      background-color: #ffbbaa;
+      border-color: #dd9988 #ffccbb #ffccbb #dd9988; }
+    #content #build.failed h1,     #content #last_build.failed h1 {
+      color: #ff1100; }
+    #content #build.failed .meta,     #content #last_build.failed .meta {
+      color: #bb7766; }
+    #content #build h1,     #content #last_build h1 {
+      margin-top: .5em;
+      margin-bottom: 0;
+      padding: .25em;
+      color: #337022; }
+    #content #build blockquote,     #content #last_build blockquote {
+      padding: .75em;
+      margin-bottom: 2em; }
+      #content #build blockquote .meta,       #content #last_build blockquote .meta {
+        margin-top: 1em;
+        display: block;
+        font-size: .9em; }
+    #content #build pre.output,     #content #last_build pre.output {
+      background: #111;
+      color: #fff;
+      padding: .5em;
+      overflow: auto;
+      max-height: 50em;
+      font-size: .825em; }
+      #content #build pre.output .color30,       #content #last_build pre.output .color30 {
+        color: #333; }
+      #content #build pre.output .color31,       #content #last_build pre.output .color31 {
+        color: #e33; }
+      #content #build pre.output .color32,       #content #last_build pre.output .color32 {
+        color: #3e3; }
+      #content #build pre.output .color33,       #content #last_build pre.output .color33 {
+        color: #ee3; }
+      #content #build pre.output .color34,       #content #last_build pre.output .color34 {
+        color: #33e; }
+      #content #build pre.output .color35,       #content #last_build pre.output .color35 {
+        color: #e3e; }
+      #content #build pre.output .color36,       #content #last_build pre.output .color36 {
+        color: #3ee; }
+      #content #build pre.output .color37,       #content #last_build pre.output .color37 {
+        color: #fff; }
+  #content #push_path {
+    display: block;
+    margin-top: 1em;
+    margin-left: 2em; }
+
+a.success {
+  color: #bbf8aa; }
+  a.success:hover {
+    background-color: #bbf8aa;
+    color: white; }
+a.failed {
+  color: #ffbbaa; }
+  a.failed:hover {
+    background-color: #ffbbaa;
+    color: white; }
+
+#footer {
+  padding: 1.5em 2.5em;
+  border-top: 1px solid #ccc;
+  font-size: .8em;
+  color: #666;
+  text-align: right; }
+  #footer strong {
+    font-weight: bold; }
+    
+    table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: 1px solid #666;
+  background: #fff;
+  margin-bottom: 20px;
+}
+
+table tr.light {
+   background: #fff;
+}
+
+table tr.dark {
+  background: #f9f9f9;
+}
+
+table tr:hover {
+  background: #FFFFC0;
+}
+
+table td, table th {
+  padding: 4px;
+  font-size: 11px;
+}
+table th {
+  text-align: center;
+  color: #337022;
+  background: #DDFFCC;
+  font-weight: bold;
+  border: #99D688 1px solid;
+}
+
+table td {
+  border: #d0d0d0 1px solid;
+}
+
+table td.score {
+  text-align: right;
+}
+
+.warning {
+  background: yellow;
+}
+.rcov_code td {
+  border-bottom: 1px solid #ddd ;
+  padding: 0;
+  margin: 0;
+}
+.rcov_code tr {
+  border: 0px;
+  padding:0px;
+  margin: 0px;
+}
+.rcov_code pre {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+.rcov_run {}
+.rcov_not_run {
+  background-color: #d88;
+}
+.rcov_run a, .rcov_not_run a {
+  text-decoration: none;
+}
+.rcov_run a {
+  color: #333;
+}
+.rcov_not_run a {
+  color: #000;
+}
+.rcov_overflow {
+  overflow: auto;
+  font-size: 50%;
+}
+
+.bluff-tooltip {
+	background: #fff;
+	border: 1px solid #d1edf5;
+	padding: 8px 8px 6px;
+}
+.bluff-tooltip .color {
+	display: block;
+	height: 4px;
+	width: 30px;
+	margin: 0 0 4px;
+	overflow: hidden;
+}
+.bluff-tooltip .data {
+	font-weight: bold;
+}
+
+    </style>
+    <link REL="SHORTCUT ICON" HREF="/favicon.ico">
+    <script language="javascript" src="js-class.js" type="text/javascript"></script>
+    <script language="javascript" src="bluff-min.js" type="text/javascript"></script>
+    <script language="javascript" src="excanvas.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id='header'>
+      <h1><a href="/">metrics</a> | <a href="index.html">achoo</a></h1>
+      <address class='watermark'>
+        built with
+        <a href='http://metric-fu.rubyforge.org/'>metric-fu</a>
+      </address>
+    </div>
+    <div id='content'>
+      <h3>Rcov Code Coverage Results</h3>
+
+<p>C0 code coverage information.</p>
+
+
+
+<canvas id="graph"></canvas>
+<script language="javascript" src="rcov.js?1272636370" type="text/javascript"></script>
+
+
+<p>Total Coverage: 83.2% </p>
+<table>
+  <tr>
+    <th>File Path</th>
+    <th>Percent run</th>
+  </tr>
+  
+  
+    <tr>
+      <td><a href="#lib_achoo_term_rb">lib/achoo/term.rb</a></td>
+      <td>40</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_ui_date_chooser_rb">lib/achoo/ui/date_chooser.rb</a></td>
+      <td>58</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_awake_rb">lib/achoo/awake.rb</a></td>
+      <td>85</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_term_menu_rb">lib/achoo/term/menu.rb</a></td>
+      <td>91</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_term_table_rb">lib/achoo/term/table.rb</a></td>
+      <td>93</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_system_cstruct_rb">lib/achoo/system/cstruct.rb</a></td>
+      <td>94</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_temporal_timespan_rb">lib/achoo/temporal/timespan.rb</a></td>
+      <td>94</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_extensions_rb">lib/achoo/extensions.rb</a></td>
+      <td>100</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_ui_rb">lib/achoo/ui.rb</a></td>
+      <td>100</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_rb">lib/achoo.rb</a></td>
+      <td>100</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_system_rb">lib/achoo/system.rb</a></td>
+      <td>100</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_system_log_entry_rb">lib/achoo/system/log_entry.rb</a></td>
+      <td>100</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_temporal_rb">lib/achoo/temporal.rb</a></td>
+      <td>100</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_temporal_open_timespan_rb">lib/achoo/temporal/open_timespan.rb</a></td>
+      <td>100</td>
+    </tr>
+    
+  
+</table>
+
+
+  <h2 id="lib_achoo_term_rb"> lib/achoo/term.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   # encoding: utf-8</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   require 'achoo'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>     class Term</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       autoload :Menu,  'achoo/term/menu'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       autoload :Table, 'achoo/term/table'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       BOLD      = 1</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       UNDERLINE = 4</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       RED       = 31</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       YELLOW    = 33</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.effect(code, text); "\e[#{code}m#{text}\e[0m"; end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.bold(text);      effect(BOLD,      text); end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.underline(text); effect(UNDERLINE, text); end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.warn(text);      effect(YELLOW,    text); end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.fatal(text);     effect(RED,       text); end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.password</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         `stty -echo`</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         pas = ask('Password')</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         `stty echo`</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         pas</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.ask(question='')</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         answer = nil</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         loop do</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           print bold("#{question}> ")</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           $stdout.flush</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           answer = gets</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           # Answer is nil if user hits C-d on an empty input</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           if answer.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>             puts</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>             exit</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           answer.strip! unless answer.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           # FIX move this to achoo.rb?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           unless $stdin.tty?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>             puts answer</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           break unless a_little_something(answer)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         answer</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.choose(question, entries, special=nil, additional_valid_answers=[])</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         menu = Menu.new(question, entries, special, additional_valid_answers)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         menu.print_ask_and_validate</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       private</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.a_little_something(answer)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         return false if answer.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         case answer.downcase</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         when 'bless you!', 'gesundheit!'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           puts "Thank you!"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           return true</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>           return false</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       def self.shadowbox(text)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         x =  "┌──────────────────────────────────────────┐ \n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         x << "│ #{text.center(40)} " <<                 "│▒\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         x << "└──────────────────────────────────────────┘▒\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         x << "  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>         x</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_ui_date_chooser_rb"> lib/achoo/ui/date_chooser.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>   require 'achoo/term'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>   require 'achoo/ui'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>     module UI</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>       class DateChooser</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         PROMPT = "Date ([today] | ?)"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         FORMAT = "        today | (+|-)n | [[[YY]YY]-[M]M]-[D]D"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         def choose</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           loop do</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             answer = Term::ask PROMPT </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             begin</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>               date = handle_answer(answer)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>               return date if date</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             rescue ArgumentError => e</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>               puts e</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         def parse_date(date_str, base=Date.today)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           raise ArgumentError.new('Invalid date') if date_str.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           # Today (default)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           if date_str == 'today' || date_str.empty?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             return Date.today</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           # Base offset</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           case date_str.chars.first</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           when '-'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             return base - Integer(date_str[1..-1])</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           when '+'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             return base + Integer(date_str[1..-1])</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           # </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           date = date_str.split('-').collect {|d| d.to_i}</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           case date.length</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           when 1</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             return Date.civil(base.year, base.month, *date)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           when 2</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             return Date.civil(base.year, *date)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           when 3</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             date[0] += 2000 if date[0] < 100</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             return Date.civil(*date)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           raise ArgumentError.new('Invalid date')</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         private</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         def handle_answer(answer)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           if answer == '?'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             print_help_message</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             return false</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>             return parse_date(answer)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         def print_help_message   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           puts "Accepted formats:"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           puts date_format_help_string</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           puts</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           system 'cal -3m'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         def date_format_help_string</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>           FORMAT</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_awake_rb"> lib/achoo/awake.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   require 'achoo'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   require 'achoo/extensions'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   require 'achoo/system'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   require 'achoo/temporal'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>     class Awake</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       def initialize</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         log = wtmp.merge!(suspend).reverse</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         log.unshift(System::LogEntry.new(Time.now, :now))</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         @sessions = sessions(log)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       def at(date)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         span = Temporal::Timespan.new(date, date+1)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         @sessions.each do |s|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           print_session(s, span) if s[0].overlaps?(span)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>     </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       def all</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         @sessions.each do |s|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           print_session(s)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       private</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       def print_session(s, span=nil)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         puts "Powered on: " << s[0].to_s</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         s[1].each do |t|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           puts "  Awake: " << t.to_s if span.nil? || t.overlaps?(span)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       def sessions(log)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         sessions = []</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         group(log).each do |g|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           raise "Session doesn't begin with a boot event" unless g.last.event == :boot</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           session = []</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           case g.first.event</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           when :now, :halt, :suspend</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             # We know the end of the session</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             session << Temporal::Timespan.new(g.last.time, g.first.time)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           else # :awake, :boot</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             # We don't know the end of the session</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             session << Temporal::OpenTimespan.new(g.last.time, g.first.time)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             g.unshift(System::LogEntry.new(-1, :crash))</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           raise "Session must consist of even number of events. Found #{g.length}" unless g.length.even?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           session << []</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           unless g.length == 2</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             i = 0</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             while i < g.length-1</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>               klass = g[i].event == :crash ? Temporal::OpenTimespan : Temporal::Timespan</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>               session[1] << klass.new(g[i+1].time, g[i].time)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>               i += 2</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           sessions << session</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         sessions</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       def suspend</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         System::PMSuspend.new</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       def wtmp</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         log     = System::Wtmp.new</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         new_log = []</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         log.each do |entry|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           if entry.boot_event?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             new_log << System::LogEntry.new(entry.time, :boot)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           elsif entry.halt_event?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             new_log << System::LogEntry.new(entry.time, :halt)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         new_log</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       def group(log)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         grouped_log = []</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         group = nil</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         log.each do |i|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           if i.event == :halt || i.event == :now</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             group = [i]</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             if group.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>               # Crashed</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>               group = []</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             group << i</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             if i.event == :boot</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>               grouped_log << group</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>               group = nil</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>             end    </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>         grouped_log</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_term_menu_rb"> lib/achoo/term/menu.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   require 'achoo/term'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>     class Term</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>       class Menu</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         def initialize(question, entries, special=nil, additional_valid_answers=[])</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           @question = question</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           @entries  = entries</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           @special  = special</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           @valid = {}</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           @valid['0'] = true unless @special.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           1.upto(@entries.length).each {|i| @valid[i.to_s] = true}</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           additional_valid_answers.each {|a| @valid[a] = true}</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         def print_ask_and_validate()</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           return nil if @entries.empty?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           print_menu()</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           return '1' if only_one_option?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           loop do</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>             answer = Term.ask(@question)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>             if @valid[answer]</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>               return answer</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>             else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>               puts "Invalid value. Must be one of " << @valid.keys.sort.join(',')</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>             end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         private</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         def print_menu</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           format = menu_item_format</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           @entries.each_with_index do |entry, i|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>             printf format, i+1, entry</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           printf format, 0, @special unless @special.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         def only_one_option?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           @entries.length == 1 && @special.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         def menu_item_format</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           max_digits = Math.log10(@entries.length).floor + 1</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>           " %#{max_digits}d. %s\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_term_table_rb"> lib/achoo/term/table.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # encoding: utf-8</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   require 'achoo/term'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # Unicode box drawing characters</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # http://en.wikipedia.org/wiki/Box-drawing_characters</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #      0 1 2 3 4 5 6 7 8 9 A B C D E F</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # 2500 ─ ━ │ ┃ ┄ ┅ ┆ ┇ ┈ ┉ ┊ ┋ ┌ ┍ ┎ ┏</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # 2510 ┐ ┑ ┒ ┓ └ ┕ ┖ ┗ ┘ ┙ ┚ ┛ ├ ┝ ┞ ┟</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # 2520 ┠ ┡ ┢ ┣ ┤ ┥ ┦ ┧ ┨ ┩ ┪ ┫ ┬ ┭ ┮ ┯</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # 2530 ┰ ┱ ┲ ┳ ┴ ┵ ┶ ┷ ┸ ┹ ┺ ┻ ┼ ┽ ┾ ┿</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # 2540 ╀ ╁ ╂ ╃ ╄ ╅ ╆ ╇ ╈ ╉ ╊ ╋ ╌ ╍ ╎ ╏</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # 2550 ═ ║ ╒ ╓ ╔ ╕ ╖ ╗ ╘ ╙ ╚ ╛ ╜ ╝ ╞ ╟</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # 2560 ╠ ╡ ╢ ╣ ╤ ╥ ╦ ╧ ╨ ╩ ╪ ╫ ╬ ╭ ╮ ╯</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   # 2570 ╰ ╱ ╲ ╳ ╴ ╵ ╶ ╷ ╸ ╹ ╺ ╻ ╼ ╽ ╾ ╿</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>     class Term</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>       class Table</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         def initialize(headers, data_rows, summaries=nil)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           @headers   = headers</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           @data_rows = data_rows</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           @summaries = summaries</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         def print(io=$stdout)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           lengths   = calculate_table_cell_widths</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           format    = build_format(lengths)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           headers   = center_table_headers(lengths)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           separator = lengths.map {|length| '─'*(length+2)}</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>       </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           io.print '┌' << separator.join('┬') << "┐\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           io.print '│ ' << headers.join(' │ ') << " │\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           io.print '├' << separator.join('┼') << "┤\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           @data_rows.each {|r| io.printf format, *r }</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           unless @summaries.nil? || @data_rows.length == 1</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             io.print '├' << separator.join('┼') << "┤\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             io.printf format, *@summaries</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           io.print '└' << separator.join('┴') << "┘\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         private</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         def center_table_headers(lengths)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           headers = @headers.dup</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           lengths.each_with_index do |len,i|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             headers[i] = headers[i].center(len)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           headers</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         def calculate_table_cell_widths</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           lengths = []</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           @headers.each_with_index do |h, i|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             lengths[i] = h.length</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           @data_rows.each do |r|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             r.each_with_index do |d, i|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>               lengths[i] = [d.length, lengths[i]].max</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           lengths</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         def build_format(lengths)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           is_column_left_justified = Array.new(lengths.count)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           is_column_left_justified.fill(false)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>       </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           @data_rows.each do |r|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             r.each_index do |c|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>               if !r[c].strip.empty? && !r[c].match(/^\d+[:.,]?\d*$/)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>                 is_column_left_justified[c] = true</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>               end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>       </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           lengths.reduce('│') do |f, l|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             justify = is_column_left_justified.shift ? '-' : ''</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>             f + " %#{justify}#{l}s │"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>           end + "\n"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_system_cstruct_rb"> lib/achoo/system/cstruct.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   require 'achoo/system'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>     module System</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>       class CStruct</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>         def initialize(bytes=nil)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           @values = []</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           unpack(bytes) unless bytes.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>         class << self</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           attr :template</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           def inherited(subclass)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             subclass.instance_variable_set(:@template, '') </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             subclass.instance_variable_set(:@count, 0)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           end </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           def char(name);  add_type(name, :char,  'c', 0); end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           def short(name); add_type(name, :short, 's', 0); end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           def long(name);  add_type(name, :long,  'l', 0); end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           def quad(name);  add_type(name, :quad,  'q', 0); end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           def string(name, length)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             add_type(name, :string, 'A', '', length)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           def bin_size</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             @bin_size ||= template.split('').select {|c| c =~ /[[:alpha:]]/}.map do |c|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>               c == 'A' ? '' : 0</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             end.pack(template).length</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           private </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           def add_type(name, type, temp, zero, length=nil)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             template << temp</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             template << length.to_s if type == :string</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             index = @count</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             @count += 1</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             send(:define_method, name) do</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>               @values[index]</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             send(:define_method, "#{name}=") do |val|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>               @values[index] = val</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>             end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>         def unpack(str)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           @values = str.unpack(self.class.template)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>         def pack</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           t = self.class.template.tr('A', 'a')</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>           @values.pack(t)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_temporal_timespan_rb"> lib/achoo/temporal/timespan.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   require 'achoo/temporal'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   require 'time'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>     module Temporal</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>       class Timespan < Range</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def initialize(start, end_)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           raise ArgumentError.new('Nil in parameters not allowed') if start.nil? || end_.nil?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           super(to_time(start), to_time(end_))</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def to_s</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           "(%s) %s" % [duration_string, from_to_string]</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def contains?(timeish_or_timespan)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           if timeish_or_timespan.is_a? Timespan</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             time = timeish_or_timespan</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             include?(time.first) && include?(time.last)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             include?(to_time(timeish_or_timespan))</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def overlaps?(timespan)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           include?(timespan.first) || include?(timespan.last) ||</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             timespan.contains?(self)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         private </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def to_time(timeish)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           case timeish</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           when Time</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             timeish.clone</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           when DateTime</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             Time.local(timeish.year, timeish.month, timeish.day, timeish.hour,timeish.minute, timeish.second)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           when Date</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             Time.local(timeish.year, timeish.month, timeish.day)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             if timeish.respond_to?(:to_s)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>               Time.parse(timeish.to_s)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>               raise ArgumentError.new("Don't know how to convert #{timeish.class} to Time")</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>             end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def duration_string</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           "%d+%02d:%02d" % duration</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def duration</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           delta = last - first</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           d     = delta.to_i / 1.day</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           delta = delta - d.days</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           h     = delta.to_i / 1.hour</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           delta = delta - h.hours</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           m     = delta.to_i / 1.minute</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           return [d, h, m]</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def from_to_string</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           today      = Date.today</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           start_date = first.send(:to_date)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           end_date   = last.send(:to_date)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           "%s - %s" % [from_as_string(start_date, today),</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                        to_as_string(start_date, end_date, today)]</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def from_as_string(start_date, today)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           format = if start_date == today</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      "Today"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                    elsif start_date.month == today.month && </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                        start_date.year == today.year</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      "%a %e."</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                    elsif start_date.year == today.year</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      "%a %e. %b"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                    else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      "%a %e. %b %Y"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                    end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           from = first.strftime(format << " %R")</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         def to_as_string(start_date, end_date, today)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           format = if end_date == start_date</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      "%R"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                    elsif end_date == today</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      "Today %R"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                    elsif end_date.month == today.month && </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      end_date.year == today.year</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      "%a %e. %R"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                    elsif end_date.year == today.year</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      "%a %e. %b %R"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                    else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                      "%a %e. %b %Y %R"</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>                    end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>           to = last.strftime(format)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_extensions_rb"> lib/achoo/extensions.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   class Array</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     %w(merge!).each do |method|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>       raise "Method already defined: #{name}\##{method}" \</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>         if method_defined?(method)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     # Useful for merging two sorted arrays with Comparable elements.</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     #</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     # The content of the two input arrays should not be trusted after</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     # being mistreated by this method.</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     # </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     def merge!(other)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>       # FIX raise exception if merge is defined?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>       array = []</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>       until empty? or other.empty?</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>         if first <= other.first</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>           array << shift</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>         else</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>           array << other.shift</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>       array.concat(self).concat(other)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>       array</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   class Integer</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     %w(day days hour hours minute minutes).each do |method|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>       raise "Method already defined: #{name}\##{method}" \</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>         if method_defined?(method)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>       </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     def day; self * 86400; end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     alias days day</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     def hour; self * 3600; end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     alias hours hour</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     def minute; self * 60; end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>     alias minutes minute</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_ui_rb"> lib/achoo/ui.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>   require 'achoo'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>     module UI</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>       autoload :Commands,                    'achoo/ui/commands'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>       autoload :Common,                      'achoo/ui/common'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>       autoload :DateChooser,                 'achoo/ui/date_chooser'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>       autoload :DateChoosers,                'achoo/ui/date_choosers'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>       autoload :ExceptionHandling,           'achoo/ui/exception_handling'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>       autoload :MonthChooser,                'achoo/ui/month_chooser'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>       autoload :OptionallyRangedDateChooser, 'achoo/ui/optionally_ranged_date_chooser'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>       autoload :RegisterHours,               'achoo/ui/register_hours'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_rb"> lib/achoo.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_system_rb"> lib/achoo/system.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>   require 'achoo'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>     module System</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>       autoload :CStruct,    'achoo/system/cstruct'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>       autoload :LogEntry,   'achoo/system/log_entry'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>       autoload :PMSuspend,  'achoo/system/pm_suspend'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>       autoload :UTMPRecord, 'achoo/system/utmp_record'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>       autoload :Wtmp,       'achoo/system/wtmp'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_system_log_entry_rb"> lib/achoo/system/log_entry.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>   require 'achoo/system'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>     module System</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>       class LogEntry </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>         include Comparable</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>       </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>         attr :time</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>         attr :event</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>       </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>         def initialize(time, event)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>           @time  = time</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>           @event = event</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>         </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>         def <=>(other_entry)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>           time <=> other_entry.time</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'><pre>   </pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_temporal_rb"> lib/achoo/temporal.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal.rb'><pre>   require 'achoo'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal.rb'><pre>     module Temporal</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal.rb'><pre>       autoload :Timespan,     'achoo/temporal/timespan.rb'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal.rb'><pre>       autoload :OpenTimespan, 'achoo/temporal/open_timespan.rb'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_temporal_open_timespan_rb"> lib/achoo/temporal/open_timespan.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   require 'achoo/temporal'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>     module Temporal</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>       class OpenTimespan < Timespan</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>         def to_s</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s = super</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s.sub!(/^\([^)]+\)/, '(?+??:??)')</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s.sub!(/- .*$/, '- ?')</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+<p>Generated on Fri Apr 30 14:06:10 +0000 2010</p>	
+
+    </div>
+  </body>
+</html>

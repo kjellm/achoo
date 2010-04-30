@@ -1,0 +1,9161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <meta content='en' http-equiv='Content-Language' />
+    <title>metrics</title>
+    <style>
+    /*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+    /* --------------------------------------------------------------
+
+   buttons.css
+   * Gives you some great CSS-only buttons.
+
+   Created by Kevin Hale [particletree.com]
+   * particletree.com/features/rediscovering-the-button-element
+
+   See Readme.txt in this folder for instructions.
+
+-------------------------------------------------------------- */
+
+button {
+  display:block;
+  float:left;
+  margin:0 0.583em 0.667em 0;
+  padding:5px 10px 5px 7px;   /* Links */
+
+  border:1px solid #dedede;
+  border-top:1px solid #eee;
+  border-left:1px solid #eee;
+
+  background-color:#f5f5f5;
+  font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+  font-size:100%;
+  line-height:130%;
+  text-decoration:none;
+  font-weight:bold;
+  color:#565656;
+  cursor:pointer;
+}
+button {
+  width:auto;
+  overflow:visible;
+  padding:4px 10px 3px 7px;   /* IE6 */
+}
+button[type] {
+  padding:4px 10px 4px 7px;   /* Firefox */
+  line-height:17px;           /* Safari */
+}
+*:first-child+html button[type] {
+  padding:4px 10px 3px 7px;   /* IE7 */
+}
+button img {
+  margin:0 3px -3px 0 !important;
+  padding:0;
+  border:none;
+  width:16px;
+  height:16px;
+  float:none;
+}
+
+
+/* Button colors
+-------------------------------------------------------------- */
+
+/* Standard */
+button:hover {
+  background-color:#dff4ff;
+  border:1px solid #c2e1ef;
+  color:#336699;
+}
+
+/* Positive */
+body .positive {
+  color:#529214;
+}
+button.positive:hover {
+  background-color:#E6EFC2;
+  border:1px solid #C6D880;
+  color:#529214;
+}
+
+/* Negative */
+body .negative {
+  color:#d12f19;
+}
+button.negative:hover {
+  background:#fbe3e4;
+  border:1px solid #fbc2c4;
+  color:#d12f19;
+}
+
+    html {
+  background-color: #e0e0e0; }
+
+body {
+  font-size: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  color: #333333; }
+
+a {
+  color: #ed1556;
+  text-decoration: none; }
+  a:hover {
+    color: #ffffff;
+    background-color: #ed1556; }
+
+#header, #content, #footer {
+  margin: 0 auto;
+  background: #eeeeee;
+  padding: 0 2em;
+  z-index: 0;
+  position: relative;
+  font-size: 1em; }
+
+#header {
+  background: #ffffff; }
+  #header h1 {
+    font-weight: bold;
+    font-size: 1.5em; }
+  #header address.watermark {
+    position: absolute;
+    font-weight: bold;
+    right: 3em;
+    top: 0;
+    font-size: .75em;
+    color: #cccccc; }
+    #header address.watermark a {
+      color: #cccccc;
+      font-weight: bold;
+      font-size: 2em; }
+      #header address.watermark a:hover {
+        background: transparent;
+        color: #aaaaaa; }
+
+#content {
+  padding-top: 1em;
+  padding-bottom: 2em; }
+  #content strong {
+    font-weight: bold; }
+  #content em {
+    font-style: italic; }
+  #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
+    color: #4e4e4e; }
+  #content h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: .75em;
+    padding: .25em 0;
+    line-height: 1.2;
+    border-bottom: 1px solid #c0c0c0; }
+  #content h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 1em 0 .2em; }
+  #content h3 {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin: .25em 0; }
+  #content h4, #content h5, #content h6 {
+    font-weight: bold;
+    margin-top: .5em; }
+  #content code, #content pre, #content textarea, #content input {
+    font-family: Monaco, Deja Vu Sans Mono, Inconsolata, Consolas, monospace; }
+  #content form p {
+    margin-top: 1em;
+    position: relative; }
+    #content form p.checkbox label {
+      margin-top: 0 !important; }
+  #content form input.text, #content form textarea {
+    width: 30em;
+    padding: .2em .4em;
+    color: #4e4e4e; }
+  #content form input.text {
+    height: 1.4em; }
+  #content form label {
+    float: left;
+    display: block;
+    margin-top: .5em;
+    width: 8em;
+    margin-right: .75em; }
+  #content form .with_errors label {
+    background: red;
+    color: white;
+    position: relative;
+    top: -.7em; }
+  #content form .with_errors.required label {
+    position: static;
+    margin-right: .25em;
+    padding: 0 .2em; }
+  #content form .with_errors input, #content form .with_errors textarea {
+    border: 2px solid #f22;
+    background: #fee;
+    color: #222222; }
+  #content form .required label {
+    float: none;
+    display: block;
+    width: auto;
+    position: relative;
+    font-weight: bold;
+    margin-top: 1em;
+    text-indent: -.65em; }
+    #content form .required label:before {
+      content: "* ";
+      color: #ed1556; }
+  #content form .required input.text {
+    width: 25.6em;
+    font-size: 24px;
+    font-weight: bold; }
+  #content form .normal {
+    margin-top: 2em; }
+  #content form h2.notifier label {
+    float: none;
+    width: auto;
+    margin-right: 0; }
+    #content form h2.notifier label .warning {
+      font-size: .5em;
+      font-weight: normal;
+      color: #999999; }
+  #content form fieldset {
+    padding-bottom: 1em;
+    margin-left: 1.35em;
+    border-bottom: 1px solid #c0c0c0;
+    margin-bottom: 1em; }
+    #content form fieldset h3 {
+      margin-top: 1em;
+      margin-bottom: 0; }
+    #content form fieldset p.normal {
+      margin-top: 1em; }
+    #content form fieldset p label {
+      width: 6.7em; }
+  #content form p.submit {
+    margin-top: 2em; }
+    #content form p.submit:after {
+      display: block;
+      clear: both;
+      float: none;
+      content: ".";
+      text-indent: -9999em;
+      text-align: left; }
+    #content form p.submit.destroy button,     #content form p.submit.manual-build button {
+      float: none;
+      display: inline; }
+    #content form p.submit.manual-build button {
+      margin-right: 0; }
+  #content #build form, #content #last_build form {
+    font-size: .75em; }
+    #content #build form p.submit,     #content #last_build form p.submit {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      right: .5em;
+      top: 1.25em; }
+  #content .blank_slate p,   #content .error p {
+    position: relative;
+    top: .3em; }
+  #content .blank_slate h1,   #content .error h1 {
+    border-width: 0;
+    margin: 0;
+    padding: 0; }
+    #content .blank_slate h1 button,     #content .error h1 button {
+      float: none;
+      border: 0 none;
+      background: transparent;
+      display: inline;
+      color: #ed1556;
+      padding: 0.25em 0;
+      margin: 0; }
+      #content .blank_slate h1 button:hover,       #content .error h1 button:hover {
+        background: #ed1556;
+        color: #ffffff; }
+  #content .error dt {
+    margin-top: 1.4em;
+    margin-bottom: .3em;
+    font-size: 1.75em;
+    font-family: Georgia, Times New Roman, serif; }
+  #content .error dd {
+    line-height: 1.4; }
+  #content .error .backtrace {
+    margin: 1em 0;
+    overflow: scroll;
+    height: 30em;
+    border: 1px solid #c0c0c0;
+    line-height: 1.6; }
+  #content #projects {
+    margin: 1em 0 2em;
+    border-top: 1px solid #c0c0c0; }
+    #content #projects li {
+      position: relative;
+      border-bottom: 1px solid #c0c0c0; }
+      #content #projects li.odd {
+        background: #e6e6e6; }
+      #content #projects li.building {
+        background: transparent url(/spinner.gif) no-repeat scroll right; }
+      #content #projects li a {
+        font-size: 2em;
+        padding: .25em;
+        line-height: 1.2;
+        font-weight: bold;
+        display: block; }
+        #content #projects li a.success {
+          color: #337022; }
+        #content #projects li a.failed {
+          color: #ff1100; }
+      #content #projects li .meta {
+        position: absolute;
+        right: .6em;
+        top: 1.5em;
+        font-size: 0.8em;
+        color: #999999;
+        text-align: right; }
+      #content #projects li.building .meta {
+        right: 1.6em; }
+      #content #projects li.success .meta {
+        color: #337022; }
+      #content #projects li.failed .meta {
+        color: #ff1100; }
+  #content #previous_builds li a {
+    display: block;
+    padding: .25em;
+    margin-bottom: .25em;
+    border-width: 1px;
+    border-style: solid; }
+    #content #previous_builds li a strong {
+      font-size: 1.3em; }
+    #content #previous_builds li a .attribution {
+      font-size: .9em; }
+  #content #projects li.success a,   #content #previous_builds li.success a {
+    background-color: #bbf8aa;
+    border-color: #99d688;
+    color: #337022; }
+    #content #projects li.success a .attribution,     #content #previous_builds li.success a .attribution {
+      color: #77b466; }
+    #content #projects li.success a:hover,     #content #previous_builds li.success a:hover {
+      background-color: #ddffcc; }
+  #content #projects li.failed a,   #content #previous_builds li.failed a {
+    background-color: #ffbbaa;
+    border-color: #dd9988;
+    color: #ff1100; }
+    #content #projects li.failed a .attribution,     #content #previous_builds li.failed a .attribution {
+      color: #bb7766; }
+    #content #projects li.failed a:hover,     #content #previous_builds li.failed a:hover {
+      background-color: #ffddcc; }
+  #content #build, #content #last_build {
+    position: relative; }
+    #content #build h1, #content #build blockquote,     #content #last_build h1, #content #last_build blockquote {
+      border-width: 0 1px;
+      border-style: solid; }
+    #content #build h1,     #content #last_build h1 {
+      border-top-width: 1px; }
+    #content #build blockquote,     #content #last_build blockquote {
+      bottom-bottom-width: 1px;
+      line-height: 1.4; }
+    #content #build.success h1, #content #build.success blockquote,     #content #last_build.success h1, #content #last_build.success blockquote {
+      background-color: #bbf8aa;
+      border-color: #99d688 #ccffbb #ccffbb #99d688; }
+    #content #build.success h1,     #content #last_build.success h1 {
+      color: #337022; }
+    #content #build.success .meta,     #content #last_build.success .meta {
+      color: #77b466; }
+    #content #build.failed h1, #content #build.failed blockquote,     #content #last_build.failed h1, #content #last_build.failed blockquote {
+      background-color: #ffbbaa;
+      border-color: #dd9988 #ffccbb #ffccbb #dd9988; }
+    #content #build.failed h1,     #content #last_build.failed h1 {
+      color: #ff1100; }
+    #content #build.failed .meta,     #content #last_build.failed .meta {
+      color: #bb7766; }
+    #content #build h1,     #content #last_build h1 {
+      margin-top: .5em;
+      margin-bottom: 0;
+      padding: .25em;
+      color: #337022; }
+    #content #build blockquote,     #content #last_build blockquote {
+      padding: .75em;
+      margin-bottom: 2em; }
+      #content #build blockquote .meta,       #content #last_build blockquote .meta {
+        margin-top: 1em;
+        display: block;
+        font-size: .9em; }
+    #content #build pre.output,     #content #last_build pre.output {
+      background: #111;
+      color: #fff;
+      padding: .5em;
+      overflow: auto;
+      max-height: 50em;
+      font-size: .825em; }
+      #content #build pre.output .color30,       #content #last_build pre.output .color30 {
+        color: #333; }
+      #content #build pre.output .color31,       #content #last_build pre.output .color31 {
+        color: #e33; }
+      #content #build pre.output .color32,       #content #last_build pre.output .color32 {
+        color: #3e3; }
+      #content #build pre.output .color33,       #content #last_build pre.output .color33 {
+        color: #ee3; }
+      #content #build pre.output .color34,       #content #last_build pre.output .color34 {
+        color: #33e; }
+      #content #build pre.output .color35,       #content #last_build pre.output .color35 {
+        color: #e3e; }
+      #content #build pre.output .color36,       #content #last_build pre.output .color36 {
+        color: #3ee; }
+      #content #build pre.output .color37,       #content #last_build pre.output .color37 {
+        color: #fff; }
+  #content #push_path {
+    display: block;
+    margin-top: 1em;
+    margin-left: 2em; }
+
+a.success {
+  color: #bbf8aa; }
+  a.success:hover {
+    background-color: #bbf8aa;
+    color: white; }
+a.failed {
+  color: #ffbbaa; }
+  a.failed:hover {
+    background-color: #ffbbaa;
+    color: white; }
+
+#footer {
+  padding: 1.5em 2.5em;
+  border-top: 1px solid #ccc;
+  font-size: .8em;
+  color: #666;
+  text-align: right; }
+  #footer strong {
+    font-weight: bold; }
+    
+    table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: 1px solid #666;
+  background: #fff;
+  margin-bottom: 20px;
+}
+
+table tr.light {
+   background: #fff;
+}
+
+table tr.dark {
+  background: #f9f9f9;
+}
+
+table tr:hover {
+  background: #FFFFC0;
+}
+
+table td, table th {
+  padding: 4px;
+  font-size: 11px;
+}
+table th {
+  text-align: center;
+  color: #337022;
+  background: #DDFFCC;
+  font-weight: bold;
+  border: #99D688 1px solid;
+}
+
+table td {
+  border: #d0d0d0 1px solid;
+}
+
+table td.score {
+  text-align: right;
+}
+
+.warning {
+  background: yellow;
+}
+.rcov_code td {
+  border-bottom: 1px solid #ddd ;
+  padding: 0;
+  margin: 0;
+}
+.rcov_code tr {
+  border: 0px;
+  padding:0px;
+  margin: 0px;
+}
+.rcov_code pre {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+.rcov_run {}
+.rcov_not_run {
+  background-color: #d88;
+}
+.rcov_run a, .rcov_not_run a {
+  text-decoration: none;
+}
+.rcov_run a {
+  color: #333;
+}
+.rcov_not_run a {
+  color: #000;
+}
+.rcov_overflow {
+  overflow: auto;
+  font-size: 50%;
+}
+
+.bluff-tooltip {
+	background: #fff;
+	border: 1px solid #d1edf5;
+	padding: 8px 8px 6px;
+}
+.bluff-tooltip .color {
+	display: block;
+	height: 4px;
+	width: 30px;
+	margin: 0 0 4px;
+	overflow: hidden;
+}
+.bluff-tooltip .data {
+	font-weight: bold;
+}
+
+    </style>
+    <link REL="SHORTCUT ICON" HREF="/favicon.ico">
+    <script language="javascript" src="js-class.js" type="text/javascript"></script>
+    <script language="javascript" src="bluff-min.js" type="text/javascript"></script>
+    <script language="javascript" src="excanvas.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id='header'>
+      <h1><a href="/">metrics</a> | <a href="index.html">achoo</a></h1>
+      <address class='watermark'>
+        built with
+        <a href='http://metric-fu.rubyforge.org/'>metric-fu</a>
+      </address>
+    </div>
+    <div id='content'>
+      <h3>Flog Results</h3>
+<p><a href='http://ruby.sadi.st/Flog.html'>Flog</a> measures code complexity.</p>
+
+
+
+<canvas id="graph"></canvas>
+<script language="javascript" src="flog.js?1272636370" type="text/javascript"></script>
+
+
+<h2>Total Flog score for all methods: 2095.3</h2>
+<h2>Average Flog score for all methods: 8.6</h2>
+
+<table>
+  <tr>
+    <th>File</th>
+    <th>Total score</th>
+    <th>Methods</th>
+    <th>Average score</th>
+    <th>Highest score</th>
+  </tr>
+    
+    <tr>
+      <td><a href="#_lib_achoo_awake_rb">/lib/achoo/awake.rb</a></td>
+      <td>178</td>
+      <td>10</td>
+      <td>18</td>
+      <td>91</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_term_table_rb">/lib/achoo/term/table.rb</a></td>
+      <td>113</td>
+      <td>7</td>
+      <td>16</td>
+      <td>52</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ical_rb">/lib/achoo/ical.rb</a></td>
+      <td>96</td>
+      <td>6</td>
+      <td>16</td>
+      <td>50</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ui_date_chooser_rb">/lib/achoo/ui/date_chooser.rb</a></td>
+      <td>73</td>
+      <td>6</td>
+      <td>12</td>
+      <td>49</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ui_commands_rb">/lib/achoo/ui/commands.rb</a></td>
+      <td>83</td>
+      <td>8</td>
+      <td>10</td>
+      <td>39</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ui_register_hours_rb">/lib/achoo/ui/register_hours.rb</a></td>
+      <td>135</td>
+      <td>13</td>
+      <td>10</td>
+      <td>38</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_achievo_hour_registration_form_rb">/lib/achoo/achievo/hour_registration_form.rb</a></td>
+      <td>269</td>
+      <td>30</td>
+      <td>9</td>
+      <td>34</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_achievo_hour_administration_form_rb">/lib/achoo/achievo/hour_administration_form.rb</a></td>
+      <td>76</td>
+      <td>12</td>
+      <td>6</td>
+      <td>33</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_temporal_timespan_rb">/lib/achoo/temporal/timespan.rb</a></td>
+      <td>156</td>
+      <td>12</td>
+      <td>13</td>
+      <td>30</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_system_cstruct_rb">/lib/achoo/system/cstruct.rb</a></td>
+      <td>90</td>
+      <td>13</td>
+      <td>7</td>
+      <td>30</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_system_pm_suspend_rb">/lib/achoo/system/pm_suspend.rb</a></td>
+      <td>30</td>
+      <td>2</td>
+      <td>15</td>
+      <td>27</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_vcs_subversion_rb">/lib/achoo/vcs/subversion.rb</a></td>
+      <td>27</td>
+      <td>4</td>
+      <td>7</td>
+      <td>22</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_term_rb">/lib/achoo/term.rb</a></td>
+      <td>53</td>
+      <td>11</td>
+      <td>5</td>
+      <td>22</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_achievo_login_form_rb">/lib/achoo/achievo/login_form.rb</a></td>
+      <td>23</td>
+      <td>2</td>
+      <td>11</td>
+      <td>22</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_app_rb">/lib/achoo/app.rb</a></td>
+      <td>124</td>
+      <td>13</td>
+      <td>10</td>
+      <td>21</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_system_utmp_record_rb">/lib/achoo/system/utmp_record.rb</a></td>
+      <td>52</td>
+      <td>8</td>
+      <td>7</td>
+      <td>21</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_rc_loader_rb">/lib/achoo/rc_loader.rb</a></td>
+      <td>51</td>
+      <td>6</td>
+      <td>9</td>
+      <td>21</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_achievo_lock_month_form_rb">/lib/achoo/achievo/lock_month_form.rb</a></td>
+      <td>36</td>
+      <td>7</td>
+      <td>5</td>
+      <td>19</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_term_menu_rb">/lib/achoo/term/menu.rb</a></td>
+      <td>62</td>
+      <td>7</td>
+      <td>9</td>
+      <td>19</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_extensions_rb">/lib/achoo/extensions.rb</a></td>
+      <td>44</td>
+      <td>6</td>
+      <td>7</td>
+      <td>17</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ui_month_chooser_rb">/lib/achoo/ui/month_chooser.rb</a></td>
+      <td>35</td>
+      <td>4</td>
+      <td>9</td>
+      <td>17</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_achievo_hour_registration_form_ranged_rb">/lib/achoo/achievo/hour_registration_form_ranged.rb</a></td>
+      <td>54</td>
+      <td>9</td>
+      <td>6</td>
+      <td>17</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_achievo_form_rb">/lib/achoo/achievo/form.rb</a></td>
+      <td>26</td>
+      <td>3</td>
+      <td>9</td>
+      <td>17</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_system_wtmp_rb">/lib/achoo/system/wtmp.rb</a></td>
+      <td>17</td>
+      <td>2</td>
+      <td>9</td>
+      <td>16</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_achievo_table_rb">/lib/achoo/achievo/table.rb</a></td>
+      <td>28</td>
+      <td>5</td>
+      <td>6</td>
+      <td>14</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_vcs_rb">/lib/achoo/vcs.rb</a></td>
+      <td>45</td>
+      <td>6</td>
+      <td>8</td>
+      <td>14</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ui_optionally_ranged_date_chooser_rb">/lib/achoo/ui/optionally_ranged_date_chooser.rb</a></td>
+      <td>21</td>
+      <td>5</td>
+      <td>4</td>
+      <td>13</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ui_exception_handling_rb">/lib/achoo/ui/exception_handling.rb</a></td>
+      <td>24</td>
+      <td>4</td>
+      <td>6</td>
+      <td>12</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ui_rb">/lib/achoo/ui.rb</a></td>
+      <td>11</td>
+      <td>2</td>
+      <td>5</td>
+      <td>10</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_achievo_rb">/lib/achoo/achievo.rb</a></td>
+      <td>10</td>
+      <td>2</td>
+      <td>5</td>
+      <td>8</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_vcs_git_rb">/lib/achoo/vcs/git.rb</a></td>
+      <td>10</td>
+      <td>4</td>
+      <td>2</td>
+      <td>6</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_system_rb">/lib/achoo/system.rb</a></td>
+      <td>7</td>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ui_common_rb">/lib/achoo/ui/common.rb</a></td>
+      <td>8</td>
+      <td>2</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_system_log_entry_rb">/lib/achoo/system/log_entry.rb</a></td>
+      <td>13</td>
+      <td>4</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_ui_date_choosers_rb">/lib/achoo/ui/date_choosers.rb</a></td>
+      <td>10</td>
+      <td>4</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_temporal_open_timespan_rb">/lib/achoo/temporal/open_timespan.rb</a></td>
+      <td>4</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_achoo_temporal_rb">/lib/achoo/temporal.rb</a></td>
+      <td>4</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+  
+</table>
+
+
+  <h2 id="_lib_achoo_awake_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/awake.rb'>/lib/achoo/awake.rb</a></h2>
+    
+      <p>Awake#sessions</p>
+      <p>Total Score: 90.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>13.0</td>
+            <td>time</td>
+          </tr>
+        
+          <tr>
+            <td>12.5</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>9.7</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>9.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>8.3</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>7.8</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>7.4</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>6.5</td>
+            <td>last</td>
+          </tr>
+        
+          <tr>
+            <td>6.3</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>5.3</td>
+            <td>event</td>
+          </tr>
+        
+          <tr>
+            <td>4.9</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>4.6</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td><</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>unshift</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>even?</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>group</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+      </table>
+    
+      <p>Awake#group</p>
+      <p>Total Score: 19.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>9.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>7.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>5.2</td>
+            <td>event</td>
+          </tr>
+        
+          <tr>
+            <td>4.6</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+      </table>
+    
+      <p>Awake#print_session</p>
+      <p>Total Score: 18.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.1</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.6</td>
+            <td>to_s</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>overlaps?</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Awake#wtmp</p>
+      <p>Total Score: 17.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.8</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>time</td>
+          </tr>
+        
+          <tr>
+            <td>3.1</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>halt_event?</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>boot_event?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+      </table>
+    
+      <p>Awake#initialize</p>
+      <p>Total Score: 12.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>suspend</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>wtmp</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>now</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>merge!</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>unshift</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>reverse</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>sessions</td>
+          </tr>
+        
+      </table>
+    
+      <p>Awake#at</p>
+      <p>Total Score: 9.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>print_session</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>overlaps?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 4.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.4</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+      <p>Awake#all</p>
+      <p>Total Score: 3.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>print_session</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>Awake#suspend</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>Awake#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_term_table_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/term/table.rb'>/lib/achoo/term/table.rb</a></h2>
+    
+      <p>Table#print</p>
+      <p>Total Score: 51.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>16.4</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>9.7</td>
+            <td>join</td>
+          </tr>
+        
+          <tr>
+            <td>9.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>6.7</td>
+            <td>print</td>
+          </tr>
+        
+          <tr>
+            <td>5.2</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.9</td>
+            <td>printf</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>*</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>map</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>center_table_headers</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>build_format</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>calculate_table_cell_widths</td>
+          </tr>
+        
+          <tr>
+            <td>0.9</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Table#build_format</p>
+      <p>Total Score: 26.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>12.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>8.9</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>strip</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>shift</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>reduce</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>count</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>each_index</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>fill</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>Table#calculate_table_cell_widths</p>
+      <p>Total Score: 18.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>14.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.1</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>each_with_index</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>max</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+      </table>
+    
+      <p>Table#center_table_headers</p>
+      <p>Total Score: 9.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>center</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>dup</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each_with_index</td>
+          </tr>
+        
+      </table>
+    
+      <p>Table#initialize</p>
+      <p>Total Score: 5.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.2</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>Table#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ical_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ical.rb'>/lib/achoo/ical.rb</a></h2>
+    
+      <p>ICal#print_events</p>
+      <p>Total Score: 49.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>16.0</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>8.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.4</td>
+            <td>x_properties</td>
+          </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>dtend</td>
+          </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>dtstart</td>
+          </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td>>=</td>
+          </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td><=</td>
+          </tr>
+        
+          <tr>
+            <td>3.6</td>
+            <td>print_event</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>occurrences</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>recurs?</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>handle_exception</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>events</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>ICal#from_http_request</p>
+      <p>Total Score: 23.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>10.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>10.8</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>4.1</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>basic_auth</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>request</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>body</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>start</td>
+          </tr>
+        
+      </table>
+    
+      <p>ICal#print_event</p>
+      <p>Total Score: 10.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>to_s</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>dtend</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>dtstart</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>summary</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>printf</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 5.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.5</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+      <p>ICal#none</p>
+      <p>Total Score: 3.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>include</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>ICal#initialize</p>
+      <p>Total Score: 3.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>parse_string</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ui_date_chooser_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_chooser.rb'>/lib/achoo/ui/date_chooser.rb</a></h2>
+    
+      <p>DateChooser#parse_date</p>
+      <p>Total Score: 49.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>16.4</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>5.6</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>4.6</td>
+            <td>civil</td>
+          </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>Integer</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>year</td>
+          </tr>
+        
+          <tr>
+            <td>3.1</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>today</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>month</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td><</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>split</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>chars</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>to_i</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+      </table>
+    
+      <p>DateChooser#choose</p>
+      <p>Total Score: 9.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.8</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.5</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>handle_answer</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>ask</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>loop</td>
+          </tr>
+        
+      </table>
+    
+      <p>DateChooser#print_help_message</p>
+      <p>Total Score: 6.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>date_format_help_string</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>system</td>
+          </tr>
+        
+      </table>
+    
+      <p>DateChooser#handle_answer</p>
+      <p>Total Score: 4.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>print_help_message</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>parse_date</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>==</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+      <p>DateChooser#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ui_commands_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/commands.rb'>/lib/achoo/ui/commands.rb</a></h2>
+    
+      <p>Commands#view_report</p>
+      <p>Total Score: 39.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>11.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>7.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>to_i</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>last</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>search</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>include?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>print</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>choose</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>keys</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>select_columns</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>get</td>
+          </tr>
+        
+      </table>
+    
+      <p>Commands#lock_month</p>
+      <p>Total Score: 9.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>submit</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>confirm</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>lock_month</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>print_values</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>month_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>Commands#show_holiday_report</p>
+      <p>Total Score: 8.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>body</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>underline</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>get</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>Commands#show_flexi_time</p>
+      <p>Total Score: 7.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>underline</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>date_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>flexi_time</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>Commands#none</p>
+      <p>Total Score: 4.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.8</td>
+            <td>include</td>
+          </tr>
+        
+      </table>
+    
+      <p>Commands#show_registered_hours_for_week</p>
+      <p>Total Score: 4.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>show_registered_hours_for_week</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>date_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>Commands#show_registered_hours_for_day</p>
+      <p>Total Score: 4.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>show_registered_hours_for_day</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>date_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 3.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.3</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ui_register_hours_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/register_hours.rb'>/lib/achoo/ui/register_hours.rb</a></h2>
+    
+      <p>RegisterHours#register_hours</p>
+      <p>Total Score: 37.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>13.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>6.7</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>5.4</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>4.7</td>
+            <td>class</td>
+          </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>workperiod_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>billing_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>submit</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>ask</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>print_remark_help</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>print_hours_help</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>phase_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>hours_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>confirm</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>project_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>print_values</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>optionally_ranged_date_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>remark_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>downcase</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#print_remark_help</p>
+      <p>Total Score: 23.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>8.0</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>4.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>handle_exception</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>from_http_request</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>print_events</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>*</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>print_logs_for</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#project_chooser</p>
+      <p>Total Score: 20.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.8</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>5.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>to_i</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>all_projects_chooser</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>choose</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>recent_projects</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.0</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#chooser_helper</p>
+      <p>Total Score: 16.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>4.1</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>to_i</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>choose</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>0.9</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#print_hours_help</p>
+      <p>Total Score: 9.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>handle_exception</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>at</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>print</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 6.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.6</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#none</p>
+      <p>Total Score: 4.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.8</td>
+            <td>include</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#hours_chooser</p>
+      <p>Total Score: 3.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>ask</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>==</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#all_projects_chooser</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>all_projects</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>chooser_helper</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#phase_chooser</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>phases_for_selected_project</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>chooser_helper</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#workperiod_chooser</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>worktime_periods</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>chooser_helper</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#billing_chooser</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>billing_options</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>chooser_helper</td>
+          </tr>
+        
+      </table>
+    
+      <p>RegisterHours#remark_chooser</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>ask</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_achievo_hour_registration_form_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/hour_registration_form.rb'>/lib/achoo/achievo/hour_registration_form.rb</a></h2>
+    
+      <p>HourRegistrationForm#print_values</p>
+      <p>Total Score: 34.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>9.1</td>
+            <td>printf</td>
+          </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>field_with</td>
+          </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td>options</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>project</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>phase</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>time</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>remark</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>date_to_s</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#phases_for_selected_project</p>
+      <p>Total Score: 32.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>9.5</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>extract_number_from_phaseid</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>body</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>forms</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>options</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>create_page_from_partial</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>respond_to?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>retrieve_project_phases_page</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#initialize</p>
+      <p>Total Score: 32.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>11.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.5</td>
+            <td>send</td>
+          </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td>field_with</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>options</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>form</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>select</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>today</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>get</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#scrape_projects</p>
+      <p>Total Score: 30.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.8</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>5.7</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>strip</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>search</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.3</td>
+            <td>at_css</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>attribute</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>to_s</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#all_projects</p>
+      <p>Total Score: 30.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>14.2</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>6.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>scrape_projects</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>keys</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>click</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>merge!</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>sort</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>projects_url</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>link_with</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>get</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#recent_projects</p>
+      <p>Total Score: 19.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.3</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>field_with</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>options</td>
+          </tr>
+        
+          <tr>
+            <td>0.8</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#atk_submit_to_url</p>
+      <p>Total Score: 12.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.2</td>
+            <td>gsub!</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#billing_options</p>
+      <p>Total Score: 12.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>field_with</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>options</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>collect_options</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#retrieve_project_phases_page</p>
+      <p>Total Score: 12.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.8</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.1</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>atkaction</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>action</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>submit</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#collect_options</p>
+      <p>Total Score: 11.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>field_with</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>options</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#phase</p>
+      <p>Total Score: 4.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>phaseid</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#projects_url</p>
+      <p>Total Score: 4.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>link_with</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>href</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>atk_submit_to_url</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#create_page_from_partial</p>
+      <p>Total Score: 3.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>body</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#extract_number_from_projectid</p>
+      <p>Total Score: 3.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#extract_number_from_phaseid</p>
+      <p>Total Score: 3.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#date_to_s</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>date</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>strftime</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#project</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>projectid</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>extract_number_from_projectid</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#month_field</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#year_field</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#submit</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>submit</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#day_field</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#project=</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#billing=</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#worktime_periods</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>collect_options</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#hours=</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#workperiod=</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#remark=</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#phase=</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationForm#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_achievo_hour_administration_form_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/hour_administration_form.rb'>/lib/achoo/achievo/hour_administration_form.rb</a></h2>
+    
+      <p>HourAdministrationForm#show_registered_hours</p>
+      <p>Total Score: 32.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.7</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>5.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.6</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>3.3</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>include?</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>gsub!</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>search</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>select_columns</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>last</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>></td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>print</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>set_page_to_view_for_date</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#set_page_to_view_for_date</p>
+      <p>Total Score: 21.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>9.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.3</td>
+            <td>form</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>click</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>get_page_for</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>date</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>capitalize</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>link_with</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>get</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#flexi_time</p>
+      <p>Total Score: 6.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>body</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>set_page_to_view_for_date</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#get_page_for</p>
+      <p>Total Score: 3.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>submit</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#initialize</p>
+      <p>Total Score: 2.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#show_registered_hours_for_day</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>show_registered_hours</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#month_field</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#day_field</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#year_field</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#show_registered_hours_for_week</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>show_registered_hours</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourAdministrationForm#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_temporal_timespan_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/timespan.rb'>/lib/achoo/temporal/timespan.rb</a></h2>
+    
+      <p>Timespan#to_time</p>
+      <p>Total Score: 30.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.9</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>year</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>day</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>month</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>local</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>class</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>hour</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>to_s</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>minute</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>second</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>parse</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>clone</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>respond_to?</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#duration</p>
+      <p>Total Score: 25.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.8</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.5</td>
+            <td>to_i</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>/</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>hours</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>hour</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>days</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>minute</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>day</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>last</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#to_as_string</p>
+      <p>Total Score: 22.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.5</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>7.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>7.2</td>
+            <td>year</td>
+          </tr>
+        
+          <tr>
+            <td>3.6</td>
+            <td>month</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>last</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>strftime</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#from_as_string</p>
+      <p>Total Score: 21.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.8</td>
+            <td>year</td>
+          </tr>
+        
+          <tr>
+            <td>5.8</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>5.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>month</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>strftime</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#from_to_string</p>
+      <p>Total Score: 16.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.8</td>
+            <td>send</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>last</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>to_as_string</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>from_as_string</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>%</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>today</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#contains?</p>
+      <p>Total Score: 11.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.6</td>
+            <td>include?</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>last</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>to_time</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>is_a?</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#initialize</p>
+      <p>Total Score: 10.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>to_time</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>super</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#overlaps?</p>
+      <p>Total Score: 8.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.9</td>
+            <td>include?</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>last</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>contains?</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#to_s</p>
+      <p>Total Score: 4.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>from_to_string</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>duration_string</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>%</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#duration_string</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>duration</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>%</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+      <p>Timespan#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_system_cstruct_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/system/cstruct.rb'>/lib/achoo/system/cstruct.rb</a></h2>
+    
+      <p>CStruct#add_type</p>
+      <p>Total Score: 30.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>11.4</td>
+            <td>send</td>
+          </tr>
+        
+          <tr>
+            <td>9.7</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>5.7</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>4.3</td>
+            <td>template</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>to_s</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>0.5</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#bin_size</p>
+      <p>Total Score: 21.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.2</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>6.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>5.2</td>
+            <td>template</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>split</td>
+          </tr>
+        
+          <tr>
+            <td>2.5</td>
+            <td>select</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>2.3</td>
+            <td>map</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>pack</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>length</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#none</p>
+      <p>Total Score: 9.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>sclass</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>private</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>attr</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#pack</p>
+      <p>Total Score: 5.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>class</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>template</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>tr</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>pack</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#unpack</p>
+      <p>Total Score: 4.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>class</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>template</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>unpack</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#initialize</p>
+      <p>Total Score: 4.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>unpack</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#inherited</p>
+      <p>Total Score: 3.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td>instance_variable_set</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#char</p>
+      <p>Total Score: 1.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>add_type</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#quad</p>
+      <p>Total Score: 1.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>add_type</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#string</p>
+      <p>Total Score: 1.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>add_type</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#long</p>
+      <p>Total Score: 1.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>add_type</td>
+          </tr>
+        
+      </table>
+    
+      <p>CStruct#short</p>
+      <p>Total Score: 1.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>add_type</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_system_pm_suspend_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/system/pm_suspend.rb'>/lib/achoo/system/pm_suspend.rb</a></h2>
+    
+      <p>PMSuspend#initialize</p>
+      <p>Total Score: 27.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>12.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>9.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>glob</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>parse</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>split</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>chop!</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>readlines</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>sort</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>open</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>reverse</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>super</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_vcs_subversion_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/vcs/subversion.rb'>/lib/achoo/vcs/subversion.rb</a></h2>
+    
+      <p>Subversion#log_for</p>
+      <p>Total Score: 22.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.1</td>
+            <td>css</td>
+          </tr>
+        
+          <tr>
+            <td>3.7</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>strip</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>start_with?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>xpath</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>XML</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>strftime</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+      <p>Subversion#repository?</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>exist?</td>
+          </tr>
+        
+      </table>
+    
+      <p>Subversion#initialize</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_term_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'>/lib/achoo/term.rb</a></h2>
+    
+      <p>Term#ask</p>
+      <p>Total Score: 21.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>4.1</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.3</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>exit</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>bold</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>strip!</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>a_little_something</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>print</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>gets</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>flush</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>tty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>loop</td>
+          </tr>
+        
+      </table>
+    
+      <p>Term#shadowbox</p>
+      <p>Total Score: 7.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.4</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>center</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>0.5</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Term#a_little_something</p>
+      <p>Total Score: 5.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>downcase</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+      </table>
+    
+      <p>Term#none</p>
+      <p>Total Score: 4.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>autoload</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Term#choose</p>
+      <p>Total Score: 4.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>print_ask_and_validate</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>Term#password</p>
+      <p>Total Score: 1.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>ask</td>
+          </tr>
+        
+      </table>
+    
+      <p>Term#bold</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>effect</td>
+          </tr>
+        
+      </table>
+    
+      <p>Term#underline</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>effect</td>
+          </tr>
+        
+      </table>
+    
+      <p>Term#warn</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>effect</td>
+          </tr>
+        
+      </table>
+    
+      <p>Term#fatal</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>effect</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_achievo_login_form_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/login_form.rb'>/lib/achoo/achievo/login_form.rb</a></h2>
+    
+      <p>LoginForm#login</p>
+      <p>Total Score: 21.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>forms</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>buttons</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>body</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>get</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>submit</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_app_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/app.rb'>/lib/achoo/app.rb</a></h2>
+    
+      <p>App#scrape_urls</p>
+      <p>Total Score: 21.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>9.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>menu_link_to_url</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>current_page</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>name</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>frames</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>find</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>href</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>get</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>search</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#menu_link_to_url</p>
+      <p>Total Score: 19.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>attribute</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>strip</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>find</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#dispatch</p>
+      <p>Total Score: 17.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>12.5</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>show_flexi_time</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>exit</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>view_report</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>register_hours</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>show_registered_hours_for_day</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>lock_month</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>show_registered_hours_for_week</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>show_holiday_report</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#command_loop</p>
+      <p>Total Score: 11.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>trap</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>choose</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>dispatch</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>puts</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#start</p>
+      <p>Total Score: 10.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>command_loop</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>login</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>print_welcome</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>warm_up_ical_cache</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>scrape_urls</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>handle_fatal_exception</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#none</p>
+      <p>Total Score: 8.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.2</td>
+            <td>include</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#warm_up_ical_cache</p>
+      <p>Total Score: 7.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.1</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>from_http_request</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 6.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.6</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#load_cookies</p>
+      <p>Total Score: 5.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>cookie_jar</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>load</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>exists?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>[]</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#initialize</p>
+      <p>Total Score: 5.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#save_cookies</p>
+      <p>Total Score: 4.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>cookie_jar</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>save_as</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#login</p>
+      <p>Total Score: 3.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>save_cookies</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>login</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>load_cookies</td>
+          </tr>
+        
+      </table>
+    
+      <p>App#print_welcome</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>shadowbox</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_system_utmp_record_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/system/utmp_record.rb'>/lib/achoo/system/utmp_record.rb</a></h2>
+    
+      <p>UTMPRecord#none</p>
+      <p>Total Score: 21.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>10.8</td>
+            <td>long</td>
+          </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>string</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>short</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>UTMPRecord#to_s</p>
+      <p>Total Score: 9.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>time</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>record_type_symbol</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>username</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>device_name</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>strftime</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>sprintf</td>
+          </tr>
+        
+      </table>
+    
+      <p>UTMPRecord#time</p>
+      <p>Total Score: 7.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>seconds</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>milliseconds</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>at</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+      </table>
+    
+      <p>UTMPRecord#halt_event?</p>
+      <p>Total Score: 6.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>device_name</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>record_type_symbol</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>UTMPRecord#record_type_symbol</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>record_type</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>[]</td>
+          </tr>
+        
+      </table>
+    
+      <p>UTMPRecord#boot_event?</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>record_type_symbol</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>==</td>
+          </tr>
+        
+      </table>
+    
+      <p>UTMPRecord#record_type_symbol=</p>
+      <p>Total Score: 1.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>find_index</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_rc_loader_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/rc_loader.rb'>/lib/achoo/rc_loader.rb</a></h2>
+    
+      <p>RCLoader#verify_rc_contents</p>
+      <p>Total Score: 20.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.4</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>4.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>to_sym</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>has_key?</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>fatal</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>warn</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>exit</td>
+          </tr>
+        
+          <tr>
+            <td>0.5</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>RCLoader#load_rc</p>
+      <p>Total Score: 11.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>class</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>load_file</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>abort</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>is_a?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>file_permissions_secure?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>const_set</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>verify_rc_contents</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>[]</td>
+          </tr>
+        
+      </table>
+    
+      <p>RCLoader#file_permissions_secure?</p>
+      <p>Total Score: 10.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>fatal</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>stat</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>exit</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>mode</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>0.8</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>RCLoader#create_empty_rc_if_not_exists</p>
+      <p>Total Score: 4.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>chmod</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>touch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>exist?</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 3.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.3</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+      <p>RCLoader#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_achievo_lock_month_form_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/lock_month_form.rb'>/lib/achoo/achievo/lock_month_form.rb</a></h2>
+    
+      <p>LockMonthForm#lock_month</p>
+      <p>Total Score: 19.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.3</td>
+            <td>user_select</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>select</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>options</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>match</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>get</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>form</td>
+          </tr>
+        
+      </table>
+    
+      <p>LockMonthForm#print_values</p>
+      <p>Total Score: 10.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.3</td>
+            <td>user_select</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>period</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+      </table>
+    
+      <p>LockMonthForm#submit</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>submit</td>
+          </tr>
+        
+      </table>
+    
+      <p>LockMonthForm#user_select</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>LockMonthForm#initialize</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>LockMonthForm#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_term_menu_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/term/menu.rb'>/lib/achoo/term/menu.rb</a></h2>
+    
+      <p>Menu#print_ask_and_validate</p>
+      <p>Total Score: 19.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.4</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>keys</td>
+          </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>sort</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>join</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>ask</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>print_menu</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>only_one_option?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>loop</td>
+          </tr>
+        
+      </table>
+    
+      <p>Menu#initialize</p>
+      <p>Total Score: 17.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>14.8</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>upto</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>to_s</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Menu#print_menu</p>
+      <p>Total Score: 10.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.5</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>printf</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>menu_item_format</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each_with_index</td>
+          </tr>
+        
+          <tr>
+            <td>0.5</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Menu#menu_item_format</p>
+      <p>Total Score: 6.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>log10</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>floor</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Menu#only_one_option?</p>
+      <p>Total Score: 5.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Menu#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_extensions_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/extensions.rb'>/lib/achoo/extensions.rb</a></h2>
+    
+      <p>Array#merge!</p>
+      <p>Total Score: 17.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.1</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>shift</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>concat</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td><=</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>Integer#none</p>
+      <p>Total Score: 14.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.2</td>
+            <td>alias</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>method_defined?</td>
+          </tr>
+        
+          <tr>
+            <td>2.5</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>name</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>each</td>
+          </tr>
+        
+      </table>
+    
+      <p>Array#none</p>
+      <p>Total Score: 7.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>method_defined?</td>
+          </tr>
+        
+          <tr>
+            <td>2.5</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>name</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>each</td>
+          </tr>
+        
+      </table>
+    
+      <p>Integer#hour</p>
+      <p>Total Score: 1.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>*</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Integer#day</p>
+      <p>Total Score: 1.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>*</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Integer#minute</p>
+      <p>Total Score: 1.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>*</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ui_month_chooser_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/month_chooser.rb'>/lib/achoo/ui/month_chooser.rb</a></h2>
+    
+      <p>MonthChooser#one_month_ago</p>
+      <p>Total Score: 17.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.4</td>
+            <td>month</td>
+          </tr>
+        
+          <tr>
+            <td>3.1</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>%</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>sprintf</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>year</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>now</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>></td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>+</td>
+          </tr>
+        
+      </table>
+    
+      <p>MonthChooser#choose</p>
+      <p>Total Score: 8.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.1</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>one_month_ago</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>handle_answer</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>ask</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>loop</td>
+          </tr>
+        
+      </table>
+    
+      <p>MonthChooser#handle_answer</p>
+      <p>Total Score: 7.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>one_month_ago</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_achievo_hour_registration_form_ranged_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/hour_registration_form_ranged.rb'>/lib/achoo/achievo/hour_registration_form_ranged.rb</a></h2>
+    
+      <p>HourRegistrationFormRanged#date</p>
+      <p>Total Score: 16.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.1</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>4.5</td>
+            <td>to_i</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>to_year_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>to_day_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>to_month_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationFormRanged#date=</p>
+      <p>Total Score: 16.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.8</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>strftime</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>to_month_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>to_day_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>to_year_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>year</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>super</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationFormRanged#initialize</p>
+      <p>Total Score: 8.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>link_with</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>href</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>atk_submit_to_url</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>get</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>form</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationFormRanged#date_to_s</p>
+      <p>Total Score: 6.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>date</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>strftime</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>map</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>join</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationFormRanged#to_year_field</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationFormRanged#to_month_field</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationFormRanged#to_day_field</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>field_with</td>
+          </tr>
+        
+      </table>
+    
+      <p>HourRegistrationFormRanged#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_achievo_form_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/form.rb'>/lib/achoo/achievo/form.rb</a></h2>
+    
+      <p>Form#date</p>
+      <p>Total Score: 16.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.1</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>4.5</td>
+            <td>to_i</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>month_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>day_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>year_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>Form#date=</p>
+      <p>Total Score: 8.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>strftime</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>day_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>year</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>year_field</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>month_field</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_system_wtmp_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/system/wtmp.rb'>/lib/achoo/system/wtmp.rb</a></h2>
+    
+      <p>Wtmp#initialize</p>
+      <p>Total Score: 16.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>glob</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>sort</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>read</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>reverse</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>open</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>bin_size</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>super</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_achievo_table_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/table.rb'>/lib/achoo/achievo/table.rb</a></h2>
+    
+      <p>Table#initialize</p>
+      <p>Total Score: 13.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>content</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>fix_empty_cells</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>strip</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>css</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>super</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+      </table>
+    
+      <p>Table#select_columns</p>
+      <p>Total Score: 7.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>transpose</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>block_pass</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>replace</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>select</td>
+          </tr>
+        
+      </table>
+    
+      <p>Table#fix_empty_cells</p>
+      <p>Total Score: 4.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>collect</td>
+          </tr>
+        
+      </table>
+    
+      <p>Table#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_vcs_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/vcs.rb'>/lib/achoo/vcs.rb</a></h2>
+    
+      <p>VCS#print_logs_for</p>
+      <p>Total Score: 13.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>7.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>log_for</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>print_log</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>factory</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>glob</td>
+          </tr>
+        
+      </table>
+    
+      <p>VCS#header</p>
+      <p>Total Score: 12.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>/</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>basename</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>upcase</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>*</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>VCS#print_log</p>
+      <p>Total Score: 7.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>chomp</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>header</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>empty?</td>
+          </tr>
+        
+      </table>
+    
+      <p>VCS#factory</p>
+      <p>Total Score: 6.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>repository?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>find</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+      </table>
+    
+      <p>VCS#none</p>
+      <p>Total Score: 3.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>autoload</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+          <tr>
+            <td>0.3</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ui_optionally_ranged_date_chooser_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/optionally_ranged_date_chooser.rb'>/lib/achoo/ui/optionally_ranged_date_chooser.rb</a></h2>
+    
+      <p>OptionallyRangedDateChooser#parse_date_range</p>
+      <p>Total Score: 13.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.5</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>strip</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>parse_date</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>raise</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>>=</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>split</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>OptionallyRangedDateChooser#handle_answer</p>
+      <p>Total Score: 3.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>parse_date_range</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>include?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>OptionallyRangedDateChooser#date_format_help_string</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td><<</td>
+          </tr>
+        
+      </table>
+    
+      <p>OptionallyRangedDateChooser#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ui_exception_handling_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/exception_handling.rb'>/lib/achoo/ui/exception_handling.rb</a></h2>
+    
+      <p>ExceptionHandling#get_exception_reason</p>
+      <p>Total Score: 11.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.5</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>message</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>gsub</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>backtrace</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>join</td>
+          </tr>
+        
+      </table>
+    
+      <p>ExceptionHandling#handle_fatal_exception</p>
+      <p>Total Score: 6.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>get_exception_reason</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>fatal</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>abort</td>
+          </tr>
+        
+      </table>
+    
+      <p>ExceptionHandling#handle_exception</p>
+      <p>Total Score: 4.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>get_exception_reason</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>warn</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>+</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ui_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ui.rb'>/lib/achoo/ui.rb</a></h2>
+    
+      <p>UI#none</p>
+      <p>Total Score: 9.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>9.6</td>
+            <td>autoload</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_achievo_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'>/lib/achoo/achievo.rb</a></h2>
+    
+      <p>Achievo#none</p>
+      <p>Total Score: 8.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>8.4</td>
+            <td>autoload</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_vcs_git_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/vcs/git.rb'>/lib/achoo/vcs/git.rb</a></h2>
+    
+      <p>Git#log_for</p>
+      <p>Total Score: 6.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>strftime</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>next</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>[]</td>
+          </tr>
+        
+      </table>
+    
+      <p>Git#initialize</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>Git#repository?</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>exists?</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_system_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/system.rb'>/lib/achoo/system.rb</a></h2>
+    
+      <p>System#none</p>
+      <p>Total Score: 6.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>autoload</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ui_common_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/common.rb'>/lib/achoo/ui/common.rb</a></h2>
+    
+      <p>Common#confirm</p>
+      <p>Total Score: 5.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>downcase!</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>ask</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_system_log_entry_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/system/log_entry.rb'>/lib/achoo/system/log_entry.rb</a></h2>
+    
+      <p>LogEntry#none</p>
+      <p>Total Score: 4.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>attr</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>include</td>
+          </tr>
+        
+      </table>
+    
+      <p>LogEntry#<=></p>
+      <p>Total Score: 4.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>time</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td><=></td>
+          </tr>
+        
+      </table>
+    
+      <p>LogEntry#initialize</p>
+      <p>Total Score: 2.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_ui_date_choosers_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/ui/date_choosers.rb'>/lib/achoo/ui/date_choosers.rb</a></h2>
+    
+      <p>DateChoosers#optionally_ranged_date_chooser</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>choose</td>
+          </tr>
+        
+      </table>
+    
+      <p>DateChoosers#month_chooser</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>choose</td>
+          </tr>
+        
+      </table>
+    
+      <p>DateChoosers#date_chooser</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>choose</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_temporal_open_timespan_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'>/lib/achoo/temporal/open_timespan.rb</a></h2>
+    
+      <p>OpenTimespan#to_s</p>
+      <p>Total Score: 2.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>sub!</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_achoo_temporal_rb"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal.rb'>/lib/achoo/temporal.rb</a></h2>
+    
+      <p>Temporal#none</p>
+      <p>Total Score: 2.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>autoload</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+<p>Generated on Fri Apr 30 14:06:10 +0000 2010</p>	
+
+    </div>
+  </body>
+</html>
