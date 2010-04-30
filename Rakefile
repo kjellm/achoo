@@ -1,9 +1,9 @@
 # encoding: utf-8
 
 require 'code_stats'
+require 'hanna/rdoctask'
 require 'metric_fu'
 require 'rake/gempackagetask'
-require 'rake/rdoctask'
 require 'rake/testtask'
 require 'rubygems'
 
@@ -108,7 +108,6 @@ namespace 'doc' do
     rd.title = 'Achoo --- The Achievo CLI'
     rd.main = "README.rdoc"
     rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
-    rd.template = `allison --path`.chop + '.rb'
     rd.options << '--line-numbers' << '--inline-source'
     rd.rdoc_dir = 'doc'
   end
@@ -117,7 +116,7 @@ end
 
 desc 'Install development dependencies'
 task :setup do
-  system 'gem install shoulda rack thin redgreen allison metric_fu code_stats'
+  system 'gem install shoulda rack thin redgreen allison metric_fu code_stats hanna'
 end
 
 desc 'Remove generated files and folders'
