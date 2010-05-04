@@ -45,55 +45,55 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000118">new</a></li>
-              <li><a href="#M000117">repository?</a></li>
+              <li><a href="#M000117">new</a></li>
+              <li><a href="#M000116">repository?</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000119">log_for</a></li>
+              <li><a href="#M000118">log_for</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000118'>
-                <a name='M000118'></a>
-                <div class='synopsis'>
-                  <span class='name'>new</span>
-                  <span class='arguments'>(dir)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000118-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000118-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/subversion.rb, line 12</span>&#x000A;12:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">dir</span>)&#x000A;13:         <span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">dir</span>&#x000A;14:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
               <div class='method public-class' id='method-M000117'>
                 <a name='M000117'></a>
                 <div class='synopsis'>
-                  <span class='name'>repository?</span>
+                  <span class='name'>new</span>
                   <span class='arguments'>(dir)</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000117-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000117-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/subversion.rb, line 8</span>&#x000A; 8:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">repository?</span>(<span class="ruby-identifier">dir</span>)&#x000A; 9:         <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{dir}/.svn&quot;</span>)&#x000A;10:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000117-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/subversion.rb, line 12</span>&#x000A;12:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">dir</span>)&#x000A;13:         <span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">dir</span>&#x000A;14:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000116'>
+                <a name='M000116'></a>
+                <div class='synopsis'>
+                  <span class='name'>repository?</span>
+                  <span class='arguments'>(dir)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000116-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000116-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/subversion.rb, line 8</span>&#x000A; 8:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">repository?</span>(<span class="ruby-identifier">dir</span>)&#x000A; 9:         <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-node">&quot;#{dir}/.svn&quot;</span>)&#x000A;10:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000119'>
-                <a name='M000119'></a>
+              <div class='method public-instance' id='method-M000118'>
+                <a name='M000118'></a>
                 <div class='synopsis'>
                   <span class='name'>log_for</span>
                   <span class='arguments'>(date)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000119-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000118-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000119-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/subversion.rb, line 16</span>&#x000A;16:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_for</span>(<span class="ruby-identifier">date</span>)&#x000A;17:         <span class="ruby-identifier">date</span> = <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">&quot;%F&quot;</span>)&#x000A;18:         <span class="ruby-identifier">xml</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-value">`cd #@dir; svn log --xml`</span>)&#x000A;19:         <span class="ruby-identifier">logentries</span> = <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-node">&quot;/log/logentry/author[contains(., \&quot;#{ENV['USER']}\&quot;)]/parent::*&quot;</span>)&#x000A;20:         &#x000A;21:         <span class="ruby-comment cmt"># FIX are the dates in the xml local time, or do they need to be</span>&#x000A;22:         <span class="ruby-comment cmt"># converted?</span>&#x000A;23:         <span class="ruby-identifier">log</span> = <span class="ruby-value str">&quot;&quot;</span>&#x000A;24:         <span class="ruby-identifier">logentries</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>&#x000A;25:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">css</span>(<span class="ruby-value str">'date'</span>).<span class="ruby-identifier">text</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-identifier">date</span>)&#x000A;26:             <span class="ruby-identifier">log</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">css</span>(<span class="ruby-value str">'msg'</span>).<span class="ruby-identifier">text</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>&#x000A;27:           <span class="ruby-keyword kw">end</span>&#x000A;28:         <span class="ruby-keyword kw">end</span>&#x000A;29:         <span class="ruby-identifier">log</span>&#x000A;30:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000118-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/subversion.rb, line 16</span>&#x000A;16:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_for</span>(<span class="ruby-identifier">date</span>)&#x000A;17:         <span class="ruby-identifier">date</span> = <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">&quot;%F&quot;</span>)&#x000A;18:         <span class="ruby-identifier">xml</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-value">`cd #@dir; svn log --xml`</span>)&#x000A;19:         <span class="ruby-identifier">logentries</span> = <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-node">&quot;/log/logentry/author[contains(., \&quot;#{ENV['USER']}\&quot;)]/parent::*&quot;</span>)&#x000A;20:         &#x000A;21:         <span class="ruby-comment cmt"># FIX are the dates in the xml local time, or do they need to be</span>&#x000A;22:         <span class="ruby-comment cmt"># converted?</span>&#x000A;23:         <span class="ruby-identifier">log</span> = <span class="ruby-value str">&quot;&quot;</span>&#x000A;24:         <span class="ruby-identifier">logentries</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>&#x000A;25:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">css</span>(<span class="ruby-value str">'date'</span>).<span class="ruby-identifier">text</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-identifier">date</span>)&#x000A;26:             <span class="ruby-identifier">log</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">css</span>(<span class="ruby-value str">'msg'</span>).<span class="ruby-identifier">text</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>&#x000A;27:           <span class="ruby-keyword kw">end</span>&#x000A;28:         <span class="ruby-keyword kw">end</span>&#x000A;29:         <span class="ruby-identifier">log</span>&#x000A;30:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

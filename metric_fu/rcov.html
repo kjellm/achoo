@@ -545,10 +545,10 @@ table td.score {
 
 
 <canvas id="graph"></canvas>
-<script language="javascript" src="rcov.js?1272636370" type="text/javascript"></script>
+<script language="javascript" src="rcov.js?1273002840" type="text/javascript"></script>
 
 
-<p>Total Coverage: 83.2% </p>
+<p>Total Coverage: 81.9% </p>
 <table>
   <tr>
     <th>File Path</th>
@@ -559,6 +559,12 @@ table td.score {
     <tr>
       <td><a href="#lib_achoo_term_rb">lib/achoo/term.rb</a></td>
       <td>40</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_achievo_date_field_rb">lib/achoo/achievo/date_field.rb</a></td>
+      <td>49</td>
     </tr>
     
   
@@ -611,7 +617,13 @@ table td.score {
     
   
     <tr>
-      <td><a href="#lib_achoo_rb">lib/achoo.rb</a></td>
+      <td><a href="#lib_achoo_temporal_open_timespan_rb">lib/achoo/temporal/open_timespan.rb</a></td>
+      <td>100</td>
+    </tr>
+    
+  
+    <tr>
+      <td><a href="#lib_achoo_achievo_rb">lib/achoo/achievo.rb</a></td>
       <td>100</td>
     </tr>
     
@@ -635,7 +647,7 @@ table td.score {
     
   
     <tr>
-      <td><a href="#lib_achoo_temporal_open_timespan_rb">lib/achoo/temporal/open_timespan.rb</a></td>
+      <td><a href="#lib_achoo_rb">lib/achoo.rb</a></td>
       <td>100</td>
     </tr>
     
@@ -1055,6 +1067,188 @@ table td.score {
       <tr>
         
         <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/term.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_achievo_date_field_rb"> lib/achoo/achievo/date_field.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>   require 'achoo/achievo'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>     module Achievo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>       def self.DateField(attr_name, field_name)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>         Module.new do</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>           define_method("#{attr_name}=") do |date|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             # Day and month must be prefixed with '0' if single</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             # digit. Date.day and Date.month doesn't do this. Use strftime</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             send("#{attr_name}_day_field=",   date.strftime('%d'))</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             send("#{attr_name}_month_field=", date.strftime('%m'))</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             send("#{attr_name}_year_field=",  date.year)</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>           define_method("#{attr_name}") do</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             Date.new(*[send("#{attr_name}_year_field"),</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>                        send("#{attr_name}_month_field"),</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>                        send("#{attr_name}_day_field")].collect {|e| e.to_i})</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>           </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>           %w(day month year).each do |e|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             define_method("#{attr_name}_#{e}_field") do</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>               @form.field_with(:name => "#{field_name}[#{e}]").value</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             end </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>                 </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             define_method("#{attr_name}_#{e}_field=") do |val|</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>               @form.field_with(:name => "#{field_name}[#{e}]").value = val</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>             end </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>           end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_not_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo/date_field.rb'><pre>   end</pre></a></td>
       </tr>
     
     </table>
@@ -4031,18 +4225,160 @@ table td.score {
     </table>
   </div>
 
-  <h2 id="lib_achoo_rb"> lib/achoo.rb</h2>
+  <h2 id="lib_achoo_temporal_open_timespan_rb"> lib/achoo/temporal/open_timespan.rb</h2>
   <div class="rcov_overflow">
     <table class="rcov_code">
     
       <tr>
         
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo.rb'><pre>   module Achoo</pre></a></td>
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   require 'achoo/temporal'</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo.rb'><pre>   end</pre></a></td>
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>     module Temporal</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>       class OpenTimespan < Timespan</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>         def to_s</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s = super</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s.sub!(/^\([^)]+\)/, '(?+??:??)')</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s.sub!(/- .*$/, '- ?')</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>         end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>       end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   end</pre></a></td>
+      </tr>
+    
+    </table>
+  </div>
+
+  <h2 id="lib_achoo_achievo_rb"> lib/achoo/achievo.rb</h2>
+  <div class="rcov_overflow">
+    <table class="rcov_code">
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>   require 'achoo'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>   require 'achoo/achievo/date_field'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>   </pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>   module Achoo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>     module Achievo</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>       autoload :HourAdministrationForm,     'achoo/achievo/hour_administration_form.rb'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>       autoload :HourRegistrationForm,       'achoo/achievo/hour_registration_form.rb'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>       autoload :HourRegistrationFormRanged, 'achoo/achievo/hour_registration_form_ranged.rb'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>       autoload :LockMonthForm,              'achoo/achievo/lock_month_form.rb'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>       autoload :LoginForm,                  'achoo/achievo/login_form.rb'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>       autoload :Table,                      'achoo/achievo/table.rb'</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/achievo.rb'><pre>   end</pre></a></td>
       </tr>
     
     </table>
@@ -4284,94 +4620,24 @@ table td.score {
     </table>
   </div>
 
-  <h2 id="lib_achoo_temporal_open_timespan_rb"> lib/achoo/temporal/open_timespan.rb</h2>
+  <h2 id="lib_achoo_rb"> lib/achoo.rb</h2>
   <div class="rcov_overflow">
     <table class="rcov_code">
     
       <tr>
         
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   require 'achoo/temporal'</pre></a></td>
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo.rb'><pre>   module Achoo</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   </pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   module Achoo</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>     module Temporal</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>       class OpenTimespan < Timespan</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   </pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>         def to_s</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s = super</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s.sub!(/^\([^)]+\)/, '(?+??:??)')</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s.sub!(/- .*$/, '- ?')</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>           s</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>         end</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   </pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>       end</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>     end</pre></a></td>
-      </tr>
-    
-      <tr>
-        
-        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo/temporal/open_timespan.rb'><pre>   end</pre></a></td>
+        <td class="rcov_run"><a href='file:///home/ubuntu/achoo/lib/achoo.rb'><pre>   end</pre></a></td>
       </tr>
     
     </table>
   </div>
 
-<p>Generated on Fri Apr 30 14:06:10 +0000 2010</p>	
+<p>Generated on Tue May 04 19:54:00 +0000 2010</p>	
 
     </div>
   </body>

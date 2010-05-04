@@ -45,41 +45,41 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000110">new</a></li>
+              <li><a href="#M000109">new</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000111">print_ask_and_validate</a></li>
+              <li><a href="#M000110">print_ask_and_validate</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000110'>
-                <a name='M000110'></a>
+              <div class='method public-class' id='method-M000109'>
+                <a name='M000109'></a>
                 <div class='synopsis'>
                   <span class='name'>new</span>
                   <span class='arguments'>(question, entries, special=nil, additional_valid_answers=[])</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000110-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000109-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000110-source'>    <span class="ruby-comment cmt"># File lib/achoo/term/menu.rb, line 7</span>&#x000A; 7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">question</span>, <span class="ruby-identifier">entries</span>, <span class="ruby-identifier">special</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">additional_valid_answers</span>=[])&#x000A; 8:         <span class="ruby-ivar">@question</span> = <span class="ruby-identifier">question</span>&#x000A; 9:         <span class="ruby-ivar">@entries</span>  = <span class="ruby-identifier">entries</span>&#x000A;10:         <span class="ruby-ivar">@special</span>  = <span class="ruby-identifier">special</span>&#x000A;11: &#x000A;12:         <span class="ruby-ivar">@valid</span> = {}&#x000A;13:         <span class="ruby-ivar">@valid</span>[<span class="ruby-value str">'0'</span>] = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@special</span>.<span class="ruby-identifier">nil?</span>&#x000A;14:         <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-ivar">@entries</span>.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@valid</span>[<span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-keyword kw">true</span>}&#x000A;15:         <span class="ruby-identifier">additional_valid_answers</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@valid</span>[<span class="ruby-identifier">a</span>] = <span class="ruby-keyword kw">true</span>}&#x000A;16:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000109-source'>    <span class="ruby-comment cmt"># File lib/achoo/term/menu.rb, line 7</span>&#x000A; 7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">question</span>, <span class="ruby-identifier">entries</span>, <span class="ruby-identifier">special</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">additional_valid_answers</span>=[])&#x000A; 8:         <span class="ruby-ivar">@question</span> = <span class="ruby-identifier">question</span>&#x000A; 9:         <span class="ruby-ivar">@entries</span>  = <span class="ruby-identifier">entries</span>&#x000A;10:         <span class="ruby-ivar">@special</span>  = <span class="ruby-identifier">special</span>&#x000A;11: &#x000A;12:         <span class="ruby-ivar">@valid</span> = {}&#x000A;13:         <span class="ruby-ivar">@valid</span>[<span class="ruby-value str">'0'</span>] = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@special</span>.<span class="ruby-identifier">nil?</span>&#x000A;14:         <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-ivar">@entries</span>.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@valid</span>[<span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-keyword kw">true</span>}&#x000A;15:         <span class="ruby-identifier">additional_valid_answers</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@valid</span>[<span class="ruby-identifier">a</span>] = <span class="ruby-keyword kw">true</span>}&#x000A;16:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000111'>
-                <a name='M000111'></a>
+              <div class='method public-instance' id='method-M000110'>
+                <a name='M000110'></a>
                 <div class='synopsis'>
                   <span class='name'>print_ask_and_validate</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000111-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000110-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000111-source'>    <span class="ruby-comment cmt"># File lib/achoo/term/menu.rb, line 18</span>&#x000A;18:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print_ask_and_validate</span>()&#x000A;19:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@entries</span>.<span class="ruby-identifier">empty?</span>&#x000A;20: &#x000A;21:         <span class="ruby-identifier">print_menu</span>()&#x000A;22:         <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'1'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">only_one_option?</span>&#x000A;23:         &#x000A;24:         <span class="ruby-identifier">loop</span> <span class="ruby-keyword kw">do</span>&#x000A;25:           <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Term</span>.<span class="ruby-identifier">ask</span>(<span class="ruby-ivar">@question</span>)&#x000A;26:           <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@valid</span>[<span class="ruby-identifier">answer</span>]&#x000A;27:             <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>&#x000A;28:           <span class="ruby-keyword kw">else</span>&#x000A;29:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Invalid value. Must be one of &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@valid</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">','</span>)&#x000A;30:           <span class="ruby-keyword kw">end</span>&#x000A;31:         <span class="ruby-keyword kw">end</span>&#x000A;32:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000110-source'>    <span class="ruby-comment cmt"># File lib/achoo/term/menu.rb, line 18</span>&#x000A;18:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print_ask_and_validate</span>()&#x000A;19:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@entries</span>.<span class="ruby-identifier">empty?</span>&#x000A;20: &#x000A;21:         <span class="ruby-identifier">print_menu</span>()&#x000A;22:         <span class="ruby-keyword kw">return</span> <span class="ruby-value str">'1'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">only_one_option?</span>&#x000A;23:         &#x000A;24:         <span class="ruby-identifier">loop</span> <span class="ruby-keyword kw">do</span>&#x000A;25:           <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Term</span>.<span class="ruby-identifier">ask</span>(<span class="ruby-ivar">@question</span>)&#x000A;26:           <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@valid</span>[<span class="ruby-identifier">answer</span>]&#x000A;27:             <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>&#x000A;28:           <span class="ruby-keyword kw">else</span>&#x000A;29:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Invalid value. Must be one of &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@valid</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">','</span>)&#x000A;30:           <span class="ruby-keyword kw">end</span>&#x000A;31:         <span class="ruby-keyword kw">end</span>&#x000A;32:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

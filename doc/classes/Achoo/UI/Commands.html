@@ -41,12 +41,12 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000089">lock_month</a></li>
-              <li><a href="#M000088">show_flexi_time</a></li>
-              <li><a href="#M000090">show_holiday_report</a></li>
-              <li><a href="#M000086">show_registered_hours_for_day</a></li>
-              <li><a href="#M000087">show_registered_hours_for_week</a></li>
-              <li><a href="#M000091">view_report</a></li>
+              <li><a href="#M000085">lock_month</a></li>
+              <li><a href="#M000084">show_flexi_time</a></li>
+              <li><a href="#M000086">show_holiday_report</a></li>
+              <li><a href="#M000082">show_registered_hours_for_day</a></li>
+              <li><a href="#M000083">show_registered_hours_for_week</a></li>
+              <li><a href="#M000087">view_report</a></li>
             </ol>
           </div>
           <div id='context'>
@@ -61,82 +61,82 @@
           <div id='section'>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000089'>
-                <a name='M000089'></a>
+              <div class='method public-instance' id='method-M000085'>
+                <a name='M000085'></a>
                 <div class='synopsis'>
                   <span class='name'>lock_month</span>
                   <span class='arguments'>(agent)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000089-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000085-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000089-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 33</span>&#x000A;33:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lock_month</span>(<span class="ruby-identifier">agent</span>)&#x000A;34:         <span class="ruby-identifier">month</span> = <span class="ruby-identifier">month_chooser</span>&#x000A;35:         <span class="ruby-identifier">form</span>  = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">LockMonthForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">agent</span>)&#x000A;36:         <span class="ruby-identifier">form</span>.<span class="ruby-identifier">lock_month</span>(<span class="ruby-identifier">month</span>)&#x000A;37:         <span class="ruby-identifier">form</span>.<span class="ruby-identifier">print_values</span>&#x000A;38:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">confirm</span>&#x000A;39:           <span class="ruby-identifier">form</span>.<span class="ruby-identifier">submit</span>&#x000A;40:         <span class="ruby-keyword kw">else</span>&#x000A;41:           <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Cancelled&quot;</span>&#x000A;42:         <span class="ruby-keyword kw">end</span>&#x000A;43:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000085-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 33</span>&#x000A;33:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lock_month</span>(<span class="ruby-identifier">agent</span>)&#x000A;34:         <span class="ruby-identifier">month</span> = <span class="ruby-identifier">month_chooser</span>&#x000A;35:         <span class="ruby-identifier">form</span>  = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">LockMonthForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">agent</span>)&#x000A;36:         <span class="ruby-identifier">form</span>.<span class="ruby-identifier">lock_month</span>(<span class="ruby-identifier">month</span>)&#x000A;37:         <span class="ruby-identifier">form</span>.<span class="ruby-identifier">print_values</span>&#x000A;38:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">confirm</span>&#x000A;39:           <span class="ruby-identifier">form</span>.<span class="ruby-identifier">submit</span>&#x000A;40:         <span class="ruby-keyword kw">else</span>&#x000A;41:           <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Cancelled&quot;</span>&#x000A;42:         <span class="ruby-keyword kw">end</span>&#x000A;43:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000088'>
-                <a name='M000088'></a>
+              <div class='method public-instance' id='method-M000084'>
+                <a name='M000084'></a>
                 <div class='synopsis'>
                   <span class='name'>show_flexi_time</span>
                   <span class='arguments'>(agent)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000088-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000084-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000088-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 25</span>&#x000A;25:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_flexi_time</span>(<span class="ruby-identifier">agent</span>)&#x000A;26:         <span class="ruby-identifier">date</span> = <span class="ruby-identifier">date_chooser</span>&#x000A;27:         <span class="ruby-identifier">form</span> = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">HourAdministrationForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">agent</span>)&#x000A;28:         <span class="ruby-identifier">balance</span> = <span class="ruby-identifier">form</span>.<span class="ruby-identifier">flexi_time</span>(<span class="ruby-identifier">date</span>)&#x000A;29:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Flexi time balance: #{Term::underline(balance)}&quot;</span>&#x000A;30:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000090'>
-                <a name='M000090'></a>
-                <div class='synopsis'>
-                  <span class='name'>show_holiday_report</span>
-                  <span class='arguments'>(agent)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000090-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000090-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 46</span>&#x000A;46:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_holiday_report</span>(<span class="ruby-identifier">agent</span>)&#x000A;47:         <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-constant">RC</span>[<span class="ruby-identifier">:holiday_report_url</span>])&#x000A;48:         <span class="ruby-identifier">page</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/&lt;b&gt;(\d+,\d+)&lt;\/b&gt;/</span>)&#x000A;49:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Balance: #{Term::underline($1)}&quot;</span>&#x000A;50:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000084-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 25</span>&#x000A;25:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_flexi_time</span>(<span class="ruby-identifier">agent</span>)&#x000A;26:         <span class="ruby-identifier">date</span> = <span class="ruby-identifier">date_chooser</span>&#x000A;27:         <span class="ruby-identifier">form</span> = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">HourAdministrationForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">agent</span>)&#x000A;28:         <span class="ruby-identifier">balance</span> = <span class="ruby-identifier">form</span>.<span class="ruby-identifier">flexi_time</span>(<span class="ruby-identifier">date</span>)&#x000A;29:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Flexi time balance: #{Term::underline(balance)}&quot;</span>&#x000A;30:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-instance' id='method-M000086'>
                 <a name='M000086'></a>
                 <div class='synopsis'>
-                  <span class='name'>show_registered_hours_for_day</span>
+                  <span class='name'>show_holiday_report</span>
                   <span class='arguments'>(agent)</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000086-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000086-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 12</span>&#x000A;12:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_registered_hours_for_day</span>(<span class="ruby-identifier">agent</span>)&#x000A;13:         <span class="ruby-identifier">date</span> = <span class="ruby-identifier">date_chooser</span>&#x000A;14:         <span class="ruby-identifier">form</span> = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">HourAdministrationForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">agent</span>)&#x000A;15:         <span class="ruby-identifier">form</span>.<span class="ruby-identifier">show_registered_hours_for_day</span>(<span class="ruby-identifier">date</span>)&#x000A;16:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000086-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 46</span>&#x000A;46:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_holiday_report</span>(<span class="ruby-identifier">agent</span>)&#x000A;47:         <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-constant">RC</span>[<span class="ruby-identifier">:holiday_report_url</span>])&#x000A;48:         <span class="ruby-identifier">page</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/&lt;b&gt;(\d+,\d+)&lt;\/b&gt;/</span>)&#x000A;49:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Balance: #{Term::underline($1)}&quot;</span>&#x000A;50:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000082'>
+                <a name='M000082'></a>
+                <div class='synopsis'>
+                  <span class='name'>show_registered_hours_for_day</span>
+                  <span class='arguments'>(agent)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000082-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000082-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 12</span>&#x000A;12:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_registered_hours_for_day</span>(<span class="ruby-identifier">agent</span>)&#x000A;13:         <span class="ruby-identifier">date</span> = <span class="ruby-identifier">date_chooser</span>&#x000A;14:         <span class="ruby-identifier">form</span> = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">HourAdministrationForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">agent</span>)&#x000A;15:         <span class="ruby-identifier">form</span>.<span class="ruby-identifier">show_registered_hours_for_day</span>(<span class="ruby-identifier">date</span>)&#x000A;16:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000083'>
+                <a name='M000083'></a>
+                <div class='synopsis'>
+                  <span class='name'>show_registered_hours_for_week</span>
+                  <span class='arguments'>(agent)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000083-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000083-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 18</span>&#x000A;18:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_registered_hours_for_week</span>(<span class="ruby-identifier">agent</span>)&#x000A;19:         <span class="ruby-identifier">date</span> = <span class="ruby-identifier">date_chooser</span>&#x000A;20:         <span class="ruby-identifier">form</span> = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">HourAdministrationForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">agent</span>)&#x000A;21:         <span class="ruby-identifier">form</span>.<span class="ruby-identifier">show_registered_hours_for_week</span>(<span class="ruby-identifier">date</span>)&#x000A;22:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-instance' id='method-M000087'>
                 <a name='M000087'></a>
                 <div class='synopsis'>
-                  <span class='name'>show_registered_hours_for_week</span>
+                  <span class='name'>view_report</span>
                   <span class='arguments'>(agent)</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000087-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000087-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 18</span>&#x000A;18:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_registered_hours_for_week</span>(<span class="ruby-identifier">agent</span>)&#x000A;19:         <span class="ruby-identifier">date</span> = <span class="ruby-identifier">date_chooser</span>&#x000A;20:         <span class="ruby-identifier">form</span> = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">HourAdministrationForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">agent</span>)&#x000A;21:         <span class="ruby-identifier">form</span>.<span class="ruby-identifier">show_registered_hours_for_week</span>(<span class="ruby-identifier">date</span>)&#x000A;22:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000091'>
-                <a name='M000091'></a>
-                <div class='synopsis'>
-                  <span class='name'>view_report</span>
-                  <span class='arguments'>(agent)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000091-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000091-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 53</span>&#x000A;53:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">view_report</span>(<span class="ruby-identifier">agent</span>)&#x000A;54:         <span class="ruby-identifier">choices</span> = <span class="ruby-constant">RC</span>[<span class="ruby-identifier">:reports</span>].<span class="ruby-identifier">keys</span>&#x000A;55:         <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Term</span>.<span class="ruby-identifier">choose</span>(<span class="ruby-value str">'Report'</span>, <span class="ruby-identifier">choices</span>)&#x000A;56:         <span class="ruby-identifier">key</span> = <span class="ruby-identifier">choices</span>[<span class="ruby-identifier">answer</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]&#x000A;57:         &#x000A;58:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Fetching data ...&quot;</span>&#x000A;59:         <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-constant">RC</span>[<span class="ruby-identifier">:url</span>] <span class="ruby-operator">+</span> <span class="ruby-constant">RC</span>[<span class="ruby-identifier">:reports</span>][<span class="ruby-identifier">key</span>])&#x000A;60:         &#x000A;61:         <span class="ruby-identifier">table</span> = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">search</span>(<span class="ruby-value str">'#rl_1 tr'</span>))&#x000A;62:         <span class="ruby-identifier">table</span>.<span class="ruby-identifier">select_columns</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>&#x000A;63:           [<span class="ruby-value str">'Date'</span>, <span class="ruby-value str">'Project'</span>, <span class="ruby-value str">'Phase'</span>, <span class="ruby-value str">'Remark'</span>, <span class="ruby-value str">'Time'</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>[<span class="ruby-value">0</span>])&#x000A;64:         <span class="ruby-keyword kw">end</span>&#x000A;65:         &#x000A;66:         <span class="ruby-constant">Term</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table</span>.<span class="ruby-identifier">first</span>,&#x000A;67:                         <span class="ruby-identifier">table</span>[<span class="ruby-value">2</span><span class="ruby-operator">...</span><span class="ruby-identifier">table</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>],&#x000A;68:                         <span class="ruby-identifier">table</span>.<span class="ruby-identifier">last</span>).<span class="ruby-identifier">print</span>&#x000A;69:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000087-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/commands.rb, line 53</span>&#x000A;53:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">view_report</span>(<span class="ruby-identifier">agent</span>)&#x000A;54:         <span class="ruby-identifier">choices</span> = <span class="ruby-constant">RC</span>[<span class="ruby-identifier">:reports</span>].<span class="ruby-identifier">keys</span>&#x000A;55:         <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Term</span>.<span class="ruby-identifier">choose</span>(<span class="ruby-value str">'Report'</span>, <span class="ruby-identifier">choices</span>)&#x000A;56:         <span class="ruby-identifier">key</span> = <span class="ruby-identifier">choices</span>[<span class="ruby-identifier">answer</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]&#x000A;57:         &#x000A;58:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Fetching data ...&quot;</span>&#x000A;59:         <span class="ruby-identifier">page</span> = <span class="ruby-identifier">agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-constant">RC</span>[<span class="ruby-identifier">:url</span>] <span class="ruby-operator">+</span> <span class="ruby-constant">RC</span>[<span class="ruby-identifier">:reports</span>][<span class="ruby-identifier">key</span>])&#x000A;60:         &#x000A;61:         <span class="ruby-identifier">table</span> = <span class="ruby-constant">Achievo</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">search</span>(<span class="ruby-value str">'#rl_1 tr'</span>))&#x000A;62:         <span class="ruby-identifier">table</span>.<span class="ruby-identifier">select_columns</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>&#x000A;63:           [<span class="ruby-value str">'Date'</span>, <span class="ruby-value str">'Project'</span>, <span class="ruby-value str">'Phase'</span>, <span class="ruby-value str">'Remark'</span>, <span class="ruby-value str">'Time'</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>[<span class="ruby-value">0</span>])&#x000A;64:         <span class="ruby-keyword kw">end</span>&#x000A;65:         &#x000A;66:         <span class="ruby-constant">Term</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table</span>.<span class="ruby-identifier">first</span>,&#x000A;67:                         <span class="ruby-identifier">table</span>[<span class="ruby-value">2</span><span class="ruby-operator">...</span><span class="ruby-identifier">table</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>],&#x000A;68:                         <span class="ruby-identifier">table</span>.<span class="ruby-identifier">last</span>).<span class="ruby-identifier">print</span>&#x000A;69:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

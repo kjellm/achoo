@@ -6,6 +6,6 @@
       g.marker_font_size = "10px"
 
         g.title = 'Roodi: design problems';
-        g.data('roodi', [21,21]);
-        g.labels = {"0":"4/28","1":"4/30"};
+        g.data('roodi', [21,21,21]);
+        g.labels = {"0":"4/28","1":"4/30","2":"5/4"};
         g.draw();

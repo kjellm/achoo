@@ -45,55 +45,63 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000061">new</a></li>
+              <li><a href="#M000064">new</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000063">date</a></li>
-              <li><a href="#M000062">date=</a></li>
+              <li><a href="#M000066">date</a></li>
+              <li><a href="#M000065">date=</a></li>
             </ol>
+          </div>
+          <div id='context'>
+            <div id='includes'>
+              <h2>Included modules</h2>
+              <ol>
+                <li>Achievo::DateField</li>
+              </ol>
+            </div>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000061'>
-                <a name='M000061'></a>
+              <div class='method public-class' id='method-M000064'>
+                <a name='M000064'></a>
                 <div class='synopsis'>
                   <span class='name'>new</span>
                   <span class='arguments'>(agent)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000061-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000064-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000061-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form_ranged.rb, line 7</span>&#x000A; 7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">agent</span>)&#x000A; 8:         <span class="ruby-keyword kw">super</span>&#x000A; 9:         &#x000A;10:         <span class="ruby-ivar">@page</span> = <span class="ruby-ivar">@agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">atk_submit_to_url</span>(<span class="ruby-ivar">@page</span>.<span class="ruby-identifier">link_with</span>(<span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Select range'</span>).<span class="ruby-identifier">href</span>))&#x000A;11:         <span class="ruby-ivar">@form</span> = <span class="ruby-ivar">@page</span>.<span class="ruby-identifier">form</span>(<span class="ruby-value str">'entryform'</span>)&#x000A;12:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000064-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form_ranged.rb, line 9</span>&#x000A; 9:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">agent</span>)&#x000A;10:         <span class="ruby-keyword kw">super</span>&#x000A;11:         <span class="ruby-ivar">@page</span> = <span class="ruby-ivar">@agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">atk_submit_to_url</span>(<span class="ruby-ivar">@page</span>.<span class="ruby-identifier">link_with</span>(<span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Select range'</span>).<span class="ruby-identifier">href</span>))&#x000A;12:         <span class="ruby-ivar">@form</span> = <span class="ruby-ivar">@page</span>.<span class="ruby-identifier">form</span>(<span class="ruby-value str">'entryform'</span>)&#x000A;13:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000063'>
-                <a name='M000063'></a>
+              <div class='method public-instance' id='method-M000066'>
+                <a name='M000066'></a>
                 <div class='synopsis'>
                   <span class='name'>date</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000063-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000066-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000063-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form_ranged.rb, line 22</span>&#x000A;22:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">date</span>&#x000A;23:         <span class="ruby-identifier">start</span> = <span class="ruby-keyword kw">super</span>&#x000A;24:         <span class="ruby-identifier">finish</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">to_year_field</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">to_month_field</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>, &#x000A;25:                           <span class="ruby-identifier">to_day_field</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>)&#x000A;26:         [<span class="ruby-identifier">start</span>, <span class="ruby-identifier">finish</span>]&#x000A;27:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000066-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form_ranged.rb, line 20</span>&#x000A;20:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">date</span>&#x000A;21:         [<span class="ruby-keyword kw">super</span>, <span class="ruby-identifier">to_date</span>()]&#x000A;22:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000062'>
-                <a name='M000062'></a>
+              <div class='method public-instance' id='method-M000065'>
+                <a name='M000065'></a>
                 <div class='synopsis'>
                   <span class='name'>date=</span>
                   <span class='arguments'>(date_range)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000062-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000065-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000062-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form_ranged.rb, line 14</span>&#x000A;14:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">date=</span>(<span class="ruby-identifier">date_range</span>)&#x000A;15:         <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">date_range</span>[<span class="ruby-value">0</span>])&#x000A;16: &#x000A;17:         <span class="ruby-identifier">to_day_field</span>.<span class="ruby-identifier">value</span>   = <span class="ruby-identifier">date_range</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%d'</span>)&#x000A;18:         <span class="ruby-identifier">to_month_field</span>.<span class="ruby-identifier">value</span> = <span class="ruby-identifier">date_range</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%m'</span>)&#x000A;19:         <span class="ruby-identifier">to_year_field</span>.<span class="ruby-identifier">value</span>  = <span class="ruby-identifier">date_range</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">year</span>&#x000A;20:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000065-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form_ranged.rb, line 15</span>&#x000A;15:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">date=</span>(<span class="ruby-identifier">date_range</span>)&#x000A;16:         <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">date_range</span>[<span class="ruby-value">0</span>])&#x000A;17:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_date</span> = <span class="ruby-identifier">date_range</span>[<span class="ruby-value">1</span>]&#x000A;18:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

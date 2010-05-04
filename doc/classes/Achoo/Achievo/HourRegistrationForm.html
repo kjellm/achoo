@@ -36,7 +36,7 @@
         </ol>
         <div class='parent'>
           Parent:
-          <strong><a href="Form.html">Achoo::Achievo::Form</a></strong>
+          <strong>Object</strong>
         </div>
       </div>
       <div id='content'>
@@ -45,265 +45,273 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000041">new</a></li>
+              <li><a href="#M000042">new</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000056">all_projects</a></li>
-              <li><a href="#M000049">billing=</a></li>
-              <li><a href="#M000053">billing_options</a></li>
-              <li><a href="#M000051">billing_options</a></li>
-              <li><a href="#M000052">collect_options</a></li>
-              <li><a href="#M000045">hours=</a></li>
-              <li><a href="#M000046">phase</a></li>
-              <li><a href="#M000047">phase=</a></li>
-              <li><a href="#M000054">phases_for_selected_project</a></li>
-              <li><a href="#M000057">print_values</a></li>
-              <li><a href="#M000042">project</a></li>
-              <li><a href="#M000043">project=</a></li>
-              <li><a href="#M000055">recent_projects</a></li>
-              <li><a href="#M000044">remark=</a></li>
-              <li><a href="#M000058">submit</a></li>
-              <li><a href="#M000048">workperiod=</a></li>
-              <li><a href="#M000050">worktime_periods</a></li>
+              <li><a href="#M000057">all_projects</a></li>
+              <li><a href="#M000050">billing=</a></li>
+              <li><a href="#M000054">billing_options</a></li>
+              <li><a href="#M000052">billing_options</a></li>
+              <li><a href="#M000053">collect_options</a></li>
+              <li><a href="#M000046">hours=</a></li>
+              <li><a href="#M000047">phase</a></li>
+              <li><a href="#M000048">phase=</a></li>
+              <li><a href="#M000055">phases_for_selected_project</a></li>
+              <li><a href="#M000058">print_values</a></li>
+              <li><a href="#M000043">project</a></li>
+              <li><a href="#M000044">project=</a></li>
+              <li><a href="#M000056">recent_projects</a></li>
+              <li><a href="#M000045">remark=</a></li>
+              <li><a href="#M000059">submit</a></li>
+              <li><a href="#M000049">workperiod=</a></li>
+              <li><a href="#M000051">worktime_periods</a></li>
             </ol>
+          </div>
+          <div id='context'>
+            <div id='includes'>
+              <h2>Included modules</h2>
+              <ol>
+                <li>Achievo::DateField</li>
+              </ol>
+            </div>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000041'>
-                <a name='M000041'></a>
+              <div class='method public-class' id='method-M000042'>
+                <a name='M000042'></a>
                 <div class='synopsis'>
                   <span class='name'>new</span>
                   <span class='arguments'>(agent)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000041-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000042-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000041-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 7</span>&#x000A; 7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">agent</span>)&#x000A; 8:         <span class="ruby-ivar">@agent</span> = <span class="ruby-identifier">agent</span>&#x000A; 9:         <span class="ruby-ivar">@page</span>  = <span class="ruby-ivar">@agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-constant">RC</span>[<span class="ruby-identifier">:hour_registration_url</span>])&#x000A;10:         <span class="ruby-ivar">@form</span>  = <span class="ruby-ivar">@page</span>.<span class="ruby-identifier">form</span>(<span class="ruby-value str">'entryform'</span>)&#x000A;11: &#x000A;12:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">nil?</span>&#x000A;13:           <span class="ruby-comment cmt"># Happens if the user has viewed a day or week report for a</span>&#x000A;14:           <span class="ruby-comment cmt"># locked month. Fetching todays day report should fix this in</span>&#x000A;15:           <span class="ruby-comment cmt"># most cases.</span>&#x000A;16: &#x000A;17:           <span class="ruby-comment cmt"># FIX Ugly call to a private method using send()</span>&#x000A;18:           <span class="ruby-identifier">haf</span>    = <span class="ruby-constant">HourAdministrationForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@agent</span>)&#x000A;19:           <span class="ruby-ivar">@page</span>  = <span class="ruby-identifier">haf</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:set_page_to_view_for_date</span>, <span class="ruby-value str">'dayview'</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>)&#x000A;20:           <span class="ruby-ivar">@form</span>  = <span class="ruby-ivar">@page</span>.<span class="ruby-identifier">form</span>(<span class="ruby-value str">'entryform'</span>)&#x000A;21:         <span class="ruby-keyword kw">end</span>&#x000A;22: &#x000A;23:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">nil?</span>&#x000A;24:           <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Failed to retrieve the hour registration form.\nThe likely cause is that you have locked the current month, which is a silly thing to do.&quot;</span>&#x000A;25:         <span class="ruby-keyword kw">end</span>&#x000A;26: &#x000A;27:         <span class="ruby-ivar">@projects_seen</span> = {}&#x000A;28:         <span class="ruby-ivar">@phases_seen</span>   = {}&#x000A;29: &#x000A;30:         <span class="ruby-comment cmt"># Need to preselect this for some reason</span>&#x000A;31:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'billpercent'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">select</span>&#x000A;32:         <span class="ruby-comment cmt"># Preselecting this one as well, just in case</span>&#x000A;33:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'workperiod'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">select</span>&#x000A;34:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000042-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 9</span>&#x000A; 9:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">agent</span>)&#x000A;10:         <span class="ruby-ivar">@agent</span> = <span class="ruby-identifier">agent</span>&#x000A;11:         <span class="ruby-ivar">@page</span>  = <span class="ruby-ivar">@agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-constant">RC</span>[<span class="ruby-identifier">:hour_registration_url</span>])&#x000A;12:         <span class="ruby-ivar">@form</span>  = <span class="ruby-ivar">@page</span>.<span class="ruby-identifier">form</span>(<span class="ruby-value str">'entryform'</span>)&#x000A;13: &#x000A;14:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">nil?</span>&#x000A;15:           <span class="ruby-comment cmt"># Happens if the user has viewed a day or week report for a</span>&#x000A;16:           <span class="ruby-comment cmt"># locked month. Fetching todays day report should fix this in</span>&#x000A;17:           <span class="ruby-comment cmt"># most cases.</span>&#x000A;18: &#x000A;19:           <span class="ruby-comment cmt"># FIX Ugly call to a private method using send()</span>&#x000A;20:           <span class="ruby-identifier">haf</span>    = <span class="ruby-constant">HourAdministrationForm</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@agent</span>)&#x000A;21:           <span class="ruby-ivar">@page</span>  = <span class="ruby-identifier">haf</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:set_page_to_view_for_date</span>, <span class="ruby-value str">'dayview'</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>)&#x000A;22:           <span class="ruby-ivar">@form</span>  = <span class="ruby-ivar">@page</span>.<span class="ruby-identifier">form</span>(<span class="ruby-value str">'entryform'</span>)&#x000A;23:         <span class="ruby-keyword kw">end</span>&#x000A;24: &#x000A;25:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">nil?</span>&#x000A;26:           <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Failed to retrieve the hour registration form.\nThe likely cause is that you have locked the current month, which is a silly thing to do.&quot;</span>&#x000A;27:         <span class="ruby-keyword kw">end</span>&#x000A;28: &#x000A;29:         <span class="ruby-ivar">@projects_seen</span> = {}&#x000A;30:         <span class="ruby-ivar">@phases_seen</span>   = {}&#x000A;31: &#x000A;32:         <span class="ruby-comment cmt"># Need to preselect this for some reason</span>&#x000A;33:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'billpercent'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">select</span>&#x000A;34:         <span class="ruby-comment cmt"># Preselecting this one as well, just in case</span>&#x000A;35:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'workperiod'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">select</span>&#x000A;36:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000056'>
-                <a name='M000056'></a>
-                <div class='synopsis'>
-                  <span class='name'>all_projects</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000056-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000056-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 120</span>&#x000A;120:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">all_projects</span>&#x000A;121:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Getting project page #1...&quot;</span>&#x000A;122:         <span class="ruby-identifier">projects_page</span> = <span class="ruby-ivar">@agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">projects_url</span>)&#x000A;123:         <span class="ruby-identifier">projects</span> = <span class="ruby-identifier">scrape_projects</span>(<span class="ruby-identifier">projects_page</span>)&#x000A;124: &#x000A;125:         <span class="ruby-identifier">i</span> = <span class="ruby-value">2</span>&#x000A;126:         <span class="ruby-keyword kw">while</span> (<span class="ruby-identifier">link</span> = <span class="ruby-identifier">projects_page</span>.<span class="ruby-identifier">link_with</span>(<span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Next'</span>))&#x000A;127:           <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Getting project page ##{i}...&quot;</span>&#x000A;128:           <span class="ruby-identifier">projects_page</span> = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">click</span>&#x000A;129:           <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">scrape_projects</span>(<span class="ruby-identifier">projects_page</span>))&#x000A;130:           <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>&#x000A;131:         <span class="ruby-keyword kw">end</span>&#x000A;132: &#x000A;133:         <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>&#x000A;134:           <span class="ruby-identifier">id</span>   = <span class="ruby-identifier">projects</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">0</span>]&#x000A;135:           <span class="ruby-identifier">text</span> = <span class="ruby-node">&quot;#{projects[name][1]}: #{name}&quot;</span>&#x000A;136:           <span class="ruby-ivar">@projects_seen</span>[<span class="ruby-identifier">id</span>] = <span class="ruby-identifier">text</span>&#x000A;137:           [<span class="ruby-identifier">id</span>, <span class="ruby-identifier">text</span>]&#x000A;138:         <span class="ruby-keyword kw">end</span>&#x000A;139:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000049'>
-                <a name='M000049'></a>
-                <div class='synopsis'>
-                  <span class='name'>billing=</span>
-                  <span class='arguments'>(billing)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000049-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000049-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 64</span>&#x000A;64:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">billing=</span>(<span class="ruby-identifier">billing</span>)&#x000A;65:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">billpercent</span> = <span class="ruby-node">&quot;billpercent.id='#{billing}'&quot;</span>&#x000A;66:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000053'>
-                <a name='M000053'></a>
-                <div class='synopsis'>
-                  <span class='name'>billing_options</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000053-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000053-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 82</span>&#x000A;82:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">billing_options</span>&#x000A;83:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'billpercent'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>&#x000A;84:           [<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/billpercent\.id='(\d+)'/</span>)[<span class="ruby-value">1</span>], <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">text</span>]&#x000A;85:         <span class="ruby-keyword kw">end</span>&#x000A;86:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000051'>
-                <a name='M000051'></a>
-                <div class='synopsis'>
-                  <span class='name'>billing_options</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000051-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000051-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 72</span>&#x000A;72:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">billing_options</span>&#x000A;73:         <span class="ruby-identifier">collect_options</span>(<span class="ruby-value str">'billpercent'</span>)&#x000A;74:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000052'>
-                <a name='M000052'></a>
-                <div class='synopsis'>
-                  <span class='name'>collect_options</span>
-                  <span class='arguments'>(field_name, pattern)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000052-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000052-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 76</span>&#x000A;76:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">collect_options</span>(<span class="ruby-identifier">field_name</span>, <span class="ruby-identifier">pattern</span>)&#x000A;77:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">field_name</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>&#x000A;78:           [<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{field_name}\.id='(\d+)'/</span>)[<span class="ruby-value">1</span>], <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">text</span>]&#x000A;79:         <span class="ruby-keyword kw">end</span>&#x000A;80:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000045'>
-                <a name='M000045'></a>
-                <div class='synopsis'>
-                  <span class='name'>hours=</span>
-                  <span class='arguments'>(hours)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000045-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000045-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 48</span>&#x000A;48:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">hours=</span>(<span class="ruby-identifier">hours</span>)&#x000A;49:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">time</span> = <span class="ruby-identifier">hours</span>&#x000A;50:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000046'>
-                <a name='M000046'></a>
-                <div class='synopsis'>
-                  <span class='name'>phase</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000046-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000046-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 52</span>&#x000A;52:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phase</span>&#x000A;53:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">phaseid</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/phase\.id='(\d+)'/</span>)[<span class="ruby-value">1</span>]&#x000A;54:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000047'>
-                <a name='M000047'></a>
-                <div class='synopsis'>
-                  <span class='name'>phase=</span>
-                  <span class='arguments'>(phaseid)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000047-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000047-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 56</span>&#x000A;56:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phase=</span>(<span class="ruby-identifier">phaseid</span>)&#x000A;57:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">phaseid</span>   = <span class="ruby-node">&quot;phase.id='#{phaseid}'&quot;</span>&#x000A;58:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000054'>
-                <a name='M000054'></a>
-                <div class='synopsis'>
-                  <span class='name'>phases_for_selected_project</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000054-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000054-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 88</span>&#x000A; 88:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phases_for_selected_project</span>&#x000A; 89:         <span class="ruby-identifier">partial_page</span> = <span class="ruby-identifier">retrieve_project_phases_page</span>&#x000A; 90:         <span class="ruby-identifier">page</span>         = <span class="ruby-identifier">create_page_from_partial</span>(<span class="ruby-identifier">partial_page</span>)&#x000A; 91:         <span class="ruby-identifier">field</span>        = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">forms</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'phaseid'</span>)&#x000A; 92:         &#x000A; 93:         <span class="ruby-identifier">phases</span> = []&#x000A; 94:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:options</span>)&#x000A; 95:           <span class="ruby-identifier">field</span>.<span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>&#x000A; 96:             <span class="ruby-identifier">phases</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">extract_number_from_phaseid</span>(<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">value</span>), <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">text</span>]&#x000A; 97:           <span class="ruby-keyword kw">end</span>&#x000A; 98:         <span class="ruby-keyword kw">else</span>&#x000A; 99:           <span class="ruby-identifier">partial_page</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/(^[^&lt;]+)&amp;nbsp;&amp;nbsp;&lt;/</span>)&#x000A;100:           <span class="ruby-identifier">phases</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">extract_number_from_phaseid</span>(<span class="ruby-identifier">field</span>.<span class="ruby-identifier">value</span>), <span class="ruby-identifier">$1</span>]&#x000A;101:         <span class="ruby-keyword kw">end</span>&#x000A;102:         &#x000A;103:         <span class="ruby-identifier">phases</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@phases_seen</span>[<span class="ruby-identifier">p</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">p</span>[<span class="ruby-value">1</span>]}&#x000A;104: &#x000A;105:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">phases</span>&#x000A;106:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
               <div class='method public-instance' id='method-M000057'>
                 <a name='M000057'></a>
                 <div class='synopsis'>
-                  <span class='name'>print_values</span>
+                  <span class='name'>all_projects</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000057-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000057-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 141</span>&#x000A;141:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print_values</span>&#x000A;142:         <span class="ruby-identifier">format</span> = <span class="ruby-value str">&quot;%10s: \&quot;%s\&quot;\n&quot;</span>&#x000A;143:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'date'</span>,     <span class="ruby-identifier">date_to_s</span>&#x000A;144:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'project'</span>,  <span class="ruby-ivar">@projects_seen</span>[<span class="ruby-identifier">project</span>]&#x000A;145:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'phase'</span>,    <span class="ruby-ivar">@phases_seen</span>[<span class="ruby-identifier">phase</span>]&#x000A;146:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'remark'</span>,   <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">remark</span>&#x000A;147:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'hours'</span>,    <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">time</span>&#x000A;148:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'worktime'</span>, <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'workperiod'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">text</span>&#x000A;149:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'billing'</span>,  <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'billpercent'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">text</span>&#x000A;150: &#x000A;151:         <span class="ruby-comment cmt"># @form.fields.each do |field|</span>&#x000A;152:         <span class="ruby-comment cmt">#   printf format, field.name, field.value</span>&#x000A;153:         <span class="ruby-comment cmt"># end</span>&#x000A;154: &#x000A;155:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000057-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 122</span>&#x000A;122:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">all_projects</span>&#x000A;123:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Getting project page #1...&quot;</span>&#x000A;124:         <span class="ruby-identifier">projects_page</span> = <span class="ruby-ivar">@agent</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">projects_url</span>)&#x000A;125:         <span class="ruby-identifier">projects</span> = <span class="ruby-identifier">scrape_projects</span>(<span class="ruby-identifier">projects_page</span>)&#x000A;126: &#x000A;127:         <span class="ruby-identifier">i</span> = <span class="ruby-value">2</span>&#x000A;128:         <span class="ruby-keyword kw">while</span> (<span class="ruby-identifier">link</span> = <span class="ruby-identifier">projects_page</span>.<span class="ruby-identifier">link_with</span>(<span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Next'</span>))&#x000A;129:           <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Getting project page ##{i}...&quot;</span>&#x000A;130:           <span class="ruby-identifier">projects_page</span> = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">click</span>&#x000A;131:           <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">scrape_projects</span>(<span class="ruby-identifier">projects_page</span>))&#x000A;132:           <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>&#x000A;133:         <span class="ruby-keyword kw">end</span>&#x000A;134: &#x000A;135:         <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>&#x000A;136:           <span class="ruby-identifier">id</span>   = <span class="ruby-identifier">projects</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">0</span>]&#x000A;137:           <span class="ruby-identifier">text</span> = <span class="ruby-node">&quot;#{projects[name][1]}: #{name}&quot;</span>&#x000A;138:           <span class="ruby-ivar">@projects_seen</span>[<span class="ruby-identifier">id</span>] = <span class="ruby-identifier">text</span>&#x000A;139:           [<span class="ruby-identifier">id</span>, <span class="ruby-identifier">text</span>]&#x000A;140:         <span class="ruby-keyword kw">end</span>&#x000A;141:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000042'>
-                <a name='M000042'></a>
+              <div class='method public-instance' id='method-M000050'>
+                <a name='M000050'></a>
                 <div class='synopsis'>
-                  <span class='name'>project</span>
+                  <span class='name'>billing=</span>
+                  <span class='arguments'>(billing)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000050-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000050-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 66</span>&#x000A;66:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">billing=</span>(<span class="ruby-identifier">billing</span>)&#x000A;67:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">billpercent</span> = <span class="ruby-node">&quot;billpercent.id='#{billing}'&quot;</span>&#x000A;68:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000054'>
+                <a name='M000054'></a>
+                <div class='synopsis'>
+                  <span class='name'>billing_options</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000042-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000054-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000042-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 36</span>&#x000A;36:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project</span>&#x000A;37:         <span class="ruby-identifier">extract_number_from_projectid</span>(<span class="ruby-ivar">@form</span>.<span class="ruby-identifier">projectid</span>)&#x000A;38:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000054-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 84</span>&#x000A;84:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">billing_options</span>&#x000A;85:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'billpercent'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>&#x000A;86:           [<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/billpercent\.id='(\d+)'/</span>)[<span class="ruby-value">1</span>], <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">text</span>]&#x000A;87:         <span class="ruby-keyword kw">end</span>&#x000A;88:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000043'>
-                <a name='M000043'></a>
+              <div class='method public-instance' id='method-M000052'>
+                <a name='M000052'></a>
                 <div class='synopsis'>
-                  <span class='name'>project=</span>
-                  <span class='arguments'>(projectid)</span>
+                  <span class='name'>billing_options</span>
+                  <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000043-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000052-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000043-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 40</span>&#x000A;40:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project=</span>(<span class="ruby-identifier">projectid</span>)&#x000A;41:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">projectid</span> = <span class="ruby-node">&quot;project.id='#{projectid}'&quot;</span>&#x000A;42:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000052-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 74</span>&#x000A;74:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">billing_options</span>&#x000A;75:         <span class="ruby-identifier">collect_options</span>(<span class="ruby-value str">'billpercent'</span>)&#x000A;76:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000053'>
+                <a name='M000053'></a>
+                <div class='synopsis'>
+                  <span class='name'>collect_options</span>
+                  <span class='arguments'>(field_name, pattern)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000053-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000053-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 78</span>&#x000A;78:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">collect_options</span>(<span class="ruby-identifier">field_name</span>, <span class="ruby-identifier">pattern</span>)&#x000A;79:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">field_name</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>&#x000A;80:           [<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{field_name}\.id='(\d+)'/</span>)[<span class="ruby-value">1</span>], <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">text</span>]&#x000A;81:         <span class="ruby-keyword kw">end</span>&#x000A;82:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000046'>
+                <a name='M000046'></a>
+                <div class='synopsis'>
+                  <span class='name'>hours=</span>
+                  <span class='arguments'>(hours)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000046-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000046-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 50</span>&#x000A;50:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">hours=</span>(<span class="ruby-identifier">hours</span>)&#x000A;51:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">time</span> = <span class="ruby-identifier">hours</span>&#x000A;52:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000047'>
+                <a name='M000047'></a>
+                <div class='synopsis'>
+                  <span class='name'>phase</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000047-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000047-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 54</span>&#x000A;54:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phase</span>&#x000A;55:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">phaseid</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/phase\.id='(\d+)'/</span>)[<span class="ruby-value">1</span>]&#x000A;56:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000048'>
+                <a name='M000048'></a>
+                <div class='synopsis'>
+                  <span class='name'>phase=</span>
+                  <span class='arguments'>(phaseid)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000048-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000048-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 58</span>&#x000A;58:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phase=</span>(<span class="ruby-identifier">phaseid</span>)&#x000A;59:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">phaseid</span>   = <span class="ruby-node">&quot;phase.id='#{phaseid}'&quot;</span>&#x000A;60:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-instance' id='method-M000055'>
                 <a name='M000055'></a>
                 <div class='synopsis'>
-                  <span class='name'>recent_projects</span>
+                  <span class='name'>phases_for_selected_project</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000055-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000055-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 108</span>&#x000A;108:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">recent_projects</span>&#x000A;109:         <span class="ruby-identifier">projects</span> = []&#x000A;110:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'projectid'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>&#x000A;111:           <span class="ruby-identifier">val</span> = <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value str">&quot;project.id='&quot;</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>]&#x000A;112:           <span class="ruby-identifier">projects</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">val</span>, <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">text</span>]&#x000A;113:         <span class="ruby-keyword kw">end</span>&#x000A;114: &#x000A;115:         <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@projects_seen</span>[<span class="ruby-identifier">p</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">p</span>[<span class="ruby-value">1</span>]}&#x000A;116: &#x000A;117:         <span class="ruby-identifier">projects</span>&#x000A;118:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='method public-instance' id='method-M000044'>
-                <a name='M000044'></a>
-                <div class='synopsis'>
-                  <span class='name'>remark=</span>
-                  <span class='arguments'>(remark)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000044-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000044-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 44</span>&#x000A;44:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remark=</span>(<span class="ruby-identifier">remark</span>)&#x000A;45:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">remark</span> = <span class="ruby-identifier">remark</span>&#x000A;46:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000055-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 90</span>&#x000A; 90:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phases_for_selected_project</span>&#x000A; 91:         <span class="ruby-identifier">partial_page</span> = <span class="ruby-identifier">retrieve_project_phases_page</span>&#x000A; 92:         <span class="ruby-identifier">page</span>         = <span class="ruby-identifier">create_page_from_partial</span>(<span class="ruby-identifier">partial_page</span>)&#x000A; 93:         <span class="ruby-identifier">field</span>        = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">forms</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'phaseid'</span>)&#x000A; 94:         &#x000A; 95:         <span class="ruby-identifier">phases</span> = []&#x000A; 96:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">field</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:options</span>)&#x000A; 97:           <span class="ruby-identifier">field</span>.<span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>&#x000A; 98:             <span class="ruby-identifier">phases</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">extract_number_from_phaseid</span>(<span class="ruby-identifier">opt</span>.<span class="ruby-identifier">value</span>), <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">text</span>]&#x000A; 99:           <span class="ruby-keyword kw">end</span>&#x000A;100:         <span class="ruby-keyword kw">else</span>&#x000A;101:           <span class="ruby-identifier">partial_page</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/(^[^&lt;]+)&amp;nbsp;&amp;nbsp;&lt;/</span>)&#x000A;102:           <span class="ruby-identifier">phases</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">extract_number_from_phaseid</span>(<span class="ruby-identifier">field</span>.<span class="ruby-identifier">value</span>), <span class="ruby-identifier">$1</span>]&#x000A;103:         <span class="ruby-keyword kw">end</span>&#x000A;104:         &#x000A;105:         <span class="ruby-identifier">phases</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@phases_seen</span>[<span class="ruby-identifier">p</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">p</span>[<span class="ruby-value">1</span>]}&#x000A;106: &#x000A;107:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">phases</span>&#x000A;108:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='method public-instance' id='method-M000058'>
                 <a name='M000058'></a>
                 <div class='synopsis'>
-                  <span class='name'>submit</span>
+                  <span class='name'>print_values</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000058-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000058-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 157</span>&#x000A;157:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">submit</span>&#x000A;158:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">submit</span>()&#x000A;159:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000058-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 143</span>&#x000A;143:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print_values</span>&#x000A;144:         <span class="ruby-identifier">format</span> = <span class="ruby-value str">&quot;%10s: \&quot;%s\&quot;\n&quot;</span>&#x000A;145:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'date'</span>,     <span class="ruby-identifier">date_to_s</span>&#x000A;146:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'project'</span>,  <span class="ruby-ivar">@projects_seen</span>[<span class="ruby-identifier">project</span>]&#x000A;147:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'phase'</span>,    <span class="ruby-ivar">@phases_seen</span>[<span class="ruby-identifier">phase</span>]&#x000A;148:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'remark'</span>,   <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">remark</span>&#x000A;149:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'hours'</span>,    <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">time</span>&#x000A;150:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'worktime'</span>, <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'workperiod'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">text</span>&#x000A;151:         <span class="ruby-identifier">printf</span> <span class="ruby-identifier">format</span>, <span class="ruby-value str">'billing'</span>,  <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'billpercent'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">text</span>&#x000A;152: &#x000A;153:         <span class="ruby-comment cmt"># @form.fields.each do |field|</span>&#x000A;154:         <span class="ruby-comment cmt">#   printf format, field.name, field.value</span>&#x000A;155:         <span class="ruby-comment cmt"># end</span>&#x000A;156: &#x000A;157:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000048'>
-                <a name='M000048'></a>
+              <div class='method public-instance' id='method-M000043'>
+                <a name='M000043'></a>
+                <div class='synopsis'>
+                  <span class='name'>project</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000043-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000043-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 38</span>&#x000A;38:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project</span>&#x000A;39:         <span class="ruby-identifier">extract_number_from_projectid</span>(<span class="ruby-ivar">@form</span>.<span class="ruby-identifier">projectid</span>)&#x000A;40:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000044'>
+                <a name='M000044'></a>
+                <div class='synopsis'>
+                  <span class='name'>project=</span>
+                  <span class='arguments'>(projectid)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000044-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000044-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 42</span>&#x000A;42:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project=</span>(<span class="ruby-identifier">projectid</span>)&#x000A;43:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">projectid</span> = <span class="ruby-node">&quot;project.id='#{projectid}'&quot;</span>&#x000A;44:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000056'>
+                <a name='M000056'></a>
+                <div class='synopsis'>
+                  <span class='name'>recent_projects</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000056-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000056-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 110</span>&#x000A;110:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">recent_projects</span>&#x000A;111:         <span class="ruby-identifier">projects</span> = []&#x000A;112:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'projectid'</span>).<span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>&#x000A;113:           <span class="ruby-identifier">val</span> = <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value str">&quot;project.id='&quot;</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>]&#x000A;114:           <span class="ruby-identifier">projects</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">val</span>, <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">text</span>]&#x000A;115:         <span class="ruby-keyword kw">end</span>&#x000A;116: &#x000A;117:         <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@projects_seen</span>[<span class="ruby-identifier">p</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">p</span>[<span class="ruby-value">1</span>]}&#x000A;118: &#x000A;119:         <span class="ruby-identifier">projects</span>&#x000A;120:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000045'>
+                <a name='M000045'></a>
+                <div class='synopsis'>
+                  <span class='name'>remark=</span>
+                  <span class='arguments'>(remark)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000045-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000045-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 46</span>&#x000A;46:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remark=</span>(<span class="ruby-identifier">remark</span>)&#x000A;47:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">remark</span> = <span class="ruby-identifier">remark</span>&#x000A;48:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000059'>
+                <a name='M000059'></a>
+                <div class='synopsis'>
+                  <span class='name'>submit</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000059-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000059-source'>     <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 159</span>&#x000A;159:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">submit</span>&#x000A;160:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">submit</span>()&#x000A;161:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-instance' id='method-M000049'>
+                <a name='M000049'></a>
                 <div class='synopsis'>
                   <span class='name'>workperiod=</span>
                   <span class='arguments'>(workperiod)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000048-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000049-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000048-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 60</span>&#x000A;60:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">workperiod=</span>(<span class="ruby-identifier">workperiod</span>)&#x000A;61:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">workperiod</span> = <span class="ruby-node">&quot;workperiod.id='#{workperiod}'&quot;</span>&#x000A;62:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000049-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 62</span>&#x000A;62:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">workperiod=</span>(<span class="ruby-identifier">workperiod</span>)&#x000A;63:         <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">workperiod</span> = <span class="ruby-node">&quot;workperiod.id='#{workperiod}'&quot;</span>&#x000A;64:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000050'>
-                <a name='M000050'></a>
+              <div class='method public-instance' id='method-M000051'>
+                <a name='M000051'></a>
                 <div class='synopsis'>
                   <span class='name'>worktime_periods</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000050-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000051-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000050-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 68</span>&#x000A;68:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">worktime_periods</span>&#x000A;69:         <span class="ruby-identifier">collect_options</span>(<span class="ruby-value str">'workperiod'</span>)&#x000A;70:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000051-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/hour_registration_form.rb, line 70</span>&#x000A;70:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">worktime_periods</span>&#x000A;71:         <span class="ruby-identifier">collect_options</span>(<span class="ruby-value str">'workperiod'</span>)&#x000A;72:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

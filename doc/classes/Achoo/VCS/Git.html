@@ -45,55 +45,55 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000121">new</a></li>
-              <li><a href="#M000120">repository?</a></li>
+              <li><a href="#M000120">new</a></li>
+              <li><a href="#M000119">repository?</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000122">log_for</a></li>
+              <li><a href="#M000121">log_for</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000121'>
-                <a name='M000121'></a>
-                <div class='synopsis'>
-                  <span class='name'>new</span>
-                  <span class='arguments'>(dir)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000121-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000121-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/git.rb, line 11</span>&#x000A;11:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">dir</span>)&#x000A;12:         <span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">dir</span>&#x000A;13:       <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
               <div class='method public-class' id='method-M000120'>
                 <a name='M000120'></a>
                 <div class='synopsis'>
-                  <span class='name'>repository?</span>
+                  <span class='name'>new</span>
                   <span class='arguments'>(dir)</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000120-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000120-source'>   <span class="ruby-comment cmt"># File lib/achoo/vcs/git.rb, line 7</span>&#x000A;7:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">repository?</span>(<span class="ruby-identifier">dir</span>)&#x000A;8:         <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-node">&quot;#{dir}/.git&quot;</span>)&#x000A;9:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000120-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/git.rb, line 11</span>&#x000A;11:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">dir</span>)&#x000A;12:         <span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">dir</span>&#x000A;13:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='method public-class' id='method-M000119'>
+                <a name='M000119'></a>
+                <div class='synopsis'>
+                  <span class='name'>repository?</span>
+                  <span class='arguments'>(dir)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000119-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000119-source'>   <span class="ruby-comment cmt"># File lib/achoo/vcs/git.rb, line 7</span>&#x000A;7:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">repository?</span>(<span class="ruby-identifier">dir</span>)&#x000A;8:         <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-node">&quot;#{dir}/.git&quot;</span>)&#x000A;9:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000122'>
-                <a name='M000122'></a>
+              <div class='method public-instance' id='method-M000121'>
+                <a name='M000121'></a>
                 <div class='synopsis'>
                   <span class='name'>log_for</span>
                   <span class='arguments'>(date)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000122-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000121-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000122-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/git.rb, line 15</span>&#x000A;15:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_for</span>(<span class="ruby-identifier">date</span>)&#x000A;16:         <span class="ruby-identifier">today</span>    = <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%Y-%m-%d'</span>)&#x000A;17:         <span class="ruby-identifier">tomorrow</span> = <span class="ruby-identifier">date</span>.<span class="ruby-identifier">next</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%Y-%m-%d'</span>)&#x000A;18:         &#x000A;19:         <span class="ruby-node">`cd  #@dir; git log --author=#{ENV['USER']} --oneline --after=#{today} --before=#{tomorrow} | cut -d ' ' -f 2-`</span>&#x000A;20:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000121-source'>    <span class="ruby-comment cmt"># File lib/achoo/vcs/git.rb, line 15</span>&#x000A;15:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_for</span>(<span class="ruby-identifier">date</span>)&#x000A;16:         <span class="ruby-identifier">today</span>    = <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%Y-%m-%d'</span>)&#x000A;17:         <span class="ruby-identifier">tomorrow</span> = <span class="ruby-identifier">date</span>.<span class="ruby-identifier">next</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%Y-%m-%d'</span>)&#x000A;18:         &#x000A;19:         <span class="ruby-node">`cd  #@dir; git log --author=#{ENV['USER']} --oneline --after=#{today} --before=#{tomorrow} | cut -d ' ' -f 2-`</span>&#x000A;20:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

@@ -31,28 +31,28 @@
         </h1>
         <ol class='paths'>
           <li>
-            <a href="../../files/lib/achoo/achievo_rb.html">lib/achoo/achievo.rb</a>
-          </li>
-          <li class='other'>
-            <a href="../../files/lib/achoo/achievo/hour_administration_form_rb.html">lib/achoo/achievo/hour_administration_form.rb</a>
-          </li>
-          <li class='other'>
-            <a href="../../files/lib/achoo/achievo/login_form_rb.html">lib/achoo/achievo/login_form.rb</a>
-          </li>
-          <li class='other'>
-            <a href="../../files/lib/achoo/achievo/lock_month_form_rb.html">lib/achoo/achievo/lock_month_form.rb</a>
-          </li>
-          <li class='other'>
-            <a href="../../files/lib/achoo/achievo/hour_registration_form_rb.html">lib/achoo/achievo/hour_registration_form.rb</a>
-          </li>
-          <li class='other'>
             <a href="../../files/lib/achoo/achievo/hour_registration_form_ranged_rb.html">lib/achoo/achievo/hour_registration_form_ranged.rb</a>
           </li>
           <li class='other'>
             <a href="../../files/lib/achoo/achievo/table_rb.html">lib/achoo/achievo/table.rb</a>
           </li>
           <li class='other'>
-            <a href="../../files/lib/achoo/achievo/form_rb.html">lib/achoo/achievo/form.rb</a>
+            <a href="../../files/lib/achoo/achievo/lock_month_form_rb.html">lib/achoo/achievo/lock_month_form.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/lib/achoo/achievo/hour_administration_form_rb.html">lib/achoo/achievo/hour_administration_form.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/lib/achoo/achievo/hour_registration_form_rb.html">lib/achoo/achievo/hour_registration_form.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/lib/achoo/achievo/login_form_rb.html">lib/achoo/achievo/login_form.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/lib/achoo/achievo/date_field_rb.html">lib/achoo/achievo/date_field.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/lib/achoo/achievo_rb.html">lib/achoo/achievo.rb</a>
           </li>
           <li>
             <a class='show' href='#' onclick='this.parentNode.parentNode.className += " expanded"; this.parentNode.removeChild(this); return false'>show all</a>
@@ -61,16 +61,38 @@
       </div>
       <div id='content'>
         <div id='text'>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M000034">DateField</a></li>
+            </ol>
+          </div>
           <div id='section'>
             <div id='class-list'>
               <h2>Classes and Modules</h2>
               Module <a href="Achievo/LoginForm.html" class="link">Achoo::Achievo::LoginForm</a><br />
-              Class <a href="Achievo/Form.html" class="link">Achoo::Achievo::Form</a><br />
               Class <a href="Achievo/HourAdministrationForm.html" class="link">Achoo::Achievo::HourAdministrationForm</a><br />
               Class <a href="Achievo/HourRegistrationForm.html" class="link">Achoo::Achievo::HourRegistrationForm</a><br />
               Class <a href="Achievo/HourRegistrationFormRanged.html" class="link">Achoo::Achievo::HourRegistrationFormRanged</a><br />
               Class <a href="Achievo/LockMonthForm.html" class="link">Achoo::Achievo::LockMonthForm</a><br />
               Class <a href="Achievo/Table.html" class="link">Achoo::Achievo::Table</a><br />
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='method public-class' id='method-M000034'>
+                <a name='M000034'></a>
+                <div class='synopsis'>
+                  <span class='name'>DateField</span>
+                  <span class='arguments'>(attr_name, field_name)</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000034-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000034-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/date_field.rb, line 6</span>&#x000A; 6:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-constant">DateField</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">field_name</span>)&#x000A; 7:       <span class="ruby-constant">Module</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span>&#x000A; 8:         <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;#{attr_name}=&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">date</span><span class="ruby-operator">|</span>&#x000A; 9:           <span class="ruby-comment cmt"># Day and month must be prefixed with '0' if single</span>&#x000A;10:           <span class="ruby-comment cmt"># digit. Date.day and Date.month doesn't do this. Use strftime</span>&#x000A;11:           <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{attr_name}_day_field=&quot;</span>,   <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%d'</span>))&#x000A;12:           <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{attr_name}_month_field=&quot;</span>, <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%m'</span>))&#x000A;13:           <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{attr_name}_year_field=&quot;</span>,  <span class="ruby-identifier">date</span>.<span class="ruby-identifier">year</span>)&#x000A;14:         <span class="ruby-keyword kw">end</span>&#x000A;15:         &#x000A;16:         <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;#{attr_name}&quot;</span>) <span class="ruby-keyword kw">do</span>&#x000A;17:           <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span>[<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{attr_name}_year_field&quot;</span>),&#x000A;18:                      <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{attr_name}_month_field&quot;</span>),&#x000A;19:                      <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{attr_name}_day_field&quot;</span>)].<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_i</span>})&#x000A;20:         <span class="ruby-keyword kw">end</span>&#x000A;21:         &#x000A;22:         <span class="ruby-node">%w(day month year)</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>&#x000A;23:           <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;#{attr_name}_#{e}_field&quot;</span>) <span class="ruby-keyword kw">do</span>&#x000A;24:             <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{field_name}[#{e}]&quot;</span>).<span class="ruby-identifier">value</span>&#x000A;25:           <span class="ruby-keyword kw">end</span> &#x000A;26:               &#x000A;27:           <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;#{attr_name}_#{e}_field=&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>&#x000A;28:             <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">field_with</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{field_name}[#{e}]&quot;</span>).<span class="ruby-identifier">value</span> = <span class="ruby-identifier">val</span>&#x000A;29:           <span class="ruby-keyword kw">end</span> &#x000A;30:         <span class="ruby-keyword kw">end</span>&#x000A;31:       <span class="ruby-keyword kw">end</span>&#x000A;32:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
             </div>
           </div>
         </div>

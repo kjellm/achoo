@@ -45,11 +45,11 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000098">new</a></li>
+              <li><a href="#M000097">new</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000099">start</a></li>
+              <li><a href="#M000098">start</a></li>
             </ol>
           </div>
           <div id='context'>
@@ -65,31 +65,31 @@
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000098'>
-                <a name='M000098'></a>
+              <div class='method public-class' id='method-M000097'>
+                <a name='M000097'></a>
                 <div class='synopsis'>
                   <span class='name'>new</span>
                   <span class='arguments'>(log=false)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000098-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000097-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000098-source'>    <span class="ruby-comment cmt"># File lib/achoo/app.rb, line 17</span>&#x000A;17:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">log</span>=<span class="ruby-keyword kw">false</span>)&#x000A;18:       <span class="ruby-ivar">@agent</span> = <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">new</span>&#x000A;19:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">log</span>&#x000A;20:         <span class="ruby-ivar">@agent</span>.<span class="ruby-identifier">log</span> = <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;achoo_http.log&quot;</span>)&#x000A;21:       <span class="ruby-keyword kw">end</span>&#x000A;22:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000097-source'>    <span class="ruby-comment cmt"># File lib/achoo/app.rb, line 17</span>&#x000A;17:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">log</span>=<span class="ruby-keyword kw">false</span>)&#x000A;18:       <span class="ruby-ivar">@agent</span> = <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">new</span>&#x000A;19:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">log</span>&#x000A;20:         <span class="ruby-ivar">@agent</span>.<span class="ruby-identifier">log</span> = <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;achoo_http.log&quot;</span>)&#x000A;21:       <span class="ruby-keyword kw">end</span>&#x000A;22:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000099'>
-                <a name='M000099'></a>
+              <div class='method public-instance' id='method-M000098'>
+                <a name='M000098'></a>
                 <div class='synopsis'>
                   <span class='name'>start</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000099-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000098-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000099-source'>    <span class="ruby-comment cmt"># File lib/achoo/app.rb, line 25</span>&#x000A;25:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>&#x000A;26:       <span class="ruby-keyword kw">begin</span>&#x000A;27:         <span class="ruby-identifier">print_welcome</span>&#x000A;28:         <span class="ruby-identifier">warm_up_ical_cache</span>&#x000A;29:         <span class="ruby-identifier">login</span>&#x000A;30:         <span class="ruby-identifier">scrape_urls</span>&#x000A;31:         <span class="ruby-identifier">command_loop</span>&#x000A;32:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">SystemExit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>&#x000A;33:         <span class="ruby-identifier">raise</span>&#x000A;34:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>&#x000A;35:         <span class="ruby-identifier">handle_fatal_exception</span>(<span class="ruby-value str">&quot;Something bad happened. Shutting down.&quot;</span>, <span class="ruby-identifier">e</span>)&#x000A;36:       <span class="ruby-keyword kw">end</span>&#x000A;37:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000098-source'>    <span class="ruby-comment cmt"># File lib/achoo/app.rb, line 25</span>&#x000A;25:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>&#x000A;26:       <span class="ruby-keyword kw">begin</span>&#x000A;27:         <span class="ruby-identifier">print_welcome</span>&#x000A;28:         <span class="ruby-identifier">warm_up_ical_cache</span>&#x000A;29:         <span class="ruby-identifier">login</span>&#x000A;30:         <span class="ruby-identifier">scrape_urls</span>&#x000A;31:         <span class="ruby-identifier">command_loop</span>&#x000A;32:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">SystemExit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>&#x000A;33:         <span class="ruby-identifier">raise</span>&#x000A;34:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>&#x000A;35:         <span class="ruby-identifier">handle_fatal_exception</span>(<span class="ruby-value str">&quot;Something bad happened. Shutting down.&quot;</span>, <span class="ruby-identifier">e</span>)&#x000A;36:       <span class="ruby-keyword kw">end</span>&#x000A;37:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

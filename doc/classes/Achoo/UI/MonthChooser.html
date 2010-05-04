@@ -45,51 +45,51 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000095">choose</a></li>
-              <li><a href="#M000096">handle_answer</a></li>
-              <li><a href="#M000097">one_month_ago</a></li>
+              <li><a href="#M000094">choose</a></li>
+              <li><a href="#M000095">handle_answer</a></li>
+              <li><a href="#M000096">one_month_ago</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000095'>
-                <a name='M000095'></a>
+              <div class='method public-instance' id='method-M000094'>
+                <a name='M000094'></a>
                 <div class='synopsis'>
                   <span class='name'>choose</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000095-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000094-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000095-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/month_chooser.rb, line 8</span>&#x000A; 8:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">choose</span>&#x000A; 9:         <span class="ruby-identifier">loop</span> <span class="ruby-keyword kw">do</span>&#x000A;10:           <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Term</span><span class="ruby-operator">::</span><span class="ruby-identifier">ask</span> <span class="ruby-node">&quot;Period ([#{one_month_ago}] | YYYYMM)&quot;</span>&#x000A;11:           <span class="ruby-keyword kw">begin</span>&#x000A;12:             <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">handle_answer</span>(<span class="ruby-identifier">answer</span>)&#x000A;13:           <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ArgumentError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>&#x000A;14:             <span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>&#x000A;15:           <span class="ruby-keyword kw">end</span>&#x000A;16:         <span class="ruby-keyword kw">end</span>&#x000A;17:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000094-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/month_chooser.rb, line 8</span>&#x000A; 8:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">choose</span>&#x000A; 9:         <span class="ruby-identifier">loop</span> <span class="ruby-keyword kw">do</span>&#x000A;10:           <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Term</span><span class="ruby-operator">::</span><span class="ruby-identifier">ask</span> <span class="ruby-node">&quot;Period ([#{one_month_ago}] | YYYYMM)&quot;</span>&#x000A;11:           <span class="ruby-keyword kw">begin</span>&#x000A;12:             <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">handle_answer</span>(<span class="ruby-identifier">answer</span>)&#x000A;13:           <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ArgumentError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>&#x000A;14:             <span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>&#x000A;15:           <span class="ruby-keyword kw">end</span>&#x000A;16:         <span class="ruby-keyword kw">end</span>&#x000A;17:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000096'>
-                <a name='M000096'></a>
+              <div class='method public-instance' id='method-M000095'>
+                <a name='M000095'></a>
                 <div class='synopsis'>
                   <span class='name'>handle_answer</span>
                   <span class='arguments'>(answer)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000096-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000095-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000096-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/month_chooser.rb, line 19</span>&#x000A;19:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_answer</span>(<span class="ruby-identifier">answer</span>)&#x000A;20:         <span class="ruby-identifier">period</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">answer</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span><span class="ruby-identifier">one_month_ago</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">answer</span>&#x000A;21:         <span class="ruby-identifier">period</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\A \d{4} (?: 0\d | 1[0-2]) \z/</span><span class="ruby-identifier">x</span> \&#x000A;22:         <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'Invalid month'</span>)&#x000A;23:         <span class="ruby-identifier">period</span>&#x000A;24:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000095-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/month_chooser.rb, line 19</span>&#x000A;19:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_answer</span>(<span class="ruby-identifier">answer</span>)&#x000A;20:         <span class="ruby-identifier">period</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">answer</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span><span class="ruby-identifier">one_month_ago</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">answer</span>&#x000A;21:         <span class="ruby-identifier">period</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\A \d{4} (?: 0\d | 1[0-2]) \z/</span><span class="ruby-identifier">x</span> \&#x000A;22:         <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'Invalid month'</span>)&#x000A;23:         <span class="ruby-identifier">period</span>&#x000A;24:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='method public-instance' id='method-M000097'>
-                <a name='M000097'></a>
+              <div class='method public-instance' id='method-M000096'>
+                <a name='M000096'></a>
                 <div class='synopsis'>
                   <span class='name'>one_month_ago</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000097-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000096-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000097-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/month_chooser.rb, line 26</span>&#x000A;26:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">one_month_ago</span>&#x000A;27:         <span class="ruby-identifier">now</span>   = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>&#x000A;28:         <span class="ruby-identifier">year</span>  = <span class="ruby-identifier">now</span>.<span class="ruby-identifier">year</span>&#x000A;29:         &#x000A;30:         <span class="ruby-comment cmt"># Use -2 + 1 to shift range from 0-11 to 1-12 </span>&#x000A;31:         <span class="ruby-identifier">month</span> = (<span class="ruby-identifier">now</span>.<span class="ruby-identifier">month</span> <span class="ruby-operator">-</span> <span class="ruby-value">2</span>)<span class="ruby-operator">%</span><span class="ruby-value">12</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>&#x000A;32:         <span class="ruby-identifier">year</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">month</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">now</span>.<span class="ruby-identifier">month</span>&#x000A;33:         &#x000A;34:         <span class="ruby-identifier">sprintf</span> <span class="ruby-value str">&quot;%d%02d&quot;</span>, <span class="ruby-identifier">year</span>, <span class="ruby-identifier">month</span>&#x000A;35:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000096-source'>    <span class="ruby-comment cmt"># File lib/achoo/ui/month_chooser.rb, line 26</span>&#x000A;26:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">one_month_ago</span>&#x000A;27:         <span class="ruby-identifier">now</span>   = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>&#x000A;28:         <span class="ruby-identifier">year</span>  = <span class="ruby-identifier">now</span>.<span class="ruby-identifier">year</span>&#x000A;29:         &#x000A;30:         <span class="ruby-comment cmt"># Use -2 + 1 to shift range from 0-11 to 1-12 </span>&#x000A;31:         <span class="ruby-identifier">month</span> = (<span class="ruby-identifier">now</span>.<span class="ruby-identifier">month</span> <span class="ruby-operator">-</span> <span class="ruby-value">2</span>)<span class="ruby-operator">%</span><span class="ruby-value">12</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>&#x000A;32:         <span class="ruby-identifier">year</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">month</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">now</span>.<span class="ruby-identifier">month</span>&#x000A;33:         &#x000A;34:         <span class="ruby-identifier">sprintf</span> <span class="ruby-value str">&quot;%d%02d&quot;</span>, <span class="ruby-identifier">year</span>, <span class="ruby-identifier">month</span>&#x000A;35:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

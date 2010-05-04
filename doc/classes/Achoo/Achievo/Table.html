@@ -45,41 +45,41 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000035">new</a></li>
+              <li><a href="#M000040">new</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000036">select_columns</a></li>
+              <li><a href="#M000041">select_columns</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='method public-class' id='method-M000035'>
-                <a name='M000035'></a>
+              <div class='method public-class' id='method-M000040'>
+                <a name='M000040'></a>
                 <div class='synopsis'>
                   <span class='name'>new</span>
                   <span class='arguments'>(source_rows)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000035-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000040-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000035-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/table.rb, line 7</span>&#x000A; 7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source_rows</span>)&#x000A; 8:         <span class="ruby-keyword kw">super</span>()&#x000A; 9:         <span class="ruby-identifier">source_rows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tr</span><span class="ruby-operator">|</span>&#x000A;10:           <span class="ruby-identifier">cells</span> = <span class="ruby-identifier">tr</span>.<span class="ruby-identifier">css</span>(<span class="ruby-value str">'td, th'</span>)&#x000A;11:           <span class="ruby-identifier">cells</span> = <span class="ruby-identifier">cells</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">strip</span>}&#x000A;12:           <span class="ruby-keyword kw">self</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">fix_empty_cells</span>(<span class="ruby-identifier">cells</span>)&#x000A;13:         <span class="ruby-keyword kw">end</span>&#x000A;14:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000040-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/table.rb, line 7</span>&#x000A; 7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source_rows</span>)&#x000A; 8:         <span class="ruby-keyword kw">super</span>()&#x000A; 9:         <span class="ruby-identifier">source_rows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tr</span><span class="ruby-operator">|</span>&#x000A;10:           <span class="ruby-identifier">cells</span> = <span class="ruby-identifier">tr</span>.<span class="ruby-identifier">css</span>(<span class="ruby-value str">'td, th'</span>)&#x000A;11:           <span class="ruby-identifier">cells</span> = <span class="ruby-identifier">cells</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">strip</span>}&#x000A;12:           <span class="ruby-keyword kw">self</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">fix_empty_cells</span>(<span class="ruby-identifier">cells</span>)&#x000A;13:         <span class="ruby-keyword kw">end</span>&#x000A;14:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='method public-instance' id='method-M000036'>
-                <a name='M000036'></a>
+              <div class='method public-instance' id='method-M000041'>
+                <a name='M000041'></a>
                 <div class='synopsis'>
                   <span class='name'>select_columns</span>
                   <span class='arguments'>(&amp;block)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000036-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000041-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000036-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/table.rb, line 16</span>&#x000A;16:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">select_columns</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;17:         <span class="ruby-identifier">columns</span> = <span class="ruby-identifier">transpose</span>&#x000A;18:         <span class="ruby-identifier">columns</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">select</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>&#x000A;19:         <span class="ruby-identifier">replace</span>(<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">transpose</span>)&#x000A;20:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000041-source'>    <span class="ruby-comment cmt"># File lib/achoo/achievo/table.rb, line 16</span>&#x000A;16:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">select_columns</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;17:         <span class="ruby-identifier">columns</span> = <span class="ruby-identifier">transpose</span>&#x000A;18:         <span class="ruby-identifier">columns</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">select</span> <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>&#x000A;19:         <span class="ruby-identifier">replace</span>(<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">transpose</span>)&#x000A;20:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>
