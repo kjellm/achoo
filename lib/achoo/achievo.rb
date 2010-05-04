@@ -1,8 +1,8 @@
 require 'achoo'
+require 'achoo/achievo/date_field'
 
 module Achoo
   module Achievo
-    autoload :Form,                       'achoo/achievo/form.rb'
     autoload :HourAdministrationForm,     'achoo/achievo/hour_administration_form.rb'
     autoload :HourRegistrationForm,       'achoo/achievo/hour_registration_form.rb'
     autoload :HourRegistrationFormRanged, 'achoo/achievo/hour_registration_form_ranged.rb'

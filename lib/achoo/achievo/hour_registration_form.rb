@@ -2,7 +2,9 @@ require 'achoo/achievo'
 
 module Achoo
   module Achievo
-    class HourRegistrationForm < Form
+    class HourRegistrationForm
+
+      include Achievo::DateField('date', 'activitydate')
 
       def initialize(agent)
         @agent = agent
@@ -183,18 +185,6 @@ module Achoo
         body = "<html><head></head><body><form>#{partial_page.body}</form></body></html>"
         page = Mechanize::Page.new(nil, {'content-type' => 'text/html; charset=iso-8859-1'},
                                    body, nil, @agent)
-      end
-
-      def day_field
-        @form.field_with(:name => 'activitydate[day]')
-      end
-
-      def month_field
-        @form.field_with(:name => 'activitydate[month]')
-      end
-
-      def year_field
-        @form.field_with(:name => 'activitydate[year]')
       end
 
       def extract_number_from_projectid(projectid)

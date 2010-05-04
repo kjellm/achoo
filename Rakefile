@@ -58,7 +58,7 @@ end
 
 begin
   require 'metric_fu'
-MetricFu::Configuration.run do |config|
+  MetricFu::Configuration.run do |config|
     dirs = %w(lib bin)
     
     # Define which metrics you want to use.

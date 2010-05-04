@@ -3,7 +3,9 @@ require 'achoo/term/table'
 
 module Achoo
   module Achievo
-    class HourAdministrationForm < Form
+    class HourAdministrationForm
+
+      include Achievo::DateField('date', 'viewdate')
 
       def initialize(agent)
         @agent = agent
@@ -74,18 +76,6 @@ module Achoo
         @page = @form.submit
       end
       
-      def day_field
-        @form.field_with(:name => 'viewdate[day]')
-      end
-      
-      def month_field
-        @form.field_with(:name => 'viewdate[month]')
-      end
-      
-      def year_field
-        @form.field_with(:name => 'viewdate[year]')
-      end
-
     end  
   end
 end
