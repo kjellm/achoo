@@ -1,5 +1,6 @@
 # From http://dynamicorange.com/2009/02/18/ruby-mock-web-server/
 
+require 'logger'
 require 'rack'
 require 'thin'
 
@@ -8,7 +9,9 @@ class AchievoMock
   def initialize(host='127.0.0.1', port=4000)
     @expectations = []
     @server = Thin::Server.new(host, port, self)
+    @server.silent = true
     @thread = Thread.new { @server.start }
+    @logger = Logger.new(File.dirname(__FILE__) + '/../../tmp/test.log')
   end
 
   def stop
@@ -16,7 +19,12 @@ class AchievoMock
     Thread.kill(@thread)
   end
 
-  def register(env, response)
+  def register(method, path, response, env={})
+    env.merge!({
+      'REQUEST_METHOD' => method.to_s.upcase,
+      'REQUEST_PATH'   => path,
+    })
+    @logger.debug "Registered #{[env, response]}"
     @expectations << [env, response]
   end
 
@@ -25,11 +33,12 @@ class AchievoMock
   end
 
   def call(env)
+    @logger.debug "Got request: #{env}"
 
     if @expectations.empty?
+      @logger.debug('Got an unexpected request')
       return error_page('Not expecting any request')
     end
-
 
     expectation = @expectations.shift
     expectationEnv = expectation[0]
@@ -41,10 +50,12 @@ class AchievoMock
       matched = true
       if value != env[envKey]
         matched = false
+        @logger.debug('Unmet expectation')
         return error_page('Expectation not met')
       end
     end
     if matched
+      @logger.debug "Responding with: #{response}"
       return response
     end
   end

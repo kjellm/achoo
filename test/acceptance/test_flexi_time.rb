@@ -23,11 +23,11 @@ class TestFlexiTime < Test::Unit::TestCase
       </html>
     }
 
-    @server.register( { 'REQUEST_METHOD' => 'GET', 'REQUEST_PATH' => '/time_registration' }, [ 200, nil, hour_administration_html ])
+    @server.register(:get, '/time_registration', [ 200, nil, hour_administration_html ])
   end
 
   def test_flexi_time
-    achoo(:verbose => false) do 
+    achoo(:verbose => $DEBUG) do 
       expect '2. Show flexitime balance'
       expect_main_prompt
       puts '2'

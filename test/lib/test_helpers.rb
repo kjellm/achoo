@@ -1,6 +1,6 @@
-require 'test/unit'
 require 'redgreen'
 require 'shoulda'
+require 'test/unit'
 
 require 'achievo_mock'
 require 'achoo_runner'
@@ -32,8 +32,8 @@ module AcceptanceBase
 
   def setup
     @server = AchievoMock.new()
-    @server.register( { 'REQUEST_METHOD' => 'GET', 'REQUEST_PATH' => '/'  },    [ 200, nil, @@main_html ])
-    @server.register( { 'REQUEST_METHOD' => 'GET', 'REQUEST_PATH' => '/menu' }, [ 200, nil, @@menu_html ])
+    @server.register(:get, '/',     [ 200, nil, @@main_html ])
+    @server.register(:get, '/menu', [ 200, nil, @@menu_html ])
   end
 
   def teardown

@@ -18,11 +18,11 @@ class TestLockMonth < Test::Unit::TestCase
       </html>
     }
 
-    @server.register( { 'REQUEST_METHOD' => 'GET', 'REQUEST_PATH' => '/lock_months' }, [ 200, nil, lock_month_html ])
+    @server.register(:get, '/lock_months', [ 200, nil, lock_month_html ])
   end
     
   def test_lock_month
-    achoo(:verbose => false) do
+    achoo(:verbose => $DEBUG) do
       expect '6. Lock month'
       expect_main_prompt
       puts '6'
