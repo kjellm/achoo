@@ -24,6 +24,8 @@ class AchievoMock
       'REQUEST_METHOD' => method.to_s.upcase,
       'REQUEST_PATH'   => path,
     })
+    response[1] = { 'Content-Type' => 'text/html', 'Content-Length' => response[2].length.to_s }
+    response[2] = [response[2]]
     @logger.debug "Registered #{[env, response]}"
     @expectations << [env, response]
   end
@@ -43,8 +45,6 @@ class AchievoMock
     expectation = @expectations.shift
     expectationEnv = expectation[0]
     response = expectation[1]
-    response[1] = { 'Content-Type' => 'text/html', 'Content-Length' => response[2].length.to_s }
-    response[2] = [response[2]]
     matched = false
     expectationEnv.each do |envKey, value|
       matched = true
