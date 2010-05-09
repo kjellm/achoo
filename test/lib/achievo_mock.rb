@@ -6,9 +6,9 @@ require 'thin'
 
 class AchievoMock
 
-  def initialize(host='127.0.0.1', port=4000)
+  def initialize(port=4000)
     @expectations = []
-    @server = Thin::Server.new(host, port, self)
+    @server = Thin::Server.new('127.0.0.1', port, self)
     @server.silent = true
     @thread = Thread.new { @server.start }
     @logger = Logger.new(File.dirname(__FILE__) + '/../../tmp/test.log')
@@ -28,7 +28,7 @@ class AchievoMock
     @expectations << [env, response]
   end
 
-  def clear()
+  def clear
     @expectations = []
   end
 
