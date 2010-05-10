@@ -42,19 +42,8 @@ class AchievoMock
       return error_page('Not expecting any request')
     end
 
-    expectation = @expectations.shift
-    expectationEnv = expectation[0]
-    response = expectation[1]
-    matched = false
-    expectationEnv.each do |envKey, value|
-      matched = true
-      if value != env[envKey]
-        matched = false
-        @logger.debug('Unmet expectation')
-        return error_page('Expectation not met')
-      end
-    end
-    if matched
+    response = @expectations.first[1]
+    if expectation_satisified?(env, @expectations.shift)
       @logger.debug "Responding with: #{response}"
       return response
     end
@@ -67,6 +56,20 @@ class AchievoMock
      }, 
      [msg]
     ]
+  end
+
+  def expectation_satisified?(env, expectation)
+    expectationEnv = expectation[0]
+    matched = false
+    expectationEnv.each do |envKey, value|
+      matched = true
+      if value != env[envKey]
+        matched = false
+        @logger.debug('Unmet expectation')
+        return error_page('Expectation not met')
+      end
+    end
+    matched
   end
 end
 
