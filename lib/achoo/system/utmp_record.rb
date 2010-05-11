@@ -56,7 +56,7 @@ module Achoo
       end
       
       def halt_event?
-        record_type_symbol == :term && device_name == ':0'
+        record_type_symbol == :run_lvl && username == 'shutdown'
       end
       
     end
