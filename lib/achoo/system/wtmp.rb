@@ -17,6 +17,10 @@ module Achoo
         end
       end
 
+      def to_s
+        inject('') {|str, e| str << e.to_s << "\n"}
+      end
+
     end
   end
 end
