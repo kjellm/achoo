@@ -76,12 +76,6 @@ For more usage information, see
 this[http://oierud.name/~kjellm/bliki/AchooTheAchievoCLI.html] blog
 post.
 
-== SET UP DEVELOPMENT ENVIRONMENT
-
-To run the tests you need to install some additional gems:
-
-  rake setup
-
 == BUGS
 
 Report bugs to http://github.com/kjellm/achoo/issues

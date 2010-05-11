@@ -13,7 +13,7 @@ Spec = Gem::Specification.new do |s|
                   end
   s.summary     = 'Achievo CLI.'
   s.description = 'Command line interface for Achievo (http://achievo.org)'
-  s.homepage    = 'http://github.com/kjellm/achoo/'
+  s.homepage    = 'http://kjellm.github.com/achoo/'
   s.author      = 'Kjell-Magne Øierud'
   s.email       = 'kjellm@acm.org'
 
