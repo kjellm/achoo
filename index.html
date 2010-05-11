@@ -6,85 +6,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <title>kjellm/achoo @ GitHub</title>
-	
-    <style type="text/css">
-body {
-    margin-top: 1.0em;
-    background-color: #e8e189;
-    font-family: "Helvetica,Arial,FreeSans";
-    color: #000000;
-}
-#container {
-    margin: 0 auto;
-    width: 700px;
-}
-h1 { 
-    font-size: 3.8em; 
-    color: #171e76; 
-    margin-bottom: 3px; 
-}
-h1 .small {
-    font-size: 0.4em;
-}
-h1 a { 
-    text-decoration: none 
-}
-h2 { 
-    font-size: 1.5em; 
-    color: #171e76; 
-}
-h3 { 
-    text-align: center; 
-    color: #171e76; 
-}
-a { 
-    color: #171e76; 
-}
-.description {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    font-style: italic;
-}
-.download {
-    float: right;
-}
-pre {
-    background: #000;
-    color: #fff;
-    padding: 15px;
-}
-pre a {
-    color: inherit;
-    text-decoration: none;
-}
-pre a:hover {
-    text-decoration: underline;
-}
-hr {
-    border: 0;
-    width: 80%;
-    border-bottom: 1px solid #aaa
-}
-.footer {
-    text-align:center; 
-    padding-top:30px; 
-    font-style: italic;
-}
-    </style>
-	
+
+    <link rel="stylesheet" href="main.css" type="text/css"/>
   </head>
 
   <body>
-    <a href="http://github.com/kjellm/achoo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+    <div><a href="http://github.com/kjellm/achoo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a></div>
 
     <div id="container">
 
       <div class="download">
         <a href="http://github.com/kjellm/achoo/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png" alt="Download zip"/></a>
+        <img width="90" src="http://github.com/images/modules/download/zip.png" alt="Download zip"/></a>
         <a href="http://github.com/kjellm/achoo/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png" alt="Download tarball"/></a>
+        <img width="90" src="http://github.com/images/modules/download/tar.png" alt="Download tarball"/></a>
       </div>
 
       <h1><a href="http://github.com/kjellm/achoo">achoo</a> <span
@@ -103,27 +38,47 @@ hr {
   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 TOC:
- 1. <a href="#dev-resources">Developer resources</a>
- 2. <a href="#download">Download</a>
+ 1. <a href="#install-usage">Installation and usage</a>
+ 2. <a href="#dev-resources">Developer resources</a>
+ 3. <a href="#download">Download</a>
 &gt;
       </pre>
 
-      <h2><a name="#dev-resources">Developer resources</a></h2>
+      <h2><a href="install-usage">Installation and usage</a></h2>
+
+      <p>You can find install and usage instructions in the project <a
+      href="http://github.com/kjellm/achoo/raw/0.4.2/README.rdoc">README</a>
+      file and in <a
+      href="http://oierud.name/~kjellm/bliki/AchooTheAchievoCLI.html">this</a>
+      blog post.</p>
+
+
+      <h2><a name="dev-resources">Developer resources</a></h2>
+
+      <h3>Setting up the development environment</h3>
+
+      <p>To run the tests, metrics, etc, you need to install some
+      additional gems:</p>
+      <pre>rake setup</pre>
+
+      <h3>Other stuff</h3>
+
       <ul>
         <li><a href="rdoc/">API documentation</a></li>
         <li><a href="metric_fu/">Metrics</a></li>
       </ul>
 
-      <h2><a name="#download">Download</a></h2>
+
+      <h2><a name="download">Download</a></h2>
       <p>
         You can download this project in either
         <a href="http://github.com/kjellm/achoo/zipball/master">zip</a> or
         <a href="http://github.com/kjellm/achoo/tarball/master">tar</a> formats.
       </p>
       <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
+      by running:</p>
+
       <pre>$ git clone git://github.com/kjellm/achoo</pre>
-      </p>
 
       <div class="footer">
         get the source code on GitHub : <a href="http://github.com/kjellm/achoo">kjellm/achoo</a>
