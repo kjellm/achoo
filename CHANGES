@@ -1,3 +1,9 @@
+2010-05-11: version 0.4.2
+
+ - Fixed problem with identifying the halt event in the awake log.
+
+ - Improved command line argument handling in the ical binary.
+
 2010-04-20: version 0.4.1
 
  - Bug fixes
