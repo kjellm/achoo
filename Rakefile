@@ -128,7 +128,7 @@ end
 
 desc 'Install development dependencies'
 task :setup do
-  system 'gem install shoulda rack thin redgreen allison metric_fu code_stats hanna'
+  system 'gem install shoulda rack thin redgreen metric_fu code_stats hanna'
 end
 
 desc 'Remove generated files and folders'
