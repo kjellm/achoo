@@ -23,7 +23,7 @@ Spec = Gem::Specification.new do |s|
 
   s.files = Dir.glob('bin/*') + 
     Dir.glob('lib/**/*.rb') + 
-    Dir.glob('test/*') + 
+    Dir.glob('test/**/*.rb') + 
     %w(Rakefile README.rdoc CHANGES COPYING)
   s.bindir = 'bin'
   s.executables = %w(achoo awake vcs_commits ical)
