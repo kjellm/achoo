@@ -13,10 +13,12 @@ module Achoo
       end
       
       def log_for(date)
-        today    = date.strftime('%Y-%m-%d')
-        tomorrow = date.next.strftime('%Y-%m-%d')
+        format = '%Y-%m-%dT00:00:00'
+        from = date.strftime(format)
+        to   = (date+1).strftime(format)
         
-        `cd  #@dir; git log --author=#{ENV['USER']} --oneline --after=#{today} --before=#{tomorrow} | cut -d ' ' -f 2-`
+        cmd = "cd  #@dir; git log --author=#{ENV['USER']} --oneline --after=#{from} --before=#{to} | cut -d ' ' -f 2-"
+        `#{cmd}`
       end
 
     end
