@@ -11,6 +11,7 @@ class AchievoMock
     @server = Thin::Server.new('127.0.0.1', port, self)
     @server.silent = true
     @thread = Thread.new { @server.start }
+    sleep 1
     @logger = Logger.new(File.dirname(__FILE__) + '/../../tmp/test.log')
   end
 

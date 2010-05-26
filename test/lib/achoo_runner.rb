@@ -20,7 +20,7 @@ class AchooRunner
   
   def expect(pattern)
     stat = reader.expect(pattern, 3)
-    raise "Didn't find #{pattern} before timeout" if stat.nil?
+    raise "Didn't find '#{pattern}' before timeout" if stat.nil?
     stat
   end
 
@@ -43,7 +43,12 @@ def achoo(opts, &block)
     w.sync = true
     $expect_verbose = options[:verbose]
 
-    AchooRunner.new(r, w, pid).instance_eval &block
+    runner = AchooRunner.new(r, w, pid)
+    begin
+      runner.instance_eval(&block)
+    rescue Exception => e
+      runner.flunk e
+    end
 
   end
 end

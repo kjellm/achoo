@@ -75,15 +75,9 @@ module Achoo
         collect_options('billpercent')
       end
 
-      def collect_options(field_name, pattern)
+      def collect_options(field_name)
         @form.field_with(:name => field_name).options.collect do |opt|
           [opt.value.match(/#{field_name}\.id='(\d+)'/)[1], opt.text]
-        end
-      end
-
-      def billing_options
-        @form.field_with(:name => 'billpercent').options.collect do |opt|
-          [opt.value.match(/billpercent\.id='(\d+)'/)[1], opt.text]
         end
       end
 
@@ -147,8 +141,8 @@ module Achoo
         printf format, 'phase',    @phases_seen[phase]
         printf format, 'remark',   @form.remark
         printf format, 'hours',    @form.time
-        printf format, 'worktime', @form.field_with(:name => 'workperiod').options.first.text
-        printf format, 'billing',  @form.field_with(:name => 'billpercent').options.first.text
+        printf format, 'worktime', @form.field_with(:name => 'workperiod').selected_options.first.text
+        printf format, 'billing',  @form.field_with(:name => 'billpercent').selected_options.first.text
 
         # @form.fields.each do |field|
         #   printf format, field.name, field.value
