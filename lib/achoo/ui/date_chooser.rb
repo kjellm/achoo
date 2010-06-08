@@ -67,7 +67,7 @@ module Achoo
         puts "Accepted formats:"
         puts date_format_help_string
         puts
-        system 'cal -3m'
+        system 'cal -3'
       end
       
       def date_format_help_string
