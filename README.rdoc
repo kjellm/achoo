@@ -56,7 +56,7 @@ Create ~/.achoo from the following template (YAML) and edit it:
   :url      : 'https://example.com/achievo/'
   :user     : 'joe'
   :password : 'geheim'
-  :vcs_dirs : ["/home/joe/projects"],
+  :vcs_dirs : ["/home/joe/projects"]
   :ical :
     - :host : "foo.example.com"
       :port : 443
