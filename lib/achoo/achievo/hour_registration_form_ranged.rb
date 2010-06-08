@@ -10,6 +10,9 @@ module Achoo
         super
         @page = @agent.get(atk_submit_to_url(@page.link_with(:text => 'Select range').href))
         @form = @page.form('entryform')
+
+        # Need to preselect this for some reason. FIX duplicated in super 
+        @form.field_with(:name => 'billpercent').options.first.select
       end
 
       def date=(date_range)
