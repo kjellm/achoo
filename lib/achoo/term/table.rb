@@ -65,11 +65,10 @@ module Achoo
       end
 
       def calculate_table_cell_widths
-        lengths = []
-        @headers.each_with_index do |h, i|
-          lengths[i] = h.length
-        end
-        @data_rows.each do |r|
+        rows = [@headers] + @data_rows
+        rows += [@summaries] unless @summaries.nil?
+        lengths = Array.new(@headers.length, 0)
+        rows.each do |r|
           r.each_with_index do |d, i|
             lengths[i] = [d.length, lengths[i]].max
           end
