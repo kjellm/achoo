@@ -21,6 +21,7 @@ module Achoo
         request = Net::HTTP::Get.new(params[:path])
         request.basic_auth(params[:user], params[:pass])
         response = http.request(request)
+        raise response.message unless response.is_a?(Net::HTTPSuccess)
         response.body
       end
     

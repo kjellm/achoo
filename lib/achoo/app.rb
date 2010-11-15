@@ -142,7 +142,7 @@ module Achoo
           begin
             ICal.from_http_request(config)
           rescue Exception => e
-            # Ignore, we are just doing this to populate the cache
+            puts "Failed to fetch calendar data: #{e}"
           end
         end
       end
