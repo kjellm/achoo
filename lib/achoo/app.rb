@@ -98,9 +98,13 @@ module Achoo
     end
 
     def print_homescreen(date = Date.today)
-      case RC[:homescreen]
-      when nil
+      if RC[:homescreen] == nil
         return
+      end
+
+      Term::clearscreen
+
+      case RC[:homescreen]
       when 'day'
         form = Achievo::HourAdministrationForm.new(@agent)
         form.show_registered_hours_for_day(date)
