@@ -76,8 +76,12 @@ module Achoo
       when '0', 'q', 'Q'
         exit
       when '1', ''
-        register_hours(@agent)
-        print_homescreen
+        date = register_hours(@agent)
+        if (date.class == Array)
+          # For date range, pick the first date
+          date = date[0]
+        end
+        print_homescreen(date)
       when '2'
         show_flexi_time(@agent)
       when '3'
@@ -93,16 +97,16 @@ module Achoo
       end
     end
 
-    def print_homescreen
+    def print_homescreen(date = Date.today)
       case RC[:homescreen]
       when nil
         return
       when 'day'
         form = Achievo::HourAdministrationForm.new(@agent)
-        form.show_registered_hours_for_day(Date.today)
+        form.show_registered_hours_for_day(date)
       when 'week'
         form = Achievo::HourAdministrationForm.new(@agent)
-        form.show_registered_hours_for_week(Date.today)
+        form.show_registered_hours_for_week(date)
       else
         printf "Unknown homescreen '%s', ignoring\n", RC['homescreen']
       end
