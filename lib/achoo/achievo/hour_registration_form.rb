@@ -114,6 +114,14 @@ module Achoo
       end
 
       def all_projects
+        if not $allprojects_cache
+          $allprojects_cache = get_all_projects
+        end
+
+        $allprojects_cache
+      end
+
+      def get_all_projects
         puts "Getting project page #1..."
         projects_page = @agent.get(projects_url)
         projects = scrape_projects(projects_page)
