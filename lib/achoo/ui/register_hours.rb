@@ -2,7 +2,6 @@ require 'achoo/achievo'
 require 'achoo/awake'
 require 'achoo/term'
 require 'achoo/ui'
-require 'achoo/vcs'
 require 'achoo/plugin_manager'
 
 module Achoo
@@ -11,6 +10,10 @@ module Achoo
 
       include DateChoosers
       include ExceptionHandling
+
+      def initialize
+        @plugin_manager = PluginManager.instance
+      end
 
       def register_hours(agent)
         date = optionally_ranged_date_chooser
@@ -25,7 +28,7 @@ module Achoo
         form.date    = date
         form.project = project_chooser(form)
         form.phase   = phase_chooser(form)
-        print_remark_help(date) unless date.class == Array
+        @plugin_manager.send_before_register_hour_remark(date) unless date.class == Array
         form.remark  = remark_chooser
         print_hours_help(date) unless date.class == Array
         form.hours   = hours_chooser
@@ -81,17 +84,6 @@ module Achoo
                        "Billing options", 
                        'Billing [1]',
                        true)
-      end
-
-      def print_remark_help(date)
-        PluginManager.instance.send_before_register_hour_remark
-        puts "VCS logs for #{date}:"
-        begin
-          VCS.print_logs_for(date, RC[:vcs_dirs])
-        rescue Exception => e
-          puts handle_exception("Failed to retrieve VCS logs.", e)
-        end
-        puts '-' * 80
       end
 
       def remark_chooser
