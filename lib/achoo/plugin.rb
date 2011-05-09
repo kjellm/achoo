@@ -13,5 +13,7 @@ module Achoo
       @@manager.register_plugin(c)
     end
 
+    def state_ok?; true; end
+
   end
 end

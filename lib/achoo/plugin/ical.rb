@@ -7,6 +7,8 @@ module Achoo
     class Ical < Achoo::Plugin
 
       include UI::ExceptionHandling
+
+      def state_ok?; RC.has_key?(:ical); end
       
       def at_startup
         warm_up_ical_cache
@@ -18,7 +20,7 @@ module Achoo
         puts '---'
         begin
           RC[:ical].each do |config|
-            ICal.from_http_request(config).print_events(date)
+            Achoo::ICal.from_http_request(config).print_events(date)
           end
         rescue Exception => e
           puts handle_exception("Failed to retrieve calendar events.", e)
@@ -31,7 +33,7 @@ module Achoo
         Thread.new do 
           RC[:ical].each do |config|
             begin
-              ICal.from_http_request(config)
+              Achoo::ICal.from_http_request(config)
             rescue Exception => e
               puts "Failed to fetch calendar data: #{e}"
             end

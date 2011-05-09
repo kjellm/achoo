@@ -26,6 +26,7 @@ module Achoo
 
     def initialize
       @plugin_glob = 'achoo/plugin/*'
+      @plugins     = []
     end
 
     def load_plugins
@@ -39,6 +40,8 @@ module Achoo
       # magically call Achoo::Plugin::inherited for each
       # plugin. inherited() will in turn call register_plugin()
 
+      @plugins.collect! {|p| p.state_ok? }
+
       @@hooks.each do |hook|
         instance_variable_set("@can_#{hook}", @plugins.find_all do |obj|
                                 obj.respond_to?(hook)
@@ -49,8 +52,6 @@ module Achoo
     end
 
     def register_plugin(klass)
-      puts "New plugin found: #{klass}"
-      @plugins ||= []
       @plugins.push(klass.new)
     end
 

@@ -8,6 +8,8 @@ module Achoo
 
       include UI::ExceptionHandling
       
+      def state_ok?; RC.has_key?(:vcs); end
+      
       def before_register_hour_remark(date)
         puts '-' * 80
         puts "VCS logs for #{date}:"
