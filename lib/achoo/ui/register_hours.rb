@@ -1,9 +1,9 @@
 require 'achoo/achievo'
 require 'achoo/awake'
-require 'achoo/ical'
 require 'achoo/term'
 require 'achoo/ui'
 require 'achoo/vcs'
+require 'achoo/plugin_manager'
 
 module Achoo
   module UI
@@ -84,6 +84,7 @@ module Achoo
       end
 
       def print_remark_help(date)
+        PluginManager.instance.send_before_register_hour_remark
         puts "VCS logs for #{date}:"
         begin
           VCS.print_logs_for(date, RC[:vcs_dirs])

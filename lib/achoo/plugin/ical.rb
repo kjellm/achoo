@@ -1,9 +1,12 @@
 require 'achoo'
 require 'achoo/ical'
+require 'achoo/ui'
 
 module Achoo
   class Plugin
     class Ical < Achoo::Plugin
+
+      include ExceptionHandling
       
       def at_startup
         warm_up_ical_cache

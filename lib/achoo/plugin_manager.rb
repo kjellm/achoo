@@ -3,9 +3,12 @@
 require 'achoo'
 require 'achoo/plugin'
 require 'rubygems';
+require 'singleton'
 
 module Achoo
   class PluginManager
+
+    include Singleton
 
     @@hooks = [
         :before_register_hour_remark,
@@ -21,8 +24,12 @@ module Achoo
       end
     end
 
+    def initialize
+      @plugin_glob = 'achoo/plugin/*'
+    end
+
     def load_plugins
-      plugins = Gem.find_files("achoo/plugin/*", true)
+      plugins = Gem.find_files(@plugin_glob, true)
       Achoo::Plugin.manager = self
       plugins.each do |p|
         require p

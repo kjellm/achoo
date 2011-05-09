@@ -19,7 +19,7 @@ module Achoo
       if log
         @agent.log = Logger.new("achoo_http.log")
       end
-      @plugin_manager = PluginManager.new
+      @plugin_manager = PluginManager.instance
     end
 
 
@@ -27,7 +27,7 @@ module Achoo
       begin
         @plugin_manager.load_plugins
         print_welcome
-        warm_up_ical_cache
+        @plugin_manager.send_at_startup
         login
         scrape_urls
         command_loop
@@ -136,8 +136,6 @@ module Achoo
     def save_cookies
       @agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
     end
-
-
 
   end
 end
