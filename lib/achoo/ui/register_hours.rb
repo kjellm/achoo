@@ -84,21 +84,25 @@ module Achoo
       end
 
       def print_remark_help(date)
-        puts "VCS logs for #{date}:"
-        begin
-          VCS.print_logs_for(date, RC[:vcs_dirs])
-        rescue Exception => e
-          puts handle_exception("Failed to retrieve VCS logs.", e)
-        end
-        puts '-' * 80
-        puts "Calendar events for #{date}:"
-        puts '---'
-        begin
-          RC[:ical].each do |config|
-            ICal.from_http_request(config).print_events(date)
+        if RC[:vcs_dirs]
+          puts "VCS logs for #{date}:"
+          begin
+            VCS.print_logs_for(date, RC[:vcs_dirs])
+          rescue Exception => e
+            puts handle_exception("Failed to retrieve VCS logs.", e)
           end
-        rescue Exception => e
-          puts handle_exception("Failed to retrieve calendar events.", e)
+          puts '-' * 80
+        end
+        if RC[:ical]
+          puts "Calendar events for #{date}:"
+          puts '---'
+          begin
+            RC[:ical].each do |config|
+                ICal.from_http_request(config).print_events(date)
+              end
+          rescue Exception => e
+            puts handle_exception("Failed to retrieve calendar events.", e)
+          end
         end
       end
 
