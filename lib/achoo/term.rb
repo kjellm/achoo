@@ -20,6 +20,11 @@ module Achoo
     def self.warn(text);      effect(YELLOW,    text); end
     def self.fatal(text);     effect(RED,       text); end
 
+    def self.clearscreen
+      print "\e[2J"
+      $stdout.flush
+    end
+
     def self.password
       `stty -echo`
       pas = ask('Password')
