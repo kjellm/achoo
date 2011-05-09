@@ -18,14 +18,14 @@ module Achoo
       def contains?(timeish_or_timespan)
         if timeish_or_timespan.is_a? Timespan
           time = timeish_or_timespan
-          include?(time.first) && include?(time.last)
+          cover?(time.first) && cover?(time.last)
         else
-          include?(to_time(timeish_or_timespan))
+          cover?(to_time(timeish_or_timespan))
         end
       end
 
       def overlaps?(timespan)
-        include?(timespan.first) || include?(timespan.last) ||
+        cover?(timespan.first) || cover?(timespan.last) || 
           timespan.contains?(self)
       end
 

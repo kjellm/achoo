@@ -45,3 +45,7 @@ class Integer
   alias minutes minute
 
 end
+
+if RUBY_VERSION < "1.9"
+  Range.send(:alias_method, :cover?, :include?) 
+end
