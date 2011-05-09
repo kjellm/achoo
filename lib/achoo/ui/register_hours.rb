@@ -91,15 +91,6 @@ module Achoo
           puts handle_exception("Failed to retrieve VCS logs.", e)
         end
         puts '-' * 80
-        puts "Calendar events for #{date}:"
-        puts '---'
-        begin
-          RC[:ical].each do |config|
-            ICal.from_http_request(config).print_events(date)
-          end
-        rescue Exception => e
-          puts handle_exception("Failed to retrieve calendar events.", e)
-        end
       end
 
       def remark_chooser
