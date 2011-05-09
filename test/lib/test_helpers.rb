@@ -1,4 +1,4 @@
-require 'redgreen'
+#require 'redgreen' # FIX Seems to be problems with ruby 1.9.2 due to minitest/unit
 require 'shoulda'
 require 'test/unit'
 

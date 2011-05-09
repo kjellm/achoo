@@ -9,30 +9,30 @@ module Achoo
       include DateChoosers
       include Common
 
-      def show_registered_hours_for_day(agent)
+      def show_registered_hours_for_day
         date = date_chooser
-        form = Achievo::HourAdministrationForm.new(agent)
+        form = Achievo::HourAdministrationForm.new
         form.show_registered_hours_for_day(date)
       end
 
-      def show_registered_hours_for_week(agent)
+      def show_registered_hours_for_week
         date = date_chooser
-        form = Achievo::HourAdministrationForm.new(agent)
+        form = Achievo::HourAdministrationForm.new
         form.show_registered_hours_for_week(date)
       end
 
 
-      def show_flexi_time(agent)
+      def show_flexi_time
         date = date_chooser
-        form = Achievo::HourAdministrationForm.new(agent)
+        form = Achievo::HourAdministrationForm.new
         balance = form.flexi_time(date)
         puts "Flexi time balance: #{Term::underline(balance)}"
       end
 
 
-      def lock_month(agent)
+      def lock_month
         month = month_chooser
-        form  = Achievo::LockMonthForm.new(agent)
+        form  = Achievo::LockMonthForm.new
         form.lock_month(month)
         form.print_values
         if confirm
@@ -43,20 +43,20 @@ module Achoo
       end
 
   
-      def show_holiday_report(agent)
-        page = agent.get(RC[:holiday_report_url])
+      def show_holiday_report
+        page = AGENT.get(RC[:holiday_report_url])
         page.body.match(/<b>(\d+,\d+)<\/b>/)
         puts "Balance: #{Term::underline($1)}"
       end
 
       
-      def view_report(agent)
+      def view_report
         choices = RC[:reports].keys
         answer = Term.choose('Report', choices)
         key = choices[answer.to_i - 1]
         
         puts "Fetching data ..."
-        page = agent.get(RC[:url] + RC[:reports][key])
+        page = AGENT.get(RC[:url] + RC[:reports][key])
         
         table = Achievo::Table.new(page.search('#rl_1 tr'))
         table.select_columns do |c|

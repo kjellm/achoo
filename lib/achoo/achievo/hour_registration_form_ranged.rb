@@ -6,9 +6,9 @@ module Achoo
 
       include Achievo::DateField('to_date', 'todate')
 
-      def initialize(agent)
+      def initialize
         super
-        @page = @agent.get(atk_submit_to_url(@page.link_with(:text => 'Select range').href))
+        @page = AGENT.get(atk_submit_to_url(@page.link_with(:text => 'Select range').href))
         @form = @page.form('entryform')
 
         # Need to preselect this for some reason. FIX duplicated in super 

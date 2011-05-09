@@ -4,9 +4,9 @@ module Achoo
   module Achievo
     module LoginForm
 
-      def self.login(agent)
+      def self.login
         puts "Fetching data ..."
-        page = agent.get(RC[:url])
+        page = AGENT.get(RC[:url])
 
         return if page.forms.empty? # already logged in
 
@@ -15,7 +15,7 @@ module Achoo
         form = page.forms.first
         form.auth_user = RC[:user]
         form.auth_pw   = RC[:password]
-        page = agent.submit(form, form.buttons.first)
+        page = AGENT.submit(form, form.buttons.first)
 
         if page.body.match(/Username and\/or password are incorrect. Please try again./)
           raise "Username and/or password are incorrect."

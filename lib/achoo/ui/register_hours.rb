@@ -15,7 +15,7 @@ module Achoo
         @plugin_manager = PluginManager.instance
       end
 
-      def register_hours(agent)
+      def register_hours
         date = optionally_ranged_date_chooser
         
         puts "Fetching data ..."
@@ -23,7 +23,7 @@ module Achoo
                  Achievo::HourRegistrationFormRanged
                else
                  Achievo::HourRegistrationForm
-               end.new(agent)
+               end.new
         
         form.date    = date
         form.project = project_chooser(form)

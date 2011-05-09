@@ -7,8 +7,7 @@ module Achoo
 
       include Achievo::DateField('date', 'viewdate')
 
-      def initialize(agent)
-        @agent = agent
+      def initialize
         @page  = nil
       end
 
@@ -53,7 +52,7 @@ module Achoo
       end
   
       def set_page_to_view_for_date(view, date)
-        @page ||= @agent.get(RC[:hour_admin_url])
+        @page ||= AGENT.get(RC[:hour_admin_url])
         
         link = @page.link_with(:text => view.capitalize)
         @form = @page.form(view)

@@ -4,12 +4,8 @@ module Achoo
   module Achievo
     class LockMonthForm
 
-      def initialize(agent)
-        @agent = agent
-      end
-
       def lock_month(period)
-        page  = @agent.get(RC[:lock_months_url])
+        page  = AGENT.get(RC[:lock_months_url])
         @form  = page.form('entryform')
 
         @form.period = period

@@ -7,6 +7,9 @@ require 'logger'
 require 'mechanize'
 
 module Achoo
+
+  AGENT = Mechanize.new
+
   class App
 
     include UI::Commands
@@ -15,9 +18,8 @@ module Achoo
     
 
     def initialize(log=false)
-      @agent = Mechanize.new
       if log
-        @agent.log = Logger.new("achoo_http.log")
+        AGENT.log = Logger.new("achoo_http.log")
       end
       @plugin_manager = PluginManager.instance
     end
@@ -78,24 +80,24 @@ module Achoo
       when '0', 'q', 'Q'
         exit
       when '1', ''
-        date = register_hours(@agent)
+        date = register_hours
         if (date.class == Array)
           # For date range, pick the first date
           date = date[0]
         end
         print_homescreen(date)
       when '2'
-        show_flexi_time(@agent)
+        show_flexi_time
       when '3'
-        show_registered_hours_for_day(@agent)
+        show_registered_hours_for_day
       when '4'
-        show_registered_hours_for_week(@agent)
+        show_registered_hours_for_week
       when '5'
-        show_holiday_report(@agent)
+        show_holiday_report
       when '6'
-        lock_month(@agent)
+        lock_month
       when '7'
-        view_report(@agent)
+        view_report
       end
     end
 
@@ -108,10 +110,10 @@ module Achoo
 
       case RC[:homescreen]
       when 'day'
-        form = Achievo::HourAdministrationForm.new(@agent)
+        form = Achievo::HourAdministrationForm.new
         form.show_registered_hours_for_day(date)
       when 'week'
-        form = Achievo::HourAdministrationForm.new(@agent)
+        form = Achievo::HourAdministrationForm.new
         form.show_registered_hours_for_week(date)
       else
         printf "Unknown homescreen '%s', ignoring\n", RC['homescreen']
@@ -119,7 +121,7 @@ module Achoo
     end
 
     def scrape_urls 
-      page = @agent.get(@agent.current_page.frames.find {|f| f.name == 'menu'}.href)
+      page = AGENT.get(AGENT.current_page.frames.find {|f| f.name == 'menu'}.href)
       menu_links = page.search('a.menuItemLevel2')
       
       RC[:hour_registration_url] = menu_link_to_url(menu_links, 'Time Registration')
@@ -145,7 +147,7 @@ module Achoo
 
     def login
       load_cookies
-      Achievo::LoginForm.login(@agent)
+      Achievo::LoginForm.login
       save_cookies
     end
 
@@ -153,13 +155,13 @@ module Achoo
     def load_cookies
       cookies_file = "#{ENV['HOME']}/.achoo_cookies.yml"
       if FileTest.exists? cookies_file
-        @agent.cookie_jar.load(cookies_file)
+        AGENT.cookie_jar.load(cookies_file)
       end
     end
 
 
     def save_cookies
-      @agent.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
+      AGENT.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
     end
 
   end

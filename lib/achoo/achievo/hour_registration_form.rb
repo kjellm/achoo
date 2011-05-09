@@ -6,9 +6,8 @@ module Achoo
 
       include Achievo::DateField('date', 'activitydate')
 
-      def initialize(agent)
-        @agent = agent
-        @page  = @agent.get(RC[:hour_registration_url])
+      def initialize
+        @page  = AGENT.get(RC[:hour_registration_url])
         @form  = @page.form('entryform')
 
         if @form.nil?
@@ -17,7 +16,7 @@ module Achoo
           # most cases.
 
           # FIX Ugly call to a private method using send()
-          haf    = HourAdministrationForm.new(@agent)
+          haf    = HourAdministrationForm.new
           @page  = haf.send(:set_page_to_view_for_date, 'dayview', Date.today)
           @form  = @page.form('entryform')
         end
@@ -119,7 +118,7 @@ module Achoo
 
       def get_all_projects
         puts "Getting project page #1..."
-        projects_page = @agent.get(projects_url)
+        projects_page = AGENT.get(projects_url)
         projects = scrape_projects(projects_page)
 
         i = 2
@@ -182,7 +181,7 @@ module Achoo
       def create_page_from_partial(partial_page)
         body = "<html><head></head><body><form>#{partial_page.body}</form></body></html>"
         page = Mechanize::Page.new(nil, {'content-type' => 'text/html; charset=iso-8859-1'},
-                                   body, nil, @agent)
+                                   body, nil, AGENT)
       end
 
       def extract_number_from_projectid(projectid)
