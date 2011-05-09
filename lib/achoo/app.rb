@@ -1,10 +1,10 @@
 require 'achoo'
 require 'achoo/achievo'
+require 'achoo/plugin_manager'
 require 'achoo/term'
 require 'achoo/ui'
 require 'logger'
 require 'mechanize'
-
 
 module Achoo
   class App
@@ -19,11 +19,13 @@ module Achoo
       if log
         @agent.log = Logger.new("achoo_http.log")
       end
+      @plugin_manager = PluginManager.new
     end
 
 
     def start
       begin
+        @plugin_manager.load_plugins
         print_welcome
         warm_up_ical_cache
         login
@@ -136,17 +138,6 @@ module Achoo
     end
 
 
-    def warm_up_ical_cache
-      Thread.new do 
-        RC[:ical].each do |config|
-          begin
-            ICal.from_http_request(config)
-          rescue Exception => e
-            puts "Failed to fetch calendar data: #{e}"
-          end
-        end
-      end
-    end
 
   end
 end
