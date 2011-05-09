@@ -70,7 +70,7 @@ module Achoo
         lengths = Array.new(@headers.length, 0)
         rows.each do |r|
           r.each_with_index do |d, i|
-            lengths[i] = [d.scan(/./mu).length, lengths[i]].max
+            lengths[i] = [d.scan(/./mu).length, lengths[i]].max # FIX scan is a 1.8 hack
           end
         end
         lengths
