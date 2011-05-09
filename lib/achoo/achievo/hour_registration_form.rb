@@ -114,11 +114,7 @@ module Achoo
       end
 
       def all_projects
-        if not $allprojects_cache
-          $allprojects_cache = get_all_projects
-        end
-
-        $allprojects_cache
+        @@allprojects_cache ||= get_all_projects
       end
 
       def get_all_projects
