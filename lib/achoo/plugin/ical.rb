@@ -6,14 +6,14 @@ module Achoo
   class Plugin
     class Ical < Achoo::Plugin
 
-      include ExceptionHandling
+      include UI::ExceptionHandling
       
       def at_startup
         warm_up_ical_cache
       end
 
-      def before_register_hour_remark
-        date = Date.today
+      def before_register_hour_remark(date)
+        puts '-' * 80
         puts "Calendar events for #{date}:"
         puts '---'
         begin

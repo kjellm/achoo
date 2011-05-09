@@ -17,9 +17,9 @@ module Achoo
     ]
 
     @@hooks.each do |hook|
-      define_method("send_#{hook}") do
+      define_method("send_#{hook}") do |*args|
         instance_variable_get("@can_#{hook}").each do |plugin|
-          plugin.send(hook)
+          plugin.send(hook, *args)
         end
       end
     end
