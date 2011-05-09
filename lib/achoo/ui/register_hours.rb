@@ -46,6 +46,8 @@ module Achoo
         else
           puts "Cancelled"
         end
+
+        date
       end
       
 

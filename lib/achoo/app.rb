@@ -30,6 +30,7 @@ module Achoo
         @plugin_manager.send_at_startup
         login
         scrape_urls
+        print_homescreen
         command_loop
       rescue SystemExit => e
         raise
@@ -66,6 +67,7 @@ module Achoo
           dispatch(answer)
         rescue Interrupt
           puts # Add a new line in case we are prompting
+          print_homescreen
         end
       end
     end
@@ -76,7 +78,12 @@ module Achoo
       when '0', 'q', 'Q'
         exit
       when '1', ''
-        register_hours(@agent)
+        date = register_hours(@agent)
+        if (date.class == Array)
+          # For date range, pick the first date
+          date = date[0]
+        end
+        print_homescreen(date)
       when '2'
         show_flexi_time(@agent)
       when '3'
@@ -92,6 +99,24 @@ module Achoo
       end
     end
 
+    def print_homescreen(date = Date.today)
+      if RC[:homescreen] == nil
+        return
+      end
+
+      Term::clearscreen
+
+      case RC[:homescreen]
+      when 'day'
+        form = Achievo::HourAdministrationForm.new(@agent)
+        form.show_registered_hours_for_day(date)
+      when 'week'
+        form = Achievo::HourAdministrationForm.new(@agent)
+        form.show_registered_hours_for_week(date)
+      else
+        printf "Unknown homescreen '%s', ignoring\n", RC['homescreen']
+      end
+    end
 
     def scrape_urls 
       page = @agent.get(@agent.current_page.frames.find {|f| f.name == 'menu'}.href)
