@@ -3,6 +3,7 @@ require 'achoo/temporal'
 require 'achoo/ui'
 require 'net/https'
 require 'ri_cal'
+require 'uri'
 
 module Achoo
   class ICal
@@ -14,11 +15,13 @@ module Achoo
     def self.from_http_request(params)
       return @@cache[params] if @@cache[params]
       
-      http = Net::HTTP.new(params[:host], params[:port])
+      url = URI.parse(params[:url])
+
+      http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       ics = http.start do |http|
-        request = Net::HTTP::Get.new(params[:path])
+        request = Net::HTTP::Get.new(url.path)
         request.basic_auth(params[:user], params[:pass])
         response = http.request(request)
         raise response.message unless response.is_a?(Net::HTTPSuccess)
