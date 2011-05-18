@@ -26,6 +26,25 @@ module Achoo
           if @valid[answer]
             return answer
           else
+            # Attempt substring match, accept if unique
+            match = -1
+            doublematch = 0
+            @entries.each_with_index do |entry, i|
+              if entry.index(answer) == 0
+                if match >= 0
+                  doublematch = 1
+                  break
+                end
+                match = i
+              end
+            end
+
+            if match >= 0 and doublematch == 0
+              # This means we have a unique entry!
+              return (match + 1).to_s
+            end
+
+            # Give up...
             puts "Invalid value. Must be one of " << @valid.keys.sort.join(',')
           end
         end
