@@ -27,35 +27,41 @@ module Achoo
     def initialize
       @plugin_glob = 'achoo/plugin/*'
       @plugins     = []
+      Achoo::Plugin.manager = self
     end
 
     def load_plugins
-      plugins = Gem.find_files(@plugin_glob, true) # FIX assuming here that array is sorted correctly. Assumption correct?
-      Achoo::Plugin.manager = self
-      seen = {}
-      plugins.each do |p|
-        name = File.basename(p)
-        require p unless seen[name]
-        seen[name] = true
-      end
+      find_and_require_plugins
 
-      # All plugins are now registered. Loading the plugins will
+      # All plugins are now registered. Requiering the plugins will
       # magically call Achoo::Plugin::inherited for each
       # plugin. inherited() will in turn call register_plugin()
 
       @plugins = @plugins.select {|p| p.state_ok?; p }
-
-      @@hooks.each do |hook|
-        instance_variable_set("@can_#{hook}", @plugins.find_all do |obj|
-                                obj.respond_to?(hook)
-                              end)
-      end
-      
-      self
+      setup_hooks
     end
 
     def register_plugin(klass)
       @plugins.push(klass.new)
+    end
+
+    private
+
+    def find_and_require_plugins
+      # FIX assuming here that array is sorted correctly. Assumption correct?
+      seen = {}
+      Gem.find_files(@plugin_glob, true).each do |p|
+        name = File.basename(p)
+        require p unless seen[name]
+        seen[name] = true
+      end
+    end
+
+    def setup_hooks
+      @@hooks.each do |hook|
+        instance_variable_set("@can_#{hook}", 
+                              @plugins.select {|p| p.respond_to?(hook)})
+      end
     end
 
   end
