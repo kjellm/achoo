@@ -37,7 +37,8 @@ module Achoo
       # magically call Achoo::Plugin::inherited for each
       # plugin. inherited() will in turn call register_plugin()
 
-      @plugins = @plugins.select {|p| p.state_ok?; p }
+      @plugins = @plugins.select {|p| p.state_ok? }
+      
       setup_hooks
     end
 
