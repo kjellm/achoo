@@ -40,7 +40,7 @@ module Achoo
       # magically call Achoo::Plugin::inherited for each
       # plugin. inherited() will in turn call register_plugin()
 
-      @plugins.collect! {|p| p.state_ok? }
+      @plugins = @plugins.select {|p| p.state_ok?; p }
 
       @@hooks.each do |hook|
         instance_variable_set("@can_#{hook}", @plugins.find_all do |obj|
