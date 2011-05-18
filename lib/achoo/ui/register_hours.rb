@@ -3,6 +3,7 @@ require 'achoo/awake'
 require 'achoo/term'
 require 'achoo/ui'
 require 'achoo/plugin_manager'
+require 'readline'
 
 module Achoo
   module UI
@@ -98,29 +99,56 @@ module Achoo
         projects = form.recent_projects
         answer = Term.choose('Project [1]', projects.collect { |p| p[1] },
                              'Other', [''])
-        case answer
-        when ''
-          projects[0][0]
-        when '0'
-          return all_projects_chooser(form)
-        else
-          return projects[answer.to_i-1][0]
-        end
+        return case answer
+               when '0'
+                 all_projects_chooser(form)
+               when ''
+                 projects[0][0]
+               else
+                 projects[answer.to_i-1][0]
+               end
       end
 
       
       
       def all_projects_chooser(form)
-        chooser_helper(form.all_projects, 
-                       'All projects', 
-                       'Project')
+        projects = form.all_projects
+
+        p projects
+
+        # FIX move readline stuff to the term modules
+        original_readline_comp_proc = Readline.completion_proc
+        original_readline_comp_append_char = Readline.completion_append_character
+        Readline.completion_append_character = ''
+        Readline.completion_proc = proc do |s|
+          projects.collect {|p| p[1] }.grep(/^#{Regexp.escape(s)}/)
+        end
+
+
+        answer = chooser_helper(projects, 
+                                'All projects', 
+                                'Project')
+
+        Readline.completion_proc = original_readline_comp_proc
+        Readline.completion_append_character = original_readline_comp_append_char
+
+        answer
       end
 
       def chooser_helper(options, heading, prompt, empty_allowed=false)
-        puts heading
         extra = empty_allowed ? [''] : []
-        answer = Achoo::Term.choose(prompt, options.collect {|p| p[1] }, nil, [''])
+        project_names = options.collect {|p| p[1] }
+        if heading == 'All projects'
+          # FIX ugly conditional
+          extra += project_names
+        end
+        answer = Achoo::Term.choose(prompt, options.collect {|p| p[1] }, nil, extra)
         answer = '1' if answer.empty?
+        if heading == 'All projects'
+          # FIX ugly conditional
+          index = project_names.find_index(answer) + 1
+          answer = index unless index.nil?
+        end
         options[answer.to_i-1][0]
       end
 
