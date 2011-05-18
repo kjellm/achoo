@@ -30,10 +30,13 @@ module Achoo
     end
 
     def load_plugins
-      plugins = Gem.find_files(@plugin_glob, true)
+      plugins = Gem.find_files(@plugin_glob, true) # FIX assuming here that array is sorted correctly. Assumption correct?
       Achoo::Plugin.manager = self
+      seen = {}
       plugins.each do |p|
-        require p
+        name = File.basename(p)
+        require p unless seen[name]
+        seen[name] = true
       end
 
       # All plugins are now registered. Loading the plugins will
