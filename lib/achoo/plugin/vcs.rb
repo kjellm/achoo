@@ -8,7 +8,7 @@ module Achoo
 
       include UI::ExceptionHandling
       
-      def state_ok?; RC.has_key?(:vcs); end
+      def state_ok?; RC.has_key?(:vcs_dirs); end
       
       def before_register_hour_remark(date)
         puts '-' * 80
