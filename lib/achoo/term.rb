@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'achoo'
+require 'readline'
 
 module Achoo
   class Term
@@ -35,9 +36,7 @@ module Achoo
     def self.ask(question='')
       answer = nil
       loop do
-        print bold("#{question}> ")
-        $stdout.flush
-        answer = gets
+        answer = Readline.readline(bold("#{question}> "), true)
         
         # Answer is nil if user hits C-d on an empty input
         if answer.nil?
