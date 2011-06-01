@@ -14,7 +14,7 @@ module Achoo
       end
 
       def get_exception_reason(e)
-        "\nReason: \n\t" + e.message.gsub("\n", "\n\t") + "\n---\n\t" + e.backtrace.join("\n\t")
+        "\nType:\t" + e.class.to_s +  "\nReason: \n\t" + e.message.gsub("\n", "\n\t") + "\n---\n\t" + e.backtrace.join("\n\t")
       end
 
     end
