@@ -1,9 +1,10 @@
 require 'achoo'
 require 'achoo/ui'
+require 'plugman/plugin_base'
 
 module Achoo
   class Plugin
-    class Homescreen < Achoo::Plugin
+    class Homescreen < Plugman::PluginBase
 
       include UI::ExceptionHandling
 

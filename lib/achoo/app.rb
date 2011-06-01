@@ -1,14 +1,16 @@
 require 'achoo'
 require 'achoo/achievo'
-require 'achoo/plugin_manager'
 require 'achoo/term'
 require 'achoo/ui'
 require 'logger'
 require 'mechanize'
+require 'plugman'
+require 'plugman/finder'
 
 module Achoo
 
-  AGENT = Mechanize.new
+  AGENT   = Mechanize.new
+  PLUGINS = Plugman.new('achoo')
 
   class App
 
@@ -21,15 +23,15 @@ module Achoo
       if log
         AGENT.log = Logger.new("achoo_http.log")
       end
-      @plugin_manager = PluginManager.instance
     end
 
 
     def start
       begin
-        @plugin_manager.load_plugins
+        PLUGINS.load_plugins
+        puts PLUGINS.log if $DEBUG
         print_welcome
-        @plugin_manager.send_at_startup
+        PLUGINS.send_at_startup
         login
         scrape_urls
         #print_homescreen

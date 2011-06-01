@@ -1,10 +1,11 @@
 require 'achoo'
 require 'achoo/vcs'
 require 'achoo/ui'
+require 'plugman/plugin_base'
 
 module Achoo
   class Plugin
-    class VCS < Achoo::Plugin
+    class VCS < Plugman::PluginBase
 
       include UI::ExceptionHandling
       

@@ -2,7 +2,6 @@ require 'achoo/achievo'
 require 'achoo/awake'
 require 'achoo/term'
 require 'achoo/ui'
-require 'achoo/plugin_manager'
 require 'readline'
 
 module Achoo
@@ -13,7 +12,6 @@ module Achoo
       include ExceptionHandling
 
       def initialize
-        @plugin_manager = PluginManager.instance
       end
 
       def register_hours
@@ -29,7 +27,7 @@ module Achoo
         form.date    = date
         form.project = project_chooser(form)
         form.phase   = phase_chooser(form)
-        @plugin_manager.send_before_register_hour_remark(date) unless date.class == Array
+        PLUGINS.send_before_register_hour_remark(date) unless date.class == Array
         form.remark  = remark_chooser
         print_hours_help(date) unless date.class == Array
         form.hours   = hours_chooser

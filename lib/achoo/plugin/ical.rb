@@ -1,10 +1,11 @@
 require 'achoo'
 require 'achoo/ical'
 require 'achoo/ui'
+require 'plugman/plugin_base'
 
 module Achoo
   class Plugin
-    class Ical < Achoo::Plugin
+    class Ical < Plugman::PluginBase
 
       include UI::ExceptionHandling
 

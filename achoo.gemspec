@@ -18,6 +18,7 @@ Spec = Gem::Specification.new do |s|
   s.email       = 'kjellm@acm.org'
 
   s.add_dependency('mechanize', '>= 1.0.0')
+  s.add_dependency('plugman',   '>= 0.1.1')
   s.add_dependency('ri_cal')
   s.requirements << 'none'
 
