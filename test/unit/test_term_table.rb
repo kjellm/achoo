@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'achoo/term/table'
 require 'test_helpers'
 
