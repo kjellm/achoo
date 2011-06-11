@@ -1,3 +1,9 @@
+2011-06-10: version 0.5.1
+
+ - Fixed failing tests
+
+ - Some menu headers was not printed
+
 2011-06-10: version 0.5
 
  - Added support for plugins.
