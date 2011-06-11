@@ -14,15 +14,14 @@ module Achoo
         Term::clearscreen
       end
 
-      def print_homescreen(date = Date.today)
+      def before_print_menu(date)
+        form = Achievo::HourAdministrationForm.new
         Term::clearscreen
 
         case RC[:homescreen]
         when 'day'
-          form = Achievo::HourAdministrationForm.new
           form.show_registered_hours_for_day(date)
         when 'week'
-          form = Achievo::HourAdministrationForm.new
           form.show_registered_hours_for_week(date)
         else
           printf "Unknown homescreen '%s', ignoring\n", RC['homescreen']

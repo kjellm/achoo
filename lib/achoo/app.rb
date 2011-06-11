@@ -20,6 +20,7 @@ module Achoo
     
 
     def initialize(log=false)
+      @last_used_date = Date.today
       if log
         AGENT.log = Logger.new("achoo_http.log")
       end
@@ -30,8 +31,8 @@ module Achoo
       begin
         PLUGINS.load_plugins
         puts PLUGINS.log if ENV['ACHOO_DEBUG']
-        print_welcome
         PLUGINS.send_at_startup
+        print_welcome
         login
         scrape_urls
         #print_homescreen
@@ -56,6 +57,8 @@ module Achoo
       while true
         begin
           trap("INT", "DEFAULT");
+          PLUGINS.send_before_print_menu(@last_used_date)
+          @last_used_date = Date.today
           choices = ["Register hours",
                      "Show flexitime balance",
                      "Day hour report",
@@ -83,11 +86,7 @@ module Achoo
         exit
       when '1', ''
         date = register_hours
-        #if (date.class == Array)
-        #  # For date range, pick the first date
-        #  date = date[0]
-        #end
-        #print_homescreen(date)
+        @last_used_date = date.class == Array ? date.first : date
       when '2'
         show_flexi_time
       when '3'

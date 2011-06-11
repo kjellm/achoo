@@ -22,7 +22,7 @@ module Achoo
     def self.fatal(text);     effect(RED,       text); end
 
     def self.clearscreen
-      print "\e[2J"
+      print "\e[2J\e[H"
       $stdout.flush
     end
 
