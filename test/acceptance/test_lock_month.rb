@@ -22,7 +22,7 @@ class TestLockMonth < Test::Unit::TestCase
   end
     
   def test_lock_month
-    achoo(:verbose => $DEBUG) do
+    achoo(:verbose => ENV['DEBUG_ACHOO']) do
       expect '6. Lock month'
       expect_main_prompt
       puts '6'
