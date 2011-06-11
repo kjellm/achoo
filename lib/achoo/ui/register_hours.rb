@@ -1,5 +1,4 @@
 require 'achoo/achievo'
-require 'achoo/awake'
 require 'achoo/term'
 require 'achoo/ui'
 require 'readline'
@@ -29,7 +28,7 @@ module Achoo
         form.phase   = phase_chooser(form)
         PLUGINS.send_before_register_hour_remark(date) unless date.class == Array
         form.remark  = remark_chooser
-        print_hours_help(date) unless date.class == Array
+        PLUGINS.send_before_register_hour_hours(date) unless date.class == Array
         form.hours   = hours_chooser
         
         answer = Term.ask("Do you want to change the defaults for worktime period and/or billing percentage? [N/y]").downcase
@@ -56,17 +55,6 @@ module Achoo
                        'Phase')
       end
 
-
-      def print_hours_help(date)
-        puts "Awake log:"
-        begin
-          awake = Awake.new
-          awake.at(date)
-          puts
-        rescue Exception => e
-          print handle_exception("Failed to retrieve awake log.", e)
-        end
-      end
 
       def hours_chooser
         answer = Term::ask 'Hours [7:30]'

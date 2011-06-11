@@ -29,7 +29,7 @@ module Achoo
     def start
       begin
         PLUGINS.load_plugins
-        puts PLUGINS.log if $DEBUG
+        puts PLUGINS.log if ENV['ACHOO_DEBUG']
         print_welcome
         PLUGINS.send_at_startup
         login

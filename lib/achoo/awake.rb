@@ -47,7 +47,7 @@ module Achoo
         else # :awake, :boot
           # We don't know the end of the session
           session << Temporal::OpenTimespan.new(g.last.time, g.first.time)
-          g.unshift(System::LogEntry.new(-1, :crash))
+          g.unshift(System::LogEntry.new(Time.at(0), :crash))
         end
       
         raise "Session must consist of even number of events. Found #{g.length}" unless g.length.even?
