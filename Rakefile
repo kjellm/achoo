@@ -1,8 +1,8 @@
 # encoding: utf-8
 
-require 'rake/gempackagetask'
 require 'rake/testtask'
 require 'rubygems'
+require 'rubygems/package_task'
 
 load File.dirname(__FILE__) + '/achoo.gemspec'
 
@@ -10,17 +10,13 @@ task :default => ['test:unit']
 
 namespace 'build' do
 
-  Rake::GemPackageTask.new(Spec) do |pkg|
+  Gem::PackageTask.new(Spec) do |pkg|
     pkg.need_tar = true
   end
 
 end
 
-Rake::TestTask.new do |t|
-  t.libs << "test/lib"
-  t.test_files = FileList['test/**/test*.rb']
-  #t.verbose = true
-end
+task :test => ['test:unit', 'test:acceptance']
 
 namespace 'test' do
 
@@ -30,10 +26,12 @@ namespace 'test' do
     t.test_files = FileList['test/unit/test*.rb']
   end
 
-  Rake::TestTask.new do |t|
-    t.name = :acceptance
-    t.libs << "test/lib"
-    t.test_files = FileList['test/acceptance/test*.rb']
+  # Need a fresh ruby interpreter for each acceptance test, so I can't
+  # use Rake::TestTask
+  task :acceptance do
+    FileList['test/acceptance/test*.rb'].each do |f|
+      ruby "-Ilib -Itest/lib #{f}"
+    end
   end
 
 end
