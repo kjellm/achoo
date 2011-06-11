@@ -12,7 +12,7 @@ class AchievoMock
     @server.silent = true
     @thread = Thread.new { @server.start }
     sleep 1
-    @logger = Logger.new(File.dirname(__FILE__) + '/../../tmp/test.log')
+    @logger = Logger.new('/tmp/achoo-test.log')
   end
 
   def stop
