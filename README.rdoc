@@ -82,6 +82,10 @@ For more usage information, see
 this[http://oierud.name/~kjellm/bliki/AchooTheAchievoCLI.html] blog
 post.
 
+== PLUGINS
+
+FIX
+
 == BUGS
 
 Report bugs to http://github.com/kjellm/achoo/issues
