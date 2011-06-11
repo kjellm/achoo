@@ -5,26 +5,34 @@ works by scraping achievo web pages and sending HTTP requests.
 
 == INSTALL
 
-These instructions are for installing on Ubuntu 9.10 (Karmic Koala),
-but they will probably work with minor adjustments on other systems as
-well.
+These instructions are for installing on Ubuntu but they will probably
+work with minor adjustments on other systems as well.
 
-- Make sure that you have ruby and rubygems installed together with
-  achoo's non-gem requirements:
+I recommend using RVM (http://beginrescueend.com/). This enables you
+to safely mess with ruby without messing with the system ruby. Achoo
+is developed using ruby 1.9.2.
 
-    sudo aptitude install ruby rubygems ruby1.8-dev libxml2 \
-      libxml2-dev libxslt1 libxslt1-dev libopenssl-ruby
+- Make sure that you have achoo's non-gem requirements installed:
+
+    sudo aptitude install libxml2 libxml2-dev libxslt1 libxslt1-dev
+
+- Install RVM
+
+  Need to install some libs required to compile ruby
+
+    sudo aptitude install build-essential libssl-dev libreadline6-dev
+
+  (See http://beginrescueend.com/rvm/install/)
+
+    bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+    # ... (follow the instructions for loading rvm into your shell's session)
+    rvm install 1.9.2
+    rvm use 1.9.2 --default
 
 - Install Achoo
 
     gem install achoo
 
-- Make sure that ~/.gem/ruby/1.8/bin is in your PATH environment variable
-
-    if echo $PATH | grep -vq ~/.gem/ruby/1.8/bin; then
-      export PATH=~/.gem/ruby/1.8/bin:$PATH
-      echo 'export PATH=~/.gem/ruby/1.8/bin:$PATH' >> ~/.bashrc
-    fi
 
 === TRACKING THE LATEST CHANGES
 
@@ -58,9 +66,7 @@ Create ~/.achoo from the following template (YAML) and edit it:
   :password : 'geheim'
   :vcs_dirs : ["/home/joe/projects"]
   :ical :
-    - :host : "foo.example.com"
-      :port : 443
-      :path : "/joe/Calendar"
+    - :url  : "https://foo.example.com/joe/Calendar"
       :user : "joe"
       :pass : 'GeHeIm'
    
@@ -87,4 +93,4 @@ Kjell-Magne Øierud <kjellm AT acm DOT org>
 == LICENSE
 
 This computer program is distributed under the GPL. Please see the
-COPYING file.
+COPYING file part of this distribution.
