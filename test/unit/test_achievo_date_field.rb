@@ -11,23 +11,23 @@ class TestTermMenu < Test::Unit::TestCase
     end
 
     should 'mixin foo accessor' do
-      assert @a.instance_methods.include?('foo')
+      assert @a.instance_methods.include?(:foo)
     end
 
     should 'mixin foo= accessor' do
-      assert @a.instance_methods.include?('foo=')
+      assert @a.instance_methods.include?(:foo=)
     end
     
     should 'mixin foo_day_field accessor' do
-      assert @a.instance_methods.include?('foo_day_field')
+      assert @a.instance_methods.include?(:foo_day_field)
     end
 
     should 'mixin foo_month_field accessor' do
-      assert @a.instance_methods.include?('foo_month_field')
+      assert @a.instance_methods.include?(:foo_month_field)
     end
 
     should 'mixin foo_year_field accessor' do
-      assert @a.instance_methods.include?('foo_year_field')
+      assert @a.instance_methods.include?(:foo_year_field)
     end
   end
 end
