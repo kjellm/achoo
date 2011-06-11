@@ -1,15 +1,15 @@
 require 'achoo'
 require 'achoo/ical'
+require 'achoo/plugin_base'
 require 'achoo/ui'
-require 'plugman/plugin_base'
 
 module Achoo
   class Plugin
-    class Ical < Plugman::PluginBase
+    class Ical < PluginBase
 
       include UI::ExceptionHandling
 
-      def state_ok?; RC.has_key?(:ical); end
+      def state_ok?; RC.has_key?(:ical) && !RC[:ical].empty?; end
       
       def at_startup
         warm_up_ical_cache

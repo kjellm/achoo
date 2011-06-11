@@ -1,15 +1,15 @@
 require 'achoo'
-require 'achoo/vcs'
+require 'achoo/plugin_base'
 require 'achoo/ui'
-require 'plugman/plugin_base'
+require 'achoo/vcs'
 
 module Achoo
   class Plugin
-    class VCS < Plugman::PluginBase
+    class VCS < PluginBase
 
       include UI::ExceptionHandling
       
-      def state_ok?; RC.has_key?(:vcs_dirs); end
+      def state_ok?; RC.has_key?(:vcs_dirs) && !RC[:vcs_dirs].empty?; end
       
       def before_register_hour_remark(date)
         puts '-' * 80
