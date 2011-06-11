@@ -122,6 +122,8 @@ module Achoo
       end
 
       def chooser_helper(options, heading, prompt, empty_allowed=false)
+        puts heading
+
         extra = empty_allowed ? [''] : []
         project_names = options.collect {|p| p[1] }
         if heading == 'All projects'
