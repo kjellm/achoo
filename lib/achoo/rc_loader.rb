@@ -49,6 +49,15 @@ module Achoo
           RC[key] = []
         end
       end
+
+      if RC.has_key?(:ical)
+        RC[:ical].each do |cal|
+          if cal.has_key?(:host)
+            puts Term.warn "You are using the old configuration format for ical. See the README for information on the new format"
+            return
+          end
+        end
+      end
     end
 
   end
