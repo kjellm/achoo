@@ -1,3 +1,16 @@
+2011-06-10: version 0.5
+
+ - Added support for plugins.
+
+ - Added tab completion for the hour registration all projects chooser.
+
+ - Added support for advanced line editing (readline).
+
+ - More user friendly configuration of ical. Merge :host, :port, and
+   :path into :url.
+
+ - Caching the list of all projects in hour registration.
+
 2010-05-11: version 0.4.2
 
  - Fixed problem with identifying the halt event in the awake log.
