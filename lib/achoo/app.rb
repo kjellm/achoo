@@ -31,7 +31,7 @@ module Achoo
       begin
         PLUGINS.load_plugins
         puts PLUGINS.log if ENV['ACHOO_DEBUG']
-        PLUGINS.send_at_startup
+        PLUGINS.signal_at_startup
         print_welcome
         login
         scrape_urls
@@ -57,7 +57,7 @@ module Achoo
       while true
         begin
           trap("INT", "DEFAULT");
-          PLUGINS.send_before_print_menu(@last_used_date)
+          PLUGINS.signal_before_print_menu(@last_used_date)
           @last_used_date = Date.today
           choices = ["Register hours",
                      "Show flexitime balance",
