@@ -37,6 +37,12 @@ module Achoo
     end
 
     def self.header(dir)
+      name = File.basename(dir).upcase
+      name << ' '
+      name << '-' * (LINE_LENGTH - name.length)
+    end
+
+    def self.fancy_header(dir)
       project = "<( #{File.basename(dir).upcase} )>"
       dashes = '-' * ((LINE_LENGTH - project.length) / 2)
       dashes + project + dashes
