@@ -13,10 +13,10 @@ module Achoo
           File.open(file, 'r') do |fh|
             fh.readlines.each do |l|
               l.chop!
-              next unless l =~ /Awake|performing suspend/
+              next unless l =~ /Awake|performing (?:suspend|hibernate)/
               time, event = *l.split(': ')
               time = Time.parse(time)
-              self << LogEntry.new(time, event == 'Awake.' ? :awake : :suspend)
+              self << LogEntry.new(time, event == 'Awake.' ? :awake : :suspend) # FIX use a new event type for hibernate
             end
           end
         end
