@@ -138,13 +138,13 @@ module Achoo
     def load_cookies
       cookies_file = "#{ENV['HOME']}/.achoo_cookies.yml"
       if FileTest.exists? cookies_file
-        AGENT.cookie_jar.load(cookies_file)
+        AGENT.cookie_jar.load(cookies_file, :cookiestxt)
       end
     end
 
 
     def save_cookies
-      AGENT.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml")
+      AGENT.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml", :cookiestxt)
     end
 
   end
