@@ -1,5 +1,6 @@
 require 'achoo/achievo'
 require 'achoo/term/table'
+require 'shellout'
 
 module Achoo
   module Achievo
@@ -32,23 +33,22 @@ module Achoo
         
         table = Table.new(@page.search(query))
 
-        if view == 'weekview'
-          table.first.each {|c| c.gsub!(/\s+/, ' ') }
-        end
+        table.first.each {|c| c.gsub!(/[\u00A0\s]+/, ' ') }
 
         if view == 'dayview'
           table.select_columns do |c|
-            # '' -> Ruby 1.9, ' ' -> Ruby 1.8
-            !['', ' ', 'Billing billed', 'Billing marked', 'Billing total'].include?(c[0])
+            p c[0]
+            ![' ', 'Billing billed', 'Billing marked', 'Billing total'].include?(c[0])
 
           end
         end
 
-        summaries = table.length > 1 ? table.last : nil
-
-        Term::Table.new(table.first,
-                        table[1 .. table.length-2], 
-                        summaries).print
+        table_params = {
+          headers: table.first,
+          rows:    table[1 .. table.length-2],
+        }
+        table_params[:footers] = table.last if table.length > 1
+        Shellout::Table.new(table_params).print
       end
   
       def set_page_to_view_for_date(view, date)

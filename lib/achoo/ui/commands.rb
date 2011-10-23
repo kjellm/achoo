@@ -1,6 +1,7 @@
 require 'achoo/achievo'
 require 'achoo/term'
 require 'achoo/ui'
+require 'shellout/table'
 
 module Achoo
   module UI
@@ -63,9 +64,9 @@ module Achoo
           ['Date', 'Project', 'Phase', 'Remark', 'Time'].include?(c[0])
         end
         
-        Term::Table.new(table.first,
-                        table[2...table.length-1],
-                        table.last).print
+        Shellout::Table.new(headers: table.first,
+                            rows:    table[2...table.length-1],
+                            footers: table.last).print
       end
       
     end

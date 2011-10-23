@@ -6,6 +6,7 @@ require 'logger'
 require 'mechanize'
 require 'plugman'
 require 'plugman/finder'
+require 'shellout'
 
 module Achoo
 
@@ -49,7 +50,7 @@ module Achoo
 
 
     def print_welcome
-      puts Term.shadowbox("Welcome to Achoo!")
+      Shellout::Shadowbox.new("Welcome to Achoo!").print
     end
 
 
