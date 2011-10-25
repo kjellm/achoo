@@ -19,6 +19,8 @@ module Achoo
     include UI::ExceptionHandling
     include UI::RegisterHours
     
+    COOKIES_FILE = "#{ENV['HOME']}/.achoo_cookies.txt"
+    
 
     def initialize(log=false)
       @last_used_date = Date.today
@@ -136,16 +138,15 @@ module Achoo
     end
 
 
-    def load_cookies
-      cookies_file = "#{ENV['HOME']}/.achoo_cookies.yml"
-      if FileTest.exists? cookies_file
-        AGENT.cookie_jar.load(cookies_file, :cookiestxt)
+    def load_cookie
+      if FileTest.exists? COOKIES_FILE
+        AGENT.cookie_jar.load(COOKIES_FILE, :cookiestxt)
       end
     end
 
 
     def save_cookies
-      AGENT.cookie_jar.save_as("#{ENV['HOME']}/.achoo_cookies.yml", :cookiestxt)
+      AGENT.cookie_jar.save_as(COOKIES_FILE, :cookiestxt)
     end
 
   end
