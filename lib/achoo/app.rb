@@ -138,7 +138,7 @@ module Achoo
     end
 
 
-    def load_cookie
+    def load_cookies
       if FileTest.exists? COOKIES_FILE
         AGENT.cookie_jar.load(COOKIES_FILE, :cookiestxt)
       end
