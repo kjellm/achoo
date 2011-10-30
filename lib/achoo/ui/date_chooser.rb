@@ -1,5 +1,7 @@
 require 'achoo/term'
 require 'achoo/ui'
+require 'date'
+require 'shellout/calendar'
 
 module Achoo
   module UI
@@ -67,7 +69,10 @@ module Achoo
         puts "Accepted formats:"
         puts date_format_help_string
         puts
-        system 'cal -3'
+        this_month = Date.today
+        Shellout::Calendar.new(this_month.prev_month,
+                               this_month,
+                               this_month.next_month).print
       end
       
       def date_format_help_string
