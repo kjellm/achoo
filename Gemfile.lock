@@ -1,0 +1,29 @@
+PATH
+  remote: .
+  specs:
+    achoo (0.5.1.340)
+      mechanize (>= 1.0.0)
+      plugman (>= 0.1.1)
+      ri_cal
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    mechanize (2.0.1)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 1.8)
+      nokogiri (~> 1.4)
+      webrobots (~> 0.0, >= 0.0.9)
+    net-http-digest_auth (1.1.1)
+    net-http-persistent (1.9)
+    nokogiri (1.5.0)
+    plugman (0.2)
+    ri_cal (0.8.8)
+    webrobots (0.0.12)
+      nokogiri (>= 1.4.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  achoo!
