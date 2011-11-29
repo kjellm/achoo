@@ -134,7 +134,11 @@ module Achoo
         answer = '1' if answer.empty?
         if heading == 'All projects'
           # FIX ugly conditional
-          index = project_names.find_index(answer) + 1
+          if answer =~ /^\d+$/
+            index = answer.to_i
+          else
+            index = project_names.find_index(answer) + 1
+          end
           answer = index unless index.nil?
         end
         options[answer.to_i-1][0]
