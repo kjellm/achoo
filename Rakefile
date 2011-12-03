@@ -9,11 +9,7 @@ load File.dirname(__FILE__) + '/achoo.gemspec'
 task :default => ['test:unit']
 
 namespace 'build' do
-
-  Gem::PackageTask.new(Spec) do |pkg|
-    pkg.need_tar = true
-  end
-
+  require "bundler/gem_tasks"
 end
 
 task :test => ['test:unit', 'test:acceptance']
