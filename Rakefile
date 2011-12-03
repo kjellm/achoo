@@ -124,10 +124,6 @@ namespace 'doc' do
   end
 end
 
-desc 'Install development dependencies'
-task :setup do
-  system 'gem install shoulda rack thin redgreen metric_fu code_stats hanna'
-end
 
 desc 'Remove generated files and folders'
 task :clean => ['build:clobber_package', 'doc:clobber_rdoc']
