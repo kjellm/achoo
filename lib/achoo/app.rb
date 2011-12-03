@@ -19,6 +19,8 @@ module Achoo
     include UI::ExceptionHandling
     include UI::RegisterHours
     
+    include Shellout
+
     COOKIES_FILE = "#{ENV['HOME']}/.achoo_cookies.txt"
     
 
@@ -52,7 +54,7 @@ module Achoo
 
 
     def print_welcome
-      Shellout::Shadowbox.new("Welcome to Achoo!").print
+      Shadowbox("Welcome to Achoo!").print
     end
 
 
@@ -77,7 +79,6 @@ module Achoo
           dispatch(answer)
         rescue Interrupt
           puts # Add a new line in case we are prompting
-          #print_homescreen
         end
       end
     end

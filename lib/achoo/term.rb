@@ -34,53 +34,21 @@ module Achoo
     end
 
     def self.ask(question='')
-      answer = nil
-      loop do
-        answer = Readline.readline(bold("#{question}> "), true)
+      answer = Readline.readline(bold("#{question}> "), true)
         
-        # Answer is nil if user hits C-d on an empty input
-        if answer.nil?
-          puts
-          exit
-        end
-        
-        answer.strip! unless answer.nil?
-
-        # FIX move this to achoo.rb?
-        unless $stdin.tty?
-          puts answer
-        end
-        break unless a_little_something(answer)
+      # Answer is nil if user hits C-d on an empty input
+      if answer.nil?
+        puts
+        exit
       end
-      answer
+      
+      answer.strip
     end
 
     def self.choose(question, entries, special=nil, additional_valid_answers=[])
       menu = Menu.new(question, entries, special, additional_valid_answers)
       menu.print_ask_and_validate
     end
-
-    private
-
-    def self.a_little_something(answer)
-      return false if answer.nil?
-
-      case answer.downcase
-      when 'bless you!', 'gesundheit!'
-        puts "Thank you!"
-        return true
-      else
-        return false
-      end
-    end
-
-    def self.shadowbox(text)
-      x =  "┌──────────────────────────────────────────┐ \n"
-      x << "│ #{text.center(40)} " <<                 "│▒\n"
-      x << "└──────────────────────────────────────────┘▒\n"
-      x << "  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n"
-      x
-    end
-
   end
+
 end

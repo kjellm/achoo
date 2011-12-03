@@ -1,5 +1,4 @@
 require 'achoo/achievo'
-require 'achoo/term/table'
 require 'shellout'
 
 module Achoo
@@ -7,6 +6,7 @@ module Achoo
     class HourAdministrationForm
 
       include Achievo::DateField('date', 'viewdate')
+      include Shellout
 
       def initialize
         @page  = nil
@@ -48,7 +48,7 @@ module Achoo
           rows:    table[1 .. table.length-2],
         }
         table_params[:footers] = table.last if table.length > 1
-        Shellout::Table.new(table_params).print
+        Table(table_params).print
       end
   
       def set_page_to_view_for_date(view, date)
