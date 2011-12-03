@@ -10,7 +10,7 @@ work with minor adjustments on other systems as well.
 
 I recommend using RVM (http://beginrescueend.com/). This enables you
 to safely mess with ruby without messing with the system ruby. Achoo
-is developed using ruby 1.9.2.
+is developed using ruby 1.9.3.
 
 - Make sure that you have achoo's non-gem requirements installed:
 
@@ -26,8 +26,8 @@ is developed using ruby 1.9.2.
 
     bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
     # ... (follow the instructions for loading rvm into your shell's session)
-    rvm install 1.9.2
-    rvm use 1.9.2 --default
+    rvm install 1.9.3
+    rvm use 1.9.3 --default
 
 - Install Achoo
 
