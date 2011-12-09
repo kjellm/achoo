@@ -130,7 +130,7 @@ class TestLockMonth < Test::Unit::TestCase
       # Bug in expect? 
       # Can't check for the whole string
       # expect 'Do you want to change the defaults for worktime period and/or billing percentage? [N/y]>'
-      expect 'Do you want to change the defaults for worktime period and/or billing percent'
+      expect 'Do you want to change the defaults for worktime period and/or billing'
       puts 'y'
 
       expect 'Worktime periods'
