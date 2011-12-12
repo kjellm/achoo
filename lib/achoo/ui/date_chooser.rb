@@ -1,10 +1,13 @@
 require 'achoo/term'
 require 'achoo/ui'
+require 'shellout'
 
 module Achoo
   module UI
 
     class DateChooser
+
+      include Shellout
 
       PROMPT = "Date ([today] | ?)"
       FORMAT = "        today | (+|-)n | [[[YY]YY]-[M]M]-[D]D"
@@ -67,7 +70,7 @@ module Achoo
         puts "Accepted formats:"
         puts date_format_help_string
         puts
-        system 'cal -3'
+        Calendar().print3
       end
       
       def date_format_help_string

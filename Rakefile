@@ -9,11 +9,7 @@ load File.dirname(__FILE__) + '/achoo.gemspec'
 task :default => ['test:unit']
 
 namespace 'build' do
-
-  Gem::PackageTask.new(Spec) do |pkg|
-    pkg.need_tar = true
-  end
-
+  require "bundler/gem_tasks"
 end
 
 task :test => ['test:unit', 'test:acceptance']
@@ -124,10 +120,6 @@ namespace 'doc' do
   end
 end
 
-desc 'Install development dependencies'
-task :setup do
-  system 'gem install shoulda rack thin redgreen metric_fu code_stats hanna'
-end
 
 desc 'Remove generated files and folders'
 task :clean => ['build:clobber_package', 'doc:clobber_rdoc']
