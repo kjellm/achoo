@@ -6,7 +6,10 @@ require 'logger'
 require 'mechanize'
 require 'plugman'
 require 'plugman/finder'
+
 require 'shellout'
+require 'shellout/command_loop'
+require 'shellout/menu_query'
 
 module Achoo
 
@@ -59,53 +62,27 @@ module Achoo
 
 
     def command_loop
-      while true
-        begin
-          trap("INT", "DEFAULT");
-          PLUGINS.signal_before_print_menu(@last_used_date)
-          @last_used_date = Date.today
-          choices = ["Register hours",
-                     "Show flexitime balance",
-                     "Day hour report",
-                     "Week hour report",
-                     "Holiday balance",
-                     "Lock month",
-                    ]
-          choices << "Time survey report" if RC[:reports]
-          answer = Term.choose('[1]',
-                               choices,
-                               "Exit",
-                               ['q', 'Q', ''])
-          dispatch(answer)
-        rescue Interrupt
-          puts # Add a new line in case we are prompting
-        end
-      end
+      main_menu_items = {
+        "Register hours" => ->{
+          date = register_hours
+          @last_used_date = date.class == Array ? date.first : date
+        },
+        "Show flexitime balance" => ->{show_flexi_time},
+        "Day hour report"        => ->{show_registered_hours_for_day},
+        "Week hour report"       => ->{show_registered_hours_for_week},
+        "Holiday balance"        => ->{show_holiday_report},
+        "Lock month"             => ->{lock_month},
+        "Exit"                   => ->{ exit }
+      }
+      main_menu = MenuQuery.new(main_menu_items, true)
+      # FIXME put next two lines inside command loop
+      PLUGINS.signal_before_print_menu(@last_used_date)
+      @last_used_date = Date.today
+      Shellout::CommandLoop.new(main_menu).call
+      # FIXME
+      # choices << "Time survey report" if RC[:reports]
+      # ['q', 'Q', ''])
     end
-
-    
-    def dispatch(command)
-      case command
-      when '0', 'q', 'Q'
-        exit
-      when '1', ''
-        date = register_hours
-        @last_used_date = date.class == Array ? date.first : date
-      when '2'
-        show_flexi_time
-      when '3'
-        show_registered_hours_for_day
-      when '4'
-        show_registered_hours_for_week
-      when '5'
-        show_holiday_report
-      when '6'
-        lock_month
-      when '7'
-        view_report
-      end
-    end
-
 
     def scrape_urls 
       page = AGENT.get(AGENT.current_page.frames.find {|f| f.name == 'menu'}.href)
