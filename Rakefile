@@ -3,6 +3,7 @@
 require 'rake/testtask'
 require 'rubygems'
 require 'rubygems/package_task'
+require 'rdoc/task'
 
 load File.dirname(__FILE__) + '/achoo.gemspec'
 
@@ -104,13 +105,6 @@ end
 
 
 namespace 'doc' do
-
-  begin 
-    require 'hanna/rdoctask'
-  rescue LoadError => e
-    warn "Package hanna recommended for better rdoc output."
-    require 'rake/rdoctask'
-  end
   Rake::RDocTask.new do |rd|
     rd.title = 'Achoo --- The Achievo CLI'
     rd.main = "README.rdoc"
