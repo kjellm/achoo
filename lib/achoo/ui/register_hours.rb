@@ -100,8 +100,6 @@ module Achoo
       def all_projects_chooser(form)
         projects = form.all_projects
 
-        p projects
-
         # FIX move readline stuff to the term modules
         original_readline_comp_proc = Readline.completion_proc
         original_readline_comp_append_char = Readline.completion_append_character
