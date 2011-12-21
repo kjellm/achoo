@@ -9,5 +9,6 @@ group :development do
   gem "redgreen"
   gem "metric_fu"
   gem "code_stats"
-  gem "hanna"
+  gem "cucumber"
+  gem "aruba"
 end
