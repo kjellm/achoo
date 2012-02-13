@@ -5,7 +5,7 @@ module Achoo
     class LockMonthForm
 
       def lock_month(period)
-        page  = AGENT.get(RC[:lock_months_url])
+        page  = AGENT.get_lock_months
         @form  = page.form('entryform')
 
         @form.period = period

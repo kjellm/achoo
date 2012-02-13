@@ -4,13 +4,13 @@ require 'achoo/term'
 require 'achoo/ui'
 require 'logger'
 require 'mechanize'
+require 'ostruct'
 require 'plugman'
 require 'plugman/finder'
 require 'shellout'
 
 module Achoo
 
-  AGENT   = Mechanize.new
   PLUGINS = Plugman.new('achoo')
 
   class App
@@ -20,9 +20,6 @@ module Achoo
     include UI::RegisterHours
     
     include Shellout
-
-    COOKIES_FILE = "#{ENV['HOME']}/.achoo_cookies.txt"
-    
 
     def initialize(log=false)
       @last_used_date = Date.today
@@ -38,8 +35,10 @@ module Achoo
         puts PLUGINS.log if ENV['ACHOO_DEBUG']
         PLUGINS.signal_at_startup
         print_welcome
-        login
-        scrape_urls
+        Achoo.const_set(:AGENT, 
+          Achievo::Agent.new(
+            RC[:url],
+            OpenStruct.new({name: RC[:user], password: RC[:password]})))
         #print_homescreen
         command_loop
       rescue SystemExit => e
@@ -106,49 +105,6 @@ module Achoo
       end
     end
 
-
-    def scrape_urls 
-      page = AGENT.get(AGENT.current_page.frames.find {|f| f.name == 'menu'}.href)
-      menu_links = page.search('a.menuItemLevel2')
-      
-      RC[:hour_registration_url] = menu_link_to_url(menu_links, 'Time Registration')
-      RC[:lock_months_url]       = menu_link_to_url(menu_links, 'Lock months')
-      RC[:holiday_report_url]    = menu_link_to_url(menu_links, 'Holiday report')
-      RC[:hour_admin_url]        = RC[:hour_registration_url]
-    end
-
-
-    def menu_link_to_url(menu_links, text)
-      a_tag = menu_links.find {|a| 
-        a.text.strip == text
-      }
-      
-      if a_tag.nil?
-        raise Exception.new("Could not find the '#{text}' link in Achievo.\nMake sure that language is 'English' and theme is 'no value' in Achievo's user preferences.\nYou must delete ~/.achoo_cookies.yml for these changes to take affect.")
-      end
-
-      url = a_tag.attribute('onclick').value.match(/window\.open\('([^']+)/)[1]
-      return "#{RC[:url]}#{url}"
-    end
-
-
-    def login
-      load_cookies
-      Achievo::LoginForm.login
-      save_cookies
-    end
-
-
-    def load_cookies
-      if FileTest.exists? COOKIES_FILE
-        AGENT.cookie_jar.load(COOKIES_FILE, :cookiestxt)
-      end
-    end
-
-
-    def save_cookies
-      AGENT.cookie_jar.save_as(COOKIES_FILE, :cookiestxt)
-    end
 
   end
 end

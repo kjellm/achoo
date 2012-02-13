@@ -7,7 +7,7 @@ module Achoo
       include Achievo::DateField('date', 'activitydate')
 
       def initialize
-        @page  = AGENT.get(RC[:hour_registration_url])
+        @page  = AGENT.get_hour_registration
         @form  = @page.form('entryform')
 
         if @form.nil?

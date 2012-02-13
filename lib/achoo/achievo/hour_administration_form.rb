@@ -52,7 +52,7 @@ module Achoo
       end
   
       def set_page_to_view_for_date(view, date)
-        @page ||= AGENT.get(RC[:hour_admin_url])
+        @page ||= AGENT.get_hour_administration
         
         link = @page.link_with(:text => view.capitalize)
         @form = @page.form(view)

@@ -3,6 +3,7 @@ require 'achoo/achievo/date_field'
 
 module Achoo
   module Achievo
+    autoload :Agent,                      'achoo/achievo/agent.rb'
     autoload :HourAdministrationForm,     'achoo/achievo/hour_administration_form.rb'
     autoload :HourRegistrationForm,       'achoo/achievo/hour_registration_form.rb'
     autoload :HourRegistrationFormRanged, 'achoo/achievo/hour_registration_form_ranged.rb'

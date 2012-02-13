@@ -45,7 +45,7 @@ module Achoo
 
   
       def show_holiday_report
-        page = AGENT.get(RC[:holiday_report_url])
+        page = AGENT.get_holiday_report
         page.body.match(/<b>(\d+,\d+)<\/b>/)
         puts "Balance: #{Term::underline($1)}"
       end
