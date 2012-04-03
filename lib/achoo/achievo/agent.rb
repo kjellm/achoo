@@ -20,7 +20,7 @@ module Achoo
       end
 
       def get_hour_administration
-        get_hour_administration
+        get_hour_registration
       end
 
       def get_time_survey
