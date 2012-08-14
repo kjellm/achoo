@@ -181,7 +181,7 @@ module Achoo
       def create_page_from_partial(partial_page)
         body = "<html><head></head><body><form>#{partial_page.body}</form></body></html>"
         page = Mechanize::Page.new(nil, {'content-type' => 'text/html; charset=iso-8859-1'},
-                                   body, nil, AGENT)
+                                   body, nil, AGENT.__getobj__)
       end
 
       def extract_number_from_projectid(projectid)
