@@ -7,7 +7,4 @@ group :development do
   gem "rack"
   gem "thin"
   gem "redgreen"
-  gem "metric_fu"
-  gem "code_stats"
-  gem "hanna"
 end
