@@ -6,12 +6,9 @@ require 'logger'
 require 'mechanize'
 require 'ostruct'
 require 'plugman'
-require 'plugman/finder'
 require 'shellout'
 
 module Achoo
-
-  PLUGINS = Plugman.new('achoo')
 
   class App
 
@@ -31,9 +28,13 @@ module Achoo
 
     def start
       begin
+        Achoo.const_set(:PLUGINS, Plugman.new(
+              logger: Logger.new(STDERR), 
+              loader: Plugman::ConfigLoader.new(RC[:plugins]),
+              ))
+
         PLUGINS.load_plugins
-        puts PLUGINS.log if ENV['ACHOO_DEBUG']
-        PLUGINS.signal_at_startup
+        PLUGINS.notify :at_startup
         print_welcome
         Achoo.const_set(:AGENT, 
           Achievo::Agent.new(
@@ -61,7 +62,7 @@ module Achoo
       while true
         begin
           trap("INT", "DEFAULT");
-          PLUGINS.signal_before_print_menu(@last_used_date)
+          PLUGINS.notify :before_print_menu, @last_used_date
           @last_used_date = Date.today
           choices = ["Register hours",
                      "Show flexitime balance",

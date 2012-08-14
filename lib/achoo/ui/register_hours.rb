@@ -26,9 +26,9 @@ module Achoo
         form.date    = date
         form.project = project_chooser(form)
         form.phase   = phase_chooser(form)
-        PLUGINS.signal_before_register_hour_remark(date) unless date.class == Array
+        PLUGINS.notify(:before_register_hour_remark, date) unless date.class == Array
         form.remark  = remark_chooser
-        PLUGINS.signal_before_register_hour_hours(date) unless date.class == Array
+        PLUGINS.notify(:before_register_hour_hours, date) unless date.class == Array
         form.hours   = hours_chooser
         
         answer = Term.ask("Do you want to change the defaults for worktime period and/or billing percentage? [N/y]").downcase
