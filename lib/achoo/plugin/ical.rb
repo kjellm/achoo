@@ -36,7 +36,7 @@ module Achoo
             begin
               Achoo::ICal.from_http_request(config)
             rescue Exception => e
-              puts "Failed to fetch calendar data: #{e}"
+              puts handle_exception("Failed to fetch calendar data.", e)
             end
           end
         end
