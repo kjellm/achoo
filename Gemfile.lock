@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    achoo (0.5.1.358)
+    achoo (0.5.1.362)
       mechanize
-      plugman (>= 0.1.1)
+      plugman (~> 1.0)
       ri_cal
       shellout (~> 0.4)
 
@@ -32,7 +32,7 @@ GEM
     net-http-persistent (2.7)
     nokogiri (1.5.5)
     ntlm-http (0.1.1)
-    plugman (0.2)
+    plugman (1.0)
     rack (1.4.1)
     redgreen (1.2.2)
     ri_cal (0.8.8)
