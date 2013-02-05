@@ -11,6 +11,7 @@ module Achoo
         @url  = url
         @user = user
         @urls = {}
+        add_auth(@url, @user.name, @user.password)
         login_with_cookies
         scrape_urls
       end
