@@ -101,14 +101,14 @@ module Achoo
       end
       
       def recent_projects
+        field = @form.field_with(:name => 'projectid')
+        options = field.respond_to?(:options) ? field.options : []
         projects = []
-        @form.field_with(:name => 'projectid').options.each do |opt|
+        options.each do |opt|
           val = opt.value["project.id='".length..-2]
           projects << [val, opt.text]
         end
-
         projects.each {|p| @projects_seen[p[0]] = p[1]}
-
         projects
       end
 

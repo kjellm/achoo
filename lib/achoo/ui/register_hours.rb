@@ -85,6 +85,7 @@ module Achoo
         projects = form.recent_projects
         answer = Term.choose('Project [1]', projects.collect { |p| p[1] },
                              'Other', [''])
+        return all_projects_chooser(form) if projects.empty?
         return case answer
                when '0'
                  all_projects_chooser(form)
