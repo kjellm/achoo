@@ -30,3 +30,6 @@ namespace 'test' do
 
 end
 
+task :r do
+  ruby "-Ilib bin/achoo"
+end
