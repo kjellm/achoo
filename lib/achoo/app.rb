@@ -40,6 +40,9 @@ module Achoo
           Achievo::Agent.new(
             RC[:url],
             OpenStruct.new({name: RC[:user], password: RC[:password]})))
+        AGENT.add_auth(RC[:url], RC[:http_auth][:user], RC[:http_auth][:password]) if RC[:http_auth]
+        AGENT.start
+
         #print_homescreen
         command_loop
       rescue SystemExit => e
