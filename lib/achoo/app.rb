@@ -20,8 +20,10 @@ module Achoo
 
     def initialize(log=false)
       @last_used_date = Date.today
+      @log = nil
       if log
         AGENT.log = Logger.new("achoo_http.log")
+        @log = Logger.new(STDERR)
       end
     end
 
@@ -29,7 +31,7 @@ module Achoo
     def start
       begin
         Achoo.const_set(:PLUGINS, Plugman.new(
-              logger: Logger.new(STDERR), 
+              logger: @log,
               loader: Plugman::ConfigLoader.new(RC[:plugins]),
               ))
 
