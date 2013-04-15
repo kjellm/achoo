@@ -92,7 +92,7 @@ Report bugs to http://github.com/kjellm/achoo/issues
 
 == AUTHOR
 
-Kjell-Magne Øierud <kjellm AT acm DOT org>
+Kjell-Magne Øierud <kjell-magne AT oierud DOT org>
 
 == LICENSE
 
